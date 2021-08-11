@@ -1,5 +1,7 @@
 package com.hqyj.seven.dao;
 
+import com.hqyj.seven.pojo.User;
+
 /**
  * Created by IntelliJ IDEA.
  * @File UserDao.java
@@ -8,4 +10,5 @@ package com.hqyj.seven.dao;
  * @Email liuxing997@foxmail.com
  */
 public interface UserDao {
+   User queryByUsername(String name);
 }
