@@ -63,9 +63,8 @@ public class HouseServiceImpl implements HouseService {
         House house = new House(27,"103",2,500,1,"空闲",null);
         return houseDao.insertHouse(house);
     }
-
     @Override
-    public int deleteHouseI() {
+    public int deleteHouseI(int house_id) {
         return houseDao.deleteHouse(27);
     }
     @Override
