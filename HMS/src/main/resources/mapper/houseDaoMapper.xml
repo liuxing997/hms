@@ -5,6 +5,9 @@
 <!--对某个Java接口文件进行描述，两者之间的关系一一对应-->
 <!--namespace属性指定对应的java接口文件，全类名-->
 <mapper namespace="com.hqyj.seven.dao.HouseDao">
+    <select id="queryByHousename" resultType="com.hqyj.seven.pojo.House">
+        select * from house where name=#{name}
+    </select>
     <update id="updateByHouseName"  parameterType="com.hqyj.seven.pojo.House">
        update house set state='已定',customer_id=#{customerId} where name=#{name}
     </update>
