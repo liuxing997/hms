@@ -41,6 +41,13 @@ public class UserServiceImpl implements UserService {
         return userDao.updateById(user);
     }
 
+    //根据用户ID删除用户信息
+    @Override
+    public int deleteById(int id) {
+        return userDao.deleteById(id);
+    }
+
+
     //操作员登录
     @Override
     public Map<String, Object> login(String  name, String password) {

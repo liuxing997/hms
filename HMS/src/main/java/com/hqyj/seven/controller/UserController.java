@@ -75,6 +75,22 @@ public class UserController {
         return result;
     }
 
+    //根据用户ID删除用户信息
+    @RequestMapping("/deleteById")
+    @ResponseBody
+    public Map<String, Object> deleteById(int id){
+        int num =  userService.deleteById(id);
+        Map<String, Object> result = new HashMap<>();
+        if (num == 1){
+            result.put("code",200);
+            result.put("message","删除成功！");
+        }else {
+            result.put("code",-1);
+            result.put("message","删除失败！");
+        }
+        return result;
+    }
+
     //操作员登录
     @RequestMapping("/login")
     @ResponseBody

@@ -2,8 +2,6 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--对某个Java接口文件进行描述，两者之间的关系一一对应-->
-<!--namespace属性指定对应的java接口文件，全类名-->
 <mapper namespace="com.hqyj.seven.dao.UserDao">
 
     <!--根据用户名查询用户-->
@@ -36,5 +34,10 @@
         </set>
         where id = #{id}
     </update>
+
+    <!--根据用户ID删除用户信息-->
+    <delete id="deleteById">
+        delete from user where id=#{id}
+    </delete>
 
 </mapper>

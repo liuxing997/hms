@@ -27,4 +27,7 @@ public interface UserService {
 
     //根据用户ID修改用户信息
     int updateById(User user);
+
+    //根据用户ID删除用户信息
+    int deleteById(int id);
 }
