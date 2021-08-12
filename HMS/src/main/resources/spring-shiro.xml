@@ -35,7 +35,7 @@
                                      roles[角色名]具有某个角色的用户
                                      permes[权限名]具有某个权限的用户-->
                                /shiroTag=anon
-                              /index.jsp=anon
+                              /login.jsp=anon
                               /user/login=anon
                               /shiro/mustauthc=authc
                                /shiro/mustauthc=roles[管理员]
