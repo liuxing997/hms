@@ -18,4 +18,7 @@ public interface UserDao {
 
    //查询所有用户信息
    List<User> queryAllUser();
+
+   //根据用户ID修改用户信息
+   int updateById(User user);
 }

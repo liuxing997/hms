@@ -35,6 +35,12 @@ public class UserServiceImpl implements UserService {
         return userDao.queryAllUser();
     }
 
+    //根据用户ID修改用户信息
+    @Override
+    public int updateById(User user) {
+        return userDao.updateById(user);
+    }
+
     //操作员登录
     @Override
     public Map<String, Object> login(String  name, String password) {

@@ -59,6 +59,22 @@ public class UserController {
         return result;
     }
 
+    //根据用户ID修改用户信息
+    @RequestMapping("/updateById")
+    @ResponseBody
+    public Map<String, Object> updateById(User user){
+        int num =  userService.updateById(user);
+        Map<String, Object> result = new HashMap<>();
+        if (num == 1){
+            result.put("code",200);
+            result.put("message","修改成功！");
+        }else {
+            result.put("code",-1);
+            result.put("message","修改失败！");
+        }
+        return result;
+    }
+
     //操作员登录
     @RequestMapping("/login")
     @ResponseBody

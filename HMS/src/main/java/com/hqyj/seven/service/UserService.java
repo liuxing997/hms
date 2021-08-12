@@ -24,4 +24,7 @@ public interface UserService {
 
     //用户登出
     Map<String,Object> logout();
+
+    //根据用户ID修改用户信息
+    int updateById(User user);
 }
