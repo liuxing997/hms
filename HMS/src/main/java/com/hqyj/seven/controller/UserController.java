@@ -21,13 +21,17 @@ import java.util.Map;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+
     @Autowired
     private UserService userService;
+
     @RequestMapping("/getAll")
     public String getAllUser(){
 
         return "success";
     }
+
+    //操作员登录
     @RequestMapping("/login")
     @ResponseBody
     public Map<String, Object> login(String  name, String password){
@@ -40,6 +44,14 @@ public class UserController {
         }
         //调用服务层实现业务
         return userService.login(name,password);
+    }
+
+    //用户登出
+    @RequestMapping("/logout")
+    @ResponseBody
+    public Map<String,Object> logout(){
+        //调用服务层实现业务
+        return userService.logout();
     }
 
 }

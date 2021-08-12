@@ -13,6 +13,10 @@ import java.util.Map;
  */
 public interface UserService {
     //根据用户名获取用户信息
-  User   getOneByUsername(String  name);
+    User   getOneByUsername(String  name);
+    //登录
     Map<String, Object> login(String username, String password);
+
+    //用户登出
+    Map<String,Object> logout();
 }

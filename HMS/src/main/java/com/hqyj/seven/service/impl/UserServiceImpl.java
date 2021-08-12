@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    //操作员登录
     @Override
     public Map<String, Object> login(String  name, String password) {
         Map<String, Object> result = new HashMap<>();
@@ -37,8 +38,7 @@ public class UserServiceImpl implements UserService {
         if(!subject.isAuthenticated()){
             //创建一个认证令牌
             UsernamePasswordToken token = new UsernamePasswordToken( name,password);
-
-            //做登录
+            //登录
             try{
                 subject.login(token);
             }catch (UnknownAccountException e){
@@ -55,17 +55,34 @@ public class UserServiceImpl implements UserService {
             }
             catch (AuthenticationException e){
                 result.put("code",-10);
-                result.put("message","认证失败");
+                result.put("message","登录失败");
                 return result;
             }
         }
         //认证通过，获取已保存在shiro session域中的用户信息
         Session session = subject.getSession();
         Object loginUser = session.getAttribute("loginUser");
-        result.put("code", 0);
-        result.put("message", name +"认证成功");
+        result.put("code", 200);
+        result.put("message", "登录成功");
         //直接返回给控制器方法
         result.put("loginUser",loginUser);
+        return result;
+    }
+
+
+    //操作员登出
+    @Override
+    public Map<String, Object> logout() {
+        //获取当前操作员
+        Subject subject =  SecurityUtils.getSubject();
+        //操作员登出
+        subject.logout();
+        //操作员登出移除session中的数据
+        Session session = subject.getSession();
+        session.removeAttribute("loginUser");
+        Map<String,Object> result = new HashMap<>();
+        result.put("code",200);
+        result.put("message","成功登出！");
         return result;
     }
 }
