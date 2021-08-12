@@ -11,7 +11,8 @@ public interface HouseDao {
 
          int updateByHouseName(@Param("customerId")int customerId,@Param("name") String name );
          House queryByHousename(String name);
-
+    int updateByHouse(House house);
+    int updateByHouseNametocheckIn(@Param("customerId")int customerId,@Param("name") String name,@Param("day") int day);
 
 
     //获取全部客房信息
