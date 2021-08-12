@@ -7,7 +7,7 @@ public class House {
     private  double price;
     private int floorId;
     private  String  state;
-    private  int customerId;
+    private  Integer customerId;
 
     public int getHouseId() {
         return houseId;
@@ -57,11 +57,11 @@ public class House {
         this.state = state;
     }
 
-    public int getCustomerId() {
+    public Integer getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
     }
 
@@ -78,7 +78,7 @@ public class House {
                 '}';
     }
 
-    public House(int houseId, String houseName, int amount, double price, int floorId, String state, int customerId) {
+    public House(int houseId, String houseName, int amount, double price, int floorId, String state, Integer customerId) {
         this.houseId = houseId;
         this.houseName = houseName;
         this.amount = amount;
