@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 对某个java接口文件进行描述，两者之间的关系一一对应-->
+<!-- namespace属性指明对应的java接口文件，全类名 -->
+<mapper namespace="com.hqyj.seven.dao.CustomerDao">
+
+    <resultMap id="customerBaseResultMap" type="com.hqyj.seven.pojo.Customer">
+        <id column="customer_id" property="customerId" />
+        <result column="cname" property="name" />
+        <result column="card" property="card" />
+        <result column="phone" property="phone" />
+        <result column="moblie" property="moblie" />
+        <result column="remainder" property="remainder" />
+        <!-- collection 用于处理1个pojo对象中 具有集合类型的属性的映射情况
+        ofType指定pojo属性对象的java类型-->
+        <collection property="roles" ofType="com.hqyj.seven.pojo.">
+       <!--     <id column="role_id" property="roleId" />
+            <result column="rname" property="name" />
+            <result column="rstate" property="state" />-->
+        </collection>
+    </resultMap>
+
+    <sql id="customerBaseQuerySql">
+         /*select u.user_id,u.name uname,u.username,u.password upassword,
+           r.role_id,r.name rname,r.state rstate
+        from user u
+        left join user_role ur on u.user_id = ur.user_id
+        left join role r on ur.role_id = r.role_id*/
+    </sql>
+    <select id="queryAll" resultMap="customerBaseResultMap">
+       <include refid="customerBaseQuerySql" />
+    </select>
+
+</mapper>
