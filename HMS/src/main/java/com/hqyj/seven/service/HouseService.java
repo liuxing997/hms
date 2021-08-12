@@ -25,7 +25,7 @@ public interface HouseService {
     int insertIntoHouse();
 
     //删除客房
-    int deleteHouseI();
+    int deleteHouseI(int house_id);
     //住房功能
     int checkIn( int customerId,String name,int day);
 }

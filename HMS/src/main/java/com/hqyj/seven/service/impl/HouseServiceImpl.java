@@ -40,10 +40,8 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public List<House> getAllHouse() {
-        System.out.println("获取全部客房信息");
-        List<House> house = houseDao.queryAllHouseI();
-
-        return house;
+        List<House> houseList = houseDao.queryAllHouseI();
+        return houseList;
     }
 
     @Override
