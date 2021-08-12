@@ -30,4 +30,7 @@ public interface UserService {
 
     //根据用户ID删除用户信息
     int deleteById(int id);
+
+    //新增用户
+    int insertUser(User user);
 }

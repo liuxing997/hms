@@ -40,4 +40,10 @@
         delete from user where id=#{id}
     </delete>
 
+    <!--新增用户-->
+    <insert id="insertUser" parameterType="com.hqyj.seven.pojo.User">
+        insert into user (id,name,password,phone,state)
+        values (#{id},#{name},#{password},#{phone},#{state})
+    </insert>
+
 </mapper>

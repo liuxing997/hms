@@ -91,6 +91,22 @@ public class UserController {
         return result;
     }
 
+    //新增用户
+    @RequestMapping("/insertUser")
+    @ResponseBody
+    public Map<String, Object> insertUser(User user){
+        int num =  userService.insertUser(user);
+        Map<String, Object> result = new HashMap<>();
+        if (num == 1){
+            result.put("code",200);
+            result.put("message","添加成功！");
+        }else {
+            result.put("code",-1);
+            result.put("message","添加失败！");
+        }
+        return result;
+    }
+
     //操作员登录
     @RequestMapping("/login")
     @ResponseBody

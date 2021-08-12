@@ -47,6 +47,12 @@ public class UserServiceImpl implements UserService {
         return userDao.deleteById(id);
     }
 
+    //新增用户
+    @Override
+    public int insertUser(User user) {
+        return userDao.insertUser(user);
+    }
+
 
     //操作员登录
     @Override
