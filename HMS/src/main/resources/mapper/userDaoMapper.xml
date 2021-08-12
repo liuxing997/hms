@@ -5,8 +5,15 @@
 <!--对某个Java接口文件进行描述，两者之间的关系一一对应-->
 <!--namespace属性指定对应的java接口文件，全类名-->
 <mapper namespace="com.hqyj.seven.dao.UserDao">
+
+    <!--根据用户名查询用户-->
     <select id="queryByUsername" resultType="com.hqyj.seven.pojo.User" useCache="true">
         select * from user where name=#{name}
+    </select>
+
+    <!--查询所有用户-->
+    <select id="queryAllUser" resultType="com.hqyj.seven.pojo.User" useCache="true">
+        select * from user
     </select>
 
 </mapper>

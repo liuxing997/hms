@@ -1,7 +1,7 @@
 package com.hqyj.seven.controller;
 
+import com.hqyj.seven.pojo.User;
 import com.hqyj.seven.service.UserService;
-import com.hqyj.seven.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +25,20 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/getAll")
-    public String getAllUser(){
-
-        return "success";
+    @RequestMapping("/getAllUser")
+    @ResponseBody
+    public Map<String, Object> getAllUser(){
+        List<User> userList =  userService.queryAllUser();
+        Map<String, Object> result = new HashMap<>();
+        if (userList == null){
+            result.put("code",-1);
+            result.put("message","用户数据为空！");
+        }else {
+            result.put("code",200);
+            result.put("user",userList);
+            result.put("message","获取数据成功！");
+        }
+        return result;
     }
 
     //操作员登录

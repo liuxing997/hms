@@ -2,6 +2,8 @@ package com.hqyj.seven.dao;
 
 import com.hqyj.seven.pojo.User;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * @File UserDao.java
@@ -10,5 +12,10 @@ import com.hqyj.seven.pojo.User;
  * @Email liuxing997@foxmail.com
  */
 public interface UserDao {
+
+   //根据用户名查询用户信息
    User queryByUsername(String name);
+
+   //查询所有用户信息
+   List<User> queryAllUser();
 }
