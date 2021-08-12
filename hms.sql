@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2021-08-12 10:24:06
+Date: 2021-08-12 09:50:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -131,21 +131,22 @@ INSERT INTO `house` VALUES ('8', '203', '4', '150.00', '2', '空闲', null);
 INSERT INTO `house` VALUES ('9', '204', '4', '150.00', '2', '空闲', null);
 INSERT INTO `house` VALUES ('10', '205', '4', '150.00', '2', '空闲', null);
 INSERT INTO `house` VALUES ('11', '301', '1', '200.00', '3', '空闲', null);
-INSERT INTO `house` VALUES ('12', '302', '2', '100.00', '3', '空闲', null);
-INSERT INTO `house` VALUES ('13', '303', '2', '100.00', '3', '空闲', null);
-INSERT INTO `house` VALUES ('14', '304', '3', '240.00', '3', '空闲', null);
-INSERT INTO `house` VALUES ('15', '305', '2', '100.00', '3', '空闲', null);
-INSERT INTO `house` VALUES ('16', '401', '2', '100.00', '3', '空闲', null);
-INSERT INTO `house` VALUES ('17', '402', '2', '100.00', '3', '空闲', null);
-INSERT INTO `house` VALUES ('18', '403', '2', '100.00', '3', '空闲', null);
-INSERT INTO `house` VALUES ('19', '404', '2', '100.00', '3', '空闲', null);
-INSERT INTO `house` VALUES ('20', '405', '2', '240.00', '4', '空闲', null);
-INSERT INTO `house` VALUES ('21', '501', '2', '240.00', '4', '空闲', null);
-INSERT INTO `house` VALUES ('22', '502', '5', '666.00', '5', '空闲', null);
-INSERT INTO `house` VALUES ('23', '503', '5', '666.00', '5', '空闲', null);
-INSERT INTO `house` VALUES ('24', '504', '5', '666.00', '5', '空闲', null);
-INSERT INTO `house` VALUES ('25', '505', '5', '666.00', '5', '空闲', null);
-INSERT INTO `house` VALUES ('26', '601', '1', '100000', '6', '空闲', null);
+INSERT INTO `house` VALUES ('14', '304', '2', '100.00', '3', '空闲', null);
+INSERT INTO `house` VALUES ('14', '304', null, null, null, null, null);
+INSERT INTO `house` VALUES ('15', '305', '3', '240.00', '3', '空闲', null);
+INSERT INTO `house` VALUES ('14', '304', '2', '100.00', '3', '空闲', null);
+INSERT INTO `house` VALUES ('14', '304', '2', '100.00', '3', '空闲', null);
+INSERT INTO `house` VALUES ('14', '304', '2', '100.00', '3', '空闲', null);
+INSERT INTO `house` VALUES ('14', '304', '2', '100.00', '3', '空闲', null);
+INSERT INTO `house` VALUES ('14', '304', '2', '100.00', '3', '空闲', null);
+INSERT INTO `house` VALUES ('19', '404', '2', '240.00', '4', '空闲', null);
+INSERT INTO `house` VALUES ('19', '404', '2', '240.00', '4', '空闲', null);
+INSERT INTO `house` VALUES ('22', '506', '5', '666.00', '5', '空闲', null);
+INSERT INTO `house` VALUES ('22', '506', '5', '666.00', '5', '空闲', null);
+INSERT INTO `house` VALUES ('22', '506', '5', '666.00', '5', '空闲', null);
+INSERT INTO `house` VALUES ('22', '506', '5', '666.00', '5', '空闲', null);
+INSERT INTO `house` VALUES ('22', '506', '5', '666.00', '5', '空闲', null);
+
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------
