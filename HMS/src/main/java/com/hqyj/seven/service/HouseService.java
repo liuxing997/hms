@@ -22,7 +22,7 @@ public interface HouseService {
     int updateHouseI();
 
     //增加客房
-    int insertIntoHouse();
+    int insertIntoHouse(House house);
 
     //删除客房
     int deleteHouseI(int house_id);
