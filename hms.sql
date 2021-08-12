@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2021-08-12 10:24:06
+Date: 2021-08-12 18:40:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -48,7 +48,6 @@ CREATE TABLE `enter` (
   `start_time` datetime DEFAULT NULL COMMENT '开始时间',
   `end_time_estimate` datetime DEFAULT NULL COMMENT '预估退房时间',
   `end_time_actual` datetime DEFAULT NULL COMMENT '实际退房时间',
-  `order_customer_id` int(11) DEFAULT NULL COMMENT '订房者，订房者不一定是入住的人',
   `fee_total` float DEFAULT NULL COMMENT '已缴费总额',
   `fee_info` int(50) DEFAULT NULL COMMENT '缴费流水id集合',
   `user_id` int(11) DEFAULT NULL COMMENT '相关操作员id',
@@ -60,7 +59,7 @@ CREATE TABLE `enter` (
 -- ----------------------------
 -- Records of enter
 -- ----------------------------
-INSERT INTO `enter` VALUES ('1', '1', '1', '1人', '2021-08-12 09:45:05', '2021-08-13 09:45:15', '2021-08-13 09:45:18', '3', '100', '1', '111111', '已结账', '100.00');
+INSERT INTO `enter` VALUES ('1', '1', '1', '1人', '2021-08-12 09:45:05', '2021-08-13 09:45:15', '2021-08-13 09:45:18', '100', '1', '111111', '已结账', '100.00');
 
 -- ----------------------------
 -- Table structure for fee
@@ -120,9 +119,9 @@ CREATE TABLE `house` (
 -- ----------------------------
 -- Records of house
 -- ----------------------------
-INSERT INTO `house` VALUES ('1', '101', '2', '100.00', '1', '入住', '1');
-INSERT INTO `house` VALUES ('2', '102', '2', '100.00', '1', '空闲', null);
-INSERT INTO `house` VALUES ('3', '103', '2', '100.00', '1', '空闲', null);
+INSERT INTO `house` VALUES ('1', '101', '2', '150.00', '1', '入住', '1');
+INSERT INTO `house` VALUES ('2', '102', '2', '500.00', '1', '空闲', null);
+INSERT INTO `house` VALUES ('3', '103', '2', '500.00', '1', '空闲', null);
 INSERT INTO `house` VALUES ('4', '104', '2', '100.00', '1', '空闲', null);
 INSERT INTO `house` VALUES ('5', '105', '2', '100.00', '1', '空闲', null);
 INSERT INTO `house` VALUES ('6', '201', '4', '150.00', '2', '空闲', null);
@@ -145,7 +144,8 @@ INSERT INTO `house` VALUES ('22', '502', '5', '666.00', '5', '空闲', null);
 INSERT INTO `house` VALUES ('23', '503', '5', '666.00', '5', '空闲', null);
 INSERT INTO `house` VALUES ('24', '504', '5', '666.00', '5', '空闲', null);
 INSERT INTO `house` VALUES ('25', '505', '5', '666.00', '5', '空闲', null);
-INSERT INTO `house` VALUES ('26', '601', '1', '100000', '6', '空闲', null);
+INSERT INTO `house` VALUES ('26', '601', '1', '100000.00', '6', '空闲', null);
+
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------
