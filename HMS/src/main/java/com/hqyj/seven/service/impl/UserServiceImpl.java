@@ -29,14 +29,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Map<String, Object> login(String username, String password) {
+    public Map<String, Object> login(String  name, String password) {
         Map<String, Object> result = new HashMap<>();
         //获取当前用户
         Subject subject = SecurityUtils.getSubject();
         //判断当前是否已经认证过
         if(!subject.isAuthenticated()){
             //创建一个认证令牌
-            UsernamePasswordToken token = new UsernamePasswordToken(username,password);
+            UsernamePasswordToken token = new UsernamePasswordToken( name,password);
 
             //做登录
             try{
@@ -44,14 +44,16 @@ public class UserServiceImpl implements UserService {
             }catch (UnknownAccountException e){
                 //未知账号异常
                 result.put("code", -1);
-                result.put("message",username+"用户不存在");
+                result.put("message",name+"用户不存在");
                 return result;
             }catch (IncorrectCredentialsException e){
                 //密码错误异常
+                System.out.println(password);
                 result.put("code", -2);
-                result.put("message",username+"用户密码错误");
+                result.put("message", name+"用户密码错误");
                 return result;
-            }catch (AuthenticationException e){
+            }
+            catch (AuthenticationException e){
                 result.put("code",-10);
                 result.put("message","认证失败");
                 return result;
@@ -61,7 +63,7 @@ public class UserServiceImpl implements UserService {
         Session session = subject.getSession();
         Object loginUser = session.getAttribute("loginUser");
         result.put("code", 0);
-        result.put("message",username +"认证成功");
+        result.put("message", name +"认证成功");
         //直接返回给控制器方法
         result.put("loginUser",loginUser);
         return result;

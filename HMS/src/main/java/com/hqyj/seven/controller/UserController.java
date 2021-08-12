@@ -30,16 +30,16 @@ public class UserController {
     }
     @RequestMapping("/login")
     @ResponseBody
-    public Map<String, Object> login(String username, String password){
+    public Map<String, Object> login(String  name, String password){
         //检查请求参数
-        if(username == null || password == null){
+        if(name == null || password == null){
             Map<String, Object> result = new HashMap<>();
             result.put("code",-9);
             result.put("message","请求参数错误");
             return result;
         }
         //调用服务层实现业务
-        return userService.login(username,password);
+        return userService.login(name,password);
     }
 
 }

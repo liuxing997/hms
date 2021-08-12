@@ -30,22 +30,20 @@ public class MyShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         //使用认证令牌获取当前待登录的用户名
-        String username = (String)token.getPrincipal();
+        String name = (String)token.getPrincipal();
         //在我们的系统中查询用户的认证信息
-        User user = userService.getOneByUsername(username);
+        User user = userService.getOneByUsername(name);
         //如果用户不存在，抛出用户不存在的异常
         if(user == null){
-            throw new UnknownAccountException(username+"不存在");
+            throw new UnknownAccountException(name+"不存在");
         }
         //在shiro会话域中共享用户信息，以便业务层获取使用
         Session session = SecurityUtils.getSubject().getSession();
         session.setAttribute("loginUser", user);
         //使用三个参数的构造方法来构造，用户名、密码、当前认证域的名称
-//        SimpleAuthenticationInfo info =
-//                new SimpleAuthenticationInfo(username, user.getPassword(), getName());
-      ByteSource saltBytes =ByteSource.Util.bytes(user.getName());
         SimpleAuthenticationInfo info =
-              new SimpleAuthenticationInfo(username, user.getPassword(), saltBytes,getName());
+                new SimpleAuthenticationInfo(name, user.getPassword(), getName());
+
         System.out.println("获取认证信息");
         System.out.println(info);
         return info;
