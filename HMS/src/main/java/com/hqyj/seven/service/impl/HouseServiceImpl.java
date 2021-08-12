@@ -70,5 +70,9 @@ public class HouseServiceImpl implements HouseService {
     public int deleteHouseI() {
         return houseDao.deleteHouse(27);
     }
+    @Override
+    public int checkIn(int customerId, String name,int day) {
+        return    houseDao.updateByHouseNametocheckIn(customerId,name,day);
+    }
 
 }
