@@ -1,5 +1,11 @@
 package com.hqyj.seven.service;
 
+import com.hqyj.seven.pojo.House;
+import com.hqyj.seven.pojo.User;
+
+import java.util.Map;
+
 public interface HouseService {
-    int reservation(int customerId,String name );
+    Map<String, Object> reservation(int customerId, String name);
+    House getOneByHousename(String  name);
 }
