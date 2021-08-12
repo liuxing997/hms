@@ -25,6 +25,24 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    //根据用户名查询用户
+    @RequestMapping("/queryByUsername")
+    @ResponseBody
+    public Map<String,Object> queryByUsername(String name){
+        Map<String, Object> result = new HashMap<>();
+        User user = userService.getOneByUsername(name);
+        if (user == null){
+            result.put("code",-1);
+            result.put("message","用户不存在！");
+        }else {
+            result.put("code",200);
+            result.put("user",user);
+            result.put("message","获取数据成功！");
+        }
+        return result;
+    }
+
+    //查询所有用户
     @RequestMapping("/getAllUser")
     @ResponseBody
     public Map<String, Object> getAllUser(){
