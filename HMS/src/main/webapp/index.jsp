@@ -36,7 +36,7 @@
             <a href="javascript:;"><span id="userName"></span></a>
             <dl class="layui-nav-child">
                 <dd>
-                    <a onclick="xadmin.open('个人信息','https://www.baidu.com')">个人信息</a></dd>
+                    <a onclick="xadmin.open('个人信息','person.jsp',800,380)">个人信息</a></dd>
                 <dd>
                     <a href="javascript:void(0);" onclick="logout()">退出</a></dd>
             </dl>
@@ -160,7 +160,7 @@
 <style id="theme_style"></style>
 <script>
     $(function () {
-        $("#userName").html(localStorage.getItem("user"));
+        $("#userName").html(JSON.parse(localStorage.getItem("user")).name);
     })
 
     function logout() {
@@ -169,7 +169,7 @@
             dataType: "json",
             success: function (data) {
                 if (data.code === 200) {
-                    layer.msg("退出成功，欢迎再次使用！", {icon: 2, time: 3000}, function () {
+                    layer.msg("退出成功，欢迎再次使用！", {icon: 1, time: 3000}, function () {
                         localStorage.removeItem("user");
                         window.location.href = "login.jsp";
                     });
