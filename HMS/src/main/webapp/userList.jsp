@@ -97,7 +97,6 @@
                         $('#userList').append(list);
                     }
                 }
-                console.log(data);
             },
             error:function (err) {
                 layer.msg('服务器被吃啦！请稍后重试', {icon: 7, time: 3000});
@@ -136,7 +135,6 @@
                         $('#userList').append(list);
                     }
                 }
-                console.log(data);
             },
             error:function (err) {
                 layer.msg('服务器被吃啦！请稍后重试', {icon: 7, time: 3000});
