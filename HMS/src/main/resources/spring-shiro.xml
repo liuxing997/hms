@@ -3,44 +3,39 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
-<!--        这里配置的算法和迭代此地，和MD5Util是一致的-->
+        <!--        这里配置的算法和迭代此地，和MD5Util是一致的-->
         <property name="hashAlgorithmName" value="MD5"/>
         <property name="hashIterations" value="1000"/>
     </bean>
     <!-- MyShiroRealm bean 配置-->
     <bean id="myShiroRealm" class="com.hqyj.seven.realm.MyShiroRealm">
-         <property name="credentialsMatcher" ref="credentialsMatcher"/>
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
     </bean>
     <!-- 配置shiro核心组件 SecurityManager -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!-- 我们自定义的认证域对象注入到SecurityManager对象中-->
-        <property name="realm" ref="myShiroRealm" />
+        <property name="realm" ref="myShiroRealm"/>
     </bean>
     <!-- shiro过滤器，用于授权 -->
     <!-- 这里的id shiroFilter 和web.xml中配置的代理过滤器的名称一致-->
-<!--    当已经认证的用户访问系统资源时，检查所具有的权限 如果有访问权限
-        授权通过,允许访问吧，反之，拒绝访问
-        web应用收权限-->
+    <!--    当已经认证的用户访问系统资源时，检查所具有的权限 如果有访问权限
+            授权通过,允许访问吧，反之，拒绝访问
+            web应用收权限-->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-        <property name="securityManager" ref="securityManager" />
-<!--        没有认证过的用户,访问受限资源时，shiro直接跳转该配置的url-->
+        <property name="securityManager" ref="securityManager"/>
+        <!--        没有认证过的用户,访问受限资源时，shiro直接跳转该配置的url-->
         <property name="loginUrl" value="/login.jsp"/>
-<!--        已认证过但是没有访问权限的用户 访问受限资源时 shiro直接跳转到该处置的url-->
+        <!--        已认证过但是没有访问权限的用户 访问受限资源时 shiro直接跳转到该处置的url-->
         <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
         <property name="filterChainDefinitions">
             <value>
-<!--                配置过滤器链
-                   想要控制url=身份信息：anon 匿名用户
-                                     authc 认证通过用户
-                                     roles[角色名]具有某个角色的用户
-                                     permes[权限名]具有某个权限的用户-->
-                               /shiroTag=anon
-                              /login.jsp=anon
-                              /user/login=anon
-                              /shiro/mustauthc=authc
-                               /shiro/mustauthc=roles[管理员]
-                              /shiro/mustnormal=roles[普通用户]
-                              /**=authc
+                /login.jsp=anon
+                /common.jsp=anon
+                /user/login=anon
+                /index.jsp=authc
+                /welcome.jsp=authc
+                /welcome.jsp=authc
+                /**=authc
             </value>
         </property>
     </bean>
