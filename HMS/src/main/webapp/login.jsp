@@ -89,7 +89,7 @@
                     if (data.code === 200 && data.loginUser.name != null ) {
                         // 登录成功
                         layer.msg("欢迎回来，" + data.loginUser.name, {icon: 1, time: 3000}, function () {
-                            localStorage.setItem("user",data.loginUser.name);
+                            localStorage.setItem("user",JSON.stringify(data.loginUser));
                             window.location.href = "index.jsp";
                         });
                     }
