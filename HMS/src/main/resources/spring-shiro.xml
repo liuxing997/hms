@@ -4,12 +4,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
 <!--        这里配置的算法和迭代此地，和MD5Util是一致的-->
-        <property name="hashAlgorithmName" value="MD5"></property>
-        <property name="hashIterations" value="1000"></property>
+        <property name="hashAlgorithmName" value="MD5"/>
+        <property name="hashIterations" value="1000"/>
     </bean>
     <!-- MyShiroRealm bean 配置-->
     <bean id="myShiroRealm" class="com.hqyj.seven.realm.MyShiroRealm">
-<!--         <property name="credentialsMatcher" ref="credentialsMatcher"></property>-->
+         <property name="credentialsMatcher" ref="credentialsMatcher"/>
     </bean>
     <!-- 配置shiro核心组件 SecurityManager -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
@@ -24,9 +24,9 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager" />
 <!--        没有认证过的用户,访问受限资源时，shiro直接跳转该配置的url-->
-        <property name="loginUrl" value="/index.jsp"></property>
+        <property name="loginUrl" value="/login.jsp"/>
 <!--        已认证过但是没有访问权限的用户 访问受限资源时 shiro直接跳转到该处置的url-->
-        <property name="unauthorizedUrl" value="/unauthorized.jsp"></property>
+        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
         <property name="filterChainDefinitions">
             <value>
 <!--                配置过滤器链
