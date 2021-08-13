@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--对某个Java接口文件进行描述，两者之间的关系一一对应-->
+<!--namespace属性指定对应的java接口文件，全类名-->
+<mapper namespace="com.hqyj.seven.dao.EnterDao">
+     <insert id="inserintoEnter" parameterType="com.hqyj.seven.pojo.Enter">
+         insert into enter (house_id,customer_id,customer_info,start_time,end_time_estimate,end_time_actual,fee_total,fee_info,user_id,state,price)
+         value
+             (#{house_id},#{customer_id},#{customer_info},#{start_time},#{end_time_estimate},#{end_time_actual},#{fee_total},
+             #{fee_info},#{user_id},#{state},#{price})
+     </insert>
+
+</mapper>
