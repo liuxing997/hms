@@ -9,7 +9,7 @@
     </bean>
     <!-- MyShiroRealm bean 配置-->
     <bean id="myShiroRealm" class="com.hqyj.seven.realm.MyShiroRealm">
-<!--        <property name="credentialsMatcher" ref="credentialsMatcher"/>-->
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
     </bean>
     <!-- 配置shiro核心组件 SecurityManager -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
@@ -35,8 +35,9 @@
                 /user/login=anon
                 /index.jsp=authc
                 /welcome.jsp=authc
-                /welcome.jsp=authc
-                /**=authc
+                /userList.jsp=authc
+                /person.jsp=authc
+<!--                /**=authc-->
             </value>
         </property>
     </bean>
