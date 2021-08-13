@@ -28,6 +28,7 @@
     <mvc:resources mapping="/images/**" location="/static/images/"/>
     <mvc:resources mapping="/bootstrap4/**" location="/static/bootstrap4/"/>
     <mvc:resources mapping="/css/**" location="/static/css/"/>
+    <mvc:resources mapping="/lib/**" location="/static/lib/"/>
 
     <!--处理文件上传-->
 <!--    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
