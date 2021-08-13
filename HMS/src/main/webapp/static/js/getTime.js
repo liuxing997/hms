@@ -10,7 +10,7 @@ function getTime() {
     var myDay = myDate.getDay(); //获取当前星期X(0-6,0代表星期天)
     var week = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
     var nowDayWeek;
-    nowDayWeek = myYear + '-' + fillZero(myMonth) + '-' + fillZero(myToday) +fillZero(myHour)
+    nowDayWeek =  '&nbsp;&nbsp;'+myYear + '-' + fillZero(myMonth) + '-' + fillZero(myToday) + '&nbsp;&nbsp;' +fillZero(myHour)
         + ':' + fillZero(myMinute) + ':' + fillZero(mySecond)+ '&nbsp;&nbsp;' + week[myDay];
     $("#nowDate").html(nowDayWeek);
 };
