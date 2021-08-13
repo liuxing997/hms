@@ -40,10 +40,9 @@ public class MyShiroRealm extends AuthorizingRealm {
         //在shiro会话域中共享用户信息，以便业务层获取使用
         Session session = SecurityUtils.getSubject().getSession();
         session.setAttribute("loginUser", user);
-        //使用三个参数的构造方法来构造，用户名、密码、当前认证域的名称
-        SimpleAuthenticationInfo info =
-                new SimpleAuthenticationInfo(name, user.getPassword(), getName());
-
+        //由于提交的是暗文密码，使用四个参数的构造方法来构造，用户名、密码、盐、当前认证域的名称
+        ByteSource saltBytes = ByteSource.Util.bytes(user.getName());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(name, user.getPassword(),saltBytes,getName());
         System.out.println("获取认证信息");
         System.out.println(info);
         return info;
