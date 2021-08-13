@@ -21,12 +21,8 @@
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="stylesheet" href="css/font.css">
+    <jsp:include page="common.jsp"/>
     <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="css/xadmin.css">
-    <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
-    <script src="lib/layui/layui.js" charset="utf-8"></script>
-    <script src="lib/layer/layer.min.js" charset="utf-8"></script>
 </head>
 <body class="login-bg">
 
