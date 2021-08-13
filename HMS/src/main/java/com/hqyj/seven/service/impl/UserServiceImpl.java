@@ -3,6 +3,7 @@ package com.hqyj.seven.service.impl;
 import com.hqyj.seven.dao.UserDao;
 import com.hqyj.seven.pojo.User;
 import com.hqyj.seven.service.UserService;
+import com.hqyj.seven.utils.MD5Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -38,6 +39,8 @@ public class UserServiceImpl implements UserService {
     //根据用户ID修改用户信息
     @Override
     public int updateById(User user) {
+        //加密用户密码
+        user.setPassword(MD5Util.md5Hash(user.getPassword(),user.getName() + user.getPassword()));
         return userDao.updateById(user);
     }
 
@@ -50,6 +53,8 @@ public class UserServiceImpl implements UserService {
     //新增用户
     @Override
     public int insertUser(User user) {
+        //加密用户密码
+        user.setPassword(MD5Util.md5Hash(user.getPassword(),user.getName()+user.getPassword()));
         return userDao.insertUser(user);
     }
 
