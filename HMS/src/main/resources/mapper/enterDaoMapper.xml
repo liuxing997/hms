@@ -11,5 +11,7 @@
              (#{house_id},#{customer_id},#{customer_info},#{start_time},#{end_time_estimate},#{end_time_actual},#{fee_total},
              #{fee_info},#{user_id},#{state},#{price})
      </insert>
-
+    <select id="queryByHouseIdAndTime" resultType="com.hqyj.seven.pojo.Enter">
+        select  * from enter where house_id=#{HouseId} and start_time=#{time}
+    </select>
 </mapper>

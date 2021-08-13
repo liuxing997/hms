@@ -8,6 +8,9 @@
     <update id="updataByCustomerIdToremainder" parameterType="com.hqyj.seven.pojo.Customer">
         update customer set remainder=remainder-#{money} where customer_id=#{id}
     </update>
+    <select id="queryByCustomer" resultType="com.hqyj.seven.pojo.Customer">
+        select * from customer where customer_id=#{CustomerId}
+    </select>
 <!--    <resultMap id="customerBaseResultMap" type="com.hqyj.seven.pojo.Customer">-->
 <!--        <id column="customer_id" property="customerId" />-->
 <!--        <result column="cname" property="name" />-->
