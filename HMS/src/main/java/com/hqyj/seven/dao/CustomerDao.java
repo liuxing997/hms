@@ -8,4 +8,5 @@ import java.util.List;
 public interface CustomerDao {
     List<Customer> queryAll();
     int updataByCustomerIdToremainder(@Param("money") double money, @Param("id") int id);
+    Customer queryByCustomer(int CustomerId);
 }

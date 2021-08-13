@@ -4,6 +4,7 @@ import com.hqyj.seven.pojo.Enter;
 import com.hqyj.seven.pojo.House;
 import com.hqyj.seven.pojo.User;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -27,5 +28,5 @@ public interface HouseService {
     //删除客房
     int deleteHouseI(int house_id);
     //住房功能
-    int checkIn( int customerId,String name,int day);
+    public Map<String, Object> checkIn(int customerId, String name,int day,int numberOfPeople,int userId) throws ParseException;
 }

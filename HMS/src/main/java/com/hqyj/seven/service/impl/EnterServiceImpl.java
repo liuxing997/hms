@@ -15,4 +15,8 @@ public class EnterServiceImpl implements EnterService {
     public int insertEnter(Enter enter) {
       return    enterDao.inserintoEnter(enter);
     }
+    @Override
+    public Enter queryByHouseIdAndTime(int CustomerId, String time) {
+        return  enterDao.queryByHouseIdAndTime(CustomerId,time);
+    }
 }

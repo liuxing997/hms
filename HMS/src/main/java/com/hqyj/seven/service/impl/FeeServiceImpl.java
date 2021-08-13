@@ -1,6 +1,7 @@
 package com.hqyj.seven.service.impl;
 
 import com.hqyj.seven.dao.Feedao;
+import com.hqyj.seven.pojo.Enter;
 import com.hqyj.seven.pojo.Fee;
 import com.hqyj.seven.service.FeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,4 +18,6 @@ public class FeeServiceImpl implements FeeService {
         return feedao.inserintoFee(fee);
 
     }
+
+
 }
