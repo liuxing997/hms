@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateById(User user) {
         //加密用户密码
-        user.setPassword(MD5Util.md5Hash(user.getPassword(),user.getName() + user.getPassword()));
+        user.setPassword(MD5Util.md5Hash(user.getPassword(),user.getName()));
         return userDao.updateById(user);
     }
 
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int insertUser(User user) {
         //加密用户密码
-        user.setPassword(MD5Util.md5Hash(user.getPassword(),user.getName()+user.getPassword()));
+        user.setPassword(MD5Util.md5Hash(user.getPassword(),user.getName()));
         return userDao.insertUser(user);
     }
 
