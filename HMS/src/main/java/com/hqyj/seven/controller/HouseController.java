@@ -54,7 +54,7 @@ public class HouseController {
     //插入数据
     @RequestMapping("/insertonehouse")
     @ResponseBody
-    public void insertOneHouse(House house){
+    public  Map<String,Object> insertOneHouse(House house){
         Map<String,Object> houseMap =  new HashMap<>();
         if (house==null){
             houseMap.put("code",-1);
@@ -69,5 +69,27 @@ public class HouseController {
                 houseMap.put("house","插入失败");
             }
         }
+        return houseMap;
+    }
+
+    //更新客房数据
+    @RequestMapping("/updatehouse")
+    @ResponseBody
+    public Map<String,Object> updatehouse(House house){
+        Map<String,Object> houseMap =  new HashMap<>();
+        if (house==null){
+            houseMap.put("code",-1);
+            houseMap.put("massage","更新的参数不能为空");
+        }else {
+            houseMap.put("code",200);
+            int num = 0;
+            num =  houseService.insertIntoHouse(house);
+            if (num == 1){
+                houseMap.put("house","更新成功");
+            }else {
+                houseMap.put("house","更新失败");
+            }
+        }
+        return houseMap;
     }
 }

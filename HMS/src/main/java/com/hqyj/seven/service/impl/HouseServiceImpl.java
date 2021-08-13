@@ -37,35 +37,32 @@ public class HouseServiceImpl implements HouseService {
         return houseDao.queryByHousename(name);
     }
 
-
+    //查询所有住房信息
     @Override
     public List<House> getAllHouse() {
         List<House> houseList = houseDao.queryAllHouseI();
         return houseList;
     }
-
+    // 查询入住信息
     @Override
-    public List<Enter> queryInter() {
-        System.out.println("获取入住人信息");
-        List<Enter> customers = houseDao.queryInter(1);
+    public List<Enter> queryInter(int house_id) {
+        List<Enter> customers = houseDao.queryInter(house_id);
         return customers;
     }
-
+    //更新客房信息
     @Override
-    public int updateHouseI() {
-        House house=new House(3,"103",2,500,1,"空闲",null);
-
+    public int updateHouseI(House house) {
         return houseDao.updateHouse(house);
     }
-
+    //插入单个客房信息
     @Override
-    public int insertIntoHouse() {
-        House house = new House(27,"103",2,500,1,"空闲",null);
+    public int insertIntoHouse(House house) {
         return houseDao.insertHouse(house);
     }
+    //删除单个客房信息
     @Override
     public int deleteHouseI(int house_id) {
-        return houseDao.deleteHouse(27);
+        return houseDao.deleteHouse(house_id);
     }
     @Override
     public int checkIn(int customerId, String name,int day) {

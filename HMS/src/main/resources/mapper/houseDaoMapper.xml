@@ -28,7 +28,7 @@
         </collection>
     </resultMap>
 
-
+<!--    根据enter入住表查询客户基本信息-->
     <select id="queryInter" resultMap="customerResultMap">
         select e.house_id,e.customer_info,e.start_time,e.end_time_actual,
         e.end_time_estimate,e.user_id,e.state,

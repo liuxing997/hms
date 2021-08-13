@@ -15,6 +15,7 @@ public interface HouseDao {
     int updateByHouseNametocheckIn(@Param("customerId")int customerId,@Param("name") String name,@Param("day") int day);
 
 
+
     //获取全部客房信息
     List<House> queryAllHouseI();
     //获取单个住房信息和住房人的信息

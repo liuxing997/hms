@@ -12,14 +12,14 @@ public interface HouseService {
     House getOneByHousename(String  name);
 
 
-    //查询客房信息
+    //查询所有客房信息
     List<House> getAllHouse();
 
     //查询入住人信息
-    List<Enter> queryInter();
+    List<Enter> queryInter(int house_id);
 
     //更新客房信息
-    int updateHouseI();
+    int updateHouseI(House house);
 
     //增加客房
     int insertIntoHouse(House house);
