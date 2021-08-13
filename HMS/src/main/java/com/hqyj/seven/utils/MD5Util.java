@@ -14,7 +14,7 @@ public class MD5Util {
 
     public static String md5Hash(String password,String salt){
         ByteSource saltBytes = ByteSource.Util.bytes(salt);
-        SimpleHash simpleHash = new SimpleHash("MD5",password,saltBytes,1024);
+        SimpleHash simpleHash = new SimpleHash("MD5",password,saltBytes,1000);
         return simpleHash.toString();
     }
 }
