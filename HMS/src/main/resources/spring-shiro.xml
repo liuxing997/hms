@@ -9,7 +9,7 @@
     </bean>
     <!-- MyShiroRealm bean 配置-->
     <bean id="myShiroRealm" class="com.hqyj.seven.realm.MyShiroRealm">
-        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+<!--        <property name="credentialsMatcher" ref="credentialsMatcher"/>-->
     </bean>
     <!-- 配置shiro核心组件 SecurityManager -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
@@ -29,6 +29,7 @@
         <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
         <property name="filterChainDefinitions">
             <value>
+                /static/**=anon
                 /login.jsp=anon
                 /common.jsp=anon
                 /user/login=anon
