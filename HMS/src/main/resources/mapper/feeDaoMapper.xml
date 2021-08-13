@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.seven.dao.Feedao">
+
+    <insert id="inserintoFee" parameterType="com.hqyj.seven.pojo.Fee">
+        insert into fee (enter_id,direct,coustomer_id,money,house_id,description,user_id,fee_type)
+            value
+            (#{enterId},#{direct},#{coustomerId},#{money},#{houseId},#{description},#{userId},
+            #{fee_type})
+    </insert>
+
+</mapper>
