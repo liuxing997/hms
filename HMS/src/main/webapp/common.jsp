@@ -10,13 +10,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
 <%
-  String basePath = request.getContextPath();
+    String basePath = request.getContextPath();
 %>
-<html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
-</html>
+<link rel="stylesheet" href="css/font.css">
+<link rel="stylesheet" href="css/xadmin.css">
+
+<script type="text/javascript" src="js/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="lib/layer/layer.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/xadmin.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/getTime.js" charset="UTF-8"></script>
