@@ -107,9 +107,14 @@
         for (var i = 0; i < show_num.length; i++) {
             str += show_num[i];
         }
+        console.log(code.toUpperCase());
         if (code === str) {
             return true;
-        } else {
+        }else if(code.toUpperCase() === str.toUpperCase()){
+            return true;
+        }else if(code.toLowerCase() === str.toLowerCase()){
+            return true;
+        }else {
             return false;
         }
     }
