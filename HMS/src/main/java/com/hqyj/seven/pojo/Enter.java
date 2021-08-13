@@ -1,20 +1,21 @@
 package com.hqyj.seven.pojo;
 
+import java.util.Date;
 import java.util.List;
 
 public class Enter {
     private int enter_id;
-    private String house_id;
+    private int house_id;
     private int customer_id;
-    private  String customer_info;
-    private String start_time;
-    private String end_time_estimate;
-    private String end_time_actual;
-    private float fee_total;
+    private int customer_info;
+    private Date start_time;
+    private Date end_time_estimate;
+    private Date end_time_actual;
+    private double fee_total;
     private  int fee_info;
     private int user_id;
     private String state;
-    private float price;
+    private double price;
 
     private List<Customer> customers;
 
@@ -34,12 +35,20 @@ public class Enter {
         this.enter_id = enter_id;
     }
 
-    public String getHouse_id() {
-        return house_id;
+    public double getFee_total() {
+        return fee_total;
     }
 
-    public void setHouse_id(String house_id) {
-        this.house_id = house_id;
+    public void setFee_total(double fee_total) {
+        this.fee_total = fee_total;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getCustomer_id() {
@@ -50,41 +59,49 @@ public class Enter {
         this.customer_id = customer_id;
     }
 
-    public String getCustomer_info() {
+
+
+    public int getCustomer_info() {
         return customer_info;
     }
 
-    public void setCustomer_info(String customer_info) {
+    public void setCustomer_info(int customer_info) {
         this.customer_info = customer_info;
     }
 
-    public String getStart_time() {
+    public int getHouse_id() {
+        return house_id;
+    }
+
+    public void setHouse_id(int house_id) {
+        this.house_id = house_id;
+    }
+
+    public Date getStart_time() {
         return start_time;
     }
 
-    public void setStart_time(String start_time) {
+    public void setStart_time(Date start_time) {
         this.start_time = start_time;
     }
 
-    public String getEnd_time_estimate() {
+    public Date getEnd_time_estimate() {
         return end_time_estimate;
     }
 
-    public void setEnd_time_estimate(String end_time_estimate) {
+    public void setEnd_time_estimate(Date end_time_estimate) {
         this.end_time_estimate = end_time_estimate;
     }
 
-    public String getEnd_time_actual() {
+    public Date getEnd_time_actual() {
         return end_time_actual;
     }
 
-    public void setEnd_time_actual(String end_time_actual) {
+    public void setEnd_time_actual(Date end_time_actual) {
         this.end_time_actual = end_time_actual;
     }
 
-    public float getFee_total() {
-        return fee_total;
-    }
+
 
     public void setFee_total(float fee_total) {
         this.fee_total = fee_total;
@@ -114,11 +131,24 @@ public class Enter {
         this.state = state;
     }
 
-    public float getPrice() {
-        return price;
-    }
+
 
     public void setPrice(float price) {
+        this.price = price;
+    }
+
+
+    public Enter(int house_id, int customer_id, int customer_info, Date start_time, Date end_time_estimate, Date end_time_actual, double fee_total, int fee_info, int user_id, String state, double price) {
+        this.house_id = house_id;
+        this.customer_id = customer_id;
+        this.customer_info = customer_info;
+        this.start_time = start_time;
+        this.end_time_estimate = end_time_estimate;
+        this.end_time_actual = end_time_actual;
+        this.fee_total = fee_total;
+        this.fee_info = fee_info;
+        this.user_id = user_id;
+        this.state = state;
         this.price = price;
     }
 
