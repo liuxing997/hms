@@ -35,11 +35,13 @@ public class HouseServiceImpl implements HouseService {
        House house=houseDao.queryByHousename(name);
        if (house.getState().equals("空闲"))
         {  houseDao.updateByHouseName(customerId,name);
-            result.put("订房成功",1);
+            result.put("code",200);
+            result.put("massage","订房成功");
         }
         if (house.getState().equals("已定")||house.getState().equals("入住"))
         {
-            result.put("此房间已定或者入住",-1);
+            result.put("code",-2);
+            result.put("massage","房间已经入住或者被定");
 
         }
         return result;
