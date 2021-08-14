@@ -46,13 +46,6 @@
 </div>
 <script type="text/javascript" src="js/code.js"></script>
 <script>
-    $(function () {
-        if (localStorage.getItem("user") != null){
-            layer.msg('您已经登录过啦,请勿重复登录！', {icon: 7, time: 3000}, function () {
-                window.location.href = "index.jsp";
-            });
-        }
-    });
     //验证码
     let show_num = [];
     draw(show_num);
@@ -65,7 +58,11 @@
         var userAccount = $("#name").val();
         var userPassword = $("#password").val();
         var userCode = $("#userCode").val();
-        if (userAccount.length === 0 && userPassword.length === 0 && userCode.length === 0){
+        if (localStorage.getItem("user") != null){
+            layer.msg('您已经登录过啦,请勿重复登录！', {icon: 7, time: 3000}, function () {
+                window.location.href = "index.jsp";
+            });
+        }else if (userAccount.length === 0 && userPassword.length === 0 && userCode.length === 0){
             layer.msg('请先填写完整内容！', {icon: 7, time: 3000});
         }else if (userCode.length === 0){
             layer.msg('验证码不能为空,请重试！', {icon: 7, time: 3000});
@@ -99,6 +96,10 @@
                             localStorage.setItem("user",JSON.stringify(data.loginUser));
                             window.location.href = "index.jsp";
                         });
+                    }else if (data.code === -1){
+                        layer.msg('用户不存在,请重试！', {icon: 7, time: 3000});
+                    }else if (data.code === -2){
+                        layer.msg('密码错误,请重试！', {icon: 7, time: 3000});
                     }
                 },
                 error:function (err) {
@@ -114,7 +115,6 @@
         for (var i = 0; i < show_num.length; i++) {
             str += show_num[i];
         }
-        console.log(code.toUpperCase());
         if (code === str) {
             return true;
         }else if(code.toUpperCase() === str.toUpperCase()){
