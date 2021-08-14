@@ -46,7 +46,7 @@ public class HouseController {
         }else {
             house.put("code", 200);
             house.put("house", houseList);
-            house.put("massage", "成功");
+            house.put("message","获取数据成功！");
         }
         return house;
     }
@@ -92,4 +92,26 @@ public class HouseController {
         }
         return houseMap;
     }
+    //订房
+    @RequestMapping("/reservation")
+    @ResponseBody
+        public Map<String, Object> reservation (int customerId, String name){
+        Map<String,Object> houseMap =  new HashMap<>();
+
+
+        if(name==null){
+            houseMap.put("code",-2);
+            houseMap.put("massage","房间号不能为空");
+        }
+        else {
+
+            houseMap=houseService.reservation(customerId,name);
+
+
+
+        }
+        return houseMap;
+
+    }
+
 }
