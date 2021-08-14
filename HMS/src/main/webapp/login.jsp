@@ -46,8 +46,15 @@
 </div>
 <script type="text/javascript" src="js/code.js"></script>
 <script>
+    $(function () {
+        if (localStorage.getItem("user") != null){
+            layer.msg('您已经登录过啦,请勿重复登录！', {icon: 7, time: 3000}, function () {
+                window.location.href = "index.jsp";
+            });
+        }
+    });
     //验证码
-    var show_num = [];
+    let show_num = [];
     draw(show_num);
     $("#code").on('click', function () {
         draw(show_num);
@@ -103,7 +110,7 @@
 
     //匹配验证码
     function checkCode(show_num, code) {
-        var str = "";
+        let str = "";
         for (var i = 0; i < show_num.length; i++) {
             str += show_num[i];
         }
