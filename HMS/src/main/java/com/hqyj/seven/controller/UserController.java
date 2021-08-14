@@ -52,9 +52,9 @@ public class UserController {
             result.put("code",-1);
             result.put("message","用户数据为空！");
         }else {
-            result.put("code",200);
-            result.put("user",userList);
-            result.put("message","获取数据成功！");
+            result.put("code",0);
+            result.put("data",userList);
+            result.put("msg","获取数据成功！");
         }
         return result;
     }
