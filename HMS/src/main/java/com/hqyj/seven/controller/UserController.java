@@ -1,10 +1,12 @@
 package com.hqyj.seven.controller;
 
+import com.hqyj.seven.pojo.PageData;
 import com.hqyj.seven.pojo.User;
 import com.hqyj.seven.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
@@ -42,11 +44,40 @@ public class UserController {
         return result;
     }
 
+    //根据ID或用户名搜索用户
+    @RequestMapping("/searchUser")
+    @ResponseBody
+    public Map<String,Object> searchUser(String names){
+        Map<String, Object> result = new HashMap<>();
+        List<User> userList2 = userService.searchUser(names);
+        if (userList2.size() == 0){
+            result.put("code",-1);
+            result.put("msg","用户不存在！");
+        }else {
+            result.put("code",0);
+            result.put("data",userList2);
+            result.put("msg","获取数据成功！");
+        }
+        return result;
+    }
+
     //查询所有用户
     @RequestMapping("/getAllUser")
     @ResponseBody
-    public Map<String, Object> getAllUser(){
-        List<User> userList =  userService.queryAllUser();
+    public Map<String, Object> getAllUser(@RequestParam("page") Integer pageNumber, @RequestParam("limit")Integer pageSize){
+        int number;
+        int size;
+        if (pageNumber == null){
+            number = 1;
+        }else {
+            number = pageNumber;
+        }
+        if (pageSize == null){
+            size = 10;
+        }else {
+            size = pageSize;
+        }
+        PageData<User> userList = userService.queryAllUser(number,size);
         Map<String, Object> result = new HashMap<>();
         if (userList == null){
             result.put("code",-1);

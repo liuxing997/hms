@@ -1,5 +1,6 @@
 package com.hqyj.seven.service;
 
+import com.hqyj.seven.pojo.PageData;
 import com.hqyj.seven.pojo.User;
 
 import java.util.List;
@@ -16,8 +17,11 @@ public interface UserService {
     //根据用户名获取用户信息
     User   getOneByUsername(String  name);
 
+    //根据ID或用户名搜索用户
+    List<User> searchUser(String  names);
+
     //查询所有用户
-    List<User> queryAllUser();
+    PageData<User> queryAllUser(int number, int size);
 
     //登录
     Map<String, Object> login(String username, String password);
