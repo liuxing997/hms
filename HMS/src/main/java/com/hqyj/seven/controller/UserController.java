@@ -48,7 +48,6 @@ public class UserController {
     public Map<String,Object> searchUser(String names){
         Map<String, Object> result = new HashMap<>();
         List<User> userList2 = userService.searchUser(names);
-        System.out.println(userList2);
         if (userList2.size() == 0){
             result.put("code",-1);
             result.put("msg","用户不存在！");
