@@ -15,7 +15,7 @@
 <html class="x-admin-sm">
 <head>
     <meta charset="UTF-8">
-    <title>个人信息｜酒店后台管理系统</title>
+    <title>订单｜酒店后台管理系统</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -26,93 +26,64 @@
 <div class="layui-card">
     <div class="layui-card-body">
         <form class="layui-form" id="person">
+
             <div class="layui-form-item">
-                <label class="layui-form-label">工号</label>
+                <label for="customerId" class="layui-form-label">顾客id</label>
                 <div class="layui-input-block">
-                    <input type="text" name="username" id="userID" disabled autocomplete="off" placeholder="请输入标题"
+                    <input type="text" name="customerId" id="customerId" autocomplete="off" placeholder="请输顾客id"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="userName" class="layui-form-label">用户名</label>
+                <label for="houseName" class="layui-form-label">房间号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="username" id="userName" autocomplete="off" placeholder="请输入标题"
+                    <input type="text" name="houseName" id="houseName" placeholder="请输房间号" autocomplete="off"
                            class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label for="password" class="layui-form-label">密码</label>
-                <div class="layui-input-block">
-                    <input type="password" name="password" id="password" placeholder="请输入密码" autocomplete="off"
-                           class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label for="phone" class="layui-form-label">电话</label>
-                <div class="layui-input-block">
-                    <input type="text" name="username" id="phone" autocomplete="off" placeholder="请输入标题"
-                           class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label for="state" class="layui-form-label">状态</label>
-                <div class="layui-input-block">
-                    <input type="text" name="username" id="state" autocomplete="off" placeholder="请输入标题"
-                           class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button type="button" class="layui-btn layui-btn-normal" onclick="edit()">修改</button>
-                    <button type="button" class="layui-btn" onclick="savePerson()">保存</button>
-                </div>
-            </div>
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn layui-btn-normal" onclick="reservation()">订房</button></div>>
         </form>
+
     </div>
 </div>
 
 
 <script>
     $(function () {
-        let user = JSON.parse(localStorage.getItem("user"));
-        layer.msg("你好！"+ user.name, {icon: 1, time: 3000});
-        $("#userID").val(user.id);
-        $("#userName").val(user.name);
-        $("#password").val(user.password);
-        $("#phone").val(user.phone);
-        $("#state").val(user.state);
-        $("#person").find('input,textarea').attr('readonly', true);
+        let house = JSON.parse(localStorage.getItem("house"));
+
+
+        $("#houseName").val(house.houseName);
+
     });
+  function reservation()
+  {
+      $.ajax({
+          url:"house/reservation",
+          dataType:"json",
+          data:
+              {
+                  customerId:$("#customerId").val(),
+                  name:$("#houseName").val()
+              },
+          success:function (data){
 
-    function edit() {
-        $("#person").find('input,textarea').attr('readonly', false);
-    }
+              alert(data.massage)
+              console.log(data.massage)
+              var index = parent.layer.getFrameIndex(window.name);
+              //表格重载 就相当于 刷新父页面的表格-dataTable是父页面的表格ID属性
+              parent.layui.table.reload('dataTable');
+              //关闭当前frame
+              parent.layer.close(index);
 
-    function savePerson() {
-        $.ajax({
-            url:"user/updateById",
-            dataType:"json",
-            data:{
-                id:$("#userID").val(),
-                name:$("#userName").val(),
-                password:$("#password").val(),
-                phone:$("#phone").val(),
-                state:$("#state").val()
-            },
-            success:function (data) {
-                if (data.code === 200 ){
-                    layer.msg("个人信息" + data.message, {icon: 1, time: 3000}, function () {
-                        location.reload();
-                    });
-                }else {
-                    layer.msg("个人信息" + data.message + "请重试", {icon: 2, time: 3000});
-                }
-            },
-            error:function (err){
-                layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
-            }
-        });
-    }
+              xadmin.father_reload();
+
+
+          }
+      })
+  }
+
 
 
 </script>
