@@ -161,6 +161,14 @@
             , toolbar: '#userToolBar' //开启头部工具栏，并为其绑定左侧模板
             , defaultToolbar: ['filter', 'exports', 'print']
             , cellMinWidth: 180
+            ,parseData:function (res){
+                return{
+                    "code":res.code,
+                    "msg":res.msg,
+                    "count":res.data.totalSize,
+                    "data":res.data.list
+                }
+            }
             , title: '操作员列表'
             , cols: [[
                 {type: 'checkbox', fixed: 'left'}
@@ -172,13 +180,15 @@
                 , {fixed: 'right', title: '操作', toolbar: '#user_list_bar'}
             ]]
             , page: true
+            , limit:5
+            , limits:[5,10,20,30,40,50,60,70,80,90,100]
         });
 
         //头工具栏事件
         table.on('toolbar(user_list)', function (obj) {
             switch (obj.event) {
                 case 'getUserByName':
-                    console.log($("#username").val())
+                    // console.log($("#username").val())
                     table.reload('user_list', {
                         url: 'user/searchUser',
                         where: {names: $("#username").val()},
@@ -306,81 +316,4 @@
         });
     });
 </script>
-
-<%--<script>--%>
-<%--    $(function() {--%>
-<%--        $.ajax({--%>
-<%--            url:"user/getAllUser",--%>
-<%--            type:"get",--%>
-<%--            dataType:"json",--%>
-<%--            beforeSend: function () {--%>
-<%--                //显示登录加载提示--%>
-<%--                this.index = layer.load(0, {shade: false, time: 10 * 1000})--%>
-<%--            },--%>
-<%--            complete: function () {--%>
-<%--                layer.close(this.index);--%>
-<%--            },--%>
-<%--            success:function (data) {--%>
-<%--                if (data.code === 200 && data.user != null ) {--%>
-<%--                    // 获取成功--%>
-<%--                    layer.msg(data.message, {icon: 1, time: 3000});--%>
-<%--                    let users = data.user;--%>
-<%--                    for (const n of users) {--%>
-<%--                        let list = "<tr>" +--%>
-<%--                            "<td>" + n.id + "</td>" +--%>
-<%--                            "<td>" + n.name + "</td>" +--%>
-<%--                            "<td>" + n.password + "</td>" +--%>
-<%--                            "<td>" + n.phone + "</td>" +--%>
-<%--                            "<td>" + n.state + "</td>" +--%>
-<%--                            "</tr>";--%>
-<%--                        $('#userList').append(list);--%>
-<%--                    }--%>
-<%--                }--%>
-<%--            },--%>
-<%--            error:function (err) {--%>
-<%--                layer.msg('服务器被吃啦！请稍后重试', {icon: 7, time: 3000});--%>
-<%--            }--%>
-<%--        });--%>
-<%--    });--%>
-<%--    function getUserByName() {--%>
-<%--        let username = $("#username").val();--%>
-<%--        $.ajax({--%>
-<%--            url:"user/queryByUsername",--%>
-<%--            type:"get",--%>
-<%--            dataType:"json",--%>
-<%--            data:{--%>
-<%--                name:username--%>
-<%--            },--%>
-<%--            beforeSend: function () {--%>
-<%--                //显示登录加载提示--%>
-<%--                this.index = layer.load(0, {shade: false, time: 10 * 1000})--%>
-<%--            },--%>
-<%--            complete: function () {--%>
-<%--                layer.close(this.index);--%>
-<%--            },--%>
-<%--            success:function (data) {--%>
-<%--                if (data.code === 200 && data.user != null ) {--%>
-<%--                    // 获取成功--%>
-<%--                    layer.msg(data.message, {icon: 1, time: 3000});--%>
-<%--                    let users2 = data.user;--%>
-<%--                    for (const n of users2) {--%>
-<%--                        let list = "<tr>" +--%>
-<%--                            "<td>" + n.id + "</td>" +--%>
-<%--                            "<td>" + n.name + "</td>" +--%>
-<%--                            "<td>" + n.password + "</td>" +--%>
-<%--                            "<td>" + n.phone + "</td>" +--%>
-<%--                            "<td>" + n.state + "</td>" +--%>
-<%--                            "</tr>";--%>
-<%--                        $('#userList').append(list);--%>
-<%--                    }--%>
-<%--                }--%>
-<%--            },--%>
-<%--            error:function (err) {--%>
-<%--                layer.msg('服务器被吃啦！请稍后重试', {icon: 7, time: 3000});--%>
-<%--            }--%>
-<%--        });--%>
-<%--    }--%>
-<%--</script>--%>
-
-
 </html>
