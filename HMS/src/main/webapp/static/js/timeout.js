@@ -7,7 +7,7 @@
  **/
 var lastTime = new Date().getTime();
 var currentTime = new Date().getTime();
-var timeOut = 1 * 60 * 1000; //设置超时时间： 15分钟
+var timeOut = 15 * 60 * 1000; //设置超时时间： 15分钟
 
 $(function(){
     /* 鼠标移动事件 */
