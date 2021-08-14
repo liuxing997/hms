@@ -35,9 +35,9 @@ public class UserController {
             result.put("code",-1);
             result.put("message","用户不存在！");
         }else {
-            result.put("code",200);
-            result.put("user",user);
-            result.put("message","获取数据成功！");
+            result.put("code",0);
+            result.put("data",user);
+            result.put("msg","获取数据成功！");
         }
         return result;
     }
