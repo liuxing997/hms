@@ -16,6 +16,9 @@ public interface UserService {
     //根据用户名获取用户信息
     User   getOneByUsername(String  name);
 
+    //根据ID或用户名搜索用户
+    List<User> searchUser(String  names);
+
     //查询所有用户
     List<User> queryAllUser();
 

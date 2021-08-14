@@ -29,6 +29,11 @@ public class UserServiceImpl implements UserService {
         return userDao.queryByUsername(name);
 
     }
+    //根据ID或用户名搜索用户
+    @Override
+    public List<User> searchUser(String names) {
+        return userDao.searchUser(names);
+    }
 
     //查询所有用户
     @Override

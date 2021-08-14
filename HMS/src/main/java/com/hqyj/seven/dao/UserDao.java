@@ -16,6 +16,9 @@ public interface UserDao {
    //根据用户名查询用户信息
    User queryByUsername(String name);
 
+   //根据ID或用户名搜索用户
+   List<User>  searchUser(String names);
+
    //查询所有用户信息
    List<User> queryAllUser();
 

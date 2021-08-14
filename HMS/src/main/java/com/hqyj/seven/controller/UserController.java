@@ -42,6 +42,24 @@ public class UserController {
         return result;
     }
 
+    //根据ID或用户名搜索用户
+    @RequestMapping("/searchUser")
+    @ResponseBody
+    public Map<String,Object> searchUser(String names){
+        Map<String, Object> result = new HashMap<>();
+        List<User> userList2 = userService.searchUser(names);
+        System.out.println(userList2);
+        if (userList2.size() == 0){
+            result.put("code",-1);
+            result.put("msg","用户不存在！");
+        }else {
+            result.put("code",0);
+            result.put("data",userList2);
+            result.put("msg","获取数据成功！");
+        }
+        return result;
+    }
+
     //查询所有用户
     @RequestMapping("/getAllUser")
     @ResponseBody
