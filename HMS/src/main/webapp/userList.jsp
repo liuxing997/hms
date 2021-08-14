@@ -180,8 +180,8 @@
                 case 'getUserByName':
                     console.log($("#username").val())
                     table.reload('user_list', {
-                        url: 'user/queryByUsername',
-                        where: {name: $("#username").val()},
+                        url: 'user/searchUser',
+                        where: {names: $("#username").val()},
                         page: true
                     })
                     break;
