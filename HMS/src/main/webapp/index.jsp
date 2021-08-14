@@ -53,7 +53,7 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('房间列表','order-list.html')">
+                        <a onclick="xadmin.add_tab('房间列表','houseList.jsp')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>房间列表</cite></a>
                     </li>
@@ -66,7 +66,7 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('订房列表','cate.html')">
+                        <a onclick="xadmin.add_tab('订房列表','reservationList.jsp')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>订房列表</cite></a>
                     </li>
