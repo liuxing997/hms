@@ -161,12 +161,12 @@
             , toolbar: '#userToolBar' //开启头部工具栏，并为其绑定左侧模板
             , defaultToolbar: ['filter', 'exports', 'print']
             , cellMinWidth: 180
-            ,parseData:function (res){
-                return{
-                    "code":res.code,
-                    "msg":res.msg,
-                    "count":res.data.totalSize,
-                    "data":res.data.list
+            , parseData: function (res) {
+                return {
+                    "code": res.code,
+                    "msg": res.msg,
+                    "count": res.data.totalSize,
+                    "data": res.data.list
                 }
             }
             , title: '操作员列表'
@@ -180,8 +180,8 @@
                 , {fixed: 'right', title: '操作', toolbar: '#user_list_bar'}
             ]]
             , page: true
-            , limit:5
-            , limits:[5,10,20,30,40,50,60,70,80,90,100]
+            , limit: 5
+            , limits: [5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
         });
 
         //头工具栏事件
@@ -192,7 +192,22 @@
                     table.reload('user_list', {
                         url: 'user/searchUser',
                         where: {names: $("#username").val()},
-                        page: true
+                        parseData: function (res) {
+                            if (res.code === 0) {
+                                return {
+                                    "code": res.code,
+                                    "msg": res.msg,
+                                    "count": res.data.length,
+                                    "data": res.data
+                                }
+                            } else {
+                                return {
+                                    "code": res.code,
+                                    "msg": res.msg,
+                                    "count": 0,
+                                }
+                            }
+                        }, page: true
                     })
                     break;
                 case 'addUser':
