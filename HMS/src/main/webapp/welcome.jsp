@@ -29,7 +29,7 @@
             <div class="layui-card">
                 <div class="layui-card-body ">
                     <blockquote class="layui-elem-quote">欢迎回来：
-                        <span class="x-red" id="user"></span>！当前时间:<span id="nowDate"></span>
+                        <span class="x-red" id="loginUser"></span>！当前时间:<span id="nowDate"></span>
                     </blockquote>
                 </div>
             </div>
@@ -152,7 +152,7 @@
 <script>
     $('document').ready(function () {
         getTime();
-        $("#user").html(localStorage.getItem("user"));
+        $("#loginUser").html(JSON.parse(localStorage.getItem("user")).name);
     })
 
 </script>
