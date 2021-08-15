@@ -142,21 +142,14 @@ public class HouseController {
     @ResponseBody
         public Map<String, Object> reservation (int customerId, String name){
         Map<String,Object> houseMap =  new HashMap<>();
-
-
-        if(name==null){
+        if(name == null){
             houseMap.put("code",-2);
-            houseMap.put("massage","房间号不能为空");
+            houseMap.put("message","房间号不能为空");
         }
         else {
-
             houseMap=houseService.reservation(customerId,name);
-
-
-
         }
         return houseMap;
-
     }
     //入住
     //参数分别为顾客id,房间name,入住天数，入住人数，userID
@@ -164,9 +157,9 @@ public class HouseController {
     @ResponseBody
     public Map<String, Object> checkIn(int customerId, String name,int day,int numberOfPeople,int userId){
         Map<String,Object> houseMap =  new HashMap<>();
-        if(name==null||day==0||numberOfPeople==0){
+        if(name == null || day == 0 || numberOfPeople == 0){
             houseMap.put("code",-2);
-            houseMap.put("massage","房间号不能为空或者天数和入住人数不能为0");
+            houseMap.put("message","房间号不能为空或者天数和入住人数不能为0");
         }
         else {
             try {
