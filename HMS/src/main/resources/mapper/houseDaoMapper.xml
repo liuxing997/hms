@@ -44,8 +44,8 @@
 
 
     <update id="updateHouse" parameterType="com.hqyj.seven.pojo.House">
-         update house set house_id = #{house_id},name=#{hname},amount=#{amount},
-         price=#{price},floor_id=#{floor_id},state=#{state} where house_id = #{house_id}
+         update house set house_id = #{houseId},name=#{houseName},amount=#{amount},
+         price=#{price},floor_id=#{floorId},state=#{state} where house_id = #{houseId}
     </update>
 
     <insert id="insertHouse" parameterType="com.hqyj.seven.pojo.House">
