@@ -11,4 +11,7 @@ public interface CustomerDao {
     Customer queryByCustomer(int CustomerId);
     //获取全部客户信息
     List<Customer> queryAll();
+
+    //根据用户名查询用户的信息
+    List<Customer> queryByCusName(String name);
 }

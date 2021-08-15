@@ -26,4 +26,10 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> queryAll() {
         return customerDao.queryAll();
     }
+
+    @Override
+    public List<Customer> queryByCusName(String name) {
+        List<Customer> customerList = customerDao.queryByCusName(name);
+        return customerList;
+    }
 }
