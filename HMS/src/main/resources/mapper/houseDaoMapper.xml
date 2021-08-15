@@ -86,6 +86,6 @@
         select * from  house where state='打扫' or state='维修'
     </select>
     <update id="updateByHouseNameToUnsubscribe" parameterType="com.hqyj.seven.pojo.House">
-        update house set state='空闲' where name=#{houseName}
+        update house set state='空闲',customer_id=null where name=#{houseName}
     </update>
 </mapper>
