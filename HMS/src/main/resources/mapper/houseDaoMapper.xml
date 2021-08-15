@@ -64,5 +64,22 @@
     <update id="updateByHouseNametocheckIn" parameterType="com.hqyj.seven.pojo.House">
         update house set state='入住',customer_id=#{customerId} where name=#{name}
     </update>
-
+  <select id="queryCount" resultType="java.lang.Integer">
+      select count(*) from house
+  </select>
+    <select id="queryCountByStateNull" resultType="java.lang.Integer">
+        select count(*) from house where state='空闲'
+    </select>
+    <select id="queryCountByStateReserve" resultType="java.lang.Integer">
+        select count(*) from house where state='已定'
+    </select>
+    <select id="queryCountByStateCheckIn" resultType="java.lang.Integer">
+        select count(*) from house where state='入住'
+    </select>
+    <select id="queryCountByStateClean" resultType="java.lang.Integer">
+        select count(*) from house where state='打扫'
+    </select>
+    <select id="queryCountByStateMaintain" resultType="java.lang.Integer">
+        select count(*) from house where state='维修'
+    </select>
 </mapper>
