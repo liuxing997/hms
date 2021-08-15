@@ -14,13 +14,13 @@ import static org.junit.Assert.*;
 public class UserServiceImplTest {
    @Autowired
     UserServiceImpl userService;
+   @Autowired
+   HouseServiceImpl houseService;
     @Test
     public void getOneByUsernameTest(){
         String  name = "admin";
         User user=userService.getOneByUsername(name);
         System.out.println(user);
-
-
     }
 
 }

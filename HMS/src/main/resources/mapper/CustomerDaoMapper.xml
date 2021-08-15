@@ -41,5 +41,14 @@
         select * from customer
     </select>
 
+    <select id="queryByCusName" resultType="com.hqyj.seven.pojo.Customer">
+        select * from customer where name = #{name}
+    </select>
+
+    <update id="updataOneCus" parameterType="com.hqyj.seven.pojo.Customer">
+        update customer set customer_id = #{customer_id},name  = #{name}
+        ,card = #{card},phone = #{phone},mobile = #{mobile},remainder = #{remainder}
+        where customer_id = #{customer_id}
+    </update>
 
 </mapper>

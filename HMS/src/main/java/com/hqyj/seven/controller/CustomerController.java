@@ -56,4 +56,18 @@ public class CustomerController {
         session.setAttribute("customerList",customerList);
         return customer;
     }
+    @RequestMapping("/updateonecus")
+    @ResponseBody
+    public  Map<String,Object> updateonecus(Customer customer){
+         int customernum = customerService.updataOneCus(customer);
+        Map<String,Object> customermap = new HashMap<>();
+        if (customernum == 0){
+            customermap.put("code",-1);
+            customermap.put("message","插入失败");
+        }else {
+            customermap.put("code",200);
+            customermap.put("message","插入成功");
+        }
+        return customermap;
+    }
 }

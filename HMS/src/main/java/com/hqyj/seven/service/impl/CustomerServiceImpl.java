@@ -32,4 +32,9 @@ public class CustomerServiceImpl implements CustomerService {
         List<Customer> customerList = customerDao.queryByCusName(name);
         return customerList;
     }
+    @Override
+    public int updataOneCus(Customer customer) {
+        int num = customerDao.updataOneCus(customer);
+        return num;
+    }
 }
