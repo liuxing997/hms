@@ -43,42 +43,42 @@
                             <a href="javascript:;" class="x-admin-backlog-body">
                                 <h3>房间总数</h3>
                                 <p>
-                                    <cite>100</cite></p>
+                                    <cite id="houseSum">100</cite></p>
                             </a>
                         </li>
                         <li class="layui-col-md2 layui-col-xs6">
                             <a href="javascript:;" class="x-admin-backlog-body">
                                 <h3>空闲房间</h3>
                                 <p>
-                                    <cite>30</cite></p>
+                                    <cite id="houseNull">30</cite></p>
                             </a>
                         </li>
                         <li class="layui-col-md2 layui-col-xs6">
                             <a href="javascript:;" class="x-admin-backlog-body">
                                 <h3>已预订</h3>
                                 <p>
-                                    <cite>26</cite></p>
+                                    <cite id="houseReserve">26</cite></p>
                             </a>
                         </li>
                         <li class="layui-col-md2 layui-col-xs6">
                             <a href="javascript:;" class="x-admin-backlog-body">
                                 <h3>已入住</h3>
                                 <p>
-                                    <cite>24</cite></p>
+                                    <cite id="houseCheckIn">24</cite></p>
                             </a>
                         </li>
                         <li class="layui-col-md2 layui-col-xs6">
                             <a href="javascript:;" class="x-admin-backlog-body">
                                 <h3>待打扫</h3>
                                 <p>
-                                    <cite>14</cite></p>
+                                    <cite id="houseClean">14</cite></p>
                             </a>
                         </li>
                         <li class="layui-col-md2 layui-col-xs6">
                             <a href="javascript:;" class="x-admin-backlog-body">
                                 <h3>待维修</h3>
                                 <p>
-                                    <cite style="color: red;">6</cite></p>
+                                    <cite id="houseMaintain" style="color: red;">6</cite></p>
                             </a>
                         </li>
                     </ul>
@@ -153,6 +153,32 @@
     $('document').ready(function () {
         getTime();
         $("#loginUser").html(JSON.parse(localStorage.getItem("user")).name);
+
+        //获取房间统计信息
+        $.ajax({
+            url:"house/totalOfHouse",
+            type:"get",
+            dataType:"json",
+            beforeSend: function () {
+                this.index = layer.load(0, {shade: false, time: 10 * 1000})
+            },
+            complete: function () {
+                layer.close(this.index);
+            },
+            success:function (data) {
+                if (data.code === 200) {
+                    $("#houseSum").html(data.data.Sum);
+                    $("#houseNull").html(data.data.Null);
+                    $("#houseReserve").html(data.data.Reserve);
+                    $("#houseCheckIn").html(data.data.CheckIn);
+                    $("#houseClean").html(data.data.Clean);
+                    $("#houseMaintain").html(data.data.Maintain);
+                }
+            },
+            error:function (err) {
+                layer.msg('服务器被吃啦！请稍后重试', {icon: 7, time: 3000});
+            }
+        })
     })
 
 </script>
