@@ -1,6 +1,7 @@
 package com.hqyj.seven.service;
 
 import com.hqyj.seven.pojo.Customer;
+import com.hqyj.seven.pojo.PageData;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface CustomerService {
     Customer queryById(int customerId);
 
     //查询所有客户信息
-    List<Customer> queryAll();
+    PageData<Customer> queryAll(int number, int size);
 
     //根据用户名查询用户的信息
     List<Customer> queryByCusName(String name);
