@@ -139,8 +139,9 @@ public class HouseServiceImpl implements HouseService {
                 //规范化插入表时的时间和获取的时间有点误差
                 long day3 = time.getTime()+500;
                 Date time4=new Date(day3);
+                System.out.println(time4);
                 Enter enter= enterDao.queryByHouseIdAndTime(house.getHouseId(),sdf.format(time4));
-
+                System.out.println(enter);
                 //插入缴费表
                 feedao.inserintoFee(new Fee( enter.getEnter_id(),"缴费",customerId,money,house.getHouseId(),
                         str1,userId,"会员卡扣费"));
@@ -169,7 +170,7 @@ public class HouseServiceImpl implements HouseService {
                         //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         //规范化插入表时的时间和获取的时间有点误差
-                        long day3 = time.getTime() + 500;
+                        long day3 = time.getTime();
                         Date time4 = new Date(day3);
                         Enter enter = enterDao.queryByHouseIdAndTime(house.getHouseId(), sdf.format(time4));
 
