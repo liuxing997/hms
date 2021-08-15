@@ -186,45 +186,22 @@ public class HouseController {
         return houseMap;
     }
 
-    //房间总数
-    @RequestMapping("/TotalNumberOfHouse")
+    //房间统计信息
+    @RequestMapping("/totalOfHouse")
     @ResponseBody
-    public   Integer TotalNumberOfHouse(){
-        return houseService.queryHouseNumber();
+    public Map<String, Object> totalOfHouse(){
+        Map<String,Object> houseTotals =  new HashMap<>();
+        Map<String,Object> total =  new HashMap<>();
+        total.put("Sum",houseService.queryHouseNumber());
+        total.put("Null", houseService.queryCountByStateNull());
+        total.put("Reserve",houseService.queryCountByStateReserve());
+        total.put("CheckIn", houseService.queryCountByStateCheckIn());
+        total.put("Clean", houseService.queryCountByStateClean());
+        total.put("Maintain",houseService.queryCountByStateMaintain());
+        houseTotals.put("code",200);
+        houseTotals.put("message","获取房间统计数据成功！");
+        houseTotals.put("data",total);
+        return houseTotals;
     }
-
-    //空房间总数
-    @RequestMapping("/queryCountByStateNull")
-    @ResponseBody
-    public   Integer queryCountByStateNull(){
-        return houseService.queryCountByStateNull();
-    }
-
-    //预定房间总数
-    @RequestMapping("/queryCountByStateReserve")
-    @ResponseBody
-    public   Integer queryCountByStateReserve(){
-        return houseService.queryCountByStateReserve();
-    }
-
-    //入住房间总数
-    @RequestMapping("/queryCountByStateCheckIn")
-    @ResponseBody
-    public   Integer queryCountByStateCheckIne(){
-        return houseService.queryCountByStateCheckIn();
-    }
-
-    //打扫房间总数
-    @RequestMapping("/queryCountByStateClean")
-    @ResponseBody
-    public   Integer queryCountByStateClean(){
-        return houseService.queryCountByStateClean();
-    }
-
-    //维修房间总数
-    @RequestMapping("/queryCountByStateMaintain")
-    @ResponseBody
-    public   Integer queryCountByStateMaintain(){
-        return houseService.queryCountByStateMaintain();
-    }
+    
 }
