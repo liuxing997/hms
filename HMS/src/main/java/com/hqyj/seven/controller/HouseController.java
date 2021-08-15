@@ -41,7 +41,7 @@ public class HouseController {
     }
 
     //获取客房的全部信息
-    @RequestMapping("/getallhuose")
+    @RequestMapping("/getAllHouse")
     @ResponseBody
     public Map<String,Object> getAllHouse(@RequestParam("page") Integer pageNumber, @RequestParam("limit")Integer pageSize) {
         int number;
@@ -73,7 +73,7 @@ public class HouseController {
     }
     
     //插入数据
-    @RequestMapping("/insertonehouse")
+    @RequestMapping("/insertOneHouse")
     @ResponseBody
     public  Map<String,Object> insertOneHouse(House house){
         Map<String,Object> houseMap =  new HashMap<>();
@@ -94,9 +94,9 @@ public class HouseController {
     }
 
     //更新客房数据
-    @RequestMapping("/updatehouse")
+    @RequestMapping("/updateOneHouse")
     @ResponseBody
-    public Map<String,Object> updatehouse(House house){
+    public Map<String,Object> updateHouse(House house){
         Map<String,Object> houseMap =  new HashMap<>();
         if (house == null){
             houseMap.put("code",-9);
@@ -121,12 +121,12 @@ public class HouseController {
         Map<String,Object> houseMap =  new HashMap<>();
         if (names == null){
             houseMap.put("code",-9);
-            houseMap.put("message","搜索的参数不能为空");
+            houseMap.put("msg","搜索的参数不能为空");
         }else {
             List<House> houseList = houseService.searchHouse(names);
             if (houseList.size() == 0){
                 houseMap.put("code",-1);
-                houseMap.put("message","房间不存在！");
+                houseMap.put("msg","房间不存在！");
             }else {
                 houseMap.put("code",0);
                 houseMap.put("msg","搜索房间成功！");
@@ -150,6 +150,7 @@ public class HouseController {
         }
         return houseMap;
     }
+
     //入住
     //参数分别为顾客id,房间name,入住天数，入住人数，userID
     @RequestMapping("/checkIn")
@@ -169,36 +170,42 @@ public class HouseController {
         }
         return houseMap;
     }
+
     //房间总数
     @RequestMapping("/TotalNumberOfHouse")
     @ResponseBody
-  public   Integer TotalNumberOfHouse(){
+    public   Integer TotalNumberOfHouse(){
         return houseService.queryHouseNumber();
     }
+
     //空房间总数
     @RequestMapping("/queryCountByStateNull")
     @ResponseBody
     public   Integer queryCountByStateNull(){
         return houseService.queryCountByStateNull();
     }
+
     //预定房间总数
     @RequestMapping("/queryCountByStateReserve")
     @ResponseBody
     public   Integer queryCountByStateReserve(){
         return houseService.queryCountByStateReserve();
     }
+
     //入住房间总数
     @RequestMapping("/queryCountByStateCheckIn")
     @ResponseBody
     public   Integer queryCountByStateCheckIne(){
         return houseService.queryCountByStateCheckIn();
     }
+
     //打扫房间总数
     @RequestMapping("/queryCountByStateClean")
     @ResponseBody
     public   Integer queryCountByStateClean(){
         return houseService.queryCountByStateClean();
     }
+
     //维修房间总数
     @RequestMapping("/queryCountByStateMaintain")
     @ResponseBody
