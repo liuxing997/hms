@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RequestMapping("/house")
@@ -112,6 +113,30 @@ public class HouseController {
         }
         return houseMap;
     }
+
+    //根据ID或房间名查询房间
+    @RequestMapping("/searchHouse")
+    @ResponseBody
+    public Map<String,Object> searchHouse(String names){
+        Map<String,Object> houseMap =  new HashMap<>();
+
+        if (names == null){
+            houseMap.put("code",-9);
+            houseMap.put("message","搜索的参数不能为空");
+        }else {
+            List<House> houseList = houseService.searchHouse(names);
+            if (houseList != null){
+                houseMap.put("code",0);
+                houseMap.put("msg","搜索房间成功！");
+                houseMap.put("data",houseList);
+            }else {
+                houseMap.put("code",-1);
+                houseMap.put("message","房间不存在！");
+            }
+        }
+        return houseMap;
+    }
+
     //订房
     @RequestMapping("/reservation")
     @ResponseBody

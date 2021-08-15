@@ -10,6 +10,10 @@ import java.util.Map;
 
 public interface HouseService {
     Map<String, Object> reservation(int customerId, String name);
+
+    //根据ID或房间名查询房间
+    List<House> searchHouse(String  names);
+
     House getOneByHousename(String  name);
 
 
