@@ -3,11 +3,14 @@ package com.hqyj.seven.controller;
 
 import com.hqyj.seven.pojo.House;
 import com.hqyj.seven.service.HouseService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +51,8 @@ public class HouseController {
             house.put("house", houseList);
             house.put("message","获取数据成功！");
         }
+        Session session= SecurityUtils.getSubject().getSession();
+        session.setAttribute("houselist",houseList);
         return house;
     }
     
@@ -112,6 +117,25 @@ public class HouseController {
         }
         return houseMap;
 
+    }
+    //入住
+    //参数分别为顾客id,房间name,入住天数，入住人数，userID
+    @RequestMapping("/checkIn")
+    @ResponseBody
+    public Map<String, Object> checkIn(int customerId, String name,int day,int numberOfPeople,int userId){
+        Map<String,Object> houseMap =  new HashMap<>();
+        if(name==null||day==0||numberOfPeople==0){
+            houseMap.put("code",-2);
+            houseMap.put("massage","房间号不能为空或者天数和入住人数不能为0");
+        }
+        else {
+            try {
+                houseMap=houseService.checkIn(customerId,name,day,numberOfPeople,userId);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return houseMap;
     }
 
 }
