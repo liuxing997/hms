@@ -37,5 +37,9 @@
 <!--    <select id="queryAll" resultMap="customerBaseResultMap">-->
 <!--       <include refid="customerBaseQuerySql" />-->
 <!--    </select>-->
+    <select id="queryAll" resultType="com.hqyj.seven.pojo.Customer">
+        select * from customer
+    </select>
+
 
 </mapper>

@@ -6,6 +6,8 @@ import com.hqyj.seven.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
@@ -18,5 +20,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer queryById(int customerId) {
         return customerDao.queryByCustomer(customerId);
+    }
+
+    @Override
+    public List<Customer> queryAll() {
+        return customerDao.queryAll();
     }
 }
