@@ -163,7 +163,7 @@
         let table = layui.table;
         table.render({
             elem: '#house_list'
-            , url: 'house/getallhuose'
+            , url: 'house/getAllHouse'
             , toolbar: '#houseToolBar' //开启头部工具栏，并为其绑定左侧模板
             , defaultToolbar: ['filter', 'exports', 'print']
             , cellMinWidth: 80
@@ -231,7 +231,7 @@
                         , content: $("#addHouseModel")  //弹窗路径
                         , yes: function (index, layero) {
                             $.ajax({
-                                url: "house/insertonehouse",
+                                url: "house/insertOneHouse",
                                 dataType: "json",
                                 data: {
                                     houseId: $('#haddid').val(),
@@ -312,7 +312,7 @@
                         $('#hstate').val(data.state);
                     }, yes: function (index, layero) {
                         $.ajax({
-                            url: "house/updatehouse",
+                            url: "house/updateOneHouse",
                             dataType: "json",
                             data: {
                                 houseId: $('#hid').val(),
