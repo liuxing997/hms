@@ -96,17 +96,17 @@ public class HouseController {
     @ResponseBody
     public Map<String,Object> updatehouse(House house){
         Map<String,Object> houseMap =  new HashMap<>();
-        if (house==null){
-            houseMap.put("code",-1);
+        if (house == null){
+            houseMap.put("code",-9);
             houseMap.put("massage","更新的参数不能为空");
         }else {
-            houseMap.put("code",200);
-            int num = 0;
-            num =  houseService.insertIntoHouse(house);
+            int num = houseService.updateHouseI(house);
             if (num == 1){
-                houseMap.put("house","更新成功");
+                houseMap.put("code",200);
+                houseMap.put("message","更新成功！");
             }else {
-                houseMap.put("house","更新失败");
+                houseMap.put("code",-1);
+                houseMap.put("message","更新失败！");
             }
         }
         return houseMap;
