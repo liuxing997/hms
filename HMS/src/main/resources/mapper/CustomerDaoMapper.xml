@@ -17,6 +17,9 @@
 
     <select id="queryByCusName" resultType="com.hqyj.seven.pojo.Customer">
         select * from customer where name = #{name}
+        or card = #{name}
+        or phone = #{name}
+        or mobile = #{name}
     </select>
 
     <update id="updataOneCus" parameterType="com.hqyj.seven.pojo.Customer">

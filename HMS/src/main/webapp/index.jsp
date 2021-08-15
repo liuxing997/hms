@@ -101,9 +101,16 @@
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="客户查询">&#xe6ac;</i>
-                    <cite>客户查询</cite>
+                    <i class="iconfont left-nav-li" lay-tips="客户管理">&#xe6ac;</i>
+                    <cite>客户管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('客户列表','customerList.jsp')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>客户列表</cite></a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="javascript:;">

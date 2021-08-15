@@ -48,14 +48,13 @@ public class CustomerController {
             customer.put("message","查询名不为空");
         } else {
             List<Customer> customerList = customerService.queryByCusName(name);
-            if (customerList != null) {
+            if (customerList.size() == 0) {
+                customer.put("code", 0);
+                customer.put("message", "没有查询到姓名为:" + name + "的客户信息");
+            } else {
                 customer.put("code", 1);
                 customer.put("message", "查询成功");
                 customer.put("data", customerList);
-
-            } else {
-                customer.put("code", 0);
-                customer.put("message", "没有查询到姓名为:" + name + "的客户信息");
             }
         }
         return customer;
