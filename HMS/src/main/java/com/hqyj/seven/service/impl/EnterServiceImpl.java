@@ -6,6 +6,8 @@ import com.hqyj.seven.service.EnterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EnterServiceImpl implements EnterService {
     @Autowired
@@ -18,5 +20,10 @@ public class EnterServiceImpl implements EnterService {
     @Override
     public Enter queryByHouseIdAndTime(int CustomerId, String time) {
         return  enterDao.queryByHouseIdAndTime(CustomerId,time);
+    }
+
+    @Override
+    public List<Enter> queryAll() {
+        return enterDao.queryAll();
     }
 }
