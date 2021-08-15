@@ -18,4 +18,6 @@ public interface CustomerDao {
     int updataOneCus(Customer customer);
     //插入单个客户的信息
     int insertOneCus(Customer customer);
+    //删除单个客户的信息
+    int deleteOneCus(int customer_id);
 }

@@ -42,18 +42,21 @@ public class CustomerController {
     @RequestMapping("/getonecus")
     @ResponseBody
     public Map<String,Object> getonecus(String name){
-        List<Customer> customerList = customerService.queryByCusName(name);
         Map<String,Object> customer = new HashMap<>();
-        if (customerList==null){
-            customer.put("code",0);
-            customer.put("massage","没有查询到姓名为"+name+"的客户信息");
-        }else {
-            customer.put("code",1);
-            customer.put("message","查询成功");
-            customer.put("data",customerList);
+        if (name==null){
+            customer.put("code",-1);
+            customer.put("message","查询名不为空");
+        } else {
+            List<Customer> customerList = customerService.queryByCusName(name);
+            if (customerList == null) {
+                customer.put("code", 0);
+                customer.put("massage", "没有查询到姓名为" + name + "的客户信息");
+            } else {
+                customer.put("code", 1);
+                customer.put("message", "查询成功");
+                customer.put("data", customerList);
+            }
         }
-        Session session= SecurityUtils.getSubject().getSession();
-        session.setAttribute("customerList",customerList);
         return customer;
     }
     @RequestMapping("/updateonecus")
@@ -81,6 +84,21 @@ public class CustomerController {
         }else {
             customermap.put("code",200);
             customermap.put("message","插入成功");
+        }
+        return customermap;
+    }
+    //客户信息的删除
+    @RequestMapping("/deleteHouse")
+    @ResponseBody
+    public Map<String,Object> deleteHousei(int customer_id){
+        Map<String,Object> customermap =  new HashMap<>();
+        int num = customerService.deleteOneCus(customer_id);
+        if (num==0){
+            customermap.put("code",0);
+            customermap.put("message","删除失败!");
+        }else {
+            customermap.put("code",200);
+            customermap.put("message","删除成功!");
         }
         return customermap;
     }

@@ -43,5 +43,10 @@ public class CustomerServiceImpl implements CustomerService {
         int num = customerDao.insertOneCus(customer);
         return num;
     }
+    @Override
+    public int deleteOneCus(int customer_id) {
+        int num = customerDao.deleteOneCus(customer_id);
+        return num;
+    }
 
 }

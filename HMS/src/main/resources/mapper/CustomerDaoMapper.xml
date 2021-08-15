@@ -28,5 +28,7 @@
         insert into  customer(customer_id,name,card,phone,mobile,remainder)
         value (#{customer_id},#{name},#{card}, #{phone},#{mobile},#{remainder})
     </insert>
-
+    <delete id="deleteOneCus" parameterType="com.hqyj.seven.pojo.Customer">
+        delete from customer where customer_id = #{customer_id}
+    </delete>
 </mapper>
