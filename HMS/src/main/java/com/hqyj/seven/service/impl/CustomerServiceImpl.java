@@ -1,7 +1,10 @@
 package com.hqyj.seven.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hqyj.seven.dao.CustomerDao;
 import com.hqyj.seven.pojo.Customer;
+import com.hqyj.seven.pojo.PageData;
 import com.hqyj.seven.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +26,35 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Customer> queryAll() {
-        return customerDao.queryAll();
+    public PageData<Customer> queryAll(int pageNumber, int pageSize) {
+        PageHelper.startPage(pageNumber,pageSize);
+        List<Customer> customerList = customerDao.queryAll();
+        PageInfo<Customer> pageInfo = new PageInfo<>(customerList);
+        PageData<Customer> pageData = new PageData<>();
+        pageData.setCurrentPage(pageNumber);
+        //设置每页数
+        pageData.setPageSize(pageSize);
+        //设置总页数
+        pageData.setTotalPage(pageInfo.getPages());
+        //设置总记录数
+        pageData.setTotalSize((int) pageInfo.getTotal());
+        if (pageInfo.isHasNextPage()){
+            //有下一页 设置下一页页码
+            pageData.setNextPage(pageInfo.getNextPage());
+        }else {
+            //没有下一页，设置尾页
+            pageData.setNextPage(pageInfo.getPages());
+        }
+        if (pageInfo.isHasPreviousPage()){
+            //有上一页 设置上一页页码
+            pageData.setPreviousPage(pageInfo.getPrePage());
+        }else {
+            //没有上一页，设置首页
+            pageData.setPreviousPage(1);
+        }
+        //设置用户信息
+        pageData.setList(pageInfo.getList());
+        return pageData;
     }
 
     @Override
