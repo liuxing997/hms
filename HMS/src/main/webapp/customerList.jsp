@@ -174,7 +174,6 @@
             , defaultToolbar: ['filter', 'exports', 'print']
             , cellMinWidth: 80
             , parseData: function (res) {
-                console.log(res)
                 return {
                     "code": res.code,
                     "msg": res.msg,
