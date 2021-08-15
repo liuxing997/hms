@@ -26,16 +26,17 @@ public class HouseController {
     //客房信息的删除
     @RequestMapping("/deleteHouse")
     @ResponseBody
-    public void deleteHousei(int house_id){
+    public Map<String,Object> deleteHousei(int house_id){
         Map<String,Object> houseMap =  new HashMap<>();
         int num = houseService.deleteHouseI(house_id);
         if (num==0){
             houseMap.put("code",0);
-            houseMap.put("massage","删除失败");
+            houseMap.put("message","删除失败!");
         }else {
             houseMap.put("code",200);
-            houseMap.put("house","删除成功");
+            houseMap.put("message","删除成功!");
         }
+        return houseMap;
     }
 
     //获取客房的全部信息
@@ -59,7 +60,7 @@ public class HouseController {
         Map<String,Object> house =  new HashMap<>();
         if (houseList == null){
             house.put("code",-1);
-            house.put("massage","没有客房信息");
+            house.put("msg","没有客房信息");
         }else {
             house.put("code", 0);
             house.put("data", houseList);
@@ -77,15 +78,15 @@ public class HouseController {
         Map<String,Object> houseMap =  new HashMap<>();
         if (house==null){
             houseMap.put("code",-1);
-            houseMap.put("massage","插入的参数不能为空");
+            houseMap.put("message","添加的参数不能为空！");
         }else {
-            houseMap.put("code",200);
-            int num = 0;
-            num =  houseService.insertIntoHouse(house);
+            int num = houseService.insertIntoHouse(house);
             if (num == 1){
-                houseMap.put("house","插入成功");
+                houseMap.put("code",200);
+                houseMap.put("message","添加成功！");
             }else {
-                houseMap.put("house","插入失败");
+                houseMap.put("code",-1);
+                houseMap.put("message","添加失败！");
             }
         }
         return houseMap;
@@ -98,7 +99,7 @@ public class HouseController {
         Map<String,Object> houseMap =  new HashMap<>();
         if (house == null){
             houseMap.put("code",-9);
-            houseMap.put("massage","更新的参数不能为空");
+            houseMap.put("message","更新的参数不能为空");
         }else {
             int num = houseService.updateHouseI(house);
             if (num == 1){
