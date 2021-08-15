@@ -36,35 +36,35 @@
     </delete>
 
 <!--功能待定-->
-    <resultMap id="queryOneState" type="com.hqyj.seven.pojo.House">
-        <id column="customer_id" property="customerId"/>
-        <result column="house_id" property="houseId"/>
-        <collection property="enters" ofType="com.hqyj.seven.pojo.Enter">
-            <id  column="enter_id" property="enter_id"/>
-            <result column="house_id" property="house_id"  />
-            <result column="customer_id" property="customer_id"  />
-            <result column="customer_info" property="customer_info"  />
-            <result column="start_time" property="start_time"  />
-            <result column="end_time_estimate" property="end_time_estimate"  />
-            <result column="end_time_actual" property="end_time_actual"  />
-            <result column="fee_total" property="fee_total"  />
-            <result column="fee_info" property="fee_info"  />
-            <result column="user_id" property="user_id"  />
-            <result column="state" property="state"  />
-            <result column="price" property="price"  />
-        </collection>
-    </resultMap>
-    <select id="queryOneStateI" resultMap="queryOneState">
-   select e.customer_id,h.house_id,
-    e.customer_info,
-    e.enter_id,e.house_id,
-    e.start_time,e.end_time_estimate,e.end_time_actual
-    ,e.fee_total,e.fee_info,
-    e.user_id,e.state,e.price
-    from house h
-    LEFT JOIN enter e on h.house_id = e.house_id
-    where e.customer_id = #{customer_id} and e.house_id = h.house_id
-  </select>
+<!--    <resultMap id="queryOneState" type="com.hqyj.seven.pojo.House">-->
+<!--        <id column="customer_id" property="customerId"/>-->
+<!--        <result column="house_id" property="houseId"/>-->
+<!--        <collection property="enters" ofType="com.hqyj.seven.pojo.Enter">-->
+<!--            <id  column="enter_id" property="enter_id"/>-->
+<!--            <result column="house_id" property="house_id"  />-->
+<!--            <result column="customer_id" property="customer_id"  />-->
+<!--            <result column="customer_info" property="customer_info"  />-->
+<!--            <result column="start_time" property="start_time"  />-->
+<!--            <result column="end_time_estimate" property="end_time_estimate"  />-->
+<!--            <result column="end_time_actual" property="end_time_actual"  />-->
+<!--            <result column="fee_total" property="fee_total"  />-->
+<!--            <result column="fee_info" property="fee_info"  />-->
+<!--            <result column="user_id" property="user_id"  />-->
+<!--            <result column="state" property="state"  />-->
+<!--            <result column="price" property="price"  />-->
+<!--        </collection>-->
+<!--    </resultMap>-->
+<!--    <select id="queryOneStateI" resultMap="queryOneState">-->
+<!--   select e.customer_id,h.house_id,-->
+<!--    e.customer_info,-->
+<!--    e.enter_id,e.house_id,-->
+<!--    e.start_time,e.end_time_estimate,e.end_time_actual-->
+<!--    ,e.fee_total,e.fee_info,-->
+<!--    e.user_id,e.state,e.price-->
+<!--    from house h-->
+<!--    LEFT JOIN enter e on h.house_id = e.house_id-->
+<!--    where e.customer_id = #{customer_id} and e.house_id = h.house_id-->
+<!--  </select>-->
 <!--    查询用户住宿状态-->
     <select id="queryState" resultType="com.hqyj.seven.pojo.House">
         select house_id houseId ,name houseName,amount,price,floor_id floorId,state,customer_id customerId from house where customer_id = #{customer_id}
