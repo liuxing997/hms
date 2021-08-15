@@ -111,6 +111,37 @@ public class HouseServiceImpl implements HouseService {
     public int deleteHouseI(int house_id) {
         return houseDao.deleteHouse(house_id);
     }
+    //查询所有房间数量
+    @Override
+    public Integer queryHouseNumber() {
+        return  houseDao.queryCount();
+    }
+    //查询空闲房间总数
+    @Override
+    public Integer queryCountByStateNull() {
+        return houseDao.queryCountByStateNull();
+    }
+    //查询预定房间总数
+    @Override
+    public Integer queryCountByStateReserve() {
+        return houseDao.queryCountByStateReserve();
+    }
+    //查询入住房间总数
+    @Override
+    public Integer queryCountByStateCheckIn() {
+        return houseDao.queryCountByStateCheckIn();
+    }
+    //查询待打扫房间总数
+    @Override
+    public Integer queryCountByStateClean() {
+        return houseDao.queryCountByStateClean();
+    }
+    //查询待维修房间总数
+    @Override
+    public Integer queryCountByStateMaintain() {
+        return houseDao.queryCountByStateMaintain();
+    }
+
     @Override
     //参数分别为顾客id,房间name,入住人数，userID
     public Map<String, Object> checkIn(int customerId, String name,int day,int numberOfPeople,int userId) throws ParseException {
