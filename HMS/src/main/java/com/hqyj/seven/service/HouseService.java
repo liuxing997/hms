@@ -31,6 +31,18 @@ public interface HouseService {
 
     //删除客房
     int deleteHouseI(int house_id);
+    //查询所有房间数量
+   Integer queryHouseNumber();
+    //查询空闲房间总数
+    Integer queryCountByStateNull();
+    //查询预定房间总数
+    Integer queryCountByStateReserve();
+    //查询入住房间总数
+    Integer queryCountByStateCheckIn();
+    //查询待打扫房间总数
+    Integer queryCountByStateClean();
+    //查询待维修房间总数
+    Integer queryCountByStateMaintain();
     //住房功能
     public Map<String, Object> checkIn(int customerId, String name,int day,int numberOfPeople,int userId) throws ParseException;
 }
