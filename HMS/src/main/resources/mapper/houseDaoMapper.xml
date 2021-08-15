@@ -50,7 +50,7 @@
 
     <insert id="insertHouse" parameterType="com.hqyj.seven.pojo.House">
            insert into house (house_id,name,amount,price,floor_id,state,customer_id) value
-            (#{house_id},#{hname},#{amount},#{price},#{floor_id},#{state},#{customer_id})
+            (#{houseId},#{houseName},#{amount},#{price},#{floorId},#{state},#{customerId})
     </insert>
 
     <delete id="deleteHouse">
