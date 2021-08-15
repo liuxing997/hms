@@ -2,7 +2,7 @@ package com.hqyj.seven.service;
 
 import com.hqyj.seven.pojo.Enter;
 import com.hqyj.seven.pojo.House;
-import com.hqyj.seven.pojo.User;
+import com.hqyj.seven.pojo.PageData;
 
 import java.text.ParseException;
 import java.util.List;
@@ -14,7 +14,7 @@ public interface HouseService {
 
 
     //查询所有客房信息
-    List<House> getAllHouse();
+    PageData<House> getAllHouse(int number, int size);
 
     //查询入住人信息
     List<Enter> queryInter(int house_id);

@@ -2,17 +2,18 @@ package com.hqyj.seven.controller;
 
 
 import com.hqyj.seven.pojo.House;
+import com.hqyj.seven.pojo.PageData;
 import com.hqyj.seven.service.HouseService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.ParseException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RequestMapping("/house")
@@ -40,16 +41,29 @@ public class HouseController {
     //获取客房的全部信息
     @RequestMapping("/getallhuose")
     @ResponseBody
-    public Map<String,Object> getAllHouse() {
-        List<House> houseList = houseService.getAllHouse();
+    public Map<String,Object> getAllHouse(@RequestParam("page") Integer pageNumber, @RequestParam("limit")Integer pageSize) {
+        int number;
+        int size;
+        if (pageNumber == null){
+            number = 1;
+        }else {
+            number = pageNumber;
+        }
+        if (pageSize == null){
+            size = 10;
+        }else {
+            size = pageSize;
+        }
+        //添加分页功能
+        PageData<House> houseList = houseService.getAllHouse(number,size);
         Map<String,Object> house =  new HashMap<>();
         if (houseList == null){
             house.put("code",-1);
             house.put("massage","没有客房信息");
         }else {
-            house.put("code", 200);
-            house.put("house", houseList);
-            house.put("message","获取数据成功！");
+            house.put("code", 0);
+            house.put("data", houseList);
+            house.put("msg","获取数据成功！");
         }
         Session session= SecurityUtils.getSubject().getSession();
         session.setAttribute("houselist",houseList);

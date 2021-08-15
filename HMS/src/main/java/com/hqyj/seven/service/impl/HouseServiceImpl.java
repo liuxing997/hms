@@ -1,13 +1,12 @@
 package com.hqyj.seven.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hqyj.seven.dao.CustomerDao;
 import com.hqyj.seven.dao.EnterDao;
 import com.hqyj.seven.dao.Feedao;
 import com.hqyj.seven.dao.HouseDao;
-import com.hqyj.seven.pojo.Customer;
-import com.hqyj.seven.pojo.Enter;
-import com.hqyj.seven.pojo.Fee;
-import com.hqyj.seven.pojo.House;
+import com.hqyj.seven.pojo.*;
 import com.hqyj.seven.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,9 +53,36 @@ public class HouseServiceImpl implements HouseService {
 
     //查询所有住房信息
     @Override
-    public List<House> getAllHouse() {
+    public PageData<House> getAllHouse(int pageNumber, int pageSize) {
+        PageHelper.startPage(pageNumber,pageSize);
         List<House> houseList = houseDao.queryAllHouseI();
-        return houseList;
+        PageInfo<House> pageInfo = new PageInfo<>(houseList);
+        PageData<House> pageData = new PageData<>();
+        pageData.setCurrentPage(pageNumber);
+        //设置每页数
+        pageData.setPageSize(pageSize);
+        //设置总页数
+        pageData.setTotalPage(pageInfo.getPages());
+        //设置总记录数
+        pageData.setTotalSize((int) pageInfo.getTotal());
+        if (pageInfo.isHasNextPage()){
+            //有下一页 设置下一页页码
+            pageData.setNextPage(pageInfo.getNextPage());
+        }else {
+            //没有下一页，设置尾页
+            pageData.setNextPage(pageInfo.getPages());
+        }
+        if (pageInfo.isHasPreviousPage()){
+            //有上一页 设置上一页页码
+            pageData.setPreviousPage(pageInfo.getPrePage());
+        }else {
+            //没有上一页，设置首页
+            pageData.setPreviousPage(1);
+        }
+        //设置房屋信息
+        pageData.setList(pageInfo.getList());
+        //返回房屋信息
+        return pageData;
     }
     // 查询入住信息
     @Override

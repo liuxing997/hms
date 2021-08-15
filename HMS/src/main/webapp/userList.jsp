@@ -41,7 +41,7 @@
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
             <div class="layui-card">
-
+            <%--搜索和新增模块--%>
                 <div class="layui-card-body ">
                     <script type="text/html" id="userToolBar">
                         <div class="layui-card-body ">
@@ -57,9 +57,10 @@
                                 </div>
                             </form>
                         </div>
-
                     </script>
+                    <%--表格区域--%>
                     <table class="layui-hide" id="user_list" lay-filter="user_list"></table>
+                    <%--操作按钮模块--%>
                     <script type="text/html" id="user_list_bar">
                         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
@@ -153,6 +154,7 @@
 </div>
 </body>
 <script>
+    //表格事件
     layui.use('table', function () {
         let table = layui.table;
         table.render({
@@ -256,6 +258,7 @@
         //监听行工具事件
         table.on('tool(user_list)', function (obj) {
             let data = obj.data;
+            //删除事件
             if (obj.event === 'del') {
                 layer.confirm('真的要删除' + data.name + "么？", {title: "提示"}, function (index) {
                     $.ajax({
@@ -283,7 +286,7 @@
                     })
 
                 });
-            } else if (obj.event === 'edit') {
+            } else if (obj.event === 'edit') { //编辑事件
                 layer.open({
                     type: 1 //Page层类型
                     , skin: 'layui-layer-molv'
