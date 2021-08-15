@@ -1,6 +1,7 @@
 package com.hqyj.seven.dao;
 
 import com.hqyj.seven.pojo.Customer;
+import com.hqyj.seven.pojo.House;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface CustomerDao {
     int insertOneCus(Customer customer);
     //删除单个客户的信息
     int deleteOneCus(int customer_id);
+//    查找用户的住宿情况
+    List<House> queryState(int customer_id);
 }

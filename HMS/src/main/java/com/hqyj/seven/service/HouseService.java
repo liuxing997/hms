@@ -43,6 +43,10 @@ public interface HouseService {
     Integer queryCountByStateClean();
     //查询待维修房间总数
     Integer queryCountByStateMaintain();
+    //查询房间为打扫和维修的房间信息
+    PageData<House> queryBySate(int pageNumber, int pageSize);
+    //退订功能
+    Map<String, Object> unsubscribe(String houseName);
     //住房功能
     public Map<String, Object> checkIn(int customerId, String name,int day,int numberOfPeople,int userId) throws ParseException;
 }

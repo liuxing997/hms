@@ -123,4 +123,20 @@ public class CustomerController {
         }
         return customerMap;
     }
+    //查询客户住宿状态
+    @RequestMapping("/queryOneState")
+    @ResponseBody
+    public  Map<String,Object> queryOneState(int customer_id){
+        Map<String,Object> customerMap =  new HashMap<>();
+        List<House> houseList = customerService.queryState(customer_id);
+        if (houseList == null){
+            customerMap.put("code",-1);
+            customerMap.put("message","没有相关住宿信息");
+        }else {
+            customerMap.put("code",200);
+            customerMap.put("message","查询成功");
+            customerMap.put("message",houseList);
+        }
+        return customerMap;
+    }
 }

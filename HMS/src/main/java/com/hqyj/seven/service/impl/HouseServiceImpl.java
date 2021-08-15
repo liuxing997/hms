@@ -28,6 +28,8 @@ public class HouseServiceImpl implements HouseService {
     private EnterDao enterDao;
     @Autowired
     private Feedao feedao;
+
+    //订房
     @Override
     public Map<String, Object> reservation(int customerId, String name ) {
         Map<String, Object> result = new HashMap<>();
@@ -90,60 +92,123 @@ public class HouseServiceImpl implements HouseService {
         //返回房屋信息
         return pageData;
     }
+
     // 查询入住信息
     @Override
     public List<Enter> queryInter(int house_id) {
         List<Enter> customers = houseDao.queryInter(house_id);
         return customers;
     }
+
     //更新客房信息
     @Override
     public int updateHouseI(House house) {
         return houseDao.updateHouse(house);
     }
+
     //插入单个客房信息
     @Override
     public int insertIntoHouse(House house) {
         return houseDao.insertHouse(house);
     }
+
     //删除单个客房信息
     @Override
     public int deleteHouseI(int house_id) {
         return houseDao.deleteHouse(house_id);
     }
+
     //查询所有房间数量
     @Override
     public Integer queryHouseNumber() {
         return  houseDao.queryCount();
     }
+
     //查询空闲房间总数
     @Override
     public Integer queryCountByStateNull() {
         return houseDao.queryCountByStateNull();
     }
+
     //查询预定房间总数
     @Override
     public Integer queryCountByStateReserve() {
         return houseDao.queryCountByStateReserve();
     }
+
     //查询入住房间总数
     @Override
     public Integer queryCountByStateCheckIn() {
         return houseDao.queryCountByStateCheckIn();
     }
+
     //查询待打扫房间总数
     @Override
     public Integer queryCountByStateClean() {
         return houseDao.queryCountByStateClean();
     }
+
     //查询待维修房间总数
     @Override
     public Integer queryCountByStateMaintain() {
         return houseDao.queryCountByStateMaintain();
     }
 
+    //查询维修或者打扫房间信息
     @Override
+    public PageData<House> queryBySate(int pageNumber, int pageSize) {
+        PageHelper.startPage(pageNumber,pageSize);
+        List<House> houseList = houseDao.queryBySate();
+        PageInfo<House> pageInfo = new PageInfo<>(houseList);
+        PageData<House> pageData = new PageData<>();
+        pageData.setCurrentPage(pageNumber);
+        //设置每页数
+        pageData.setPageSize(pageSize);
+        //设置总页数
+        pageData.setTotalPage(pageInfo.getPages());
+        //设置总记录数
+        pageData.setTotalSize((int) pageInfo.getTotal());
+        if (pageInfo.isHasNextPage()){
+            //有下一页 设置下一页页码
+            pageData.setNextPage(pageInfo.getNextPage());
+        }else {
+            //没有下一页，设置尾页
+            pageData.setNextPage(pageInfo.getPages());
+        }
+        if (pageInfo.isHasPreviousPage()){
+            //有上一页 设置上一页页码
+            pageData.setPreviousPage(pageInfo.getPrePage());
+        }else {
+            //没有上一页，设置首页
+            pageData.setPreviousPage(1);
+        }
+        //设置房屋信息
+        pageData.setList(pageInfo.getList());
+        //返回房屋信息
+        return pageData;
+    }
+
+    //退订
+    @Override
+    public   Map<String, Object> unsubscribe(String houseName) {
+        Map<String, Object> result = new HashMap<>();
+        House house=houseDao.queryByHousename(houseName);
+        if (house.getState().equals("已定"))
+        {  houseDao.updateByHouseNameToUnsubscribe(houseName);
+            result.put("code",200);
+            result.put("message","退订成功");
+        }
+       else
+        {
+            result.put("code",-2);
+            result.put("message","房间已经退订或者正在入住");
+        }
+        return result;
+    }
+
+    //入住
     //参数分别为顾客id,房间name,入住人数，userID
+    @Override
     public Map<String, Object> checkIn(int customerId, String name,int day,int numberOfPeople,int userId) throws ParseException {
         Map<String, Object> result = new HashMap<>();
         //按照name获取house数据

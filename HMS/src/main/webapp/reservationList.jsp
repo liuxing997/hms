@@ -289,8 +289,32 @@
                     }
                 });
             }else if (obj.event === 'unsubscribe'){//退订
+                layer.confirm('真的要退订' + data.houseName + "么？", {title: "提示"}, function (index) {
+                    $.ajax({
+                        url: "house/unsubscribe",
+                        type: "get",
+                        dataType: 'json',
+                        data: {
+                            name: data.houseName
+                        },
+                        success: function (res) {
+                            if (res.code === 200) {
+                                layer.msg(res.message, {icon: 1, time: 3000}, function () {
+                                    layer.close(index);
+                                    location.reload();
+                                });
+                            } else {
+                                layer.msg(res.message, {icon: 2, time: 3000}, function () {
+                                    layer.close(index);
+                                });
+                            }
+                        },
+                        error: function (err) {
+                            layer.msg('服务器被吃啦！请稍后重试', {icon: 7, time: 3000});
+                        }
+                    })
 
-
+                });
             }else if (obj.event === 'checkout'){//退房
 
             }

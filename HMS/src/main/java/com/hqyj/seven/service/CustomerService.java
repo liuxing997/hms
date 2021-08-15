@@ -1,6 +1,7 @@
 package com.hqyj.seven.service;
 
 import com.hqyj.seven.pojo.Customer;
+import com.hqyj.seven.pojo.House;
 import com.hqyj.seven.pojo.PageData;
 
 import java.util.List;
@@ -23,7 +24,10 @@ public interface CustomerService {
     int insertOneCus(Customer customer);
     //删除单个客户的信息
     int deleteOneCus(int customer_id);
+//    查询客户住宿情况
+     List<House> queryState(int customer_id);
 }
+
 
 
 
