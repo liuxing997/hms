@@ -10,15 +10,22 @@ import java.util.List;
 public interface HouseDao {
 
     int updateByHouseName(@Param("customerId")int customerId,@Param("name") String name );
+    //更改维修状态
+    int updateByHouseStatetocheckIn(@Param("houseId")int houseId,@Param("state") String state);
 
     House queryByHousename(String name);
 
     //根据ID或房间名查询房间
     List<House> searchHouse(String  names);
 
+    //状态查询
+    List<House> searchHouseState(String  state);
+
     int updateByHouse(House house);
 
     int updateByHouseNametocheckIn(@Param("customerId")int customerId,@Param("name") String name,@Param("day") int day);
+
+
 
     //获取全部客房信息
     List<House> queryAllHouseI();
@@ -28,7 +35,8 @@ public interface HouseDao {
     int updateHouse(House house);
     //增加住房
     int insertHouse(House house);
-
+    //更改住房状态
+    int updateHouseState(House house);
     //删除客房
     int deleteHouse(int house_id);
     //查询所有房间数量
