@@ -11,32 +11,6 @@
     <select id="queryByCustomer" resultType="com.hqyj.seven.pojo.Customer">
         select * from customer where customer_id=#{CustomerId}
     </select>
-<!--    <resultMap id="customerBaseResultMap" type="com.hqyj.seven.pojo.Customer">-->
-<!--        <id column="customer_id" property="customerId" />-->
-<!--        <result column="cname" property="name" />-->
-<!--        <result column="card" property="card" />-->
-<!--        <result column="phone" property="phone" />-->
-<!--        <result column="moblie" property="moblie" />-->
-<!--        <result column="remainder" property="remainder" />-->
-<!--        &lt;!&ndash; collection 用于处理1个pojo对象中 具有集合类型的属性的映射情况-->
-<!--        ofType指定pojo属性对象的java类型&ndash;&gt;-->
-<!--        <collection property="roles" ofType="com.hqyj.seven.pojo.">-->
-<!--       &lt;!&ndash;     <id column="role_id" property="roleId" />-->
-<!--            <result column="rname" property="name" />-->
-<!--            <result column="rstate" property="state" />&ndash;&gt;-->
-<!--        </collection>-->
-<!--    </resultMap>-->
-
-<!--    <sql id="customerBaseQuerySql">-->
-<!--         /*select u.user_id,u.name uname,u.username,u.password upassword,-->
-<!--           r.role_id,r.name rname,r.state rstate-->
-<!--        from user u-->
-<!--        left join user_role ur on u.user_id = ur.user_id-->
-<!--        left join role r on ur.role_id = r.role_id*/-->
-<!--    </sql>-->
-<!--    <select id="queryAll" resultMap="customerBaseResultMap">-->
-<!--       <include refid="customerBaseQuerySql" />-->
-<!--    </select>-->
     <select id="queryAll" resultType="com.hqyj.seven.pojo.Customer">
         select * from customer
     </select>
