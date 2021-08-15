@@ -21,7 +21,9 @@ import java.util.Map;
 public class CustomerController {
     @Autowired
     CustomerService customerService;
-    @RequestMapping("/getallcus")
+
+    //查询所有客户
+    @RequestMapping("/getAllCus")
     @ResponseBody
     public Map<String,Object> getAllCus(@RequestParam("page") Integer pageNumber, @RequestParam("limit")Integer pageSize){
         int number;
@@ -52,29 +54,32 @@ public class CustomerController {
     }
 
 
-    @RequestMapping("/getonecus")
+    //根据姓名、身份证号码、座机号码、手机号码查询客户
+    @RequestMapping("/getOneCus")
     @ResponseBody
-    public Map<String,Object> getonecus(String name){
+    public Map<String,Object> getOneCus(String name){
         Map<String,Object> customer = new HashMap<>();
         if (name==null){
             customer.put("code",-9);
-            customer.put("message","查询名不为空");
+            customer.put("msg","查询参数不为空");
         } else {
             List<Customer> customerList = customerService.queryByCusName(name);
             if (customerList.size() == 0) {
                 customer.put("code", -1);
-                customer.put("msg", "没有查询到姓名为:" + name + "的客户信息");
+                customer.put("msg", "客户不存在");
             } else {
                 customer.put("code", 0);
-                customer.put("message", "查询成功");
+                customer.put("msg", "查询成功");
                 customer.put("data", customerList);
             }
         }
         return customer;
     }
-    @RequestMapping("/updateonecus")
+
+    //更新客户信息
+    @RequestMapping("/updateOneCus")
     @ResponseBody
-    public  Map<String,Object> updateonecus(Customer customer){
+    public  Map<String,Object> updateOneCus(Customer customer){
          int customernum = customerService.updataOneCus(customer);
         Map<String,Object> customermap = new HashMap<>();
         if (customernum == 0){
@@ -86,9 +91,11 @@ public class CustomerController {
         }
         return customermap;
     }
-    @RequestMapping("/insertonecus")
+
+    //添加客户信息
+    @RequestMapping("/insertOneCus")
     @ResponseBody
-    public  Map<String,Object> insertonecus(Customer customer){
+    public  Map<String,Object> insertOneCus(Customer customer){
         int customernum = customerService.insertOneCus(customer);
         Map<String,Object> customermap = new HashMap<>();
         if (customernum == 0){
@@ -100,10 +107,11 @@ public class CustomerController {
         }
         return customermap;
     }
-    //客户信息的删除
-    @RequestMapping("/deleteCustomer")
+
+    //删除客户
+    @RequestMapping("/deleteOneCus")
     @ResponseBody
-    public Map<String,Object> deleteCustomer(int customer_id){
+    public Map<String,Object> deleteOneCus(int customer_id){
         Map<String,Object> customerMap =  new HashMap<>();
         int num = customerService.deleteOneCus(customer_id);
         if (num==0){
