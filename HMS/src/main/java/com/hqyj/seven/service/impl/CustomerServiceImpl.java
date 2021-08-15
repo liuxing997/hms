@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hqyj.seven.dao.CustomerDao;
 import com.hqyj.seven.pojo.Customer;
+import com.hqyj.seven.pojo.House;
 import com.hqyj.seven.pojo.PageData;
 import com.hqyj.seven.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,11 @@ public class CustomerServiceImpl implements CustomerService {
     public int deleteOneCus(int customer_id) {
         int num = customerDao.deleteOneCus(customer_id);
         return num;
+    }
+    @Override
+    public List<House> queryState(int customer_id) {
+        List<House> houseList = customerDao.queryState(customer_id);
+        return houseList;
     }
 
 }
