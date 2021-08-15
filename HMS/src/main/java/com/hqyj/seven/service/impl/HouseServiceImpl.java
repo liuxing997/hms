@@ -28,6 +28,8 @@ public class HouseServiceImpl implements HouseService {
     private EnterDao enterDao;
     @Autowired
     private Feedao feedao;
+
+    //订房
     @Override
     public Map<String, Object> reservation(int customerId, String name ) {
         Map<String, Object> result = new HashMap<>();
@@ -90,58 +92,69 @@ public class HouseServiceImpl implements HouseService {
         //返回房屋信息
         return pageData;
     }
+
     // 查询入住信息
     @Override
     public List<Enter> queryInter(int house_id) {
         List<Enter> customers = houseDao.queryInter(house_id);
         return customers;
     }
+
     //更新客房信息
     @Override
     public int updateHouseI(House house) {
         return houseDao.updateHouse(house);
     }
+
     //插入单个客房信息
     @Override
     public int insertIntoHouse(House house) {
         return houseDao.insertHouse(house);
     }
+
     //删除单个客房信息
     @Override
     public int deleteHouseI(int house_id) {
         return houseDao.deleteHouse(house_id);
     }
+
     //查询所有房间数量
     @Override
     public Integer queryHouseNumber() {
         return  houseDao.queryCount();
     }
+
     //查询空闲房间总数
     @Override
     public Integer queryCountByStateNull() {
         return houseDao.queryCountByStateNull();
     }
+
     //查询预定房间总数
     @Override
     public Integer queryCountByStateReserve() {
         return houseDao.queryCountByStateReserve();
     }
+
     //查询入住房间总数
     @Override
     public Integer queryCountByStateCheckIn() {
         return houseDao.queryCountByStateCheckIn();
     }
+
     //查询待打扫房间总数
     @Override
     public Integer queryCountByStateClean() {
         return houseDao.queryCountByStateClean();
     }
+
     //查询待维修房间总数
     @Override
     public Integer queryCountByStateMaintain() {
         return houseDao.queryCountByStateMaintain();
     }
-//查询维修或者打扫房间信息
+
+    //查询维修或者打扫房间信息
     @Override
     public PageData<House> queryBySate(int pageNumber, int pageSize) {
         PageHelper.startPage(pageNumber,pageSize);
@@ -174,7 +187,8 @@ public class HouseServiceImpl implements HouseService {
         //返回房屋信息
         return pageData;
     }
- //退订
+
+    //退订
     @Override
     public   Map<String, Object> unsubscribe(String houseName) {
         Map<String, Object> result = new HashMap<>();
@@ -188,13 +202,13 @@ public class HouseServiceImpl implements HouseService {
         {
             result.put("code",-2);
             result.put("message","房间已经退订或者正在入住");
-
         }
         return result;
     }
 
-    @Override
+    //入住
     //参数分别为顾客id,房间name,入住人数，userID
+    @Override
     public Map<String, Object> checkIn(int customerId, String name,int day,int numberOfPeople,int userId) throws ParseException {
         Map<String, Object> result = new HashMap<>();
         //按照name获取house数据

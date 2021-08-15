@@ -150,20 +150,22 @@ public class HouseController {
         }
         return houseMap;
     }
-//退订
-@RequestMapping("/unsubscribe")
-@ResponseBody
-public Map<String, Object> unsubscribe (String name){
-    Map<String,Object> houseMap =  new HashMap<>();
-    if(name == null){
-        houseMap.put("code",-2);
-        houseMap.put("message","房间号不能为空");
+
+    //退订
+    @RequestMapping("/unsubscribe")
+    @ResponseBody
+    public Map<String, Object> unsubscribe (String name){
+        Map<String,Object> houseMap =  new HashMap<>();
+        if(name == null){
+            houseMap.put("code",-2);
+            houseMap.put("message","房间号不能为空");
+        }
+        else {
+            houseMap = houseService.unsubscribe(name);
+        }
+        return houseMap;
     }
-    else {
-        houseMap=houseService.unsubscribe(name);
-    }
-    return houseMap;
-}
+
     //入住
     //参数分别为顾客id,房间name,入住天数，入住人数，userID
     @RequestMapping("/checkIn")
