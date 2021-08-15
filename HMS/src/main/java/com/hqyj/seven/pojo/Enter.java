@@ -152,6 +152,9 @@ public class Enter {
         this.price = price;
     }
 
+    public Enter() {
+    }
+
     @Override
     public String toString() {
         return "Enter{" +
