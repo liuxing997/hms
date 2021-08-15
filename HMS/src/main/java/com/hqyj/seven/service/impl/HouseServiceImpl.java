@@ -35,12 +35,12 @@ public class HouseServiceImpl implements HouseService {
        if (house.getState().equals("空闲"))
         {  houseDao.updateByHouseName(customerId,name);
             result.put("code",200);
-            result.put("massage","订房成功");
+            result.put("message","订房成功");
         }
         if (house.getState().equals("已定")||house.getState().equals("入住"))
         {
             result.put("code",-2);
-            result.put("massage","房间已经入住或者被定");
+            result.put("message","房间已经入住或者被定");
 
         }
         return result;
@@ -132,8 +132,10 @@ public class HouseServiceImpl implements HouseService {
         {
             double money=house.getPrice()*day;
             //如果余额不足则会提示
-            if (money>customer.getRemainder())
-                result.put("用户余额不足可以尝试充值或者减少预定住房时间",-1);
+            if (money>customer.getRemainder()){
+                result.put("code", -9);
+                result.put("message", "用户余额不足，可以尝试充值或者减少预定住房时间");
+            }
             else {
                 //更新顾客表余额的数据
                 customerDao.updataByCustomerIdToremainder(money,customerId);
@@ -143,21 +145,18 @@ public class HouseServiceImpl implements HouseService {
                 //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
                 SimpleDateFormat sdf  =   new  SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
                 //规范化插入表时的时间和获取的时间有点误差
-                long day3 = time.getTime()+500;
+                long day3 = time.getTime();
                 Date time4=new Date(day3);
-                System.out.println(time4);
                 Enter enter= enterDao.queryByHouseIdAndTime(house.getHouseId(),sdf.format(time4));
-                System.out.println(enter);
+
                 //插入缴费表
                 feedao.inserintoFee(new Fee( enter.getEnter_id(),"缴费",customerId,money,house.getHouseId(),
                         str1,userId,"会员卡扣费"));
                 //更新房间为入住
                 houseDao.updateByHouseNametocheckIn(customerId,name,day);
                 result.put("code",200);
-                result.put("massage","订房成功");
-
+                result.put("message","入住成功");
             }
-
         }
         else {
             if ((house.getState().equals("已定"))) {
@@ -165,8 +164,10 @@ public class HouseServiceImpl implements HouseService {
                 if (house.getCustomerId() == customerId) {
                     double money = house.getPrice() * day;
                     //如果余额不足则会提示
-                    if (money > customer.getRemainder())
-                        result.put("用户余额不足可以尝试充值或者减少预定住房时间", -1);
+                    if (money > customer.getRemainder()) {
+                        result.put("code", -9);
+                        result.put("message", "用户余额不足，可以尝试充值或者减少预定住房时间");
+                    }
                     else {
                         //更新顾客表余额的数据
                         customerDao.updataByCustomerIdToremainder(money, customerId);
@@ -185,19 +186,19 @@ public class HouseServiceImpl implements HouseService {
                                 str1, userId, "会员卡扣费"));
                         //更新房间为入住
                         houseDao.updateByHouseNametocheckIn(customerId, name, day);
-                        result.put("code",-1);
-                        result.put("massage","顾客入住预定的房间成功");
+                        result.put("code",200);
+                        result.put("message","顾客入住预定的房间成功");
                     }
 
 
                 } else {
                     result.put("code",-2);
-                    result.put("massage","此房间不是该顾客预定的哟");
+                    result.put("message","此房间不是该顾客预定的哟");
 
                 }
             } else {
                 result.put("code",-3);
-                result.put("massage","房间预定或者已经入住哟");
+                result.put("message","房间预定或者已经入住哟");
             }
         }
         return result;
