@@ -27,7 +27,7 @@ public class CustomerController {
         Map<String,Object> customer =   new HashMap<>();
         if (customerList == null){
             customer.put("code",-1);
-            customer.put("msg","没有客房信息");
+            customer.put("msg","没有客户信息");
         }else {
             customer.put("code", 0);
             customer.put("data", customerList);
@@ -60,6 +60,20 @@ public class CustomerController {
     @ResponseBody
     public  Map<String,Object> updateonecus(Customer customer){
          int customernum = customerService.updataOneCus(customer);
+        Map<String,Object> customermap = new HashMap<>();
+        if (customernum == 0){
+            customermap.put("code",-1);
+            customermap.put("message","修改失败");
+        }else {
+            customermap.put("code",200);
+            customermap.put("message","修改成功");
+        }
+        return customermap;
+    }
+    @RequestMapping("/insertonecus")
+    @ResponseBody
+    public  Map<String,Object> insertonecus(Customer customer){
+        int customernum = customerService.insertOneCus(customer);
         Map<String,Object> customermap = new HashMap<>();
         if (customernum == 0){
             customermap.put("code",-1);

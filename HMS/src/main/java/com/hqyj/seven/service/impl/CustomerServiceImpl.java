@@ -37,4 +37,11 @@ public class CustomerServiceImpl implements CustomerService {
         int num = customerDao.updataOneCus(customer);
         return num;
     }
+
+    @Override
+    public int insertOneCus(Customer customer) {
+        int num = customerDao.insertOneCus(customer);
+        return num;
+    }
+
 }

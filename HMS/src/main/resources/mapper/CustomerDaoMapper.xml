@@ -50,5 +50,9 @@
         ,card = #{card},phone = #{phone},mobile = #{mobile},remainder = #{remainder}
         where customer_id = #{customer_id}
     </update>
+    <insert id="insertOneCus" parameterType="com.hqyj.seven.pojo.Customer">
+        insert into  customer(customer_id,name,card,phone,mobile,remainder)
+        value (#{customer_id},#{name},#{card}, #{phone},#{mobile},#{remainder})
+    </insert>
 
 </mapper>

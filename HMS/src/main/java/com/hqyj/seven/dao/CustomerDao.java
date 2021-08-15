@@ -16,4 +16,6 @@ public interface CustomerDao {
     List<Customer> queryByCusName(String name);
     //更新客户信息
     int updataOneCus(Customer customer);
+    //插入单个客户的信息
+    int insertOneCus(Customer customer);
 }
