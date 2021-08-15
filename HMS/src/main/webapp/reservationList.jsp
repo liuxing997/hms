@@ -131,7 +131,7 @@
         let table = layui.table;
         table.render({
             elem: '#reservation_list'
-            , url: 'house/getallhuose'
+            , url: 'house/getAllHouse'
             , toolbar: '#reservationToolBar' //开启头部工具栏，并为其绑定左侧模板
             , defaultToolbar: ['filter', 'exports', 'print']
             , parseData: function (res) {
