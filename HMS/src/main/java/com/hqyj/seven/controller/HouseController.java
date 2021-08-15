@@ -170,5 +170,41 @@ public class HouseController {
         }
         return houseMap;
     }
+    //房间总数
+    @RequestMapping("/TotalNumberOfHouse")
+    @ResponseBody
+  public   Integer TotalNumberOfHouse(){
+        return houseService.queryHouseNumber();
+    }
+    //空房间总数
+    @RequestMapping("/queryCountByStateNull")
+    @ResponseBody
+    public   Integer queryCountByStateNull(){
+        return houseService.queryCountByStateNull();
+    }
+    //预定房间总数
+    @RequestMapping("/queryCountByStateReserve")
+    @ResponseBody
+    public   Integer queryCountByStateReserve(){
+        return houseService.queryCountByStateReserve();
+    }
+    //入住房间总数
+    @RequestMapping("/queryCountByStateCheckIn")
+    @ResponseBody
+    public   Integer queryCountByStateCheckIne(){
+        return houseService.queryCountByStateCheckIn();
+    }
+    //打扫房间总数
+    @RequestMapping("/queryCountByStateClean")
+    @ResponseBody
+    public   Integer queryCountByStateClean(){
+        return houseService.queryCountByStateClean();
+    }
+    //维修房间总数
+    @RequestMapping("/queryCountByStateMaintain")
+    @ResponseBody
+    public   Integer queryCountByStateMaintain(){
+        return houseService.queryCountByStateMaintain();
+    }
 
 }
