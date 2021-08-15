@@ -9,12 +9,16 @@ import java.util.List;
 
 public interface HouseDao {
 
-         int updateByHouseName(@Param("customerId")int customerId,@Param("name") String name );
-         House queryByHousename(String name);
+    int updateByHouseName(@Param("customerId")int customerId,@Param("name") String name );
+
+    House queryByHousename(String name);
+
+    //根据ID或房间名查询房间
+    List<House> searchHouse(String  names);
+
     int updateByHouse(House house);
+
     int updateByHouseNametocheckIn(@Param("customerId")int customerId,@Param("name") String name,@Param("day") int day);
-
-
 
     //获取全部客房信息
     List<House> queryAllHouseI();

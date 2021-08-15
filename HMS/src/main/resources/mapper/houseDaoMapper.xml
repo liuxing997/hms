@@ -8,6 +8,11 @@
     <select id="queryByHousename" resultType="com.hqyj.seven.pojo.House">
         select * from house where name=#{name}
     </select>
+
+    <!--根据ID或房间名查询房间-->
+    <select id="searchHouse" resultType="com.hqyj.seven.pojo.House">
+        select * from house where name=#{names} or house_id=#{names}
+    </select>
     <update id="updateByHouseName" parameterType="com.hqyj.seven.pojo.House">
        update house set state='已定',customer_id=#{customerId} where name=#{name}
     </update>

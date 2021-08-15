@@ -46,6 +46,12 @@ public class HouseServiceImpl implements HouseService {
         return result;
     }
 
+    //根据ID或房间名查询房间
+    @Override
+    public List<House> searchHouse(String names) {
+        return houseDao.searchHouse(names);
+    }
+
     @Override
     public House getOneByHousename(String name) {
         return houseDao.queryByHousename(name);
