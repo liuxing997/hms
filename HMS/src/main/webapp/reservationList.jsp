@@ -91,7 +91,7 @@
                             "<td>" + n.floorId + "</td>" +
                             "<td>" + n.state + "</td>" +
                             "<td>" + n.customerId + "</td>" +
-                             " <td><a  class='btn btn-primary' onclick=\"xadmin.open('订房','reservation.jsp',300,200)\">订房</a> <a class='btn btn-danger' href='#'>入住</a>" +
+                             " <td><a  class='btn btn-primary' onclick=\"xadmin.open('订房','reservation.jsp',300,200)\">订房</a> <a class='btn btn-danger' onclick=\"xadmin.open('入住','checkin.jsp',300,400)\">入住</a>" +
                             "  <a class='btn btn-primary' href='#'>退订</a> <a class='btn btn-danger' href='#'>退房</a>" +
                             "</td>"+
                             "</tr>";
@@ -203,5 +203,10 @@
                 };
             });
     });</script>
+<script>
+    function reservation() {
+        xadmin.open('订房','reservation.jsp',300,200)
 
+    }
+</script>
 </html>
