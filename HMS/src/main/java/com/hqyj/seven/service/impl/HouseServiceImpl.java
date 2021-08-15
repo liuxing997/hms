@@ -120,7 +120,8 @@ public class HouseServiceImpl implements HouseService {
                         str1,userId,"会员卡扣费"));
                 //更新房间为入住
                 houseDao.updateByHouseNametocheckIn(customerId,name,day);
-                result.put("入住成功",1);
+                result.put("code",200);
+                result.put("massage","订房成功");
 
             }
 
@@ -151,15 +152,19 @@ public class HouseServiceImpl implements HouseService {
                                 str1, userId, "会员卡扣费"));
                         //更新房间为入住
                         houseDao.updateByHouseNametocheckIn(customerId, name, day);
-                        result.put("入住预定的房间成功", 2);
+                        result.put("code",-1);
+                        result.put("massage","顾客入住预定的房间成功");
                     }
 
 
                 } else {
-                    result.put("此房间不是该顾客预定的哟", -3);
+                    result.put("code",-2);
+                    result.put("massage","此房间不是该顾客预定的哟");
+
                 }
             } else {
-                result.put("房间预定或者已经入住", -2);
+                result.put("code",-3);
+                result.put("massage","房间预定或者已经入住哟");
             }
         }
         return result;
