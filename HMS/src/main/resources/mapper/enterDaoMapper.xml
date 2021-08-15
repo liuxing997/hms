@@ -14,4 +14,7 @@
     <select id="queryByHouseIdAndTime" resultType="com.hqyj.seven.pojo.Enter">
         select  * from enter where house_id=#{HouseId} and start_time=#{time}
     </select>
+    <select id="queryAll" resultType="com.hqyj.seven.pojo.Enter">
+        select * from  enter
+    </select>
 </mapper>
