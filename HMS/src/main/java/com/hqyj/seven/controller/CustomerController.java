@@ -55,7 +55,7 @@ public class CustomerController {
 
             } else {
                 customer.put("code", 0);
-                customer.put("massage", "没有查询到姓名为:" + name + "的客户信息");
+                customer.put("message", "没有查询到姓名为:" + name + "的客户信息");
             }
         }
         return customer;
