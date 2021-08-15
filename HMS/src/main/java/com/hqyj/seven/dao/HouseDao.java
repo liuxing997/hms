@@ -31,4 +31,16 @@ public interface HouseDao {
 
     //删除客房
     int deleteHouse(int house_id);
+    //查询所有房间数量
+    Integer queryCount();
+    //查询空闲房间总数
+    Integer queryCountByStateNull();
+   //查询预定房间总数
+    Integer queryCountByStateReserve();
+    //查询入住房间总数
+    Integer queryCountByStateCheckIn();
+    //查询待打扫房间总数
+    Integer queryCountByStateClean();
+    //查询待维修房间总数
+    Integer queryCountByStateMaintain();
 }
