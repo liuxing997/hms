@@ -123,7 +123,7 @@ public class CustomerController {
         }
         return customerMap;
     }
-    //删除客户
+    //查询客户住宿状态
     @RequestMapping("/queryOneState")
     @ResponseBody
     public  Map<String,Object> queryOneState(int customer_id){
