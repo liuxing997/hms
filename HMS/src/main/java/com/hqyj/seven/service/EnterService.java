@@ -11,7 +11,7 @@ public interface EnterService {
     int insertEnter(Enter enter);
 
     //按照房间号和住房时间查找住房id
-    Enter queryByHouseIdAndTime(int CustomerId, String time);
+    Enter queryByHouseIdAndLimitOne(int CustomerId);
 
     //查询所有客户信息
     PageData<Enter> queryAll(int number, int size);

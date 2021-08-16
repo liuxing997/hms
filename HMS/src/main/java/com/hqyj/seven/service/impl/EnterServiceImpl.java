@@ -27,8 +27,8 @@ public class EnterServiceImpl implements EnterService {
     }
 
     @Override
-    public Enter queryByHouseIdAndTime(int CustomerId, String time) {
-        return enterDao.queryByHouseIdAndTime(CustomerId, time);
+    public Enter queryByHouseIdAndLimitOne(int CustomerId) {
+        return enterDao.queryByHouseIdAndLimitOne(CustomerId);
     }
 
     @Override
