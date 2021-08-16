@@ -83,7 +83,7 @@
         select count(*) from house where state='维修'
     </select>
     <select id="queryBySate" resultType="com.hqyj.seven.pojo.House">
-        select * from  house where state='打扫' or state='维修'
+        select * from  house where state=#{state}
     </select>
     <update id="updateByHouseNameToUnsubscribe" parameterType="com.hqyj.seven.pojo.House">
         update house set state='空闲',customer_id=null where name=#{houseName}
