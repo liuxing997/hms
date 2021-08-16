@@ -21,7 +21,7 @@ import java.util.Map;
 public class EnterController {
 
     private EnterService enterService;
-    
+
     @Autowired
     public void setEnterService(EnterService enterService) {
         this.enterService = enterService;
@@ -30,50 +30,22 @@ public class EnterController {
     //获得所有订单记录
     @RequestMapping("/queryEnter")
     @ResponseBody
-    public Map<String,Object> getAllenter(@RequestParam("page") Integer pageNumber, @RequestParam("limit")Integer pageSize){
+    public Map<String, Object> getAllenter(@RequestParam("page") Integer pageNumber, @RequestParam("limit") Integer pageSize) {
         int number;
         int size;
-        if (pageNumber == null){
+        if (pageNumber == null) {
             number = 1;
-        }else {
+        } else {
             number = pageNumber;
         }
-        if (pageSize == null){
+        if (pageSize == null) {
             size = 10;
-        }else {
+        } else {
             size = pageSize;
         }
-        PageData<Enter> enterList = enterService.queryAll(number,size);
-        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        for (Enter enter:enterList.getList()){
-            enter.setStart_time1(df.format(enter.getStart_time()));
-            enter.setEnd_time_estimate1(df.format(enter.getEnd_time_estimate()));
-            if (enter.getEnd_time_actual()==null){
-                enter.setEnd_time_actual1("未定");
-            }else {
-                enter.setEnd_time_actual1(df.format(enter.getEnd_time_actual()));
-            }
-        }
-        Map<String,Object> enter =   new HashMap<>();
-        if (enterList.getList().size() == 0){
-            enter.put("code",-1);
-            enter.put("msg","没有客户信息");
-        }else {
-            enter.put("code", 0);
-            enter.put("data", enterList);
-            enter.put("msg","获取数据成功！");
-        }
-        Session session= SecurityUtils.getSubject().getSession();
-        session.setAttribute("enterList",enterList);
-        return enter;
-    }
-
-    @RequestMapping("/queryOneById")
-    @ResponseBody
-    public  Map<String,Object> queryOneById(int id){
-        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        List<Enter> enterList = enterService.queryOneById(id);
-        for (Enter enter:enterList) {
+        PageData<Enter> enterList = enterService.queryAll(number, size);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for (Enter enter : enterList.getList()) {
             enter.setStart_time1(df.format(enter.getStart_time()));
             enter.setEnd_time_estimate1(df.format(enter.getEnd_time_estimate()));
             if (enter.getEnd_time_actual() == null) {
@@ -82,14 +54,42 @@ public class EnterController {
                 enter.setEnd_time_actual1(df.format(enter.getEnd_time_actual()));
             }
         }
-        Map<String,Object> enterMap = new HashMap<>();
-        if ( enterList.size()==0 ){
-            enterMap.put("code",-1);
-            enterMap.put("msg","未查询到任何信息");
-        }else {
-            enterMap.put("code",0);
-            enterMap.put("msg","查询成功");
-            enterMap.put("data",enterList);
+        Map<String, Object> enter = new HashMap<>();
+        if (enterList.getList().size() == 0) {
+            enter.put("code", -1);
+            enter.put("msg", "没有客户信息");
+        } else {
+            enter.put("code", 0);
+            enter.put("data", enterList);
+            enter.put("msg", "获取数据成功！");
+        }
+        Session session = SecurityUtils.getSubject().getSession();
+        session.setAttribute("enterList", enterList);
+        return enter;
+    }
+
+    @RequestMapping("/queryOneById")
+    @ResponseBody
+    public Map<String, Object> queryOneById(int id) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        List<Enter> enterList = enterService.queryOneById(id);
+        for (Enter enter : enterList) {
+            enter.setStart_time1(df.format(enter.getStart_time()));
+            enter.setEnd_time_estimate1(df.format(enter.getEnd_time_estimate()));
+            if (enter.getEnd_time_actual() == null) {
+                enter.setEnd_time_actual1("未定");
+            } else {
+                enter.setEnd_time_actual1(df.format(enter.getEnd_time_actual()));
+            }
+        }
+        Map<String, Object> enterMap = new HashMap<>();
+        if (enterList.size() == 0) {
+            enterMap.put("code", -1);
+            enterMap.put("msg", "未查询到任何信息");
+        } else {
+            enterMap.put("code", 0);
+            enterMap.put("msg", "查询成功");
+            enterMap.put("data", enterList);
         }
         return enterMap;
     }
