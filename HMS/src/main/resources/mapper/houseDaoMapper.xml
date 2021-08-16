@@ -100,11 +100,11 @@
 
     <!--根据ID或房间名搜索待打扫房间-->
     <select id="searchHouseClean" resultType="com.hqyj.seven.pojo.House">
-        select * from house where name=#{names} or house_id=#{names} and state='打扫'
+        select * from house where (name=#{names} or house_id=#{names}) and state='打扫'
     </select>
     <!--根据ID或房间名搜索待维修房间-->
     <select id="searchHouseMaintain" resultType="com.hqyj.seven.pojo.House">
-        select * from house where name=#{names} or house_id=#{names} and state='维修' and state!='空闲' and state!='打扫'
+        select * from house where (name=#{names} or house_id=#{names}) and state='维修'
     </select>
 
 
