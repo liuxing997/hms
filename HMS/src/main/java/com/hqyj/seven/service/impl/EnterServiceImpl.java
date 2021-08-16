@@ -10,8 +10,13 @@ import java.util.List;
 
 @Service
 public class EnterServiceImpl implements EnterService {
+
+    private EnterDao enterDao;
+
     @Autowired
-   private EnterDao enterDao;
+    public void setEnterDao(EnterDao enterDao) {
+        this.enterDao = enterDao;
+    }
 
     @Override
     public int insertEnter(Enter enter) {

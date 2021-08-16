@@ -14,8 +14,14 @@ import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
-    @Autowired
+
     private CustomerDao customerDao;
+
+    @Autowired
+    public void setCustomerDao(CustomerDao customerDao) {
+        this.customerDao = customerDao;
+    }
+
     @Override
     public int updateByNameToRemainder(double money, int id) {
         return customerDao.updataByCustomerIdToremainder(money,id);

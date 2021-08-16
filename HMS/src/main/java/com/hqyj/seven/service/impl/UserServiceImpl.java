@@ -23,8 +23,13 @@ import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
+
     private UserDao userDao;
+
+    @Autowired
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     //根据用户名查询用户
     @Override

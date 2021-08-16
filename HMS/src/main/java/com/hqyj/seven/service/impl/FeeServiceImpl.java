@@ -10,8 +10,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class FeeServiceImpl implements FeeService {
 
-    @Autowired
+
     private Feedao feedao;
+
+    @Autowired
+    public void setFeedao(Feedao feedao) {
+        this.feedao = feedao;
+    }
+
     @Override
     //插入数据
     public int insertFee(Fee fee) {

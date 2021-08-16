@@ -20,14 +20,31 @@ import java.util.Map;
 
 @Service
 public class HouseServiceImpl implements HouseService {
-    @Autowired
+
     private HouseDao houseDao;
-    @Autowired
     private CustomerDao customerDao;
-    @Autowired
     private EnterDao enterDao;
-    @Autowired
     private Feedao feedao;
+
+    @Autowired
+    public void setHouseDao(HouseDao houseDao) {
+        this.houseDao = houseDao;
+    }
+
+    @Autowired
+    public void setCustomerDao(CustomerDao customerDao) {
+        this.customerDao = customerDao;
+    }
+
+    @Autowired
+    public void setEnterDao(EnterDao enterDao) {
+        this.enterDao = enterDao;
+    }
+
+    @Autowired
+    public void setFeedao(Feedao feedao) {
+        this.feedao = feedao;
+    }
 
     //订房
     @Override
