@@ -37,7 +37,7 @@
                             <form class="layui-form layui-col-space5" onsubmit="return false;">
                                 <div class="layui-inline layui-show-xs-block">
                                     <input type="text" id="houseNames" placeholder="请输入房间ID或房间名" autocomplete="off"
-                                           class="layui-input"></div>
+                                           class="layui-input" style="width: 200px;"></div>
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn" lay-submit="" lay-filter="sreach"
                                             lay-event="searchHouseByName">

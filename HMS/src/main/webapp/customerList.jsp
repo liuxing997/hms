@@ -42,8 +42,8 @@
                         <div class="layui-card-body ">
                             <form class="layui-form layui-col-space5" onsubmit="return false;">
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" id="customerNames" placeholder="姓名、身份证、电话" autocomplete="off"
-                                           class="layui-input"></div>
+                                    <input type="text" id="customerNames" placeholder="请输入姓名、身份证、电话" autocomplete="off"
+                                           class="layui-input" style="width: 200px;"></div>
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn" lay-submit="" lay-filter="sreach"
                                             lay-event="getCustomerByName">

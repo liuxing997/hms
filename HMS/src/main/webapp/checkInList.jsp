@@ -42,8 +42,8 @@
                         <div class="layui-card-body ">
                             <form class="layui-form layui-col-space5" onsubmit="return false;">
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" id="checkInNames" placeholder="入住ID、房间ID" autocomplete="off"
-                                           class="layui-input"></div>
+                                    <input type="text" id="checkInNames" placeholder="请输入入住ID、房间ID" autocomplete="off"
+                                           class="layui-input" style="width: 200px;"></div>
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn" lay-submit="" lay-filter="sreach"
                                             lay-event="searchCheckIn">
@@ -54,10 +54,6 @@
                     </script>
                     <%--表格区域--%>
                     <table class="layui-hide" id="check_list" lay-filter="check_list"></table>
-                    <%--操作按钮模块--%>
-                    <%--                    <script type="text/html" id="check_list_bar">--%>
-                    <%--                        <a class="layui-btn layui-btn-xs" lay-event="cleanHouse">打扫</a>--%>
-                    <%--                    </script>--%>
                 </div>
             </div>
         </div>
@@ -85,19 +81,18 @@
             , title: '入住列表'
             , cols: [[
                 {type: 'checkbox', fixed: 'left'}
-                , {field: 'enter_id', title: '入住ID', fixed: 'left', unresize: true, align: "center"}
+                , {field: 'enter_id', title: '入住ID', align: "center"}
                 , {field: 'house_id', title: '房间ID', align: "center", sort: true}
                 , {field: 'customer_id', title: '顾客ID', align: "center", sort: true}
                 , {field: 'customer_info', title: '入住人数', align: "center", sort: true}
                 , {field: 'start_time1', title: '入住时间', width: 150, align: "center", sort: true}
                 , {field: 'end_time_estimate1', title: '预计退房时间', width: 150, align: "center", sort: true}
                 , {field: 'end_time_actual1', title: '实际退房时间', width: 150, align: "center", sort: true}
-                , {field: 'fee_total', title: '已缴费总额', width: 150, align: "center", sort: true}
-                , {field: 'fee_info', title: '缴费流水号', width: 150, align: "center", sort: true}
+                , {field: 'fee_total', title: '已缴金额', width: 150, align: "center", sort: true}
+                , {field: 'fee_info', title: '缴费流水号', width: 120, align: "center", sort: true}
                 , {field: 'user_id', title: '操作员ID', align: "center", sort: true}
                 , {field: 'state', title: '状态', align: "center", sort: true}
-                , {field: 'price', title: '已谈好的房价', width: 150, align: "center", sort: true}
-                // , {fixed: 'right', title: '操作', toolbar: '#check_list_bar'}
+                , {field: 'price', title: '房间单价', width: 100, align: "center", sort: true}
             ]]
             , page: true
             , limit: 10
