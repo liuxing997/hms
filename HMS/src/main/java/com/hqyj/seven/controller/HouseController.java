@@ -238,5 +238,66 @@ public class HouseController {
         }
         return customerMap;
     }
-    
+    //获取所有打扫房间间信息
+    @RequestMapping("/queryBySatClean")
+    @ResponseBody
+    public Map<String,Object> queryBySateClean(@RequestParam("page") Integer pageNumber, @RequestParam("limit")Integer pageSize) {
+        int number;
+        int size;
+        if (pageNumber == null){
+            number = 1;
+        }else {
+            number = pageNumber;
+        }
+        if (pageSize == null){
+            size = 10;
+        }else {
+            size = pageSize;
+        }
+        //添加分页功能
+        PageData<House> houseList = houseService.queryBySateClean(number,size);
+        Map<String,Object> house =  new HashMap<>();
+        if (houseList == null){
+            house.put("code",-1);
+            house.put("msg","没有客房信息");
+        }else {
+            house.put("code", 0);
+            house.put("data", houseList);
+            house.put("msg","获取数据成功！");
+        }
+        Session session= SecurityUtils.getSubject().getSession();
+        session.setAttribute("houselist",houseList);
+        return house;
+    }
+    //获取所有查询查询间信息
+    @RequestMapping("/queryBySateMaintain")
+    @ResponseBody
+    public Map<String,Object> queryBySateMaintain(@RequestParam("page") Integer pageNumber, @RequestParam("limit")Integer pageSize) {
+        int number;
+        int size;
+        if (pageNumber == null){
+            number = 1;
+        }else {
+            number = pageNumber;
+        }
+        if (pageSize == null){
+            size = 10;
+        }else {
+            size = pageSize;
+        }
+        //添加分页功能
+        PageData<House> houseList = houseService.queryBySateMaintain(number,size);
+        Map<String,Object> house =  new HashMap<>();
+        if (houseList == null){
+            house.put("code",-1);
+            house.put("msg","没有客房信息");
+        }else {
+            house.put("code", 0);
+            house.put("data", houseList);
+            house.put("msg","获取数据成功！");
+        }
+        Session session= SecurityUtils.getSubject().getSession();
+        session.setAttribute("houselist",houseList);
+        return house;
+    }
 }
