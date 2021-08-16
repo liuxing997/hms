@@ -66,4 +66,20 @@ public class EnterController {
         session.setAttribute("enterList",enterList);
         return enter;
     }
+
+    @RequestMapping("/queryOneById")
+    @ResponseBody
+    public  Map<String,Object> queryOneById(int id){
+        List<Enter> enterList = enterService.queryOneById(id);
+        Map<String,Object> enterMap = new HashMap<>();
+        if ( enterList.size()==0 ){
+            enterMap.put("code",-1);
+            enterMap.put("message","未查询到任何信息");
+        }else {
+            enterMap.put("code",200);
+            enterMap.put("message","查询成功");
+            enterMap.put("data",enterList);
+        }
+        return enterMap;
+    }
 }
