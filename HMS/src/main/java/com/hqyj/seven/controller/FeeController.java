@@ -1,8 +1,5 @@
 package com.hqyj.seven.controller;
-import com.hqyj.seven.pojo.Enter;
-import com.hqyj.seven.pojo.Fee;
-import com.hqyj.seven.pojo.House;
-import com.hqyj.seven.pojo.PageData;
+import com.hqyj.seven.pojo.*;
 import com.hqyj.seven.service.EnterService;
 import com.hqyj.seven.service.FeeService;
 import org.apache.shiro.SecurityUtils;
@@ -82,6 +79,68 @@ public class FeeController {
         }else {
             fee.put("code", 0);
            fee.put("data", feeList);
+            fee.put("msg","获取数据成功！");
+        }
+        Session session= SecurityUtils.getSubject().getSession();
+        session.setAttribute("feelist",feeList);
+        return fee;
+    }
+    //缴费查询
+    @RequestMapping("/queryOneByIdPay")
+    @ResponseBody
+    public  Map<String,Object> queryOneByIdPay(@RequestParam("page") Integer pageNumber, @RequestParam("limit")Integer pageSize,int id){
+        int number;
+        int size;
+        if (pageNumber == null){
+            number = 1;
+        }else {
+            number = pageNumber;
+        }
+        if (pageSize == null){
+            size = 10;
+        }else {
+            size = pageSize;
+        }
+        //添加分页功能
+        PageData<Fee> feeList =feeService.queryAllId(number,size,id,"缴费");
+        Map<String,Object> fee =  new HashMap<>();
+        if (feeList == null){
+            fee.put("code",-1);
+            fee.put("msg","没有缴费信息");
+        }else {
+            fee.put("code", 0);
+            fee.put("data", feeList);
+            fee.put("msg","获取数据成功！");
+        }
+        Session session= SecurityUtils.getSubject().getSession();
+        session.setAttribute("feelist",feeList);
+        return fee;
+    }
+    //未缴费查询
+    @RequestMapping("/queryOneByIdNoPay")
+    @ResponseBody
+    public  Map<String,Object> queryOneByIdNoPay(@RequestParam("page") Integer pageNumber, @RequestParam("limit")Integer pageSize,int id){
+        int number;
+        int size;
+        if (pageNumber == null){
+            number = 1;
+        }else {
+            number = pageNumber;
+        }
+        if (pageSize == null){
+            size = 10;
+        }else {
+            size = pageSize;
+        }
+        //添加分页功能
+        PageData<Fee> feeList =feeService.queryAllId(number,size,id,"未缴费");
+        Map<String,Object> fee =  new HashMap<>();
+        if (feeList == null){
+            fee.put("code",-1);
+            fee.put("msg","没有缴费信息");
+        }else {
+            fee.put("code", 0);
+            fee.put("data", feeList);
             fee.put("msg","获取数据成功！");
         }
         Session session= SecurityUtils.getSubject().getSession();
