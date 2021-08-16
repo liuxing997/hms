@@ -12,4 +12,6 @@ public interface EnterService {
     Enter queryByHouseIdAndTime(int CustomerId, String time);
     //查询所有客户信息
     PageData<Enter> queryAll(int number, int size);
+    //删除记录
+    int deleteEnter(int enter_id);
 }

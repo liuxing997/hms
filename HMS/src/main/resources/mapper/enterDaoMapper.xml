@@ -17,4 +17,8 @@
     <select id="queryAll" resultType="com.hqyj.seven.pojo.Enter">
         select * from  enter
     </select>
+    <delete id="deleteEnter" parameterType="com.hqyj.seven.pojo.Enter">
+        delete from enter where enter_id = #{enter_id}
+    </delete>
+
 </mapper>

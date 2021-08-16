@@ -61,4 +61,10 @@ public class EnterServiceImpl implements EnterService {
         pageData.setList(pageInfo.getList());
         return pageData;
     }
+
+    @Override
+    public int deleteEnter(int enter_id) {
+       int num =  enterDao.deleteEnter(enter_id);
+        return num;
+    }
 }

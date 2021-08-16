@@ -10,4 +10,6 @@ public interface EnterDao {
     Enter queryByHouseIdAndTime(@Param("HouseId") int HouseId, @Param("time") String time);
     //查询全部 入住信息
     List<Enter> queryAll();
+    //删除记录
+    int deleteEnter(int enter_id);
 }
