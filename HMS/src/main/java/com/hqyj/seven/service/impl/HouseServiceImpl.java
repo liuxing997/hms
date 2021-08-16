@@ -350,7 +350,7 @@ public class HouseServiceImpl implements HouseService {
                 customerDao.updataByCustomerIdToremainder(money,customerId);
                 //插入顾客表
                 enterDao.inserintoEnter(new Enter(house.getHouseId(),customerId,
-                        numberOfPeople,time,time3,time5,0,1,userId,"未结账",house.getPrice()));
+                        numberOfPeople,time,time3,null,0,1,userId,"未结账",house.getPrice()));
                 //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
 
                 //规范化插入表时的时间和获取的时间有点误差
@@ -373,7 +373,7 @@ public class HouseServiceImpl implements HouseService {
                 customerDao.updataByCustomerIdToremainder(money,customerId);
                 //插入顾客表
                 enterDao.inserintoEnter(new Enter(house.getHouseId(),customerId,
-                        numberOfPeople,time,time3,time5,money,1,userId,"已结账",house.getPrice()));
+                        numberOfPeople,time,time3,null,money,1,userId,"已结账",house.getPrice()));
                 //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
 
                 //规范化插入表时的时间和获取的时间有点误差
@@ -403,7 +403,7 @@ public class HouseServiceImpl implements HouseService {
                         customerDao.updataByCustomerIdToremainder(money,customerId);
                         //插入顾客表
                         enterDao.inserintoEnter(new Enter(house.getHouseId(),customerId,
-                                numberOfPeople,time,time3,time5,0,1,userId,"未缴费",house.getPrice()));
+                                numberOfPeople,time,time3,null,0,1,userId,"未缴费",house.getPrice()));
                         //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
 
                         //规范化插入表时的时间和获取的时间有点误差
@@ -426,7 +426,7 @@ public class HouseServiceImpl implements HouseService {
                         customerDao.updataByCustomerIdToremainder(money, customerId);
                         //插入顾客表
                         enterDao.inserintoEnter(new Enter(house.getHouseId(), customerId,
-                                numberOfPeople, time, time3,time5, money, 1, userId, "已结账", house.getPrice()));
+                                numberOfPeople, time, time3,null, money, 1, userId, "已结账", house.getPrice()));
                         //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
 
                         //规范化插入表时的时间和获取的时间有点误差
