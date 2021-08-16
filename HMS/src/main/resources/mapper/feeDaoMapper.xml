@@ -5,6 +5,8 @@
 <mapper namespace="com.hqyj.seven.dao.Feedao">
 
 
+
+
     <insert id="inserintoFee" parameterType="com.hqyj.seven.pojo.Fee">
         insert into fee (enter_id,direct,coustomer_id,money,house_id,description,user_id,fee_type)
             value
@@ -15,16 +17,13 @@
        select  fee_id feeId,enter_id enterId,direct,coustomer_id coustomerId,money,house_id houseId,description,user_id  userId,fee_type from  fee where  house_id=#{houseId} and coustomer_id=#{coustomerId} order by fee_id DESC limit 1
    </select>
   <update id="updateByFeeId" parameterType="com.hqyj.seven.pojo.Fee">
-      update  fee set direct='缴费',fee_type='现金' where fee_id=#{feeId}
+      update  fee set direct='未缴费',fee_type='待缴费' where fee_id=#{feeId}
   </update>
+
     <select id="queryByDirect" resultType="com.hqyj.seven.pojo.Fee">
         select  fee_id feeId,enter_id enterId,direct,coustomer_id coustomerId,money,house_id houseId,description,user_id  userId,fee_type
         from  fee where  direct=#{direct}
     </select>
 
-    <select id="queryAllId" resultType="com.hqyj.seven.pojo.Fee">
-        select fee_id feeId,enter_id enterId,direct,coustomer_id coustomerId,money,house_id houseId,description,user_id  userId,fee_type
-        from  fee where direct=#{direct} and  (fee_id=#{Id} or enter_id=#{Id} or coustomer_id=#{Id} or house_id=#{Id} or user_id=#{Id})
-    </select>
 
 </mapper>
