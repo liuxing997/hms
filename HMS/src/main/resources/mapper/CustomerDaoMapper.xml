@@ -11,6 +11,9 @@
     <select id="queryByCustomer" resultType="com.hqyj.seven.pojo.Customer">
         select * from customer where customer_id=#{CustomerId}
     </select>
+    <update id="updataByCustomerIdToremainderTwo" parameterType="com.hqyj.seven.pojo.Customer">
+        update customer set remainder=remainder+#{money} where customer_id=#{id}
+    </update>
     <select id="queryAll" resultType="com.hqyj.seven.pojo.Customer">
         select * from customer
     </select>
