@@ -97,5 +97,38 @@ public class FeeServiceImpl implements FeeService {
         return pageData;
     }
 
+    @Override
+    public PageData<Fee> queryAllId(int pageNumber, int pageSize,int id,String direct) {
+        PageHelper.startPage(pageNumber,pageSize);
+        List<Fee> houseList = feedao.queryAllId(id,direct);
+        PageInfo<Fee> pageInfo = new PageInfo<>(houseList);
+        PageData<Fee> pageData = new PageData<>();
+        pageData.setCurrentPage(pageNumber);
+        //设置每页数
+        pageData.setPageSize(pageSize);
+        //设置总页数
+        pageData.setTotalPage(pageInfo.getPages());
+        //设置总记录数
+        pageData.setTotalSize((int) pageInfo.getTotal());
+        if (pageInfo.isHasNextPage()){
+            //有下一页 设置下一页页码
+            pageData.setNextPage(pageInfo.getNextPage());
+        }else {
+            //没有下一页，设置尾页
+            pageData.setNextPage(pageInfo.getPages());
+        }
+        if (pageInfo.isHasPreviousPage()){
+            //有上一页 设置上一页页码
+            pageData.setPreviousPage(pageInfo.getPrePage());
+        }else {
+            //没有上一页，设置首页
+            pageData.setPreviousPage(1);
+        }
+        //设置房屋信息
+        pageData.setList(pageInfo.getList());
+        //返回房屋信息
+        return pageData;
+    }
+
 
 }
