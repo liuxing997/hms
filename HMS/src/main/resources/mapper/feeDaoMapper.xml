@@ -5,8 +5,6 @@
 <mapper namespace="com.hqyj.seven.dao.Feedao">
 
 
-
-
     <insert id="inserintoFee" parameterType="com.hqyj.seven.pojo.Fee">
         insert into fee (enter_id,direct,coustomer_id,money,house_id,description,user_id,fee_type)
             value
@@ -22,5 +20,9 @@
     <select id="queryByDirect" resultType="com.hqyj.seven.pojo.Fee">
         select  fee_id feeId,enter_id enterId,direct,coustomer_id coustomerId,money,house_id houseId,description,user_id  userId,fee_type
         from  fee where  direct=#{direct}
+    </select>
+    <select id="queryAllId" resultType="com.hqyj.seven.pojo.Fee">
+        select fee_id feeId,enter_id enterId,direct,coustomer_id coustomerId,money,house_id houseId,description,user_id  userId,fee_type
+        from  fee where direct=#{direct} and  fee_id=#{Id} or enter_id=#{Id} or coustomer_id=#{Id} or house_id=#{Id} or user_id=#{Id}
     </select>
 </mapper>
