@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface CustomerDao {
 
+    //通过客户ID更新客户余额
     int updataByCustomerIdToremainder(@Param("money") double money, @Param("id") int id);
     int updataByCustomerIdToremainderTwo(@Param("money") double money, @Param("id") int id);
     Customer queryByCustomer(int CustomerId);

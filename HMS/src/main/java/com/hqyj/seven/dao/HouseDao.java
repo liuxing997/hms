@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface HouseDao {
 
+    //更新房间名和顾客id
     int updateByHouseName(@Param("customerId")int customerId,@Param("name") String name );
     //更改维修状态
     int updateByHouseStatetocheckIn(@Param("houseId")int houseId,@Param("state") String state);

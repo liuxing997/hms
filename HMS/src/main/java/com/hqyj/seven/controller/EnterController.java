@@ -27,6 +27,7 @@ public class EnterController {
         this.enterService = enterService;
     }
 
+    //获得所有订单记录
     @RequestMapping("/queryEnter")
     @ResponseBody
     public Map<String,Object> getAllenter(@RequestParam("page") Integer pageNumber, @RequestParam("limit")Integer pageSize){

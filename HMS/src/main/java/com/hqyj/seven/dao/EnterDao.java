@@ -13,6 +13,7 @@ public interface EnterDao {
     List<Enter> queryAll();
     //删除记录
     int deleteEnter(int enter_id);
+    //更新房间号和客户号
     int  updateByHouseIdAndCustomerId(@Param("time") Date time, @Param("houseId") int houseId, @Param("customerId") int customerId);
     Enter selectByHouseIdAndCustomerId(@Param("houseId") int houseId,@Param("customerId") int customerId);
 }

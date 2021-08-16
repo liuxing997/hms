@@ -4,13 +4,6 @@ import com.hqyj.seven.pojo.User;
 
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * @File UserDao.java
- * @Auth liuxing
- * @Date 2021/8/11 16:52
- * @Email liuxing997@foxmail.com
- */
 public interface UserDao {
 
    //根据用户名查询用户信息
