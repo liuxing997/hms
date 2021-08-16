@@ -14,4 +14,6 @@ public interface EnterService {
     PageData<Enter> queryAll(int number, int size);
     //删除记录
     int deleteEnter(int enter_id);
+    //根据住房id或者房间id查询住宿情况
+    List<Enter> queryOneById(int id);
 }
