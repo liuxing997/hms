@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,12 @@ public class EnterController {
             size = pageSize;
         }
         PageData<Enter> enterList = enterService.queryAll(number,size);
+        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for (Enter enter:enterList.getList()){
+            enter.setStart_time1(df.format(enter.getStart_time()));
+            enter.setEnd_time_estimate1(df.format(enter.getEnd_time_estimate()));
+            enter.setEnd_time_actual1(df.format(enter.getEnd_time_actual()));
+        }
         Map<String,Object> enter =   new HashMap<>();
         if (enterList == null){
             enter.put("code",-1);
