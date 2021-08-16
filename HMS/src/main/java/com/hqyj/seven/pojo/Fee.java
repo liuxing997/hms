@@ -94,6 +94,21 @@ public class Fee {
         this.fee_type = fee_type;
     }
 
+    public Fee(int feeId, int enterId, String direct, int coustomerId, double money, int houseId, String description, int userId, String fee_type) {
+        this.feeId = feeId;
+        this.enterId = enterId;
+        this.direct = direct;
+        this.coustomerId = coustomerId;
+        this.money = money;
+        this.houseId = houseId;
+        this.description = description;
+        this.userId = userId;
+        this.fee_type = fee_type;
+    }
+
+    public Fee() {
+    }
+
     @Override
     public String toString() {
         return "Fee{" +
