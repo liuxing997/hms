@@ -47,7 +47,11 @@ public class EnterController {
         for (Enter enter:enterList.getList()){
             enter.setStart_time1(df.format(enter.getStart_time()));
             enter.setEnd_time_estimate1(df.format(enter.getEnd_time_estimate()));
-            enter.setEnd_time_actual1(df.format(enter.getEnd_time_actual()));
+            if (enter.getEnd_time_actual()==null){
+                enter.setEnd_time_actual1("未定");
+            }else {
+                enter.setEnd_time_actual1(df.format(enter.getEnd_time_actual()));
+            }
         }
         Map<String,Object> enter =   new HashMap<>();
         if (enterList.getList().size() == 0){
