@@ -75,27 +75,32 @@
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="退房管理">&#xe723;</i>
-                    <cite>退房管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i></a>
-                <ul class="sub-menu">
-                    <li>
-                        <a onclick="xadmin.add_tab('退房列表','city.html')">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>退房列表</cite></a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
                     <i class="iconfont left-nav-li" lay-tips="入住管理">&#xe726;</i>
                     <cite>入住管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('管理员列表','admin-list.html')">
+                        <a onclick="xadmin.add_tab('入住列表','checkInList.jsp')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>入住列表</cite></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="缴费管理">&#xe723;</i>
+                    <cite>缴费管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('未缴费列表','unpaidList.jsp')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>未缴费</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('已缴费列表','paidList.jsp')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>已缴费</cite></a>
                     </li>
                 </ul>
             </li>
@@ -114,14 +119,19 @@
             </li>
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="维修管理">&#xe6ab;</i>
-                    <cite>代办管理</cite>
+                    <i class="iconfont left-nav-li" lay-tips="待办管理">&#xe6ab;</i>
+                    <cite>待办管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('维修列表','unicode.html')">
+                        <a onclick="xadmin.add_tab('待打扫列表','cleanList.jsp')">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>代办列表</cite></a>
+                            <cite>待打扫</cite></a>
+                    </li>
+                    <li>
+                        <a onclick="xadmin.add_tab('待维修列表','maintainList.jsp')">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>待维修</cite></a>
                     </li>
                 </ul>
             </li>
