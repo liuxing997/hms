@@ -346,8 +346,27 @@ public class HouseServiceImpl implements HouseService {
             double money=house.getPrice()*day;
             //如果余额不足则会提示
             if (money>customer.getRemainder()){
-                result.put("code", -9);
-                result.put("message", "用户余额不足，可以尝试充值或者减少预定住房时间");
+                //更新顾客表余额的数据
+                customerDao.updataByCustomerIdToremainder(money,customerId);
+                //插入顾客表
+                enterDao.inserintoEnter(new Enter(house.getHouseId(),customerId,
+                        numberOfPeople,time,time3,time5,0,1,userId,"未结账",house.getPrice()));
+                //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
+
+                //规范化插入表时的时间和获取的时间有点误差
+
+                long day3 = time.getTime();
+                Date time4=new Date(day3);
+
+                Enter enter= enterDao.queryByHouseIdAndTime(house.getHouseId(),sdf.format(time4));
+
+                //插入缴费表
+                feedao.inserintoFee(new Fee( enter.getEnter_id(),"未缴费",customerId,money,house.getHouseId(),
+                        str1,userId,"未缴费"));
+                //更新房间为入住
+                houseDao.updateByHouseNametocheckIn(customerId,name,day);
+                result.put("code",201);
+                result.put("message","入住成功，但余额不足需要顾客现金或者充值");
             }
             else {
                 //更新顾客表余额的数据
@@ -380,8 +399,27 @@ public class HouseServiceImpl implements HouseService {
                     double money = house.getPrice() * day;
                     //如果余额不足则会提示
                     if (money > customer.getRemainder()) {
-                        result.put("code", -9);
-                        result.put("message", "用户余额不足，可以尝试充值或者减少预定住房时间");
+                        //更新顾客表余额的数据
+                        customerDao.updataByCustomerIdToremainder(money,customerId);
+                        //插入顾客表
+                        enterDao.inserintoEnter(new Enter(house.getHouseId(),customerId,
+                                numberOfPeople,time,time3,time5,0,1,userId,"未缴费",house.getPrice()));
+                        //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
+
+                        //规范化插入表时的时间和获取的时间有点误差
+
+                        long day3 = time.getTime();
+                        Date time4=new Date(day3);
+
+                        Enter enter= enterDao.queryByHouseIdAndTime(house.getHouseId(),sdf.format(time4));
+
+                        //插入缴费表
+                        feedao.inserintoFee(new Fee( enter.getEnter_id(),"未缴费",customerId,money,house.getHouseId(),
+                                str1,userId,"未缴费"));
+                        //更新房间为入住
+                        houseDao.updateByHouseNametocheckIn(customerId,name,day);
+                        result.put("code",201);
+                        result.put("message","入住成功预定房间成功，但余额不足需要顾客现金或者充值");
                     }
                     else {
                         //更新顾客表余额的数据
