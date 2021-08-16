@@ -18,7 +18,7 @@
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
-    <jsp:include page="WEB-INF/jsp/common.jsp"/>
+    <jsp:include page="common.jsp"/>
     <script type="text/javascript" src="js/timeout.js" charset="UTF-8"></script>
     <script>
         // 是否开启刷新记忆tab功能
