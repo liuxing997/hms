@@ -135,7 +135,7 @@ public class CustomerController {
         }else {
             customerMap.put("code",200);
             customerMap.put("message","查询成功");
-            customerMap.put("message",houseList);
+            customerMap.put("data",houseList);
         }
         return customerMap;
     }
