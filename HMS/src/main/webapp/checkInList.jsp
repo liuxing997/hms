@@ -42,7 +42,7 @@
                         <div class="layui-card-body ">
                             <form class="layui-form layui-col-space5" onsubmit="return false;">
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" id="checkInNames" placeholder="房间号、ID" autocomplete="off"
+                                    <input type="text" id="checkInNames" placeholder="入住ID、房间ID" autocomplete="off"
                                            class="layui-input"></div>
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn" lay-submit="" lay-filter="sreach"
@@ -105,13 +105,12 @@
         });
 
         //头工具栏事件
-        table.on('toolbar(cleanHouse_list)', function (obj) {
+        table.on('toolbar(check_list)', function (obj) {
             switch (obj.event) {
-                case 'searchCleanHouse':
-                    // console.log($("#username").val())
-                    table.reload('cleanHouse_list', {
-                        url: 'house/getOneCus',
-                        where: {name: $("#cleanHouseNames").val()},
+                case 'searchCheckIn':
+                    table.reload('check_list', {
+                        url: 'enter/queryOneById',
+                        where: {id: $("#checkInNames").val()},
                         parseData: function (res) {
                             if (res.code === 0) {
                                 return {
@@ -130,40 +129,6 @@
                         }, page: true
                     })
                     break;
-            }
-        });
-
-        //监听行工具事件
-        table.on('tool(clean_list_bar)', function (obj) {
-            let data = obj.data;
-            //打扫房间
-            if (obj.event === 'cleanHouse') {
-                layer.confirm('真的打扫了' + data.name + "么？", {title: "提示"}, function (index) {
-                    $.ajax({
-                        url: "house/deleteOneCus",
-                        type: "get",
-                        dataType: 'json',
-                        data: {
-                            customer_id: data.customer_id
-                        },
-                        success: function (res) {
-                            if (res.code === 200) {
-                                layer.msg(res.message, {icon: 1, time: 3000}, function () {
-                                    obj.del();
-                                    layer.close(index);
-                                });
-                            } else {
-                                layer.msg(res.message, {icon: 2, time: 3000}, function () {
-                                    layer.close(index);
-                                });
-                            }
-                        },
-                        error: function (err) {
-                            layer.msg('服务器被吃啦！请稍后重试', {icon: 7, time: 3000});
-                        }
-                    })
-
-                });
             }
         });
     });
