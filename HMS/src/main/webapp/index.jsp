@@ -115,13 +115,13 @@
             <li>
                 <a href="javascript:;">
                     <i class="iconfont left-nav-li" lay-tips="维修管理">&#xe6ab;</i>
-                    <cite>维修管理</cite>
+                    <cite>代办管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
                         <a onclick="xadmin.add_tab('维修列表','unicode.html')">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>维修列表</cite></a>
+                            <cite>代办列表</cite></a>
                     </li>
                 </ul>
             </li>
