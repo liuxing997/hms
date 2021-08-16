@@ -31,4 +31,8 @@
         select * from enter where enter_id =#{id}
         or house_id = #{id}
     </select>
+    <update id="updateByEnterIdToMoney" parameterType="com.hqyj.seven.pojo.Enter">
+
+        update  enter set fee_total=#{money},state='已结账' where enter_id=#{enterId}
+    </update>
 </mapper>
