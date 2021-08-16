@@ -21,8 +21,10 @@
         select  fee_id feeId,enter_id enterId,direct,coustomer_id coustomerId,money,house_id houseId,description,user_id  userId,fee_type
         from  fee where  direct=#{direct}
     </select>
+
     <select id="queryAllId" resultType="com.hqyj.seven.pojo.Fee">
         select fee_id feeId,enter_id enterId,direct,coustomer_id coustomerId,money,house_id houseId,description,user_id  userId,fee_type
-        from  fee where direct=#{direct} and  fee_id=#{Id} or enter_id=#{Id} or coustomer_id=#{Id} or house_id=#{Id} or user_id=#{Id}
+        from  fee where direct=#{direct} and  (fee_id=#{Id} or enter_id=#{Id} or coustomer_id=#{Id} or house_id=#{Id} or user_id=#{Id})
     </select>
+
 </mapper>
