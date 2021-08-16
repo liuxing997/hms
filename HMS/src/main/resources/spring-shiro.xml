@@ -29,14 +29,38 @@
         <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
         <property name="filterChainDefinitions">
             <value>
+                <!-- 静态资源路径 -->
                 /static/**=anon
+                <!-- 登录界面 -->
                 /login.jsp=anon
+                <!-- 公共样式和脚本引入文件 -->
                 /common.jsp=anon
+                <!-- 登录接口 -->
                 /user/login=anon
-                /index.jsp=authc
-                /welcome.jsp=authc
-                /userList.jsp=authc
-                /person.jsp=authc
+                <!-- 后台主界面 -->
+                /index=authc
+                <!-- 欢迎页面列表 -->
+                /welcome=authc
+                <!-- 个人信息页面 -->
+                /person=authc
+                <!-- 操作员列表 -->
+                /userList=authc
+                <!-- 房间列表 -->
+                /houseList=authc
+                <!-- 订房列表 -->
+                /reservationList=authc
+                <!-- 入住列表 -->
+                /checkInList=authc
+                <!-- 未缴费列表 -->
+                /unpaidList=authc
+                <!-- 已缴费列表 -->
+                /paidList=authc
+                <!-- 客户列表 -->
+                /customerList=authc
+                <!-- 待打扫列表 -->
+                /cleanList=authc
+                <!-- 待维修列表 -->
+                /maintainList=authc
 <!--                /**=authc-->
             </value>
         </property>
