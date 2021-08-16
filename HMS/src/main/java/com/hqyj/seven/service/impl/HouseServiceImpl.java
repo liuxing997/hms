@@ -314,7 +314,7 @@ public class HouseServiceImpl implements HouseService {
         }
         else {
             result.put("code",-1);
-            result.put("message","房间已经退或在其他状态，不需要重复操作");
+            result.put("message","房间已经退了或在其他状态，不需要重复操作");
         }
         return result;
 
