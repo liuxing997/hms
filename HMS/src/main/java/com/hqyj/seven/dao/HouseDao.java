@@ -55,4 +55,6 @@ public interface HouseDao {
     List<House> queryBySate();
     //按照id房间号更改住房信息用于退房
     int updateByHouseNameToUnsubscribe(String houseName);
+    //修改打扫和维修的房间名
+    int cleanMaintainByHouseState(@Param("name") String name,@Param("state") String state);
 }
