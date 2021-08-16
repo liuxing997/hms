@@ -189,7 +189,21 @@ public class HouseController {
         }
         return houseMap;
     }
+    @RequestMapping("/checkOut")
+    @ResponseBody
+    public Map<String, Object> checkOut(String name){
+        Map<String,Object> houseMap =  new HashMap<>();
+        if(name == null){
+            houseMap.put("code",-2);
+            houseMap.put("message","房间号不能为空");
+        }
+        else {
 
+            houseMap=houseService.checkOut(name);
+
+        }
+        return houseMap;
+    }
     //房间统计信息
     @RequestMapping("/totalOfHouse")
     @ResponseBody
