@@ -23,6 +23,12 @@ public interface HouseService {
     //查询入住人信息
     List<Enter> queryInter(int house_id);
 
+    //维修更新空闲
+    int updateMaintainHouse (String name);
+
+    //打扫更新空闲
+    int updateCleanHouse(String name);
+
     //更新客房信息
     int updateHouseI(House house);
 
