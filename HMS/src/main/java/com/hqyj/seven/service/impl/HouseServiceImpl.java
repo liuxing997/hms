@@ -336,10 +336,8 @@ public class HouseServiceImpl implements HouseService {
         long time2=time.getTime()+day2;
         Date time3=new Date(time2);
         System.out.println(time);
-        String s1="1111-11-11 11:11:11";
         //如果房间是空闲则之间可以入住
          SimpleDateFormat sdf  =   new  SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
-        Date time5=sdf.parse(s1);
         if (house.getState().equals("空闲"))
         {
 
