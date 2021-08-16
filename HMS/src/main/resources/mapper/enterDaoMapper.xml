@@ -21,7 +21,7 @@
         delete from enter where enter_id = #{enter_id}
     </delete>
     <update id="updateByHouseIdAndCustomerId" parameterType="com.hqyj.seven.pojo.Enter">
-        update enter set end_time_actual=#{time}  where  house_id=#{houseId} and customer_id=#{customerId}
+        update enter set end_time_actual=#{time},state='已结账' where  house_id=#{houseId} and customer_id=#{customerId}
     </update>
     <select id="selectByHouseIdAndCustomerId" resultType="com.hqyj.seven.pojo.Enter">
         select  * from  enter where  house_id=#{houseId} and customer_id=#{customerId} order by enter_id DESC limit 1
