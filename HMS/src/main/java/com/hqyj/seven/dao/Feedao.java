@@ -15,5 +15,7 @@ public interface Feedao {
     int updateByFeeId(int feeId);
     //按未缴费缴费查询所有缴费信息
     List<Fee> queryByDirect(@Param("direct") String direct);
+    //用id查询缴费
+    List<Fee> queryAllId(@Param("Id") int Id,@Param("direct") String  direct);
 
 }
