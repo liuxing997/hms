@@ -100,6 +100,19 @@ public class HouseServiceImpl implements HouseService {
         return customers;
     }
 
+    //维修更新
+    @Override
+    public int updateMaintainHouse(String name) {
+        return houseDao.cleanMaintainByHouseState(name,"维修");
+    }
+
+    //打扫更新
+    @Override
+    public int updateCleanHouse(String name) {
+        return houseDao.cleanMaintainByHouseState(name,"打扫");
+    }
+
+
     //更新客房信息
     @Override
     public int updateHouseI(House house) {
