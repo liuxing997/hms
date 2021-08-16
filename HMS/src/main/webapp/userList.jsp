@@ -47,13 +47,13 @@
                         <div class="layui-card-body ">
                             <form class="layui-form layui-col-space5" onsubmit="return false;">
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" id="username" placeholder="请输入用户名或工号" autocomplete="off"
+                                    <input type="text" id="searchUserNames" placeholder="请输入用户名或工号" autocomplete="off"
                                            class="layui-input"></div>
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn" lay-submit="" lay-filter="sreach"
-                                            lay-event="getUserByName">
+                                            lay-event="searchUserByName">
                                         <i class="layui-icon">&#xe615;</i></button>
-                                    <button class="layui-btn layui-btn-sm" lay-event="addUser">新增</button>
+                                    <button class="layui-btn layui-btn-sm" lay-event="addOneUser">新增</button>
                                 </div>
                             </form>
                         </div>
@@ -62,8 +62,8 @@
                     <table class="layui-hide" id="user_list" lay-filter="user_list"></table>
                     <%--操作按钮模块--%>
                     <script type="text/html" id="user_list_bar">
-                        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                        <a class="layui-btn layui-btn-xs" lay-event="editOneUser">编辑</a>
+                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delOneUser">删除</a>
                     </script>
                 </div>
             </div>
@@ -72,40 +72,40 @@
 </div>
 
 <!-- 添加操作员模态框 -->
-<div class="site-text" style="margin: 5%; display: none" id="addModel">
+<div class="site-text" style="margin: 5%; display: none" id="addUserModel">
     <form class="layui-form">
         <div class="layui-form-item">
-            <label class="layui-form-label">工号</label>
+            <label for="addiUserId" class="layui-form-label">工号</label>
             <div class="layui-input-block">
-                <input type="text" id="addid" name="bid" lay-verify="title" autocomplete="off" placeholder="请输入工号"
+                <input type="text" id="addiUserId" lay-verify="title" autocomplete="off" placeholder="请输入工号"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">用户名</label>
+            <label for="addiUserName" class="layui-form-label">用户名</label>
             <div class="layui-input-block">
-                <input type="text" id="addname" name="bname" lay-verify="title" autocomplete="off" placeholder="请输入用户名"
+                <input type="text" id="addiUserName" lay-verify="title" autocomplete="off" placeholder="请输入用户名"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">密码</label>
+            <label for="addiUserPassword" class="layui-form-label">密码</label>
             <div class="layui-input-block">
-                <input type="password" id="addpassword" name="price" lay-verify="title" autocomplete="off"
+                <input type="password" id="addiUserPassword" name="price" lay-verify="title" autocomplete="off"
                        placeholder="请输入密码" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">电话</label>
+            <label  for="addiUserPhone" class="layui-form-label">电话</label>
             <div class="layui-input-block">
-                <input type="text" id="addphone" name="price" lay-verify="title" autocomplete="off" placeholder="请输入电话"
+                <input type="text" id="addiUserPhone" lay-verify="title" autocomplete="off" placeholder="请输入电话"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">状态</label>
+            <label for="addiUserState" class="layui-form-label">状态</label>
             <div class="layui-input-block">
-                <select id="addstate" lay-filter="addstate">
+                <select id="addiUserState" lay-filter="addiUserState">
                     <option value="活动" selected>活动</option>
                     <option value="禁用" >禁用</option>
                     <option value="其他">其他</option>
@@ -116,26 +116,26 @@
 </div>
 
 <!-- 编辑操作员模态框 -->
-<div class="site-text" style="margin: 5%; display: none" id="editModel">
+<div class="site-text" style="margin: 5%; display: none" id="editUserModel">
     <form class="layui-form">
         <div class="layui-form-item">
-            <label class="layui-form-label">工号</label>
+            <label for="editUserId" class="layui-form-label">工号</label>
             <div class="layui-input-block">
-                <input type="text" id="uid" name="bid" lay-verify="title" autocomplete="off" readonly disabled
+                <input type="text" id="editUserId" lay-verify="title" autocomplete="off" readonly disabled
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">用户名</label>
+            <label for="editUserName" class="layui-form-label">用户名</label>
             <div class="layui-input-block">
-                <input type="text" id="uname" name="bname" lay-verify="title" autocomplete="off" placeholder="请输入用户"
+                <input type="text" id="editUserName"  lay-verify="title" autocomplete="off" placeholder="请输入用户"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">密码</label>
+            <label for="editUserPassword" class="layui-form-label">密码</label>
             <div class="layui-input-block">
-                <input type="password" id="upassword" name="price" lay-verify="title" autocomplete="off"
+                <input type="password" id="editUserPassword"  lay-verify="title" autocomplete="off"
                        placeholder="请输入密码" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
@@ -143,16 +143,16 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">电话</label>
+            <label for="editUserPhone" class="layui-form-label">电话</label>
             <div class="layui-input-block">
-                <input type="text" id="uphone" name="price" lay-verify="title" autocomplete="off" placeholder="请输入电话"
+                <input type="text" id="editUserPhone" lay-verify="title" autocomplete="off" placeholder="请输入电话"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">状态</label>
+            <label for="editUserState" class="layui-form-label">状态</label>
             <div class="layui-input-block">
-                <select id="ustate" lay-filter="ustate">
+                <select id="editUserState" lay-filter="editUserState">
                     <option value="活动">活动</option>
                     <option value="禁用">禁用</option>
                     <option value="其他">其他</option>
@@ -206,10 +206,10 @@
         //头工具栏事件
         table.on('toolbar(user_list)', function (obj) {
             switch (obj.event) {
-                case 'getUserByName':
+                case 'searchUserByName':
                     table.reload('user_list', {
                         url: 'user/searchUser',
-                        where: {names: $("#username").val()},
+                        where: {names: $("#searchUserNames").val()},
                         parseData: function (res) {
                             if (res.code === 0) {
                                 return {
@@ -228,7 +228,7 @@
                         }, page: true
                     })
                     break;
-                case 'addUser':
+                case 'addOneUser':
                     layer.open({
                         type: 1 //Page层类型
                         , skin: 'layui-layer-molv'
@@ -238,17 +238,17 @@
                         , shadeClose: true
                         , shade: 0 //遮罩透明度
                         , maxmin: true //允许全屏最小化
-                        , content: $("#addModel")  //弹窗路径
+                        , content: $("#addUserModel")  //弹窗路径
                         , yes: function (index, layero) {
                             $.ajax({
                                 url: "user/insertUser",
                                 dataType: "json",
                                 data: {
-                                    id: $("#addid").val(),
-                                    name: $("#addname").val(),
-                                    password: $("#addpassword").val(),
-                                    phone: $("#addphone").val(),
-                                    state: $("#addstate").val()
+                                    id: $("#addiUserId").val(),
+                                    name: $("#addiUserName").val(),
+                                    password: $("#addiUserPassword").val(),
+                                    phone: $("#addiUserPhone").val(),
+                                    state: $("#addiUserState").val()
                                 },
                                 success: function (data) {
                                     if (data.code === 200) {
@@ -275,7 +275,7 @@
         table.on('tool(user_list)', function (obj) {
             let data = obj.data;
             //删除事件
-            if (obj.event === 'del') {
+            if (obj.event === 'delOneUser') {
                 layer.confirm('真的要删除' + data.name + "么？", {title: "提示"}, function (index) {
                     $.ajax({
                         url: "user/deleteById",
@@ -302,7 +302,7 @@
                     })
 
                 });
-            } else if (obj.event === 'edit') { //编辑事件
+            } else if (obj.event === 'editOneUser') { //编辑事件
                 layer.open({
                     type: 1 //Page层类型
                     , skin: 'layui-layer-molv'
@@ -312,23 +312,23 @@
                     , shadeClose: true
                     , shade: 0 //遮罩透明度
                     , maxmin: true //允许全屏最小化
-                    , content: $("#editModel")  //弹窗路径
+                    , content: $("#editUserModel")  //弹窗路径
                     , success: function (layero, index) {
-                        $('#uid').val(data.id);
-                        $('#uname').val(data.name);
-                        $('#upassword').val(data.password);
-                        $('#uphone').val(data.phone);
-                        $('#ustate').val(data.state);
+                        $('#editUserId').val(data.id);
+                        $('#editUserName').val(data.name);
+                        $('#editUserPassword').val(data.password);
+                        $('#editUserPhone').val(data.phone);
+                        $('#editUserState').val(data.state);
                     }, yes: function (index, layero) {
                         $.ajax({
                             url: "user/updateById",
                             dataType: "json",
                             data: {
-                                id: $("#uid").val(),
-                                name: $("#uname").val(),
-                                password: $("#upassword").val(),
-                                phone: $("#uphone").val(),
-                                state: $("#ustate").val()
+                                id: $("#editUserId").val(),
+                                name: $("#editUserName").val(),
+                                password: $("#editUserPassword").val(),
+                                phone: $("#editUserPhone").val(),
+                                state: $("#editUserState").val()
                             },
                             success: function (data) {
                                 if (data.code === 200) {
