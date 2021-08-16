@@ -306,6 +306,13 @@ public class HouseServiceImpl implements HouseService {
             System.out.println(money);
             System.out.println(df.format(money));
             customerDao.updataByCustomerIdToremainderTwo(money,customerId);
+            Fee fee=feedao.queryByHouseIdAndCoustomerId(houseId,customerId);
+            System.out.println(fee);
+            int feeId=fee.getFeeId();
+            System.out.println(feeId);
+            String feeddirect=fee.getDirect();
+            if (feeddirect.equals("未缴费"))
+                  feedao.updateByFeeId(feeId);
             houseDao.updateByHouseNameToCheckOut(name);
             result.put("code",200);
             result.put("message","退房成功");
