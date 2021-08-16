@@ -14,8 +14,14 @@ import java.util.Map;
 @Controller
 @RequestMapping("/enter")
 public class EnterController {
+
+    private EnterService enterService;
+    
     @Autowired
-    EnterService enterService;
+    public void setEnterService(EnterService enterService) {
+        this.enterService = enterService;
+    }
+
     @RequestMapping("/queryEnter")
     @ResponseBody
     public Map<String,Object> queryEnter(){

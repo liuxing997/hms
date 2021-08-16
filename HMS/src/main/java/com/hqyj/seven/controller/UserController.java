@@ -24,8 +24,12 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     //根据用户名查询用户
     @RequestMapping("/queryByUsername")

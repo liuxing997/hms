@@ -20,9 +20,13 @@ import java.util.Map;
 @RequestMapping("/house")
 @Controller
 public class HouseController {
-    @Autowired
+
     private HouseService  houseService;
 
+    @Autowired
+    public void setHouseService(HouseService houseService) {
+        this.houseService = houseService;
+    }
 
     //客房信息的删除
     @RequestMapping("/deleteHouse")

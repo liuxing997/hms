@@ -19,8 +19,13 @@ import java.util.Map;
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
+
+    private CustomerService customerService;
+
     @Autowired
-    CustomerService customerService;
+    public void setCustomerService(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     //查询所有客户
     @RequestMapping("/getAllCus")
