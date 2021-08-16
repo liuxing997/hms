@@ -53,6 +53,8 @@ public interface HouseDao {
     Integer queryCountByStateMaintain();
     //查询状态为打扫和维修的房间
     List<House> queryBySate();
+    //查询状态为打扫和维修的房间
+    List<House> queryBySate(String state);
     //按照id房间号更改住房信息用于退房
     int updateByHouseNameToUnsubscribe(String houseName);
     //修改打扫和维修的房间名
