@@ -96,7 +96,9 @@
     <select id="searchHouseClean" resultType="com.hqyj.seven.pojo.House">
         select * from house where name=#{names} or house_id=#{names} and state='打扫'
     </select>
-
+    <update id="updateByHouseNameToCheckOut" parameterType="com.hqyj.seven.pojo.House">
+        update house set state='打扫',customer_id=null where name=#{houseName}
+    </update>
     <!--根据ID或房间名搜索待维修房间-->
     <select id="searchHouseMaintain" resultType="com.hqyj.seven.pojo.House">
         select * from house where name=#{names} or house_id=#{names} and state='维修' and state!='空闲' and state!='打扫'
