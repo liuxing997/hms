@@ -50,7 +50,7 @@ public class EnterController {
             enter.setEnd_time_actual1(df.format(enter.getEnd_time_actual()));
         }
         Map<String,Object> enter =   new HashMap<>();
-        if (enterList == null){
+        if (enterList.getList().size() == 0){
             enter.put("code",-1);
             enter.put("msg","没有客户信息");
         }else {
