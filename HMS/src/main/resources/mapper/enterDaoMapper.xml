@@ -20,5 +20,10 @@
     <delete id="deleteEnter" parameterType="com.hqyj.seven.pojo.Enter">
         delete from enter where enter_id = #{enter_id}
     </delete>
-
+    <update id="updateByHouseIdAndCustomerId" parameterType="com.hqyj.seven.pojo.Enter">
+        update enter set end_time_actual=#{time}  where  house_id=#{houseId} and customer_id=#{customerId}
+    </update>
+    <select id="selectByHouseIdAndCustomerId" resultType="com.hqyj.seven.pojo.Enter">
+        select  * from  enter where  house_id=#{houseId} and customer_id=#{customerId}
+    </select>
 </mapper>
