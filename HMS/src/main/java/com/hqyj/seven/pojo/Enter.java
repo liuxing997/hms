@@ -187,17 +187,20 @@ public class Enter {
     public String toString() {
         return "Enter{" +
                 "enter_id=" + enter_id +
-                ", house_id='" + house_id + '\'' +
+                ", house_id=" + house_id +
                 ", customer_id=" + customer_id +
-                ", customer_info='" + customer_info + '\'' +
-                ", start_time1='" + start_time1 + '\'' +
-                ", end_time_estimate1='" + end_time_estimate1 + '\'' +
-                ", end_time_actual1='" + end_time_actual1 + '\'' +
+                ", customer_info=" + customer_info +
+                ", start_time=" + start_time +
+                ", end_time_estimate=" + end_time_estimate +
+                ", end_time_actual=" + end_time_actual +
                 ", fee_total=" + fee_total +
                 ", fee_info=" + fee_info +
                 ", user_id=" + user_id +
                 ", state='" + state + '\'' +
                 ", price=" + price +
+                ", start_time1='" + start_time1 + '\'' +
+                ", end_time_estimate1='" + end_time_estimate1 + '\'' +
+                ", end_time_actual1='" + end_time_actual1 + '\'' +
                 ", customers=" + customers +
                 '}';
     }

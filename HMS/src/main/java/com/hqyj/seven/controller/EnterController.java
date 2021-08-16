@@ -71,7 +71,17 @@ public class EnterController {
     @RequestMapping("/queryOneById")
     @ResponseBody
     public  Map<String,Object> queryOneById(int id){
+        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         List<Enter> enterList = enterService.queryOneById(id);
+        for (Enter enter:enterList) {
+            enter.setStart_time1(df.format(enter.getStart_time()));
+            enter.setEnd_time_estimate1(df.format(enter.getEnd_time_estimate()));
+            if (enter.getEnd_time_actual() == null) {
+                enter.setEnd_time_actual1("未定");
+            } else {
+                enter.setEnd_time_actual1(df.format(enter.getEnd_time_actual()));
+            }
+        }
         Map<String,Object> enterMap = new HashMap<>();
         if ( enterList.size()==0 ){
             enterMap.put("code",-1);
