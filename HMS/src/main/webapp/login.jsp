@@ -21,7 +21,7 @@
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <jsp:include page="common.jsp"/>
+    <jsp:include page="WEB-INF/jsp/common.jsp"/>
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body class="login-bg">
@@ -60,7 +60,7 @@
         var userCode = $("#userCode").val();
         if (localStorage.getItem("user") != null){
             layer.msg('您已经登录过啦,请勿重复登录！', {icon: 7, time: 3000}, function () {
-                window.location.href = "index.jsp";
+                window.location.href = "index";
             });
         }else if (userAccount.length === 0 && userPassword.length === 0 && userCode.length === 0){
             layer.msg('请先填写完整内容！', {icon: 7, time: 3000});
@@ -94,7 +94,7 @@
                         // 登录成功
                         layer.msg("欢迎回来，" + data.loginUser.name, {icon: 1, time: 3000}, function () {
                             localStorage.setItem("user",JSON.stringify(data.loginUser));
-                            window.location.href = "index.jsp";
+                            window.location.href = "index";
                         });
                     }else if (data.code === -1){
                         layer.msg(data.message +',请重试！', {icon: 7, time: 3000});
