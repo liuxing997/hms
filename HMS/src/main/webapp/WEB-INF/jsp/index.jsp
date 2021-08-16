@@ -18,7 +18,7 @@
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
-    <jsp:include page="common.jsp"/>
+    <jsp:include page="WEB-INF/jsp/common.jsp"/>
     <script type="text/javascript" src="js/timeout.js" charset="UTF-8"></script>
     <script>
         // 是否开启刷新记忆tab功能
@@ -37,7 +37,7 @@
             <a href="javascript:;"><span id="userName"></span></a>
             <dl class="layui-nav-child">
                 <dd>
-                    <a onclick="xadmin.open('个人信息','person.jsp',800,380)">个人信息</a></dd>
+                    <a onclick="xadmin.open('个人信息','person',800,380)">个人信息</a></dd>
                 <dd>
                     <a href="javascript:void(0);" onclick="logout()">退出</a></dd>
             </dl>
@@ -54,7 +54,7 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('房间列表','houseList.jsp')">
+                        <a onclick="xadmin.add_tab('房间列表','houseList')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>房间列表</cite></a>
                     </li>
@@ -67,7 +67,7 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('订房列表','reservationList.jsp')">
+                        <a onclick="xadmin.add_tab('订房列表','reservationList')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>订房列表</cite></a>
                     </li>
@@ -80,7 +80,7 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('入住列表','checkInList.jsp')">
+                        <a onclick="xadmin.add_tab('入住列表','checkInList')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>入住列表</cite></a>
                     </li>
@@ -93,12 +93,12 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('未缴费列表','unpaidList.jsp')">
+                        <a onclick="xadmin.add_tab('未缴费列表','unpaidList')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>未缴费</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('已缴费列表','paidList.jsp')">
+                        <a onclick="xadmin.add_tab('已缴费列表','paidList')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>已缴费</cite></a>
                     </li>
@@ -111,7 +111,7 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('客户列表','customerList.jsp')">
+                        <a onclick="xadmin.add_tab('客户列表','customerList')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>客户列表</cite></a>
                     </li>
@@ -124,12 +124,12 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('待打扫列表','cleanList.jsp')">
+                        <a onclick="xadmin.add_tab('待打扫列表','cleanList')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>待打扫</cite></a>
                     </li>
                     <li>
-                        <a onclick="xadmin.add_tab('待维修列表','maintainList.jsp')">
+                        <a onclick="xadmin.add_tab('待维修列表','maintainList')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>待维修</cite></a>
                     </li>
@@ -142,7 +142,7 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('操作员列表','userList.jsp')">
+                        <a onclick="xadmin.add_tab('操作员列表','userList')">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>操作员列表</cite></a>
                     </li>
@@ -168,7 +168,7 @@
         </div>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='./welcome.jsp' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe src='welcome' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
         </div>
         <div id="tab_show"></div>

@@ -276,9 +276,15 @@
                                         layer.close(index);
                                         location.reload();
                                     });
-                                }else if (data.code === -9){
+                                }else if (data.code === 201){  //会员卡余额不足，跳转未缴费页面
+                                    layer.msg(data.message, {icon: 2, time: 3000}, function () {
+                                        layer.close(index);
+                                        location.href='unpaidList.jsp';
+                                    });
+                                } else if (data.code === -9){
                                     layer.msg(data.message, {icon: 2, time: 3000});
-                                }else {
+                                }
+                                else {
                                     layer.msg(data.message + "，请重试！", {icon: 2, time: 3000});
                                 }
                             },
