@@ -40,9 +40,9 @@
                                            class="layui-input"></div>
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn" lay-submit="" lay-filter="sreach"
-                                            lay-event="getHouseByName">
+                                            lay-event="searchHouseByName">
                                         <i class="layui-icon">&#xe615;</i></button>
-                                    <button class="layui-btn layui-btn-sm" lay-event="addHouse">新增</button>
+                                    <button class="layui-btn layui-btn-sm" lay-event="addOneHouse">新增</button>
                                 </div>
                             </form>
                         </div>
@@ -51,8 +51,8 @@
                     <table class="layui-hide" id="house_list" lay-filter="house_list"></table>
                     <%--操作按钮模块--%>
                     <script type="text/html" id="house_list_bar">
-                        <a class="layui-btn layui-btn-xs" lay-event="editHouse">编辑</a>
-                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delHouse">删除</a>
+                        <a class="layui-btn layui-btn-xs" lay-event="editOneHouse">编辑</a>
+                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delOneHouse">删除</a>
                     </script>
                 </div>
             </div>
@@ -61,47 +61,47 @@
 </div>
 
 <!-- 添加房间模态框 -->
-<div class="site-text" style="margin: 5%; display: none" id="addHouseModel">
+<div class="site-text" style="margin: 5%; display: none" id="addOneHouseModel">
     <form class="layui-form">
         <div class="layui-form-item">
-            <label class="layui-form-label">ID</label>
+            <label for="houseAddId" class="layui-form-label">ID</label>
             <div class="layui-input-block">
-                <input type="text" id="haddid" lay-verify="title" autocomplete="off" placeholder="请输入房间ID"
+                <input type="text" id="houseAddId" lay-verify="title" autocomplete="off" placeholder="请输入房间ID"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">房间名</label>
+            <label for="houseAddName" class="layui-form-label">房间名</label>
             <div class="layui-input-block">
-                <input type="text" id="haddname" lay-verify="title" autocomplete="off" placeholder="请输入房间名"
+                <input type="text" id="houseAddName" lay-verify="title" autocomplete="off" placeholder="请输入房间名"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">可住人数</label>
+            <label for="houseAddAmount" class="layui-form-label">可住人数</label>
             <div class="layui-input-block">
-                <input type="text" id="haddamount" lay-verify="title" autocomplete="off"
+                <input type="text" id="houseAddAmount" lay-verify="title" autocomplete="off"
                        placeholder="请输入可住人数" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">价格</label>
+            <label for="houseAddPrice" class="layui-form-label">价格</label>
             <div class="layui-input-block">
-                <input type="text" id="haddprice" lay-verify="title" autocomplete="off" placeholder="请输入价格"
+                <input type="text" id="houseAddPrice" lay-verify="title" autocomplete="off" placeholder="请输入价格"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">楼层</label>
+            <label for="houseAddFloorId" class="layui-form-label">楼层</label>
             <div class="layui-input-block">
-                <input type="text" id="haddfloorId" lay-verify="title" autocomplete="off" placeholder="请输入楼层"
+                <input type="text" id="houseAddFloorId" lay-verify="title" autocomplete="off" placeholder="请输入楼层"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="haddstate" class="layui-form-label">状态</label>
+            <label for="houseAddState" class="layui-form-label">状态</label>
             <div class="layui-input-block">
-                <select id="haddstate" lay-filter="haddstate">
+                <select id="houseAddState" lay-filter="houseAddState">
                     <option value="空闲" selected>空闲</option>
                 </select>
             </div>
@@ -111,47 +111,47 @@
 
 
 <!-- 编辑房间模态框 -->
-<div class="site-text" style="margin: 5%; display: none" id="editHouseModel">
+<div class="site-text" style="margin: 5%; display: none" id="editOneHouseModel">
     <form class="layui-form">
         <div class="layui-form-item">
-            <label class="layui-form-label">ID</label>
+            <label for="houseEditId" class="layui-form-label">ID</label>
             <div class="layui-input-block">
-                <input type="text" id="hid" lay-verify="title" autocomplete="off" readonly disabled
+                <input type="text" id="houseEditId" lay-verify="title" autocomplete="off" readonly disabled
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">房间名</label>
+            <label for="houseEditName" class="layui-form-label">房间名</label>
             <div class="layui-input-block">
-                <input type="text" id="hname" lay-verify="title" autocomplete="off" placeholder="请输入房间名"
+                <input type="text" id="houseEditName" lay-verify="title" autocomplete="off" placeholder="请输入房间名"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">可住人数</label>
+            <label for="houseEditAmount" class="layui-form-label">可住人数</label>
             <div class="layui-input-block">
-                <input type="text" id="hamount" lay-verify="title" autocomplete="off"
+                <input type="text" id="houseEditAmount" lay-verify="title" autocomplete="off"
                        placeholder="请输入可住人数" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">价格</label>
             <div class="layui-input-block">
-                <input type="text" id="hprice" lay-verify="title" autocomplete="off" placeholder="请输入价格"
+                <input type="text" id="houseEditPrice" lay-verify="title" autocomplete="off" placeholder="请输入价格"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">楼层</label>
             <div class="layui-input-block">
-                <input type="text" id="hfloorId" lay-verify="title" autocomplete="off" placeholder="请输入楼层"
+                <input type="text" id="houseEditFloorId" lay-verify="title" autocomplete="off" placeholder="请输入楼层"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">状态</label>
             <div class="layui-input-block">
-                <select id="hstate" lay-filter="hstate">
+                <select id="houseEditState" lay-filter="houseEditState">
                     <option value="空闲" selected>空闲</option>
                 </select>
             </div>
@@ -197,7 +197,7 @@
         //头工具栏事件
         table.on('toolbar(house_list)', function (obj) {
             switch (obj.event) {
-                case 'getHouseByName':
+                case 'searchHouseByName':
                     // console.log($("#username").val())
                     table.reload('house_list', {
                         url: 'house/searchHouse',
@@ -220,7 +220,7 @@
                         }, page: true
                     })
                     break;
-                case 'addHouse':
+                case 'addOneHouse':
                     layer.open({
                         type: 1 //Page层类型
                         , skin: 'layui-layer-molv'
@@ -230,18 +230,18 @@
                         , shadeClose: true
                         , shade: 0 //遮罩透明度
                         , maxmin: true //允许全屏最小化
-                        , content: $("#addHouseModel")  //弹窗路径
+                        , content: $("#addOneHouseModel")  //弹窗路径
                         , yes: function (index, layero) {
                             $.ajax({
                                 url: "house/insertOneHouse",
                                 dataType: "json",
                                 data: {
-                                    houseId: $('#haddid').val(),
-                                    houseName: $('#haddname').val(),
-                                    amount: $('#haddamount').val(),
-                                    price: $('#haddprice').val(),
-                                    floorId: $('#haddfloorId').val(),
-                                    state: $('#haddstate').val()
+                                    houseId: $('#houseAddId').val(),
+                                    houseName: $('#houseAddName').val(),
+                                    amount: $('#houseAddAmount').val(),
+                                    price: $('#houseAddPrice').val(),
+                                    floorId: $('#houseAddFloorId').val(),
+                                    state: $('#houseAddState').val()
                                 },
                                 success: function (data) {
                                     if (data.code === 200) {
@@ -267,8 +267,8 @@
         table.on('tool(house_list)', function (obj) {
             let data = obj.data;
             //删除事件
-            if (obj.event === 'delHouse') {
-                switch (data.state){
+            if (obj.event === 'delOneHouse') {
+                switch (data.state) {
                     case '已定':
                         layer.msg(data.houseName + "房间已被顾客预订, 暂时不能删除哦！", {icon: 2, time: 3000});
                         break;
@@ -310,8 +310,8 @@
                         });
                         break;
                 }
-            } else if (obj.event === 'editHouse') { //编辑事件
-                switch (data.state){
+            } else if (obj.event === 'editOneHouse') { //编辑事件
+                switch (data.state) {
                     case '已定':
                         layer.msg(data.houseName + "房间已被顾客预订, 暂时不能编辑哦！", {icon: 2, time: 3000});
                         break;
@@ -334,25 +334,25 @@
                             , shadeClose: true
                             , shade: 0 //遮罩透明度
                             , maxmin: true //允许全屏最小化
-                            , content: $("#editHouseModel")  //弹窗路径
+                            , content: $("#editOneHouseModel")  //弹窗路径
                             , success: function (layero, index) {
-                                $('#hid').val(data.houseId);
-                                $('#hname').val(data.houseName);
-                                $('#hamount').val(data.amount);
-                                $('#hprice').val(data.price);
-                                $('#hfloorId').val(data.floorId);
-                                $('#hstate').val(data.state);
+                                $('#houseEditId').val(data.houseId);
+                                $('#houseEditName').val(data.houseName);
+                                $('#houseEditAmount').val(data.amount);
+                                $('#houseEditPrice').val(data.price);
+                                $('#houseEditFloorId').val(data.floorId);
+                                $('#houseEditState').val(data.state);
                             }, yes: function (index, layero) {
                                 $.ajax({
                                     url: "house/updateOneHouse",
                                     dataType: "json",
                                     data: {
-                                        houseId: $('#hid').val(),
-                                        houseName: $('#hname').val(),
-                                        amount: $('#hamount').val(),
-                                        price: $('#hprice').val(),
-                                        floorId: $('#hfloorId').val(),
-                                        state: $('#hstate').val()
+                                        houseId: $('#houseEditId').val(),
+                                        houseName: $('#houseEditName').val(),
+                                        amount: $('#houseEditAmount').val(),
+                                        price: $('#houseEditPrice').val(),
+                                        floorId: $('#houseEditFloorId').val(),
+                                        state: $('#houseEditState').val()
                                     },
                                     success: function (data) {
                                         if (data.code === 200) {
