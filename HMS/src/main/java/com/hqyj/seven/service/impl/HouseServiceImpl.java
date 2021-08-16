@@ -340,7 +340,7 @@ public class HouseServiceImpl implements HouseService {
             //如果余额不足则会提示
             if (money > customer.getRemainder()) {
                 //更新顾客表余额的数据
-                customerDao.updataByCustomerIdToremainder(money, customerId);
+                customerDao.updataByCustomerIdToremainder(0, customerId);
                 //插入顾客表
                 enterDao.inserintoEnter(new Enter(house.getHouseId(), customerId,
                         numberOfPeople, time, time3, null, 0, 1, userId, "未结账", house.getPrice()));
@@ -379,7 +379,7 @@ public class HouseServiceImpl implements HouseService {
                     //如果余额不足则会提示
                     if (money > customer.getRemainder()) {
                         //更新顾客表余额的数据
-                        customerDao.updataByCustomerIdToremainder(money, customerId);
+                        customerDao.updataByCustomerIdToremainder(0, customerId);
                         //插入顾客表
                         enterDao.inserintoEnter(new Enter(house.getHouseId(), customerId,
                                 numberOfPeople, time, time3, null, 0, 1, userId, "未缴费", house.getPrice()));
