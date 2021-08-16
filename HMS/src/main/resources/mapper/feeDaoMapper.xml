@@ -19,4 +19,8 @@
   <update id="updateByFeeId" parameterType="com.hqyj.seven.pojo.Fee">
       update  fee set direct='缴费',fee_type='现金' where fee_id=#{feeId}
   </update>
+    <select id="queryByDirect" resultType="com.hqyj.seven.pojo.Fee">
+        select  fee_id feeId,enter_id enterId,direct,coustomer_id coustomerId,money,house_id houseId,description,user_id  userId,fee_type
+        from  fee where  direct=#{direct}
+    </select>
 </mapper>
