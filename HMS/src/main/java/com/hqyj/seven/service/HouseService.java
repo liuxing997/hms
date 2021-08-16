@@ -71,6 +71,8 @@ public interface HouseService {
 
     //退订功能
     Map<String, Object> unsubscribe(String houseName);
+    //退房功能
+    public  Map<String,Object> checkOut(String name);
 
     //住房功能
     public Map<String, Object> checkIn(int customerId, String name,int day,int numberOfPeople,int userId) throws ParseException;
