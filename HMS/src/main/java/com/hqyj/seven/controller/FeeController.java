@@ -141,4 +141,25 @@ public class FeeController {
         }
         return fee;
     }
+    //现金显示金额接口
+    @RequestMapping("/paymentAmount")
+    @ResponseBody
+    public  double paymentAmount(int feeId){
+        return feeService.paymentAmount(feeId);
+    }
+    //现金支付接口
+    @RequestMapping("/cashPayment")
+    @ResponseBody
+    public Map<String, Object> cashPayment(int feeId){
+        Map<String, Object> result = new HashMap<>();
+        if (feeId==0){
+            result.put("code",-2);
+            result.put("message","房间号异常");
+        }
+        else {
+            result=feeService.CashPayment(feeId);
+        }
+        return  result;
+    }
+
 }
