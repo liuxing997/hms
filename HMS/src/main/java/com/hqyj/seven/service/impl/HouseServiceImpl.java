@@ -306,6 +306,13 @@ public class HouseServiceImpl implements HouseService {
             System.out.println(money);
             System.out.println(df.format(money));
             customerDao.updataByCustomerIdToremainderTwo(money,customerId);
+            Fee fee=feedao.queryByHouseIdAndCoustomerId(houseId,customerId);
+            System.out.println(fee);
+            int feeId=fee.getFeeId();
+            System.out.println(feeId);
+            String feeddirect=fee.getDirect();
+            if (feeddirect.equals("未缴费"))
+                  feedao.updateByFeeId(feeId);
             houseDao.updateByHouseNameToCheckOut(name);
             result.put("code",200);
             result.put("message","退房成功");
@@ -336,8 +343,10 @@ public class HouseServiceImpl implements HouseService {
         long time2=time.getTime()+day2;
         Date time3=new Date(time2);
         System.out.println(time);
+        String s1="1111-11-11 11:11:11";
         //如果房间是空闲则之间可以入住
          SimpleDateFormat sdf  =   new  SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
+        Date time5=sdf.parse(s1);
         if (house.getState().equals("空闲"))
         {
 
@@ -348,7 +357,7 @@ public class HouseServiceImpl implements HouseService {
                 customerDao.updataByCustomerIdToremainder(money,customerId);
                 //插入顾客表
                 enterDao.inserintoEnter(new Enter(house.getHouseId(),customerId,
-                        numberOfPeople,time,time3,null,0,1,userId,"未结账",house.getPrice()));
+                        numberOfPeople,time,time3,time5,0,1,userId,"未结账",house.getPrice()));
                 //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
 
                 //规范化插入表时的时间和获取的时间有点误差
@@ -371,7 +380,7 @@ public class HouseServiceImpl implements HouseService {
                 customerDao.updataByCustomerIdToremainder(money,customerId);
                 //插入顾客表
                 enterDao.inserintoEnter(new Enter(house.getHouseId(),customerId,
-                        numberOfPeople,time,time3,null,money,1,userId,"已结账",house.getPrice()));
+                        numberOfPeople,time,time3,time5,money,1,userId,"已结账",house.getPrice()));
                 //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
 
                 //规范化插入表时的时间和获取的时间有点误差
@@ -401,7 +410,7 @@ public class HouseServiceImpl implements HouseService {
                         customerDao.updataByCustomerIdToremainder(money,customerId);
                         //插入顾客表
                         enterDao.inserintoEnter(new Enter(house.getHouseId(),customerId,
-                                numberOfPeople,time,time3,null,0,1,userId,"未缴费",house.getPrice()));
+                                numberOfPeople,time,time3,time5,0,1,userId,"未缴费",house.getPrice()));
                         //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
 
                         //规范化插入表时的时间和获取的时间有点误差
@@ -424,7 +433,7 @@ public class HouseServiceImpl implements HouseService {
                         customerDao.updataByCustomerIdToremainder(money, customerId);
                         //插入顾客表
                         enterDao.inserintoEnter(new Enter(house.getHouseId(), customerId,
-                                numberOfPeople, time, time3,null, money, 1, userId, "已结账", house.getPrice()));
+                                numberOfPeople, time, time3,time5, money, 1, userId, "已结账", house.getPrice()));
                         //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
 
                         //规范化插入表时的时间和获取的时间有点误差
