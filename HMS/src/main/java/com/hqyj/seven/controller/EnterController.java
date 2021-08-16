@@ -77,7 +77,7 @@ public class EnterController {
             enterMap.put("code",-1);
             enterMap.put("message","未查询到任何信息");
         }else {
-            enterMap.put("code",200);
+            enterMap.put("code",0);
             enterMap.put("message","查询成功");
             enterMap.put("data",enterList);
         }
