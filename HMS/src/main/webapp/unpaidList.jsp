@@ -67,40 +67,54 @@
 </div>
 
 <!-- 现金支付模态框 -->
-<div class="site-text" style="margin: 5%; display: none" id="cashPayment">
+<div class="site-text" style="margin: 5%; display: none" id="cashPaymentModel">
     <form class="layui-form">
         <div class="layui-form-item">
-            <label for="checkinCustomerId" class="layui-form-label">顾客ID</label>
+            <label for="cashFeeId" class="layui-form-label">缴费ID</label>
             <div class="layui-input-block">
-                <input type="text"  id="checkinCustomerId" autocomplete="off" placeholder="请输入顾客ID"
+                <input type="text"  id="cashFeeId" readonly disabled autocomplete="off"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="checkinHouseName" class="layui-form-label">房间号</label>
+            <label for="cashEnterId" class="layui-form-label">入住ID</label>
             <div class="layui-input-block">
-                <input type="text"  id="checkinHouseName" readonly disabled autocomplete="off"
+                <input type="text"  id="cashEnterId" readonly disabled autocomplete="off"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="checkinDay" class="layui-form-label">入住天数</label>
+            <label for="cashCoustomerId" class="layui-form-label">顾客ID</label>
             <div class="layui-input-block">
-                <input type="text"  id="checkinDay" placeholder="请输入入住天数" autocomplete="off"
+                <input type="text"  id="cashCoustomerId" readonly disabled autocomplete="off"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="checkinPeople" class="layui-form-label">入住人数</label>
+            <label for="cashHouseId" class="layui-form-label">房间ID</label>
             <div class="layui-input-block">
-                <input type="text" id="checkinPeople" placeholder="请输入入住人数" autocomplete="off"
+                <input type="text" id="cashHouseId" readonly disabled autocomplete="off"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="userId" class="layui-form-label">操作员ID</label>
+            <label for="cashDescription" class="layui-form-label">入住人数</label>
             <div class="layui-input-block">
-                <input type="text"  id="userId" readonly disabled autocomplete="off"
+                <input type="text" id="cashDescription" readonly disabled autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="cashUserId" class="layui-form-label">操作员ID</label>
+            <div class="layui-input-block">
+                <input type="text"  id="cashUserId" readonly disabled autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="cashMoney" class="layui-form-label">待缴金额</label>
+            <div class="layui-input-block">
+                <input type="text" id="cashMoney" readonly disabled autocomplete="off"
                        class="layui-input">
             </div>
         </div>
@@ -131,7 +145,7 @@
                 , {field: 'enterId', title: '入住ID', align: "center", sort: true}
                 , {field: 'direct', title: '状态', align: "center", sort: true}
                 , {field: 'coustomerId', title: '顾客ID', align: "center", sort: true}
-                , {field: 'money', title: '金额', align: "center", sort: true}
+                , {field: 'money', title: '待缴金额', align: "center", sort: true}
                 , {field: 'houseId', title: '房间ID', align: "center", sort: true}
                 , {field: 'description', title: '描述', align: "center", sort: true}
                 , {field: 'userId', title: '操作员ID', align: "center", sort: true}
@@ -179,7 +193,48 @@
             if (obj.event === 'recharge') {//顾客充值
                 layer.msg("顾客充值", {icon: 1, time: 3000});
             } else if (obj.event === 'cashPayment') { //现金支付
-                layer.msg("现金支付", {icon: 2, time: 3000});
+                layer.open({
+                    type: 1 //Page层类型
+                    , skin: 'layui-layer-molv'
+                    , area: '600px'
+                    , title: ['现金支付', 'font-size:18px']
+                    , btn: ['已支付', '未支付']
+                    , shadeClose: true
+                    , shade: 0
+                    , maxmin: true
+                    , content: $("#cashPaymentModel")  //弹窗路径
+                    , success: function (layero, index) {
+                        layer.iframeAuto(index)//自适应高度
+                        $('#cashFeeId').val(data.feeId);
+                        $('#cashEnterId').val(data.enterId);
+                        $('#cashCoustomerId').val(data.coustomerId);
+                        $('#cashHouseId').val(data.houseId);
+                        $('#cashDescription').val(data.description);
+                        $('#cashUserId').val(data.userId);
+                        $('#cashMoney').val(data.money);
+                    }, yes: function (index, layero) {
+                        $.ajax({
+                            url: "fee/cashPayment",
+                            dataType: "json",
+                            data: {
+                                feeId:$("#cashFeeId").val(),
+                            },
+                            success: function (data) {
+                                if (data.code === 200) {
+                                    layer.msg(data.message, {icon: 1, time: 3000}, function () {
+                                        layer.close(index);
+                                        location.reload();
+                                    });
+                                } else {
+                                    layer.msg(data.message + "请重试", {icon: 2, time: 3000});
+                                }
+                            },
+                            error: function (err) {
+                                layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
+                            }
+                        });
+                    }
+                });
             }
         });
     });
