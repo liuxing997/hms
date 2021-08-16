@@ -129,13 +129,13 @@ public class CustomerController {
     public  Map<String,Object> queryOneState(int customer_id){
         Map<String,Object> customerMap =  new HashMap<>();
         List<House> houseList = customerService.queryState(customer_id);
-        if (houseList == null){
+        if (houseList.size() == 0){
             customerMap.put("code",-1);
             customerMap.put("message","没有相关住宿信息");
         }else {
             customerMap.put("code",200);
             customerMap.put("message","查询成功");
-            customerMap.put("message",houseList);
+            customerMap.put("data",houseList);
         }
         return customerMap;
     }
