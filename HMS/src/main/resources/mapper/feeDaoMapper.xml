@@ -21,9 +21,19 @@
   </update>
 
     <select id="queryByDirect" resultType="com.hqyj.seven.pojo.Fee">
-        select  fee_id feeId,enter_id enterId,direct,coustomer_id coustomerId,money,house_id houseId,description,user_id  userId,fee_type
+        select  fee_id feeId,enter_id enterId,direct,coustomer_id coustomerId,
+               money,house_id houseId,description,user_id  userId,fee_type
         from  fee where  direct=#{direct}
     </select>
-
-
+      <select id="queryOneByFeeId" resultType="com.hqyj.seven.pojo.Fee">
+          select fee_id feeId,enter_id enterId,direct,coustomer_id coustomerId,
+                 money,house_id houseId,description,user_id  userId,fee_type
+          from  fee where  fee_id=#{feeId}
+      </select>
+    <update id="updateFee" parameterType="com.hqyj.seven.pojo.Fee">
+        update fee set enter_id=#{enterId},direct=#{direct},
+                       coustomer_id=#{coustomerId},money=#{money},house_id=#{houseId},
+                       description=#{description},user_id=#{userId},fee_type=#{fee_type}
+        where fee_id=#{feeId}
+    </update>
 </mapper>
