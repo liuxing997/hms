@@ -86,7 +86,7 @@
                 , {field: 'enterId', title: '入住ID', align: "center", sort: true}
                 , {field: 'direct', title: '状态', align: "center", sort: true}
                 , {field: 'coustomerId', title: '顾客ID', align: "center", sort: true}
-                , {field: 'money', title: '金额', align: "center", sort: true}
+                , {field: 'money', title: '已缴金额', align: "center", sort: true}
                 , {field: 'houseId', title: '房间ID', align: "center", sort: true}
                 , {field: 'description', title: '描述', align: "center", sort: true}
                 , {field: 'userId', title: '操作员ID', align: "center", sort: true}
