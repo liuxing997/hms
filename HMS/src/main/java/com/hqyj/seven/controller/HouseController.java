@@ -203,5 +203,36 @@ public class HouseController {
         houseTotals.put("data",total);
         return houseTotals;
     }
+    //更新住房状态之维修
+    @RequestMapping("/updateMaintainState")
+    @ResponseBody
+    public Map<String,Object> updateMaintainState(String name){
+        Map<String,Object> customerMap =  new HashMap<>();
+        int housestate = houseService.updateMaintainHouse(name);
+        if (housestate == 0){
+            customerMap.put("code",-1);
+            customerMap.put("message","房间已维修成功");
+        }else {
+            customerMap.put("code",200);
+            customerMap.put("message","维修成功");
+        }
+        return customerMap;
+    }
+
+    //更新住房状态之打扫
+    @RequestMapping("/updateCleanState")
+    @ResponseBody
+    public Map<String,Object> updateCleanState(String name){
+        Map<String,Object> customerMap =  new HashMap<>();
+        int housestate = houseService.updateCleanHouse(name);
+        if (housestate == 0){
+            customerMap.put("code",-1);
+            customerMap.put("message","房间已打扫成功");
+        }else {
+            customerMap.put("code",200);
+            customerMap.put("message","打扫成功");
+        }
+        return customerMap;
+    }
     
 }
