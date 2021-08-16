@@ -224,7 +224,7 @@
                     layer.open({
                         type: 1 //Page层类型
                         , skin: 'layui-layer-molv'
-                        , area: ['600px', '500px']
+                        , area: '600px'
                         , title: ['添加房间', 'font-size:18px']
                         , btn: ['保存', '取消']
                         , shadeClose: true
@@ -232,6 +232,7 @@
                         , maxmin: true //允许全屏最小化
                         , content: $("#addOneHouseModel")  //弹窗路径
                         , yes: function (index, layero) {
+                            layer.iframeAuto(index)//高度自适应
                             $.ajax({
                                 url: "house/insertOneHouse",
                                 dataType: "json",

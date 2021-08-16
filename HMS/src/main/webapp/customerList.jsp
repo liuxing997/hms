@@ -227,7 +227,7 @@
                     layer.open({
                         type: 1 //Page层类型
                         , skin: 'layui-layer-molv'
-                        , area: ['600px', '460px']
+                        , area: '600px'
                         , title: ['添加客户', 'font-size:18px']
                         , btn: ['保存', '取消']
                         , shadeClose: true
@@ -235,6 +235,7 @@
                         , maxmin: true //允许全屏最小化
                         , content: $("#addCustomerModel")  //弹窗路径
                         , yes: function (index, layero) {
+                            layer.iframeAuto(index)//高度自适应
                             $.ajax({
                                 url: "customer/insertOneCus",
                                 dataType: "json",
@@ -301,7 +302,7 @@
                 layer.open({
                     type: 1 //Page层类型
                     , skin: 'layui-layer-molv'
-                    , area: ['600px', '460px']
+                    , area: '600px'
                     , title: ['修改客户信息', 'font-size:18px']
                     , btn: ['保存', '取消']
                     , shadeClose: true
@@ -309,6 +310,7 @@
                     , maxmin: true //允许全屏最小化
                     , content: $("#editCustomerModel")  //弹窗路径
                     , success: function (layero, index) {
+                        layer.iframeAuto(index)//高度自适应
                         $('#editCustomerId').val(data.customer_id);
                         $('#editCustomerName').val(data.name);
                         $('#editCustomerCard').val(data.card);

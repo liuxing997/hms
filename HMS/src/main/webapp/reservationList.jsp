@@ -246,7 +246,7 @@
                 layer.open({
                     type: 1 //Page层类型
                     , skin: 'layui-layer-molv'
-                    , area: ['600px', '400px']
+                    , area: '600px'
                     , title: ['顾客入住', 'font-size:18px']
                     , btn: ['入住', '取消']
                     , shadeClose: true
@@ -254,6 +254,7 @@
                     , maxmin: true //允许全屏最小化
                     , content: $("#checkinModel")  //弹窗路径
                     , success: function (layero, index) {
+                        layer.iframeAuto(index)//高度自适应
                         $('#checkinHouseName').val(data.houseName);
                         $('#userId').val(JSON.parse(localStorage.getItem("user")).id);
                     }, yes: function (index, layero) {

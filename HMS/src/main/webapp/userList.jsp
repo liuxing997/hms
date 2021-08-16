@@ -232,7 +232,7 @@
                     layer.open({
                         type: 1 //Page层类型
                         , skin: 'layui-layer-molv'
-                        , area: ['600px', '450px']
+                        , area: '600px'
                         , title: ['添加操作员', 'font-size:18px']
                         , btn: ['保存', '取消']
                         , shadeClose: true
@@ -240,6 +240,7 @@
                         , maxmin: true //允许全屏最小化
                         , content: $("#addUserModel")  //弹窗路径
                         , yes: function (index, layero) {
+                            layer.iframeAuto(index)//高度自适应
                             $.ajax({
                                 url: "user/insertUser",
                                 dataType: "json",
@@ -306,7 +307,7 @@
                 layer.open({
                     type: 1 //Page层类型
                     , skin: 'layui-layer-molv'
-                    , area: ['600px', '450px']
+                    , area: '600px'
                     , title: ['编辑操作员', 'font-size:18px']
                     , btn: ['保存', '取消']
                     , shadeClose: true
@@ -314,6 +315,7 @@
                     , maxmin: true //允许全屏最小化
                     , content: $("#editUserModel")  //弹窗路径
                     , success: function (layero, index) {
+                        layer.iframeAuto(index)//高度自适应
                         $('#editUserId').val(data.id);
                         $('#editUserName').val(data.name);
                         $('#editUserPassword').val(data.password);
