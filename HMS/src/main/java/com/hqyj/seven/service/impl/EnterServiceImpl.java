@@ -67,4 +67,11 @@ public class EnterServiceImpl implements EnterService {
        int num =  enterDao.deleteEnter(enter_id);
         return num;
     }
+
+    @Override
+    public List<Enter> queryOneById(int id) {
+        List<Enter> enterList = enterDao.queryOneById(id);
+        return enterList;
+    }
+
 }
