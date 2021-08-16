@@ -55,9 +55,9 @@
                     <%--表格区域--%>
                     <table class="layui-hide" id="check_list" lay-filter="check_list"></table>
                     <%--操作按钮模块--%>
-<%--                    <script type="text/html" id="check_list_bar">--%>
-<%--                        <a class="layui-btn layui-btn-xs" lay-event="cleanHouse">打扫</a>--%>
-<%--                    </script>--%>
+                    <%--                    <script type="text/html" id="check_list_bar">--%>
+                    <%--                        <a class="layui-btn layui-btn-xs" lay-event="cleanHouse">打扫</a>--%>
+                    <%--                    </script>--%>
                 </div>
             </div>
         </div>
@@ -86,17 +86,17 @@
             , cols: [[
                 {type: 'checkbox', fixed: 'left'}
                 , {field: 'enter_id', title: '入住ID', fixed: 'left', unresize: true, align: "center"}
-                , {field: 'house_id', title: '房间ID', align: "center",  sort: true}
+                , {field: 'house_id', title: '房间ID', align: "center", sort: true}
                 , {field: 'customer_id', title: '顾客ID', align: "center", sort: true}
                 , {field: 'customer_info', title: '入住人数', align: "center", sort: true}
-                , {field: 'start_time1', title: '入住时间',width:150, align: "center", sort: true}
-                , {field: 'end_time_estimate1', title: '预计退房时间',width:150, align: "center", sort: true}
-                , {field: 'end_time_actual1', title: '实际退房时间', width:150,align: "center", sort: true}
-                , {field: 'fee_total', title: '房费', align: "center", sort: true}
-                , {field: 'fee_info', title: '缴费流水号', width:150,align: "center", sort: true}
+                , {field: 'start_time1', title: '入住时间', width: 150, align: "center", sort: true}
+                , {field: 'end_time_estimate1', title: '预计退房时间', width: 150, align: "center", sort: true}
+                , {field: 'end_time_actual1', title: '实际退房时间', width: 150, align: "center", sort: true}
+                , {field: 'fee_total', title: '已缴费总额', width: 150, align: "center", sort: true}
+                , {field: 'fee_info', title: '缴费流水号', width: 150, align: "center", sort: true}
                 , {field: 'user_id', title: '操作员ID', align: "center", sort: true}
-                , {field: 'state', title: '缴费状态', align: "center", sort: true}
-                , {field: 'price', title: '缴费金额', align: "center", sort: true}
+                , {field: 'state', title: '状态', align: "center", sort: true}
+                , {field: 'price', title: '已谈好的房价', width: 150, align: "center", sort: true}
                 // , {fixed: 'right', title: '操作', toolbar: '#check_list_bar'}
             ]]
             , page: true
