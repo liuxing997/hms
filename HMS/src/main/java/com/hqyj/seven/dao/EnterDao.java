@@ -18,4 +18,6 @@ public interface EnterDao {
     Enter selectByHouseIdAndCustomerId(@Param("houseId") int houseId,@Param("customerId") int customerId);
     //根据住房id或者房间id查询住宿情况
     List<Enter> queryOneById(int id);
+    //更改金额 现金支付时
+    int updateByEnterIdToMoney(@Param("money") double money,@Param("enterId") int enterId);
 }
