@@ -11,6 +11,7 @@ import com.hqyj.seven.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -280,7 +281,44 @@ public class HouseServiceImpl implements HouseService {
         }
         return result;
     }
+    //退房
+    @Override
+    public Map<String, Object> checkOut(String name) {
+        Map<String, Object> result = new HashMap<>();
+        House house=houseDao.queryByHousename(name);
 
+        double price=house.getPrice();
+
+        int customerId=house.getCustomerId();
+
+        int houseId=house.getHouseId();
+        if (house.getState().equals("入住"))
+        {
+            Date date1=new Date();
+
+            enterDao.updateByHouseIdAndCustomerId(date1,houseId,customerId);
+            Enter enter=enterDao.selectByHouseIdAndCustomerId(houseId,customerId);
+            System.out.println(enter);
+            Date date2=enter.getEnd_time_estimate();
+            DecimalFormat df = new DecimalFormat("#.##");
+            long day=  (date2.getTime()-date1.getTime())/24/60/60/1000;
+            double money=day*price;
+            System.out.println(money);
+            System.out.println(df.format(money));
+            customerDao.updataByCustomerIdToremainderTwo(money,customerId);
+            houseDao.updateByHouseNameToCheckOut(name);
+            result.put("code",200);
+            result.put("message","退房成功");
+
+
+        }
+        else {
+            result.put("code",-1);
+            result.put("message","房间已经退或在其他状态，不需要重复操作");
+        }
+        return result;
+
+    }
     //入住
     //参数分别为顾客id,房间name,入住人数，userID
     @Override
