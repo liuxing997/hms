@@ -99,10 +99,11 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">状态</label>
+            <label for="haddstate" class="layui-form-label">状态</label>
             <div class="layui-input-block">
-                <input type="text" id="haddstate" lay-verify="title" autocomplete="off" placeholder="请输入状态"
-                       class="layui-input">
+                <select id="haddstate" lay-filter="haddstate">
+                    <option value="空闲" selected>空闲</option>
+                </select>
             </div>
         </div>
     </form>
@@ -150,8 +151,9 @@
         <div class="layui-form-item">
             <label class="layui-form-label">状态</label>
             <div class="layui-input-block">
-                <input type="text" id="hstate" lay-verify="title" autocomplete="off" placeholder="请输入状态"
-                       class="layui-input">
+                <select id="hstate" lay-filter="hstate">
+                    <option value="空闲" selected>空闲</option>
+                </select>
             </div>
         </div>
     </form>
@@ -222,7 +224,7 @@
                     layer.open({
                         type: 1 //Page层类型
                         , skin: 'layui-layer-molv'
-                        , area: ['600px', '460px']
+                        , area: ['600px', '500px']
                         , title: ['添加房间', 'font-size:18px']
                         , btn: ['保存', '取消']
                         , shadeClose: true
@@ -236,10 +238,10 @@
                                 data: {
                                     houseId: $('#haddid').val(),
                                     houseName: $('#haddname').val(),
-                                    amount:$('#haddamount').val(),
-                                    price:$('#haddprice').val(),
-                                    floorId:$('#haddfloorId').val(),
-                                    state:$('#haddstate').val()
+                                    amount: $('#haddamount').val(),
+                                    price: $('#haddprice').val(),
+                                    floorId: $('#haddfloorId').val(),
+                                    state: $('#haddstate').val()
                                 },
                                 success: function (data) {
                                     if (data.code === 200) {
@@ -266,78 +268,110 @@
             let data = obj.data;
             //删除事件
             if (obj.event === 'delHouse') {
-                layer.confirm('真的要删除' + data.houseName + "么？", {title: "提示"}, function (index) {
-                    $.ajax({
-                        url: "house/deleteHouse",
-                        type: "get",
-                        dataType: 'json',
-                        data: {
-                            house_id: data.houseId
-                        },
-                        success: function (res) {
-                            if (res.code === 200) {
-                                layer.msg(res.message, {icon: 1, time: 3000}, function () {
-                                    obj.del();
-                                    layer.close(index);
-                                });
-                            } else {
-                                layer.msg(res.message, {icon: 2, time: 3000}, function () {
-                                    layer.close(index);
-                                });
-                            }
-                        },
-                        error: function (err) {
-                            layer.msg('服务器被吃啦！请稍后重试', {icon: 7, time: 3000});
-                        }
-                    })
-
-                });
-            } else if (obj.event === 'editHouse') { //编辑事件
-                layer.open({
-                    type: 1 //Page层类型
-                    , skin: 'layui-layer-molv'
-                    , area: ['600px', '460px']
-                    , title: ['修改房间信息', 'font-size:18px']
-                    , btn: ['保存', '取消']
-                    , shadeClose: true
-                    , shade: 0 //遮罩透明度
-                    , maxmin: true //允许全屏最小化
-                    , content: $("#editHouseModel")  //弹窗路径
-                    , success: function (layero, index) {
-                        $('#hid').val(data.houseId);
-                        $('#hname').val(data.houseName);
-                        $('#hamount').val(data.amount);
-                        $('#hprice').val(data.price);
-                        $('#hfloorId').val(data.floorId);
-                        $('#hstate').val(data.state);
-                    }, yes: function (index, layero) {
-                        $.ajax({
-                            url: "house/updateOneHouse",
-                            dataType: "json",
-                            data: {
-                                houseId: $('#hid').val(),
-                                houseName: $('#hname').val(),
-                                amount:$('#hamount').val(),
-                                price:$('#hprice').val(),
-                                floorId:$('#hfloorId').val(),
-                                state:$('#hstate').val()
-                            },
-                            success: function (data) {
-                                if (data.code === 200) {
-                                    layer.msg("房间信息" + data.message, {icon: 1, time: 3000}, function () {
-                                        layer.close(index);
-                                        location.reload();
-                                    });
-                                } else {
-                                    layer.msg("房间信息" + data.message + "请重试", {icon: 2, time: 3000});
+                switch (data.state){
+                    case '已定':
+                        layer.msg(data.houseName + "房间已被顾客预订, 暂时不能删除哦！", {icon: 2, time: 3000});
+                        break;
+                    case '入住':
+                        layer.msg(data.houseName + "房间已有顾客入住, 暂时不能删除哦！", {icon: 2, time: 3000});
+                        break;
+                    case '打扫':
+                        layer.msg(data.houseName + "房间正在打扫中, 暂时不能删除哦！", {icon: 2, time: 3000});
+                        break;
+                    case '维修':
+                        layer.msg(data.houseName + "房间正在维修中, 暂时不能删除哦！", {icon: 2, time: 3000});
+                        break;
+                    case '空闲':
+                        layer.confirm('真的要删除' + data.houseName + "么？", {title: "提示"}, function (index) {
+                            $.ajax({
+                                url: "house/deleteHouse",
+                                type: "get",
+                                dataType: 'json',
+                                data: {
+                                    house_id: data.houseId
+                                },
+                                success: function (res) {
+                                    if (res.code === 200) {
+                                        layer.msg(res.message, {icon: 1, time: 3000}, function () {
+                                            obj.del();
+                                            layer.close(index);
+                                        });
+                                    } else {
+                                        layer.msg(res.message, {icon: 2, time: 3000}, function () {
+                                            layer.close(index);
+                                        });
+                                    }
+                                },
+                                error: function (err) {
+                                    layer.msg('服务器被吃啦！请稍后重试', {icon: 7, time: 3000});
                                 }
-                            },
-                            error: function (err) {
-                                layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
+                            })
+
+                        });
+                        break;
+                }
+            } else if (obj.event === 'editHouse') { //编辑事件
+                switch (data.state){
+                    case '已定':
+                        layer.msg(data.houseName + "房间已被顾客预订, 暂时不能编辑哦！", {icon: 2, time: 3000});
+                        break;
+                    case '入住':
+                        layer.msg(data.houseName + "房间已有顾客入住, 暂时不能编辑哦！", {icon: 2, time: 3000});
+                        break;
+                    case '打扫':
+                        layer.msg(data.houseName + "房间正在打扫中, 暂时不能编辑哦！", {icon: 2, time: 3000});
+                        break;
+                    case '维修':
+                        layer.msg(data.houseName + "房间正在维修中, 暂时不能编辑哦！", {icon: 2, time: 3000});
+                        break;
+                    case '空闲':
+                        layer.open({
+                            type: 1 //Page层类型
+                            , skin: 'layui-layer-molv'
+                            , area: ['600px', '460px']
+                            , title: ['修改房间信息', 'font-size:18px']
+                            , btn: ['保存', '取消']
+                            , shadeClose: true
+                            , shade: 0 //遮罩透明度
+                            , maxmin: true //允许全屏最小化
+                            , content: $("#editHouseModel")  //弹窗路径
+                            , success: function (layero, index) {
+                                $('#hid').val(data.houseId);
+                                $('#hname').val(data.houseName);
+                                $('#hamount').val(data.amount);
+                                $('#hprice').val(data.price);
+                                $('#hfloorId').val(data.floorId);
+                                $('#hstate').val(data.state);
+                            }, yes: function (index, layero) {
+                                $.ajax({
+                                    url: "house/updateOneHouse",
+                                    dataType: "json",
+                                    data: {
+                                        houseId: $('#hid').val(),
+                                        houseName: $('#hname').val(),
+                                        amount: $('#hamount').val(),
+                                        price: $('#hprice').val(),
+                                        floorId: $('#hfloorId').val(),
+                                        state: $('#hstate').val()
+                                    },
+                                    success: function (data) {
+                                        if (data.code === 200) {
+                                            layer.msg("房间信息" + data.message, {icon: 1, time: 3000}, function () {
+                                                layer.close(index);
+                                                location.reload();
+                                            });
+                                        } else {
+                                            layer.msg("房间信息" + data.message + "请重试", {icon: 2, time: 3000});
+                                        }
+                                    },
+                                    error: function (err) {
+                                        layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
+                                    }
+                                });
                             }
                         });
-                    }
-                });
+                        break;
+                }
             }
         });
     });

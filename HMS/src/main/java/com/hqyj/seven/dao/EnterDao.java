@@ -16,4 +16,6 @@ public interface EnterDao {
     //更新房间号和客户号
     int  updateByHouseIdAndCustomerId(@Param("time") Date time, @Param("houseId") int houseId, @Param("customerId") int customerId);
     Enter selectByHouseIdAndCustomerId(@Param("houseId") int houseId,@Param("customerId") int customerId);
+    //根据住房id或者房间id查询住宿情况
+    List<Enter> queryOneById(int id);
 }

@@ -26,4 +26,9 @@
     <select id="selectByHouseIdAndCustomerId" resultType="com.hqyj.seven.pojo.Enter">
         select  * from  enter where  house_id=#{houseId} and customer_id=#{customerId} order by enter_id DESC limit 1
     </select>
+
+    <select id="queryOneById" resultType="com.hqyj.seven.pojo.Enter">
+        select * from enter where enter_id =#{id}
+        or house_id = #{id}
+    </select>
 </mapper>
