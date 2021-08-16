@@ -41,7 +41,7 @@
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
             <div class="layui-card">
-            <%--搜索和新增模块--%>
+                <%--搜索和新增模块--%>
                 <div class="layui-card-body ">
                     <script type="text/html" id="userToolBar">
                         <div class="layui-card-body ">
@@ -105,8 +105,11 @@
         <div class="layui-form-item">
             <label class="layui-form-label">状态</label>
             <div class="layui-input-block">
-                <input type="text" id="addstate" name="price" lay-verify="title" autocomplete="off" placeholder="请输入状态"
-                       class="layui-input">
+                <select id="addstate" lay-filter="addstate">
+                    <option value="活动" selected>活动</option>
+                    <option value="禁用" >禁用</option>
+                    <option value="其他">其他</option>
+                </select>
             </div>
         </div>
     </form>
@@ -135,6 +138,9 @@
                 <input type="password" id="upassword" name="price" lay-verify="title" autocomplete="off"
                        placeholder="请输入密码" class="layui-input">
             </div>
+            <div class="layui-form-mid layui-word-aux">
+                注意：这里是暗文密码，修改时请先清空!
+            </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">电话</label>
@@ -146,8 +152,11 @@
         <div class="layui-form-item">
             <label class="layui-form-label">状态</label>
             <div class="layui-input-block">
-                <input type="text" id="ustate" name="price" lay-verify="title" autocomplete="off" placeholder="请输入状态"
-                       class="layui-input">
+                <select id="ustate" lay-filter="ustate">
+                    <option value="活动">活动</option>
+                    <option value="禁用">禁用</option>
+                    <option value="其他">其他</option>
+                </select>
             </div>
         </div>
     </form>
@@ -162,7 +171,7 @@
             , url: 'user/getAllUser'
             , toolbar: '#userToolBar' //开启头部工具栏，并为其绑定左侧模板
             , defaultToolbar: ['filter', 'exports', 'print']
-            , cellMinWidth: 180
+            , cellMinWidth: 100
             , parseData: function (res) {
                 return {
                     "code": res.code,
@@ -174,12 +183,20 @@
             , title: '操作员列表'
             , cols: [[
                 {type: 'checkbox', fixed: 'left'}
-                , {field: 'id', title: 'ID', fixed: 'left', unresize: true, sort: true}
-                , {field: 'name', title: '用户名', sort: true}
-                , {field: 'password', title: '密码',}
-                , {field: 'phone', title: '联系电话', sort: true}
-                , {field: 'state', title: '状态', sort: true}
-                , {fixed: 'right', title: '操作', toolbar: '#user_list_bar'}
+                , {field: 'id', title: 'ID', fixed: 'left', unresize: true, align: "center", sort: true}
+                , {field: 'name', title: '用户名', align: "center", sort: true}
+                , {
+                    field: 'password', title: '密码', align: "left", templet: function (data) {
+                        return `<input id="newPassword" type="password"
+                                value="` + data.password + `"
+                                class="layui-input"
+                                style="border:none;"
+                                readonly>`
+                    }
+                }
+                , {field: 'phone', title: '联系电话', align: "center", sort: true}
+                , {field: 'state', title: '状态', align: "center", sort: true}
+                , {fixed: 'right', title: '操作', align: "center", toolbar: '#user_list_bar'}
             ]]
             , page: true
             , limit: 10
@@ -190,7 +207,6 @@
         table.on('toolbar(user_list)', function (obj) {
             switch (obj.event) {
                 case 'getUserByName':
-                    // console.log($("#username").val())
                     table.reload('user_list', {
                         url: 'user/searchUser',
                         where: {names: $("#username").val()},
@@ -216,7 +232,7 @@
                     layer.open({
                         type: 1 //Page层类型
                         , skin: 'layui-layer-molv'
-                        , area: ['600px', '400px']
+                        , area: ['600px', '450px']
                         , title: ['添加操作员', 'font-size:18px']
                         , btn: ['保存', '取消']
                         , shadeClose: true
@@ -290,7 +306,7 @@
                 layer.open({
                     type: 1 //Page层类型
                     , skin: 'layui-layer-molv'
-                    , area: ['600px', '400px']
+                    , area: ['600px', '450px']
                     , title: ['编辑操作员', 'font-size:18px']
                     , btn: ['保存', '取消']
                     , shadeClose: true
