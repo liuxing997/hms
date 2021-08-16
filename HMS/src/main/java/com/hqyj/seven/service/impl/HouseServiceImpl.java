@@ -251,6 +251,18 @@ public class HouseServiceImpl implements HouseService {
         return pageData;
     }
 
+    //根据ID或房间名搜索待打扫房间
+    @Override
+    public List<House> searchHouseClean(String names) {
+        return houseDao.searchHouseClean(names);
+    }
+
+    //根据ID或房间名搜索待维修房间
+    @Override
+    public List<House> searchHouseMaintain(String names) {
+        return houseDao.searchHouseMaintain(names);
+    }
+
     //退订
     @Override
     public   Map<String, Object> unsubscribe(String houseName) {

@@ -25,8 +25,6 @@ public interface HouseDao {
 
     int updateByHouseNametocheckIn(@Param("customerId")int customerId,@Param("name") String name,@Param("day") int day);
 
-
-
     //获取全部客房信息
     List<House> queryAllHouseI();
     //获取单个住房信息和住房人的信息
@@ -43,7 +41,7 @@ public interface HouseDao {
     Integer queryCount();
     //查询空闲房间总数
     Integer queryCountByStateNull();
-   //查询预定房间总数
+    //查询预定房间总数
     Integer queryCountByStateReserve();
     //查询入住房间总数
     Integer queryCountByStateCheckIn();
@@ -59,4 +57,10 @@ public interface HouseDao {
     int updateByHouseNameToUnsubscribe(String houseName);
     //修改打扫和维修的房间名
     int cleanMaintainByHouseState(@Param("name") String name,@Param("state") String state);
+
+    //根据ID或房间名搜索待打扫房间
+    List<House> searchHouseClean(String names);
+
+    //根据ID或房间名搜索待维修房间
+    List<House> searchHouseMaintain(String names);
 }

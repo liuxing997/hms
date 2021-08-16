@@ -207,6 +207,51 @@ public class HouseController {
         houseTotals.put("data",total);
         return houseTotals;
     }
+
+    //根据ID或房间名搜索待打扫房间
+    @RequestMapping("/searchHouseClean")
+    @ResponseBody
+    public Map<String,Object> searchHouseClean(String names){
+        Map<String,Object> houseMap =  new HashMap<>();
+        if (names == null){
+            houseMap.put("code",-9);
+            houseMap.put("msg","搜索的参数不能为空");
+        }else {
+            List<House> houseList = houseService.searchHouseClean(names);
+            if (houseList.size() == 0){
+                houseMap.put("code",-1);
+                houseMap.put("msg","房间已打扫或空闲中！");
+            }else {
+                houseMap.put("code",0);
+                houseMap.put("msg","搜索房间成功！");
+                houseMap.put("data",houseList);
+            }
+        }
+        return houseMap;
+    }
+
+    //根据ID或房间名搜索待维修房间
+    @RequestMapping("/searchHouseMaintain")
+    @ResponseBody
+    public Map<String,Object> searchHouseMaintain(String names){
+        Map<String,Object> houseMap =  new HashMap<>();
+        if (names == null){
+            houseMap.put("code",-9);
+            houseMap.put("msg","搜索的参数不能为空");
+        }else {
+            List<House> houseList = houseService.searchHouseMaintain(names);
+            if (houseList.size() == 0){
+                houseMap.put("code",-1);
+                houseMap.put("msg","房间已维修或空闲中！");
+            }else {
+                houseMap.put("code",0);
+                houseMap.put("msg","搜索房间成功！");
+                houseMap.put("data",houseList);
+            }
+        }
+        return houseMap;
+    }
+
     //更新住房状态之维修
     @RequestMapping("/updateMaintainState")
     @ResponseBody
