@@ -31,27 +31,27 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
     }
 
-    //根据用户名查询用户
+    //根据用户名查询操作员
     @Override
-    public User getOneByUsername(String  name) {
+    public User getOneByUsername(String name) {
         return userDao.queryByUsername(name);
 
     }
-    //根据ID或用户名搜索用户
+
+    //根据ID或用户名搜索操作员
     @Override
     public List<User> searchUser(String names) {
         return userDao.searchUser(names);
     }
 
-    //查询所有用户
+    //查询所有操作员
     @Override
     public PageData<User> queryAllUser(int pageNumber, int pageSize) {
-        PageHelper.startPage(pageNumber,pageSize);
+        PageHelper.startPage(pageNumber, pageSize);
         List<User> userList = userDao.queryAllUser();
         PageInfo<User> pageInfo = new PageInfo<>(userList);
-        //创建我们自己的数据模型
+        //创建数据模型
         PageData<User> pageData = new PageData<>();
-
         pageData.setCurrentPage(pageNumber);
         //设置每页数
         pageData.setPageSize(pageSize);
@@ -59,77 +59,76 @@ public class UserServiceImpl implements UserService {
         pageData.setTotalPage(pageInfo.getPages());
         //设置总记录数
         pageData.setTotalSize((int) pageInfo.getTotal());
-        if (pageInfo.isHasNextPage()){
+        if (pageInfo.isHasNextPage()) {
             //有下一页 设置下一页页码
             pageData.setNextPage(pageInfo.getNextPage());
-        }else {
+        } else {
             //没有下一页，设置尾页
             pageData.setNextPage(pageInfo.getPages());
         }
-        if (pageInfo.isHasPreviousPage()){
+        if (pageInfo.isHasPreviousPage()) {
             //有上一页 设置上一页页码
             pageData.setPreviousPage(pageInfo.getPrePage());
-        }else {
+        } else {
             //没有上一页，设置首页
             pageData.setPreviousPage(1);
         }
-        //设置用户信息
+        //设置操作员信息
         pageData.setList(pageInfo.getList());
 
         return pageData;
     }
 
-    //根据用户ID修改用户信息
+    //根据操作员ID修改操作员信息
     @Override
     public int updateById(User user) {
-        //加密用户密码
-        user.setPassword(MD5Util.md5Hash(user.getPassword(),user.getName()));
+        //加密操作员密码
+        user.setPassword(MD5Util.md5Hash(user.getPassword(), user.getName()));
         return userDao.updateById(user);
     }
 
-    //根据用户ID删除用户信息
+    //根据操作员ID删除操作员信息
     @Override
     public int deleteById(int id) {
         return userDao.deleteById(id);
     }
 
-    //新增用户
+    //新增操作员
     @Override
     public int insertUser(User user) {
         //加密用户密码
-        user.setPassword(MD5Util.md5Hash(user.getPassword(),user.getName()));
+        user.setPassword(MD5Util.md5Hash(user.getPassword(), user.getName()));
         return userDao.insertUser(user);
     }
 
 
     //操作员登录
     @Override
-    public Map<String, Object> login(String  name, String password) {
+    public Map<String, Object> login(String name, String password) {
         Map<String, Object> result = new HashMap<>();
-        //获取当前用户
+        //获取当前操作员
         Subject subject = SecurityUtils.getSubject();
         //判断当前是否已经认证过
-        if(!subject.isAuthenticated()){
+        if (!subject.isAuthenticated()) {
             //创建一个认证令牌
-            UsernamePasswordToken token = new UsernamePasswordToken( name,password);
+            UsernamePasswordToken token = new UsernamePasswordToken(name, password);
             //登录
-            try{
+            try {
                 subject.login(token);
-            }catch (UnknownAccountException e){
+            } catch (UnknownAccountException e) {
                 //未知账号异常
                 result.put("code", -1);
-                result.put("message",name+"用户不存在或被禁用");
+                result.put("message", name + "用户不存在或被禁用");
                 return result;
-            }catch (IncorrectCredentialsException e){
+            } catch (IncorrectCredentialsException e) {
                 //密码错误异常
                 System.out.println(password);
                 result.put("code", -2);
-                result.put("message", name+"用户密码错误");
+                result.put("message", name + "用户密码错误");
                 return result;
-            }
-            catch (AuthenticationException e){
-                result.put("code",-10);
-                result.put("message","登录失败");
+            } catch (AuthenticationException e) {
+                result.put("code", -10);
+                result.put("message", "登录失败");
                 return result;
             }
         }
@@ -139,7 +138,7 @@ public class UserServiceImpl implements UserService {
         result.put("code", 200);
         result.put("message", "登录成功");
         //直接返回给控制器方法
-        result.put("loginUser",loginUser);
+        result.put("loginUser", loginUser);
         return result;
     }
 
@@ -148,15 +147,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public Map<String, Object> logout() {
         //获取当前操作员
-        Subject subject =  SecurityUtils.getSubject();
+        Subject subject = SecurityUtils.getSubject();
         //操作员登出
         subject.logout();
         //操作员登出移除session中的数据
         Session session = subject.getSession();
         session.removeAttribute("loginUser");
-        Map<String,Object> result = new HashMap<>();
-        result.put("code",200);
-        result.put("message","成功登出！");
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 200);
+        result.put("message", "成功登出！");
         return result;
     }
 }

@@ -7,6 +7,7 @@ import com.hqyj.seven.pojo.PageData;
 import java.util.List;
 
 public interface CustomerService {
+
     //住房更新金额
     int updateByNameToRemainder(double money, int id);
 
@@ -18,14 +19,18 @@ public interface CustomerService {
 
     //根据用户名查询用户的信息
     List<Customer> queryByCusName(String name);
+
     //更新客户信息
     int updataOneCus(Customer customer);
+
     //插入单个客户的信息
     int insertOneCus(Customer customer);
+
     //删除单个客户的信息
     int deleteOneCus(int customer_id);
-//    查询客户住宿情况
-     List<House> queryState(int customer_id);
+
+    //查询客户住宿情况
+    List<House> queryState(int customer_id);
 }
 
 

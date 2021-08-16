@@ -49,19 +49,17 @@ public class HouseServiceImpl implements HouseService {
 
     //订房
     @Override
-    public Map<String, Object> reservation(int customerId, String name ) {
+    public Map<String, Object> reservation(int customerId, String name) {
         Map<String, Object> result = new HashMap<>();
-       House house=houseDao.queryByHousename(name);
-       if (house.getState().equals("空闲"))
-        {  houseDao.updateByHouseName(customerId,name);
-            result.put("code",200);
-            result.put("message","订房成功");
+        House house = houseDao.queryByHousename(name);
+        if (house.getState().equals("空闲")) {
+            houseDao.updateByHouseName(customerId, name);
+            result.put("code", 200);
+            result.put("message", "订房成功");
         }
-        if (house.getState().equals("已定")||house.getState().equals("入住"))
-        {
-            result.put("code",-2);
-            result.put("message","房间已经入住或者被定");
-
+        if (house.getState().equals("已定") || house.getState().equals("入住")) {
+            result.put("code", -2);
+            result.put("message", "房间已经入住或者被定");
         }
         return result;
     }
@@ -80,7 +78,7 @@ public class HouseServiceImpl implements HouseService {
     //查询所有住房信息
     @Override
     public PageData<House> getAllHouse(int pageNumber, int pageSize) {
-        PageHelper.startPage(pageNumber,pageSize);
+        PageHelper.startPage(pageNumber, pageSize);
         List<House> houseList = houseDao.queryAllHouseI();
         PageInfo<House> pageInfo = new PageInfo<>(houseList);
         PageData<House> pageData = new PageData<>();
@@ -91,17 +89,17 @@ public class HouseServiceImpl implements HouseService {
         pageData.setTotalPage(pageInfo.getPages());
         //设置总记录数
         pageData.setTotalSize((int) pageInfo.getTotal());
-        if (pageInfo.isHasNextPage()){
+        if (pageInfo.isHasNextPage()) {
             //有下一页 设置下一页页码
             pageData.setNextPage(pageInfo.getNextPage());
-        }else {
+        } else {
             //没有下一页，设置尾页
             pageData.setNextPage(pageInfo.getPages());
         }
-        if (pageInfo.isHasPreviousPage()){
+        if (pageInfo.isHasPreviousPage()) {
             //有上一页 设置上一页页码
             pageData.setPreviousPage(pageInfo.getPrePage());
-        }else {
+        } else {
             //没有上一页，设置首页
             pageData.setPreviousPage(1);
         }
@@ -121,13 +119,13 @@ public class HouseServiceImpl implements HouseService {
     //维修更新
     @Override
     public int updateMaintainHouse(String name) {
-        return houseDao.cleanMaintainByHouseState(name,"维修");
+        return houseDao.cleanMaintainByHouseState(name, "维修");
     }
 
     //打扫更新
     @Override
     public int updateCleanHouse(String name) {
-        return houseDao.cleanMaintainByHouseState(name,"打扫");
+        return houseDao.cleanMaintainByHouseState(name, "打扫");
     }
 
 
@@ -152,7 +150,7 @@ public class HouseServiceImpl implements HouseService {
     //查询所有房间数量
     @Override
     public Integer queryHouseNumber() {
-        return  houseDao.queryCount();
+        return houseDao.queryCount();
     }
 
     //查询空闲房间总数
@@ -188,7 +186,7 @@ public class HouseServiceImpl implements HouseService {
     //查询打扫房间信息
     @Override
     public PageData<House> queryBySateClean(int pageNumber, int pageSize) {
-        PageHelper.startPage(pageNumber,pageSize);
+        PageHelper.startPage(pageNumber, pageSize);
         List<House> houseList = houseDao.queryBySate("打扫");
         PageInfo<House> pageInfo = new PageInfo<>(houseList);
         PageData<House> pageData = new PageData<>();
@@ -199,17 +197,17 @@ public class HouseServiceImpl implements HouseService {
         pageData.setTotalPage(pageInfo.getPages());
         //设置总记录数
         pageData.setTotalSize((int) pageInfo.getTotal());
-        if (pageInfo.isHasNextPage()){
+        if (pageInfo.isHasNextPage()) {
             //有下一页 设置下一页页码
             pageData.setNextPage(pageInfo.getNextPage());
-        }else {
+        } else {
             //没有下一页，设置尾页
             pageData.setNextPage(pageInfo.getPages());
         }
-        if (pageInfo.isHasPreviousPage()){
+        if (pageInfo.isHasPreviousPage()) {
             //有上一页 设置上一页页码
             pageData.setPreviousPage(pageInfo.getPrePage());
-        }else {
+        } else {
             //没有上一页，设置首页
             pageData.setPreviousPage(1);
         }
@@ -218,10 +216,11 @@ public class HouseServiceImpl implements HouseService {
         //返回房屋信息
         return pageData;
     }
+
     //查询维修房间信息
     @Override
     public PageData<House> queryBySateMaintain(int pageNumber, int pageSize) {
-        PageHelper.startPage(pageNumber,pageSize);
+        PageHelper.startPage(pageNumber, pageSize);
         List<House> houseList = houseDao.queryBySate("维修");
         PageInfo<House> pageInfo = new PageInfo<>(houseList);
         PageData<House> pageData = new PageData<>();
@@ -232,17 +231,17 @@ public class HouseServiceImpl implements HouseService {
         pageData.setTotalPage(pageInfo.getPages());
         //设置总记录数
         pageData.setTotalSize((int) pageInfo.getTotal());
-        if (pageInfo.isHasNextPage()){
+        if (pageInfo.isHasNextPage()) {
             //有下一页 设置下一页页码
             pageData.setNextPage(pageInfo.getNextPage());
-        }else {
+        } else {
             //没有下一页，设置尾页
             pageData.setNextPage(pageInfo.getPages());
         }
-        if (pageInfo.isHasPreviousPage()){
+        if (pageInfo.isHasPreviousPage()) {
             //有上一页 设置上一页页码
             pageData.setPreviousPage(pageInfo.getPrePage());
-        }else {
+        } else {
             //没有上一页，设置首页
             pageData.setPreviousPage(1);
         }
@@ -266,138 +265,118 @@ public class HouseServiceImpl implements HouseService {
 
     //退订
     @Override
-    public   Map<String, Object> unsubscribe(String houseName) {
+    public Map<String, Object> unsubscribe(String houseName) {
         Map<String, Object> result = new HashMap<>();
-        House house=houseDao.queryByHousename(houseName);
-        if (house.getState().equals("已定"))
-        {  houseDao.updateByHouseNameToUnsubscribe(houseName);
-            result.put("code",200);
-            result.put("message","退订成功");
-        }
-       else
-        {
-            result.put("code",-2);
-            result.put("message","房间已经退订或者正在入住");
+        House house = houseDao.queryByHousename(houseName);
+        if (house.getState().equals("已定")) {
+            houseDao.updateByHouseNameToUnsubscribe(houseName);
+            result.put("code", 200);
+            result.put("message", "退订成功");
+        } else {
+            result.put("code", -2);
+            result.put("message", "房间已经退订或者正在入住");
         }
         return result;
     }
+
     //退房
     @Override
     public Map<String, Object> checkOut(String name) {
         Map<String, Object> result = new HashMap<>();
-        House house=houseDao.queryByHousename(name);
-
-        double price=house.getPrice();
-
-        int customerId=house.getCustomerId();
-
-        int houseId=house.getHouseId();
-        if (house.getState().equals("入住"))
-        {
-            Date date1=new Date();
-
-            enterDao.updateByHouseIdAndCustomerId(date1,houseId,customerId);
-            Enter enter=enterDao.selectByHouseIdAndCustomerId(houseId,customerId);
+        House house = houseDao.queryByHousename(name);
+        double price = house.getPrice();
+        int customerId = house.getCustomerId();
+        int houseId = house.getHouseId();
+        if (house.getState().equals("入住")) {
+            Date date1 = new Date();
+            enterDao.updateByHouseIdAndCustomerId(date1, houseId, customerId);
+            Enter enter = enterDao.selectByHouseIdAndCustomerId(houseId, customerId);
             System.out.println(enter);
-            Date date2=enter.getEnd_time_estimate();
+            Date date2 = enter.getEnd_time_estimate();
             DecimalFormat df = new DecimalFormat("#.##");
-            long day=  (date2.getTime()-date1.getTime())/24/60/60/1000;
-            double money=day*price;
+            long day = (date2.getTime() - date1.getTime()) / 24 / 60 / 60 / 1000;
+            double money = day * price;
             System.out.println(money);
             System.out.println(df.format(money));
-            customerDao.updataByCustomerIdToremainderTwo(money,customerId);
-            Fee fee=feedao.queryByHouseIdAndCoustomerId(houseId,customerId);
+            customerDao.updataByCustomerIdToremainderTwo(money, customerId);
+            Fee fee = feedao.queryByHouseIdAndCoustomerId(houseId, customerId);
             System.out.println(fee);
-            int feeId=fee.getFeeId();
+            int feeId = fee.getFeeId();
             System.out.println(feeId);
-            String feeddirect=fee.getDirect();
+            String feeddirect = fee.getDirect();
             if (feeddirect.equals("未缴费"))
-                  feedao.updateByFeeId(feeId);
+                feedao.updateByFeeId(feeId);
             houseDao.updateByHouseNameToCheckOut(name);
-            result.put("code",200);
-            result.put("message","退房成功");
-
-
-        }
-        else {
-            result.put("code",-1);
-            result.put("message","房间已经退了或在其他状态，不需要重复操作");
+            result.put("code", 200);
+            result.put("message", "退房成功");
+        } else {
+            result.put("code", -1);
+            result.put("message", "房间已经退了或在其他状态，不需要重复操作");
         }
         return result;
 
     }
+
     //入住
     //参数分别为顾客id,房间name,入住人数，userID
     @Override
-    public Map<String, Object> checkIn(int customerId, String name,int day,int numberOfPeople,int userId) throws ParseException {
+    public Map<String, Object> checkIn(int customerId, String name, int day, int numberOfPeople, int userId) throws ParseException {
         Map<String, Object> result = new HashMap<>();
         //按照name获取house数据
-        House house=houseDao.queryByHousename(name);
+        House house = houseDao.queryByHousename(name);
         //按照id获取customer数据
-        Customer customer=customerDao.queryByCustomer(customerId);
-        Date time=new Date();
+        Customer customer = customerDao.queryByCustomer(customerId);
+        Date time = new Date();
         //更新字符串 如果numberOfPeople=2，字符串则更新为2人已入住
-        String str1=numberOfPeople+"人已入住";
+        String str1 = numberOfPeople + "人已入住";
         //预定时间+day为预定退房时间，实际退房时间 退房时更新
-        int  day2 = day*24*60*60*1000;
-        long time2=time.getTime()+day2;
-        Date time3=new Date(time2);
+        int day2 = day * 24 * 60 * 60 * 1000;
+        long time2 = time.getTime() + day2;
+        Date time3 = new Date(time2);
         System.out.println(time);
         //如果房间是空闲则之间可以入住
-         SimpleDateFormat sdf  =   new  SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
-        if (house.getState().equals("空闲"))
-        {
-
-            double money=house.getPrice()*day;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        if (house.getState().equals("空闲")) {
+            double money = house.getPrice() * day;
             //如果余额不足则会提示
-            if (money>customer.getRemainder()){
+            if (money > customer.getRemainder()) {
                 //更新顾客表余额的数据
-                customerDao.updataByCustomerIdToremainder(money,customerId);
+                customerDao.updataByCustomerIdToremainder(money, customerId);
                 //插入顾客表
-                enterDao.inserintoEnter(new Enter(house.getHouseId(),customerId,
-                        numberOfPeople,time,time3,null,0,1,userId,"未结账",house.getPrice()));
+                enterDao.inserintoEnter(new Enter(house.getHouseId(), customerId,
+                        numberOfPeople, time, time3, null, 0, 1, userId, "未结账", house.getPrice()));
                 //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
-
                 //规范化插入表时的时间和获取的时间有点误差
-
                 long day3 = time.getTime();
-                Date time4=new Date(day3);
-
-                Enter enter= enterDao.queryByHouseIdAndTime(house.getHouseId(),sdf.format(time4));
-
+                Date time4 = new Date(day3);
+                Enter enter = enterDao.queryByHouseIdAndTime(house.getHouseId(), sdf.format(time4));
                 //插入缴费表
-                feedao.inserintoFee(new Fee( enter.getEnter_id(),"未缴费",customerId,money,house.getHouseId(),
-                        str1,userId,"未缴费"));
+                feedao.inserintoFee(new Fee(enter.getEnter_id(), "未缴费", customerId, money, house.getHouseId(),
+                        str1, userId, "未缴费"));
                 //更新房间为入住
-                houseDao.updateByHouseNametocheckIn(customerId,name,day);
-                result.put("code",201);
-                result.put("message","入住成功，但余额不足需要顾客现金或者充值");
-            }
-            else {
+                houseDao.updateByHouseNametocheckIn(customerId, name, day);
+                result.put("code", 201);
+                result.put("message", "入住成功，但余额不足需要顾客现金或者充值");
+            } else {
                 //更新顾客表余额的数据
-                customerDao.updataByCustomerIdToremainder(money,customerId);
+                customerDao.updataByCustomerIdToremainder(money, customerId);
                 //插入顾客表
-                enterDao.inserintoEnter(new Enter(house.getHouseId(),customerId,
-                        numberOfPeople,time,time3,null,money,1,userId,"已结账",house.getPrice()));
+                enterDao.inserintoEnter(new Enter(house.getHouseId(), customerId,
+                        numberOfPeople, time, time3, null, money, 1, userId, "已结账", house.getPrice()));
                 //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
-
                 //规范化插入表时的时间和获取的时间有点误差
-
                 long day3 = time.getTime();
-                Date time4=new Date(day3);
-
-                Enter enter= enterDao.queryByHouseIdAndTime(house.getHouseId(),sdf.format(time4));
-
+                Date time4 = new Date(day3);
+                Enter enter = enterDao.queryByHouseIdAndTime(house.getHouseId(), sdf.format(time4));
                 //插入缴费表
-                feedao.inserintoFee(new Fee( enter.getEnter_id(),"缴费",customerId,money,house.getHouseId(),
-                        str1,userId,"会员卡扣费"));
+                feedao.inserintoFee(new Fee(enter.getEnter_id(), "缴费", customerId, money, house.getHouseId(),
+                        str1, userId, "会员卡扣费"));
                 //更新房间为入住
-                houseDao.updateByHouseNametocheckIn(customerId,name,day);
-                result.put("code",200);
-                result.put("message","入住成功");
+                houseDao.updateByHouseNametocheckIn(customerId, name, day);
+                result.put("code", 200);
+                result.put("message", "入住成功");
             }
-        }
-        else {
+        } else {
             if ((house.getState().equals("已定"))) {
                 //判断预定房间号的顾客id和现在的顾客id是否一致
                 if (house.getCustomerId() == customerId) {
@@ -405,58 +384,48 @@ public class HouseServiceImpl implements HouseService {
                     //如果余额不足则会提示
                     if (money > customer.getRemainder()) {
                         //更新顾客表余额的数据
-                        customerDao.updataByCustomerIdToremainder(money,customerId);
-                        //插入顾客表
-                        enterDao.inserintoEnter(new Enter(house.getHouseId(),customerId,
-                                numberOfPeople,time,time3,null,0,1,userId,"未缴费",house.getPrice()));
-                        //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
-
-                        //规范化插入表时的时间和获取的时间有点误差
-
-                        long day3 = time.getTime();
-                        Date time4=new Date(day3);
-
-                        Enter enter= enterDao.queryByHouseIdAndTime(house.getHouseId(),sdf.format(time4));
-
-                        //插入缴费表
-                        feedao.inserintoFee(new Fee( enter.getEnter_id(),"未缴费",customerId,money,house.getHouseId(),
-                                str1,userId,"未缴费"));
-                        //更新房间为入住
-                        houseDao.updateByHouseNametocheckIn(customerId,name,day);
-                        result.put("code",201);
-                        result.put("message","入住成功预定房间成功，但余额不足需要顾客现金或者充值");
-                    }
-                    else {
-                        //更新顾客表余额的数据
                         customerDao.updataByCustomerIdToremainder(money, customerId);
                         //插入顾客表
                         enterDao.inserintoEnter(new Enter(house.getHouseId(), customerId,
-                                numberOfPeople, time, time3,null, money, 1, userId, "已结账", house.getPrice()));
+                                numberOfPeople, time, time3, null, 0, 1, userId, "未缴费", house.getPrice()));
                         //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
-
                         //规范化插入表时的时间和获取的时间有点误差
                         long day3 = time.getTime();
                         Date time4 = new Date(day3);
                         Enter enter = enterDao.queryByHouseIdAndTime(house.getHouseId(), sdf.format(time4));
-
+                        //插入缴费表
+                        feedao.inserintoFee(new Fee(enter.getEnter_id(), "未缴费", customerId, money, house.getHouseId(),
+                                str1, userId, "未缴费"));
+                        //更新房间为入住
+                        houseDao.updateByHouseNametocheckIn(customerId, name, day);
+                        result.put("code", 201);
+                        result.put("message", "入住成功预定房间成功，但余额不足需要顾客现金或者充值");
+                    } else {
+                        //更新顾客表余额的数据
+                        customerDao.updataByCustomerIdToremainder(money, customerId);
+                        //插入顾客表
+                        enterDao.inserintoEnter(new Enter(house.getHouseId(), customerId,
+                                numberOfPeople, time, time3, null, money, 1, userId, "已结账", house.getPrice()));
+                        //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
+                        //规范化插入表时的时间和获取的时间有点误差
+                        long day3 = time.getTime();
+                        Date time4 = new Date(day3);
+                        Enter enter = enterDao.queryByHouseIdAndTime(house.getHouseId(), sdf.format(time4));
                         //插入缴费表
                         feedao.inserintoFee(new Fee(enter.getEnter_id(), "缴费", customerId, money, house.getHouseId(),
                                 str1, userId, "会员卡扣费"));
                         //更新房间为入住
                         houseDao.updateByHouseNametocheckIn(customerId, name, day);
-                        result.put("code",200);
-                        result.put("message","顾客入住预定的房间成功");
+                        result.put("code", 200);
+                        result.put("message", "顾客入住预定的房间成功");
                     }
-
-
                 } else {
-                    result.put("code",-2);
-                    result.put("message","此房间不是该顾客预定的哟");
-
+                    result.put("code", -2);
+                    result.put("message", "此房间不是该顾客预定的哟");
                 }
             } else {
-                result.put("code",-3);
-                result.put("message","房间预定或者已经入住哟");
+                result.put("code", -3);
+                result.put("message", "房间预定或者已经入住哟");
             }
         }
         return result;

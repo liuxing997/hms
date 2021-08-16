@@ -4,10 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hqyj.seven.dao.EnterDao;
 import com.hqyj.seven.dao.Feedao;
-import com.hqyj.seven.dao.HouseDao;
-import com.hqyj.seven.pojo.Enter;
 import com.hqyj.seven.pojo.Fee;
-import com.hqyj.seven.pojo.House;
 import com.hqyj.seven.pojo.PageData;
 import com.hqyj.seven.service.FeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +19,14 @@ public class FeeServiceImpl implements FeeService {
 
 
     private Feedao feedao;
-@Autowired
+
+    @Autowired
     public void setEnterDao(EnterDao enterDao) {
         this.enterDao = enterDao;
     }
 
     private EnterDao enterDao;
+
     @Autowired
     public void setFeedao(Feedao feedao) {
         this.feedao = feedao;
@@ -39,10 +38,11 @@ public class FeeServiceImpl implements FeeService {
         return feedao.inserintoFee(fee);
 
     }
-   //查询已经缴费信息表
+
+    //查询已经缴费信息表
     @Override
     public PageData<Fee> queryByDirectPay(int pageNumber, int pageSize) {
-        PageHelper.startPage(pageNumber,pageSize);
+        PageHelper.startPage(pageNumber, pageSize);
         List<Fee> houseList = feedao.queryByDirect("缴费");
         PageInfo<Fee> pageInfo = new PageInfo<>(houseList);
         PageData<Fee> pageData = new PageData<>();
@@ -53,17 +53,17 @@ public class FeeServiceImpl implements FeeService {
         pageData.setTotalPage(pageInfo.getPages());
         //设置总记录数
         pageData.setTotalSize((int) pageInfo.getTotal());
-        if (pageInfo.isHasNextPage()){
+        if (pageInfo.isHasNextPage()) {
             //有下一页 设置下一页页码
             pageData.setNextPage(pageInfo.getNextPage());
-        }else {
+        } else {
             //没有下一页，设置尾页
             pageData.setNextPage(pageInfo.getPages());
         }
-        if (pageInfo.isHasPreviousPage()){
+        if (pageInfo.isHasPreviousPage()) {
             //有上一页 设置上一页页码
             pageData.setPreviousPage(pageInfo.getPrePage());
-        }else {
+        } else {
             //没有上一页，设置首页
             pageData.setPreviousPage(1);
         }
@@ -75,7 +75,7 @@ public class FeeServiceImpl implements FeeService {
 
     @Override
     public PageData<Fee> queryByDirectNoPay(int pageNumber, int pageSize) {
-        PageHelper.startPage(pageNumber,pageSize);
+        PageHelper.startPage(pageNumber, pageSize);
         List<Fee> houseList = feedao.queryByDirect("未缴费");
         PageInfo<Fee> pageInfo = new PageInfo<>(houseList);
         PageData<Fee> pageData = new PageData<>();
@@ -86,17 +86,17 @@ public class FeeServiceImpl implements FeeService {
         pageData.setTotalPage(pageInfo.getPages());
         //设置总记录数
         pageData.setTotalSize((int) pageInfo.getTotal());
-        if (pageInfo.isHasNextPage()){
+        if (pageInfo.isHasNextPage()) {
             //有下一页 设置下一页页码
             pageData.setNextPage(pageInfo.getNextPage());
-        }else {
+        } else {
             //没有下一页，设置尾页
             pageData.setNextPage(pageInfo.getPages());
         }
-        if (pageInfo.isHasPreviousPage()){
+        if (pageInfo.isHasPreviousPage()) {
             //有上一页 设置上一页页码
             pageData.setPreviousPage(pageInfo.getPrePage());
-        }else {
+        } else {
             //没有上一页，设置首页
             pageData.setPreviousPage(1);
         }
@@ -107,9 +107,9 @@ public class FeeServiceImpl implements FeeService {
     }
 
     @Override
-    public PageData<Fee> queryAllId(int pageNumber, int pageSize,int id,String direct) {
-        PageHelper.startPage(pageNumber,pageSize);
-        List<Fee> houseList = feedao.queryAllId(id,direct);
+    public PageData<Fee> queryAllId(int pageNumber, int pageSize, int id, String direct) {
+        PageHelper.startPage(pageNumber, pageSize);
+        List<Fee> houseList = feedao.queryAllId(id, direct);
         PageInfo<Fee> pageInfo = new PageInfo<>(houseList);
         PageData<Fee> pageData = new PageData<>();
         pageData.setCurrentPage(pageNumber);
@@ -119,17 +119,17 @@ public class FeeServiceImpl implements FeeService {
         pageData.setTotalPage(pageInfo.getPages());
         //设置总记录数
         pageData.setTotalSize((int) pageInfo.getTotal());
-        if (pageInfo.isHasNextPage()){
+        if (pageInfo.isHasNextPage()) {
             //有下一页 设置下一页页码
             pageData.setNextPage(pageInfo.getNextPage());
-        }else {
+        } else {
             //没有下一页，设置尾页
             pageData.setNextPage(pageInfo.getPages());
         }
-        if (pageInfo.isHasPreviousPage()){
+        if (pageInfo.isHasPreviousPage()) {
             //有上一页 设置上一页页码
             pageData.setPreviousPage(pageInfo.getPrePage());
-        }else {
+        } else {
             //没有上一页，设置首页
             pageData.setPreviousPage(1);
         }
@@ -141,32 +141,31 @@ public class FeeServiceImpl implements FeeService {
 
     @Override
     public double paymentAmount(int feeId) {
-        Fee fee=feedao.queryOneByFeeId(feeId);
-        return  fee.getMoney();
+        Fee fee = feedao.queryOneByFeeId(feeId);
+        return fee.getMoney();
     }
-   //现金支付
+
+    //现金支付
     @Override
     public Map<String, Object> CashPayment(int feeId) {
-        Map<String, Object> result=new HashMap<>();
-        Fee fee=feedao.queryOneByFeeId(feeId);
+        Map<String, Object> result = new HashMap<>();
+        Fee fee = feedao.queryOneByFeeId(feeId);
         System.out.println(fee);
-        if (fee!=null)
-        {
-          double money=fee.getMoney();
-            int enterId=fee.getEnterId();
-             fee.setFee_type("现金");
-             fee.setDirect("缴费");
+        if (fee != null) {
+            double money = fee.getMoney();
+            int enterId = fee.getEnterId();
+            fee.setFee_type("现金");
+            fee.setDirect("缴费");
             System.out.println(fee);
-        feedao.updateFee(fee);
-        enterDao.updateByEnterIdToMoney(money,enterId);
-        result.put("code",200);
-        result.put("message","现金支付成功");
+            feedao.updateFee(fee);
+            enterDao.updateByEnterIdToMoney(money, enterId);
+            result.put("code", 200);
+            result.put("message", "现金支付成功");
+        } else {
+            result.put("code", -1);
+            result.put("message", "此房间未找到或者已经付费");
         }
-     else {
-            result.put("code",-1);
-            result.put("message","此房间未找到或者已经付费");
-        }
-     return  result;
+        return result;
     }
 
 
