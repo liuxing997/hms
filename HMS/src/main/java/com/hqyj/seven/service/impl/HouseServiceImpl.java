@@ -184,11 +184,44 @@ public class HouseServiceImpl implements HouseService {
         return houseDao.queryCountByStateMaintain();
     }
 
-    //查询维修或者打扫房间信息
+    //查询打扫房间信息
     @Override
-    public PageData<House> queryBySate(int pageNumber, int pageSize) {
+    public PageData<House> queryBySateClean(int pageNumber, int pageSize) {
         PageHelper.startPage(pageNumber,pageSize);
-        List<House> houseList = houseDao.queryBySate();
+        List<House> houseList = houseDao.queryBySate("打扫");
+        PageInfo<House> pageInfo = new PageInfo<>(houseList);
+        PageData<House> pageData = new PageData<>();
+        pageData.setCurrentPage(pageNumber);
+        //设置每页数
+        pageData.setPageSize(pageSize);
+        //设置总页数
+        pageData.setTotalPage(pageInfo.getPages());
+        //设置总记录数
+        pageData.setTotalSize((int) pageInfo.getTotal());
+        if (pageInfo.isHasNextPage()){
+            //有下一页 设置下一页页码
+            pageData.setNextPage(pageInfo.getNextPage());
+        }else {
+            //没有下一页，设置尾页
+            pageData.setNextPage(pageInfo.getPages());
+        }
+        if (pageInfo.isHasPreviousPage()){
+            //有上一页 设置上一页页码
+            pageData.setPreviousPage(pageInfo.getPrePage());
+        }else {
+            //没有上一页，设置首页
+            pageData.setPreviousPage(1);
+        }
+        //设置房屋信息
+        pageData.setList(pageInfo.getList());
+        //返回房屋信息
+        return pageData;
+    }
+    //查询维修房间信息
+    @Override
+    public PageData<House> queryBySateMaintain(int pageNumber, int pageSize) {
+        PageHelper.startPage(pageNumber,pageSize);
+        List<House> houseList = houseDao.queryBySate("维修");
         PageInfo<House> pageInfo = new PageInfo<>(houseList);
         PageData<House> pageData = new PageData<>();
         pageData.setCurrentPage(pageNumber);

@@ -49,8 +49,10 @@ public interface HouseService {
     Integer queryCountByStateClean();
     //查询待维修房间总数
     Integer queryCountByStateMaintain();
-    //查询房间为打扫和维修的房间信息
-    PageData<House> queryBySate(int pageNumber, int pageSize);
+    //查询房间为打扫的房间信息
+    PageData<House> queryBySateClean(int pageNumber, int pageSize);
+    //查询房间为维修的房间信息
+    public PageData<House> queryBySateMaintain(int pageNumber, int pageSize);
     //退订功能
     Map<String, Object> unsubscribe(String houseName);
     //住房功能
