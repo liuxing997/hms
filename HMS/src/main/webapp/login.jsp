@@ -97,9 +97,9 @@
                             window.location.href = "index.jsp";
                         });
                     }else if (data.code === -1){
-                        layer.msg('用户不存在,请重试！', {icon: 7, time: 3000});
+                        layer.msg(data.message +',请重试！', {icon: 7, time: 3000});
                     }else if (data.code === -2){
-                        layer.msg('密码错误,请重试！', {icon: 7, time: 3000});
+                        layer.msg(data.message + '密码错误,请重试！', {icon: 7, time: 3000});
                     }
                 },
                 error:function (err) {
