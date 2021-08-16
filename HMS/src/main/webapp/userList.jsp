@@ -75,39 +75,39 @@
 <div class="site-text" style="margin: 5%; display: none" id="addUserModel">
     <form class="layui-form">
         <div class="layui-form-item">
-            <label for="addiUserId" class="layui-form-label">工号</label>
+            <label for="addUserId" class="layui-form-label">工号</label>
             <div class="layui-input-block">
-                <input type="text" id="addiUserId" lay-verify="title" autocomplete="off" placeholder="请输入工号"
+                <input type="text" id="addUserId" lay-verify="title" autocomplete="off" placeholder="请输入工号"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="addiUserName" class="layui-form-label">用户名</label>
+            <label for="addUserName" class="layui-form-label">用户名</label>
             <div class="layui-input-block">
-                <input type="text" id="addiUserName" lay-verify="title" autocomplete="off" placeholder="请输入用户名"
+                <input type="text" id="addUserName" lay-verify="title" autocomplete="off" placeholder="请输入用户名"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="addiUserPassword" class="layui-form-label">密码</label>
+            <label for="addUserPassword" class="layui-form-label">密码</label>
             <div class="layui-input-block">
-                <input type="password" id="addiUserPassword" name="price" lay-verify="title" autocomplete="off"
+                <input type="password" id="addUserPassword" name="price" lay-verify="title" autocomplete="off"
                        placeholder="请输入密码" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label  for="addiUserPhone" class="layui-form-label">电话</label>
+            <label for="addUserPhone" class="layui-form-label">电话</label>
             <div class="layui-input-block">
-                <input type="text" id="addiUserPhone" lay-verify="title" autocomplete="off" placeholder="请输入电话"
+                <input type="text" id="addUserPhone" lay-verify="title" autocomplete="off" placeholder="请输入电话"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="addiUserState" class="layui-form-label">状态</label>
+            <label for="addUserState" class="layui-form-label">状态</label>
             <div class="layui-input-block">
-                <select id="addiUserState" lay-filter="addiUserState">
+                <select id="addUserState" lay-filter="addUserState">
                     <option value="活动" selected>活动</option>
-                    <option value="禁用" >禁用</option>
+                    <option value="禁用">禁用</option>
                     <option value="其他">其他</option>
                 </select>
             </div>
@@ -128,14 +128,14 @@
         <div class="layui-form-item">
             <label for="editUserName" class="layui-form-label">用户名</label>
             <div class="layui-input-block">
-                <input type="text" id="editUserName"  lay-verify="title" autocomplete="off" placeholder="请输入用户"
+                <input type="text" id="editUserName" lay-verify="title" autocomplete="off" placeholder="请输入用户"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label for="editUserPassword" class="layui-form-label">密码</label>
             <div class="layui-input-block">
-                <input type="password" id="editUserPassword"  lay-verify="title" autocomplete="off"
+                <input type="password" id="editUserPassword" lay-verify="title" autocomplete="off"
                        placeholder="请输入密码" class="layui-input">
             </div>
             <div class="layui-form-mid layui-word-aux">
@@ -244,11 +244,11 @@
                                 url: "user/insertUser",
                                 dataType: "json",
                                 data: {
-                                    id: $("#addiUserId").val(),
-                                    name: $("#addiUserName").val(),
-                                    password: $("#addiUserPassword").val(),
-                                    phone: $("#addiUserPhone").val(),
-                                    state: $("#addiUserState").val()
+                                    id: $("#addUserId").val(),
+                                    name: $("#addUserName").val(),
+                                    password: $("#addUserPassword").val(),
+                                    phone: $("#addUserPhone").val(),
+                                    state: $("#addUserState").val()
                                 },
                                 success: function (data) {
                                     if (data.code === 200) {
