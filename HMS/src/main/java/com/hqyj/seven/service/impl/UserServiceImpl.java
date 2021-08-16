@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
             }catch (UnknownAccountException e){
                 //未知账号异常
                 result.put("code", -1);
-                result.put("message",name+"用户不存在");
+                result.put("message",name+"用户不存在或被禁用");
                 return result;
             }catch (IncorrectCredentialsException e){
                 //密码错误异常
