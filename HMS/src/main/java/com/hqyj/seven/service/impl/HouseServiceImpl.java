@@ -333,7 +333,6 @@ public class HouseServiceImpl implements HouseService {
         int day2 = day * 24 * 60 * 60 * 1000;
         long time2 = time.getTime() + day2;
         Date time3 = new Date(time2);
-        System.out.println(time);
         //如果房间是空闲则之间可以入住
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if (house.getState().equals("空闲")) {
@@ -347,9 +346,7 @@ public class HouseServiceImpl implements HouseService {
                         numberOfPeople, time, time3, null, 0, 1, userId, "未结账", house.getPrice()));
                 //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
                 //规范化插入表时的时间和获取的时间有点误差
-                long day3 = time.getTime();
-                Date time4 = new Date(day3);
-                Enter enter = enterDao.queryByHouseIdAndTime(house.getHouseId(), sdf.format(time4));
+                Enter enter = enterDao.queryByHouseIdAndLimitOne(house.getHouseId());
                 //插入缴费表
                 feedao.inserintoFee(new Fee(enter.getEnter_id(), "未缴费", customerId, money, house.getHouseId(),
                         str1, userId, "未缴费"));
@@ -365,9 +362,7 @@ public class HouseServiceImpl implements HouseService {
                         numberOfPeople, time, time3, null, money, 1, userId, "已结账", house.getPrice()));
                 //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
                 //规范化插入表时的时间和获取的时间有点误差
-                long day3 = time.getTime();
-                Date time4 = new Date(day3);
-                Enter enter = enterDao.queryByHouseIdAndTime(house.getHouseId(), sdf.format(time4));
+                Enter enter = enterDao.queryByHouseIdAndLimitOne(house.getHouseId());
                 //插入缴费表
                 feedao.inserintoFee(new Fee(enter.getEnter_id(), "缴费", customerId, money, house.getHouseId(),
                         str1, userId, "会员卡扣费"));
@@ -390,13 +385,13 @@ public class HouseServiceImpl implements HouseService {
                                 numberOfPeople, time, time3, null, 0, 1, userId, "未缴费", house.getPrice()));
                         //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
                         //规范化插入表时的时间和获取的时间有点误差
-                        long day3 = time.getTime();
-                        Date time4 = new Date(day3);
-                        Enter enter = enterDao.queryByHouseIdAndTime(house.getHouseId(), sdf.format(time4));
+                        Enter enter = enterDao.queryByHouseIdAndLimitOne(house.getHouseId());
                         //插入缴费表
+                        System.out.println(enter);
                         feedao.inserintoFee(new Fee(enter.getEnter_id(), "未缴费", customerId, money, house.getHouseId(),
                                 str1, userId, "未缴费"));
                         //更新房间为入住
+
                         houseDao.updateByHouseNametocheckIn(customerId, name, day);
                         result.put("code", 201);
                         result.put("message", "入住成功预定房间成功，但余额不足需要顾客现金或者充值");
@@ -408,9 +403,7 @@ public class HouseServiceImpl implements HouseService {
                                 numberOfPeople, time, time3, null, money, 1, userId, "已结账", house.getPrice()));
                         //设置时间格式为yyyy-MM-dd HH:mm:ss以便插入
                         //规范化插入表时的时间和获取的时间有点误差
-                        long day3 = time.getTime();
-                        Date time4 = new Date(day3);
-                        Enter enter = enterDao.queryByHouseIdAndTime(house.getHouseId(), sdf.format(time4));
+                        Enter enter = enterDao.queryByHouseIdAndLimitOne(house.getHouseId());
                         //插入缴费表
                         feedao.inserintoFee(new Fee(enter.getEnter_id(), "缴费", customerId, money, house.getHouseId(),
                                 str1, userId, "会员卡扣费"));
