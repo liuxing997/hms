@@ -7,7 +7,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>房间列表｜酒店后台管理系统</title>
+    <title>订房列表｜酒店后台管理系统</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -21,7 +21,7 @@
                 <a href="">首页</a>
                 <a href="">订房管理</a>
                 <a>
-                    <cite>房间列表</cite></a>
+                    <cite>订房列表</cite></a>
             </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
        onclick="location.reload()" title="刷新">
@@ -279,7 +279,7 @@
                                 }else if (data.code === 201){  //会员卡余额不足，跳转未缴费页面
                                     layer.msg(data.message, {icon: 2, time: 3000}, function () {
                                         layer.close(index);
-                                        location.href='unpaidList.jsp';
+                                        location.href='unpaidList';
                                     });
                                 } else if (data.code === -9){
                                     layer.msg(data.message, {icon: 2, time: 3000});
