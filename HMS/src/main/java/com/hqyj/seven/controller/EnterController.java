@@ -85,10 +85,10 @@ public class EnterController {
         Map<String,Object> enterMap = new HashMap<>();
         if ( enterList.size()==0 ){
             enterMap.put("code",-1);
-            enterMap.put("message","未查询到任何信息");
+            enterMap.put("msg","未查询到任何信息");
         }else {
             enterMap.put("code",0);
-            enterMap.put("message","查询成功");
+            enterMap.put("msg","查询成功");
             enterMap.put("data",enterList);
         }
         return enterMap;
