@@ -17,6 +17,34 @@ public class Enter {
     private String state;
     private double price;
 
+    private String start_time1;
+    private String end_time_estimate1;
+    private String end_time_actual1;
+
+    public String getStart_time1() {
+        return start_time1;
+    }
+
+    public void setStart_time1(String start_time1) {
+        this.start_time1 = start_time1;
+    }
+
+    public String getEnd_time_estimate1() {
+        return end_time_estimate1;
+    }
+
+    public void setEnd_time_estimate1(String end_time_estimate1) {
+        this.end_time_estimate1 = end_time_estimate1;
+    }
+
+    public String getEnd_time_actual1() {
+        return end_time_actual1;
+    }
+
+    public void setEnd_time_actual1(String end_time_actual1) {
+        this.end_time_actual1 = end_time_actual1;
+    }
+
     private List<Customer> customers;
 
     public List<Customer> getCustomers() {
@@ -162,9 +190,9 @@ public class Enter {
                 ", house_id='" + house_id + '\'' +
                 ", customer_id=" + customer_id +
                 ", customer_info='" + customer_info + '\'' +
-                ", start_time='" + start_time + '\'' +
-                ", end_time_estimate='" + end_time_estimate + '\'' +
-                ", end_time_actual='" + end_time_actual + '\'' +
+                ", start_time1='" + start_time1 + '\'' +
+                ", end_time_estimate1='" + end_time_estimate1 + '\'' +
+                ", end_time_actual1='" + end_time_actual1 + '\'' +
                 ", fee_total=" + fee_total +
                 ", fee_info=" + fee_info +
                 ", user_id=" + user_id +
