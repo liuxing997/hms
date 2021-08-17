@@ -52,19 +52,6 @@
         <ul id="nav">
             <li>
                 <a href="javascript:;">
-                    <i class="iconfont left-nav-li" lay-tips="房间管理">&#xe6b4;</i>
-                    <cite>房间管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i></a>
-                <ul class="sub-menu">
-                    <li>
-                        <a onclick="xadmin.add_tab('房间列表','houseList',true)">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>房间列表</cite></a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
                     <i class="iconfont left-nav-li" lay-tips="订房管理">&#xe71c;</i>
                     <cite>订房管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i></a>
@@ -117,6 +104,19 @@
                         <a onclick="xadmin.add_tab('客户列表','customerList',true)">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>客户列表</cite></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont left-nav-li" lay-tips="房间管理">&#xe6b4;</i>
+                    <cite>房间管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i></a>
+                <ul class="sub-menu">
+                    <li>
+                        <a onclick="xadmin.add_tab('房间列表','houseList',true)">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>房间列表</cite></a>
                     </li>
                 </ul>
             </li>
