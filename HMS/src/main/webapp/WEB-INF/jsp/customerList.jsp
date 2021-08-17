@@ -185,7 +185,7 @@
             , cols: [[
                 {type: 'checkbox', fixed: 'left'}
                 , {field: 'customer_id', title: 'ID', fixed: 'left', unresize: true, align: "center"}
-                , {field: 'name', title: '姓名', align: "center",  sort: true}
+                , {field: 'name', title: '姓名', align: "center", sort: true}
                 , {field: 'card', title: '身份证号码', align: "center", sort: true}
                 , {field: 'phone', title: '座机', align: "center", sort: true}
                 , {field: 'mobile', title: '手机', align: "center", sort: true}
@@ -236,31 +236,53 @@
                         , content: $("#addCustomerModel")  //弹窗路径
                         , yes: function (index, layero) {
                             layer.iframeAuto(index)//高度自适应
-                            $.ajax({
-                                url: "customer/insertOneCus",
-                                dataType: "json",
-                                data: {
-                                    customer_id: $('#addCustomerId').val(),
-                                    name: $('#addCustomerName').val(),
-                                    card:$('#addCustomerCard').val(),
-                                    phone:$('#addCustomerPhone').val(),
-                                    mobile:$('#addCustomerMobile').val(),
-                                    remainder:$('#addCustomerRemainder').val()
-                                },
-                                success: function (data) {
-                                    if (data.code === 200) {
-                                        layer.msg("客户信息" + data.message, {icon: 1, time: 3000}, function () {
-                                            layer.close(index);
-                                            location.reload();
-                                        });
-                                    } else {
-                                        layer.msg("客户信息" + data.message + "请重试", {icon: 2, time: 3000});
+                            let addCustomerId = $('#addCustomerId').val();
+                            let addCustomerName = $('#addCustomerName').val();
+                            let addCustomerCard = $('#addCustomerCard').val();
+                            let addCustomerPhone = $('#addCustomerPhone').val();
+                            let addCustomerMobile = $('#addCustomerMobile').val();
+                            let addCustomerRemainder = $('#addCustomerRemainder').val();
+                            if (addCustomerId.length === 0){
+                                layer.msg("客户ID不能为空！", {icon: 2, time: 3000});
+                            }else if (addCustomerName.length === 0){
+                                layer.msg("客户姓名不能为空！", {icon: 2, time: 3000});
+                            }else if (addCustomerCard.length === 0){
+                                layer.msg("身份证号码不能为空！", {icon: 2, time: 3000});
+                            }else if (addCustomerPhone.length === 0){
+                                layer.msg("座机号码不能为空！", {icon: 2, time: 3000});
+                            }else if (addCustomerMobile .length === 0){
+                                layer.msg("手机号码不能为空！", {icon: 2, time: 3000});
+                            }else if (addCustomerRemainder .length === 0){
+                                layer.msg("余额不能为空！", {icon: 2, time: 3000});
+                            }else if(addCustomerId.length !== 0 && addCustomerName.length !== 0 && addCustomerCard.length !== 0  && addCustomerPhone.length !== 0  && addCustomerMobile.length !== 0  && addCustomerRemainder.length !== 0 ){
+                                $.ajax({
+                                    url: "customer/insertOneCus",
+                                    dataType: "json",
+                                    data: {
+                                        customer_id: addCustomerId,
+                                        name: addCustomerName,
+                                        card: addCustomerCard,
+                                        phone: addCustomerPhone,
+                                        mobile: addCustomerMobile,
+                                        remainder: addCustomerRemainder
+                                    },
+                                    success: function (data) {
+                                        if (data.code === 200) {
+                                            layer.msg("客户信息" + data.message, {icon: 1, time: 3000}, function () {
+                                                layer.close(index);
+                                                location.reload();
+                                            });
+                                        } else {
+                                            layer.msg("客户信息" + data.message + "请重试", {icon: 2, time: 3000});
+                                        }
+                                    },
+                                    error: function (err) {
+                                        layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
                                     }
-                                },
-                                error: function (err) {
-                                    layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
-                                }
-                            });
+                                });
+                            }else {
+                                layer.msg("请先填写完整信息！", {icon: 2, time: 3000});
+                            }
                         }
                     });
                     break;
@@ -318,31 +340,53 @@
                         $('#editCustomerMobile').val(data.mobile);
                         $('#editCustomerRemainder').val(data.remainder);
                     }, yes: function (index, layero) {
-                        $.ajax({
-                            url: "customer/updateOneCus",
-                            dataType: "json",
-                            data: {
-                                customer_id: $('#editCustomerId').val(),
-                                name: $('#editCustomerName').val(),
-                                card:$('#editCustomerCard').val(),
-                                phone:$('#editCustomerPhone').val(),
-                                mobile:$('#editCustomerMobile').val(),
-                                remainder:$('#editCustomerRemainder').val()
-                            },
-                            success: function (data) {
-                                if (data.code === 200) {
-                                    layer.msg("客户信息" + data.message, {icon: 1, time: 3000}, function () {
-                                        layer.close(index);
-                                        location.reload();
-                                    });
-                                } else {
-                                    layer.msg("客户信息" + data.message + "请重试", {icon: 2, time: 3000});
+                        let editCustomerId = $('#editCustomerId').val();
+                        let editCustomerName = $('#editCustomerName').val();
+                        let editCustomerCard = $('#editCustomerCard').val();
+                        let editCustomerPhone = $('#editCustomerPhone').val();
+                        let editCustomerMobile = $('#editCustomerMobile').val();
+                        let editCustomerRemainder = $('#editCustomerRemainder').val();
+                        if (editCustomerId.length === 0){
+                            layer.msg("客户ID不能为空！", {icon: 2, time: 3000});
+                        }else if (editCustomerName.length === 0){
+                            layer.msg("客户姓名不能为空！", {icon: 2, time: 3000});
+                        }else if (editCustomerCard.length === 0){
+                            layer.msg("身份证号码不能为空！", {icon: 2, time: 3000});
+                        }else if (editCustomerPhone.length === 0){
+                            layer.msg("座机号码不能为空！", {icon: 2, time: 3000});
+                        }else if (editCustomerMobile .length === 0){
+                            layer.msg("手机号码不能为空！", {icon: 2, time: 3000});
+                        }else if (editCustomerRemainder .length === 0){
+                            layer.msg("余额不能为空！", {icon: 2, time: 3000});
+                        }else if(editCustomerId.length !== 0 && editCustomerName.length !== 0 && editCustomerCard.length !== 0  && editCustomerPhone.length !== 0  && editCustomerMobile.length !== 0  && editCustomerRemainder.length !== 0 ){
+                            $.ajax({
+                                url: "customer/updateOneCus",
+                                dataType: "json",
+                                data: {
+                                    customer_id:editCustomerId,
+                                    name: editCustomerName,
+                                    card: editCustomerCard,
+                                    phone: editCustomerPhone,
+                                    mobile: editCustomerMobile,
+                                    remainder: editCustomerRemainder
+                                },
+                                success: function (data) {
+                                    if (data.code === 200) {
+                                        layer.msg("客户信息" + data.message, {icon: 1, time: 3000}, function () {
+                                            layer.close(index);
+                                            location.reload();
+                                        });
+                                    } else {
+                                        layer.msg("客户信息" + data.message + "请重试", {icon: 2, time: 3000});
+                                    }
+                                },
+                                error: function (err) {
+                                    layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
                                 }
-                            },
-                            error: function (err) {
-                                layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
-                            }
-                        });
+                            });
+                        }else {
+                            layer.msg("请先填写完整信息！", {icon: 2, time: 3000});
+                        }
                     }
                 });
             }
