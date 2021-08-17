@@ -17,6 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <%--  引入公共样式和脚本文件  --%>
     <jsp:include page="common.jsp"/>
 </head>
 <body>
@@ -42,7 +43,8 @@
                         <div class="layui-card-body ">
                             <form class="layui-form layui-col-space5" onsubmit="return false;">
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" id="searchPaidFeeNames" placeholder="请输入缴费ID、入住ID、顾客ID、房间ID、操作员ID"
+                                    <input type="text" id="searchPaidFeeNames"
+                                           placeholder="请输入缴费ID、入住ID、顾客ID、房间ID、操作员ID"
                                            autocomplete="off"
                                            class="layui-input" style="width: 300px;"></div>
                                 <div class="layui-inline layui-show-xs-block">
@@ -100,7 +102,7 @@
         //头工具栏事件
         table.on('toolbar(paid_list)', function (obj) {
             switch (obj.event) {
-                case 'searchPaidFee':
+                case 'searchPaidFee': //搜索已缴费信息
                     table.reload('paid_list', {
                         url: 'fee/queryOneByIdPay',
                         where: {id: $("#searchPaidFeeNames").val()},

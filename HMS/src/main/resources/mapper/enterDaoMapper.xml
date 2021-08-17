@@ -5,39 +5,84 @@
 <!--对某个Java接口文件进行描述，两者之间的关系一一对应-->
 <!--namespace属性指定对应的java接口文件，全类名-->
 <mapper namespace="com.hqyj.seven.dao.EnterDao">
-     <insert id="inserintoEnter" parameterType="com.hqyj.seven.pojo.Enter">
-         insert into enter (house_id,customer_id,customer_info,start_time,end_time_estimate,end_time_actual,fee_total,fee_info,user_id,state,price)
-         value
-             (#{house_id},#{customer_id},#{customer_info},#{start_time},#{end_time_estimate},#{end_time_actual},#{fee_total},
-             #{fee_info},#{user_id},#{state},#{price})
-     </insert>
+
+    <!--  新增入住信息  -->
+    <insert id="inserintoEnter" parameterType="com.hqyj.seven.pojo.Enter">
+        insert into enter (house_id, customer_id, customer_info, start_time, end_time_estimate, end_time_actual,
+                           fee_total, fee_info, user_id, state, price)
+            value
+            (#{house_id},#{customer_id},#{customer_info},#{start_time},#{end_time_estimate},#{end_time_actual},#{fee_total},
+            #{fee_info},#{user_id},#{state},#{price})
+    </insert>
+
+    <!-- 根据房间ID查询入住信息  -->
     <select id="queryByHouseIdAndLimitOne" resultType="com.hqyj.seven.pojo.Enter">
-        select  * from enter where house_id=#{HouseId} order by enter_id DESC limit 1
+        select *
+        from enter
+        where house_id = #{HouseId}
+        order by enter_id DESC limit 1
     </select>
+
+    <!--  查询所有入住信息  -->
     <select id="queryAll" resultType="com.hqyj.seven.pojo.Enter">
-        select * from  enter
+        select *
+        from enter
     </select>
+
+    <!--  根据入住ID删除入住信息  -->
     <delete id="deleteEnter" parameterType="com.hqyj.seven.pojo.Enter">
-        delete from enter where enter_id = #{enter_id}
+        delete
+        from enter
+        where enter_id = #{enter_id}
     </delete>
+
+    <!--  根据房间ID和顾客ID修改入住信息  -->
     <update id="updateByHouseIdAndCustomerId" parameterType="com.hqyj.seven.pojo.Enter">
-        update enter set end_time_actual=#{time},state=#{state} where  house_id=#{houseId} and customer_id=#{customerId}
+        update enter
+        set end_time_actual=#{time},
+            state=#{state}
+        where house_id = #{houseId}
+          and customer_id = #{customerId}
     </update>
+
+    <!--  根据房间ID和顾客ID查询入住信息  -->
     <select id="selectByHouseIdAndCustomerId" resultType="com.hqyj.seven.pojo.Enter">
-        select  * from  enter where  house_id=#{houseId} and customer_id=#{customerId} order by enter_id DESC limit 1
+        select *
+        from enter
+        where house_id = #{houseId}
+          and customer_id = #{customerId}
+        order by enter_id DESC limit 1
     </select>
 
+    <!--  根据入住ID查询或房间ID查询入住信息  -->
     <select id="queryOneById" resultType="com.hqyj.seven.pojo.Enter">
-        select * from enter where enter_id =#{id}
-        or house_id = #{id}
+        select *
+        from enter
+        where enter_id = #{id}
+           or house_id = #{id}
     </select>
+
+    <!--  根据入住ID更新缴费金额和缴费状态  -->
     <update id="updateByEnterIdToMoney" parameterType="com.hqyj.seven.pojo.Enter">
-
-        update  enter set fee_total=#{money},state='已结账' where enter_id=#{enterId}
+        update enter
+        set fee_total=#{money},
+            state='已结账'
+        where enter_id = #{enterId}
     </update>
+
+    <!--  根据入住ID更新缴费金额和缴费状态 用于支付  -->
     <update id="updateByEnterIdToMoneyTwo" parameterType="com.hqyj.seven.pojo.Enter">
-
-        update  enter set fee_total=#{money},state='已结账',fee_info=#{out_trade_no} where enter_id=#{enterId}
+        update enter
+        set fee_total=#{money},
+            state='已结账',
+            fee_info=#{out_trade_no}
+        where enter_id = #{enterId}
     </update>
 
+    <!--根据交易流水号查询查询住宿情况-->
+    <select id="queryByOutTradeNo" resultType="com.hqyj.seven.pojo.Enter">
+        select *
+        from enter
+        where fee_info = #{out_trade_no}
+    </select>
 </mapper>

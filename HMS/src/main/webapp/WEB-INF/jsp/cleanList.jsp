@@ -17,6 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <%--  引入公共样式和脚本文件  --%>
     <jsp:include page="common.jsp"/>
 </head>
 <body>
@@ -75,29 +76,27 @@
             , defaultToolbar: ['filter', 'exports', 'print']
             , cellMinWidth: 80
             , parseData: function (res) {
-                if (res.code===-1)
-                {
+                if (res.code === -1) {
                     return {
                         "code": res.code,
                         "msg": res.msg,
                         "count": res.data.totalSize,
                         "data": res.data.list
-
                     }
-                }else {
-                return {
-                    "code": res.code,
-                    "msg": res.msg,
-                    "count": res.data.totalSize,
-                    "data": res.data.list
-
-                }}
+                } else {
+                    return {
+                        "code": res.code,
+                        "msg": res.msg,
+                        "count": res.data.totalSize,
+                        "data": res.data.list
+                    }
+                }
             }
             , title: '待打扫列表'
             , cols: [[
                 {type: 'checkbox', fixed: 'left'}
                 , {field: 'houseId', title: '房间ID', fixed: 'left', unresize: true, align: "center"}
-                , {field: 'houseName', title: '房间号', align: "center",  sort: true}
+                , {field: 'houseName', title: '房间号', align: "center", sort: true}
                 , {field: 'amount', title: '可入住数量', align: "center", sort: true}
                 , {field: 'price', title: '价格', align: "center", sort: true}
                 , {field: 'floorId', title: '楼层', align: "center", sort: true}
@@ -140,9 +139,8 @@
         //监听行工具事件
         table.on('tool(cleanHouse_list)', function (obj) {
             let data = obj.data;
-            //打扫房间
-            if (obj.event === 'cleanHouse') {
-                layer.confirm('真的打扫了' + data.houseName + "房间么？", {title: "提示",btn:["已打扫","未打扫"]}, function (index) {
+            if (obj.event === 'cleanHouse') { //打扫房间
+                layer.confirm('真的打扫了' + data.houseName + "房间么？", {title: "提示", btn: ["已打扫", "未打扫"]}, function (index) {
                     $.ajax({
                         url: "house/updateCleanState",
                         type: "get",

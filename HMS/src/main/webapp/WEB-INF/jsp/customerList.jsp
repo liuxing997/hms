@@ -17,6 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <%--  引入公共样式和脚本文件  --%>
     <jsp:include page="common.jsp"/>
 </head>
 <body>
@@ -114,7 +115,6 @@
     </form>
 </div>
 
-
 <!-- 编辑客户模态框 -->
 <div class="site-text" style="margin: 5%; display: none" id="editCustomerModel">
     <form class="layui-form">
@@ -200,7 +200,7 @@
         //头工具栏事件
         table.on('toolbar(customer_list)', function (obj) {
             switch (obj.event) {
-                case 'getCustomerByName':
+                case 'getCustomerByName': //搜索客户
                     // console.log($("#username").val())
                     table.reload('customer_list', {
                         url: 'customer/getOneCus',
@@ -223,7 +223,7 @@
                         }, page: true
                     })
                     break;
-                case 'addCustomer':
+                case 'addCustomer': //添加客户
                     layer.open({
                         type: 1 //Page层类型
                         , skin: 'layui-layer-molv'
@@ -242,19 +242,22 @@
                             let addCustomerPhone = $('#addCustomerPhone').val();
                             let addCustomerMobile = $('#addCustomerMobile').val();
                             let addCustomerRemainder = $('#addCustomerRemainder').val();
-                            if (addCustomerId.length === 0){
+                            if (addCustomerId.length === 0 && addCustomerName.length === 0 && addCustomerCard.length === 0 && addCustomerPhone.length === 0 && addCustomerMobile.length === 0 && addCustomerRemainder.length === 0) {
+                                layer.msg("请先填写完整信息！", {icon: 2, time: 3000});
+                            }
+                            if (addCustomerId.length === 0) {
                                 layer.msg("客户ID不能为空！", {icon: 2, time: 3000});
-                            }else if (addCustomerName.length === 0){
+                            } else if (addCustomerName.length === 0) {
                                 layer.msg("客户姓名不能为空！", {icon: 2, time: 3000});
-                            }else if (addCustomerCard.length === 0){
+                            } else if (addCustomerCard.length === 0) {
                                 layer.msg("身份证号码不能为空！", {icon: 2, time: 3000});
-                            }else if (addCustomerPhone.length === 0){
+                            } else if (addCustomerPhone.length === 0) {
                                 layer.msg("座机号码不能为空！", {icon: 2, time: 3000});
-                            }else if (addCustomerMobile .length === 0){
+                            } else if (addCustomerMobile.length === 0) {
                                 layer.msg("手机号码不能为空！", {icon: 2, time: 3000});
-                            }else if (addCustomerRemainder .length === 0){
+                            } else if (addCustomerRemainder.length === 0) {
                                 layer.msg("余额不能为空！", {icon: 2, time: 3000});
-                            }else if(addCustomerId.length !== 0 && addCustomerName.length !== 0 && addCustomerCard.length !== 0  && addCustomerPhone.length !== 0  && addCustomerMobile.length !== 0  && addCustomerRemainder.length !== 0 ){
+                            } else if (addCustomerId.length !== 0 && addCustomerName.length !== 0 && addCustomerCard.length !== 0 && addCustomerPhone.length !== 0 && addCustomerMobile.length !== 0 && addCustomerRemainder.length !== 0) {
                                 $.ajax({
                                     url: "customer/insertOneCus",
                                     dataType: "json",
@@ -280,8 +283,6 @@
                                         layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
                                     }
                                 });
-                            }else {
-                                layer.msg("请先填写完整信息！", {icon: 2, time: 3000});
                             }
                         }
                     });
@@ -292,8 +293,7 @@
         //监听行工具事件
         table.on('tool(customer_list)', function (obj) {
             let data = obj.data;
-            //删除客户
-            if (obj.event === 'delCustomer') {
+            if (obj.event === 'delCustomer') { //删除客户
                 layer.confirm('真的要删除' + data.name + "么？", {title: "提示"}, function (index) {
                     $.ajax({
                         url: "customer/deleteOneCus",
@@ -346,24 +346,27 @@
                         let editCustomerPhone = $('#editCustomerPhone').val();
                         let editCustomerMobile = $('#editCustomerMobile').val();
                         let editCustomerRemainder = $('#editCustomerRemainder').val();
-                        if (editCustomerId.length === 0){
+                        if (editCustomerId.length === 0 && editCustomerName.length === 0 && editCustomerCard.length === 0 && editCustomerPhone.length === 0 && editCustomerMobile.length === 0 && editCustomerRemainder.length === 0) {
+                            layer.msg("请先填写完整信息！", {icon: 2, time: 3000});
+                        }
+                        if (editCustomerId.length === 0) {
                             layer.msg("客户ID不能为空！", {icon: 2, time: 3000});
-                        }else if (editCustomerName.length === 0){
+                        } else if (editCustomerName.length === 0) {
                             layer.msg("客户姓名不能为空！", {icon: 2, time: 3000});
-                        }else if (editCustomerCard.length === 0){
+                        } else if (editCustomerCard.length === 0) {
                             layer.msg("身份证号码不能为空！", {icon: 2, time: 3000});
-                        }else if (editCustomerPhone.length === 0){
+                        } else if (editCustomerPhone.length === 0) {
                             layer.msg("座机号码不能为空！", {icon: 2, time: 3000});
-                        }else if (editCustomerMobile .length === 0){
+                        } else if (editCustomerMobile.length === 0) {
                             layer.msg("手机号码不能为空！", {icon: 2, time: 3000});
-                        }else if (editCustomerRemainder .length === 0){
+                        } else if (editCustomerRemainder.length === 0) {
                             layer.msg("余额不能为空！", {icon: 2, time: 3000});
-                        }else if(editCustomerId.length !== 0 && editCustomerName.length !== 0 && editCustomerCard.length !== 0  && editCustomerPhone.length !== 0  && editCustomerMobile.length !== 0  && editCustomerRemainder.length !== 0 ){
+                        } else if (editCustomerId.length !== 0 && editCustomerName.length !== 0 && editCustomerCard.length !== 0 && editCustomerPhone.length !== 0 && editCustomerMobile.length !== 0 && editCustomerRemainder.length !== 0) {
                             $.ajax({
                                 url: "customer/updateOneCus",
                                 dataType: "json",
                                 data: {
-                                    customer_id:editCustomerId,
+                                    customer_id: editCustomerId,
                                     name: editCustomerName,
                                     card: editCustomerCard,
                                     phone: editCustomerPhone,
@@ -384,8 +387,6 @@
                                     layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
                                 }
                             });
-                        }else {
-                            layer.msg("请先填写完整信息！", {icon: 2, time: 3000});
                         }
                     }
                 });

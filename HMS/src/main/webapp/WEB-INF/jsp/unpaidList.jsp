@@ -17,7 +17,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <%--  引入公共样式和脚本文件  --%>
     <jsp:include page="common.jsp"/>
+    <%--  引入支付模态框样式  --%>
+    <link rel="stylesheet" href="alipay.css">
 </head>
 <body>
 <div class="x-nav">
@@ -66,152 +69,47 @@
         </div>
     </div>
 </div>
-<style>
-    .show {
-        clear: left;
-        display: block;
-    }
-
-    .new-btn-login-sp {
-        padding: 1px;
-        display: inline-block;
-        width: 75%;
-    }
-
-    .new-btn-login {
-        background-color: #02aaf1;
-        color: #FFFFFF;
-        font-weight: bold;
-        border: none;
-        width: 100%;
-        height: 30px;
-        border-radius: 5px;
-        font-size: 16px;
-    }
-
-    .content {
-        margin-top: 5px;
-    }
-
-    .content dt {
-        width: 100px;
-        display: inline-block;
-        float: left;
-        margin-left: 20px;
-        color: #666;
-        font-size: 13px;
-        margin-top: 8px;
-    }
-
-    .content dd {
-        margin-left: 120px;
-        margin-bottom: 5px;
-    }
-
-    .content dd input {
-        width: 85%;
-        height: 28px;
-        border: 0;
-        -webkit-border-radius: 0;
-        -webkit-appearance: none;
-    }
-
-    #foot {
-        margin-top: 10px;
-        position: absolute;
-        bottom: 15px;
-        width: 100%;
-    }
-
-    .foot-ul {
-        width: 100%;
-    }
-    .foot-ul li {
-        width: 100%;
-        text-align: center;
-        color: #666;
-    }
-
-    .note-help {
-        color: #999999;
-        font-size: 12px;
-        line-height: 130%;
-        margin-top: 5px;
-        width: 100%;
-        display: block;
-    }
-
-    #btn-dd {
-        margin: 20px;
-        text-align: center;
-    }
-
-    .foot-ul {
-        width: 100%;
-    }
-
-    .one_line {
-        display: block;
-        height: 1px;
-        border: 0;
-        border-top: 1px solid #eeeeee;
-        width: 100%;
-        margin-left: 20px;
-    }
-
-
-    .am-header h1 {
-        -webkit-box-flex: 1;
-        -ms-flex: 1;
-        box-flex: 1;
-        line-height: 18px;
-        text-align: center;
-        font-size: 18px;
-        font-weight: 300;
-        color: #fff;
-    }
-</style>
 <!-- 支付宝支付模态框 -->
 <div class="site-text" style="margin: 5%; display: none" id="aliPaymentModel">
-        <form name=alipayment action="alipay" method="post"
-              target="_blank">
-            <div id="body1" class="show" name="divcontent">
-                <dl class="content">
-                    <dt>缴费ID ：</dt>
-                    <dd>
-                        <input id="FeeID" name="FeeID"/>
-                    </dd>
-                    <hr class="one_line">
-                    <dt>商户订单号 ：</dt>
-                    <dd>
-                        <input id="WIDout_trade_no" name="WIDout_trade_no"/>
-                    </dd>
-                    <hr class="one_line">
-                    <dt>订单名称 ：</dt>
-                    <dd>
-                        <input id="WIDsubject" name="WIDsubject"/>
-                    </dd>
-                    <hr class="one_line">
-                    <dt>付款金额 ：</dt>
-                    <dd>
-                        <input id="WIDtotal_amount" name="WIDtotal_amount"/>
-                    </dd>
-                    <hr class="one_line">
-                    <dt>商品描述：</dt>
-                    <dd>
-                        <input id="WIDbody" name="WIDbody" placeholder="请输入商品描述，默认：房费" />
-                    </dd>
-                    <hr class="one_line">
-                    <dt></dt>
-                    <dd id="btn-dd">
+    <form name=alipayment action="alipay" method="post"
+          target="_blank">
+        <div id="body1" class="show" name="divcontent">
+            <dl class="content">
+                <dt>缴费ID ：</dt>
+                <dd>
+                    <input id="FeeID" name="FeeID" readonly disabled/>
+                </dd>
+                <hr class="one_line">
+                <dt>商户订单号 ：</dt>
+                <dd>
+                    <input id="WIDout_trade_no" name="WIDout_trade_no" readonly disabled/>
+                </dd>
+                <hr class="one_line">
+                <dt>订单名称 ：</dt>
+                <dd>
+                    <input id="WIDsubject" name="WIDsubject" readonly disabled/>
+                </dd>
+                <hr class="one_line">
+                <dt>付款金额 ：</dt>
+                <dd>
+                    <input id="WIDtotal_amount" name="WIDtotal_amount" readonly disabled/>
+                </dd>
+                <hr class="one_line">
+                <dt>商品描述：</dt>
+                <dd>
+                    <input id="WIDbody" name="WIDbody" placeholder="请输入商品描述，默认：房费"/>
+                </dd>
+                <hr class="one_line">
+                <dt></dt>
+                <dd id="btn-dd">
 						<span class="new-btn-login-sp">
 							<button class="new-btn-login" type="submit"
-                                    style="text-align: center;">付 款</button>
+                                    style="text-align: center;">确认付 款</button>
 						</span> <span class="note-help">如果您点击“付款”按钮，即表示您同意本次付款操作。</span>
-                    </dd>
-                </dl>
-            </div>
-        </form>
+                </dd>
+            </dl>
+        </div>
+    </form>
 </div>
 <!-- 现金支付模态框 -->
 <div class="site-text" style="margin: 5%; display: none" id="cashPaymentModel">
@@ -307,7 +205,7 @@
         //头工具栏事件
         table.on('toolbar(unpaid_list)', function (obj) {
             switch (obj.event) {
-                case 'searchUnPaidFee':
+                case 'searchUnPaidFee': //搜索未缴费信息
                     table.reload('unpaid_list', {
                         url: 'fee/queryOneByIdNoPay',
                         where: {id: $("#searchUnPaidFeeNames").val()},
@@ -403,6 +301,7 @@
     });
 </script>
 <script>
+    //生成订单号
     function GetDateNow() {
         var vNow = new Date();
         var sNow = "";
@@ -413,8 +312,9 @@
         sNow += String(vNow.getMinutes());
         sNow += String(vNow.getSeconds());
         sNow += String(vNow.getMilliseconds());
-        $("#WIDout_trade_no").val(sNow) ;
+        $("#WIDout_trade_no").val(sNow);
     }
+
     GetDateNow();
 </script>
 </body>

@@ -9,9 +9,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
-<%
-    String basePath = request.getContextPath();
-%>
 <html class="x-admin-sm">
 <head>
     <meta charset="UTF-8">
@@ -21,11 +18,12 @@
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <%--  引入公共样式和脚本文件  --%>
     <jsp:include page="common.jsp"/>
+    <%--  引入登录界面样式  --%>
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body class="login-bg">
-
 <div class="login layui-anim layui-anim-up">
     <div class="message">酒店后台管理系统</div>
     <div id="darkbannerwrap"></div>
@@ -58,15 +56,15 @@
         var userAccount = $("#name").val();
         var userPassword = $("#password").val();
         var userCode = $("#userCode").val();
-        if (localStorage.getItem("user") != null){
+        if (userAccount.length === 0 && userPassword.length === 0 && userCode.length === 0) {
+            layer.msg('请先填写完整内容！', {icon: 7, time: 3000});
+        } else if (localStorage.getItem("user") != null) {
             layer.msg('您已经登录过啦,请勿重复登录！', {icon: 7, time: 3000}, function () {
                 window.location.href = "index";
             });
-        }else if (userAccount.length === 0 && userPassword.length === 0 && userCode.length === 0){
-            layer.msg('请先填写完整内容！', {icon: 7, time: 3000});
-        }else if (userCode.length === 0){
+        } else if (userCode.length === 0) {
             layer.msg('验证码不能为空,请重试！', {icon: 7, time: 3000});
-        }else if (userAccount.length === 0 || userPassword.length === 0) {
+        } else if (userAccount.length === 0 || userPassword.length === 0) {
             layer.msg('用户或密码不能为空,请重试！', {icon: 7, time: 3000});
         } else if (!checkCode(show_num, userCode)) {
             layer.msg('验证码不匹配,请重新输入', {icon: 7, time: 3000}, function () {
@@ -74,13 +72,13 @@
             });
         } else {
             $.ajax({
-                url:"user/login",
-                type:"get",
-                dataType:"json",
-                contentType:"application/x-www-form-urlencoded",//x-www-form-urlencoded
-                data:{
-                    name:$("#name").val(),
-                    password:$("#password").val()
+                url: "user/login",
+                type: "get",
+                dataType: "json",
+                contentType: "application/x-www-form-urlencoded",//x-www-form-urlencoded
+                data: {
+                    name: $("#name").val(),
+                    password: $("#password").val()
                 },
                 beforeSend: function () {
                     //显示登录加载提示
@@ -89,20 +87,20 @@
                 complete: function () {
                     layer.close(this.index);
                 },
-                success:function (data) {
-                    if (data.code === 200 && data.loginUser.name != null ) {
+                success: function (data) {
+                    if (data.code === 200 && data.loginUser.name != null) {
                         // 登录成功
                         layer.msg("欢迎回来，" + data.loginUser.name, {icon: 1, time: 3000}, function () {
-                            localStorage.setItem("user",JSON.stringify(data.loginUser));
+                            localStorage.setItem("user", JSON.stringify(data.loginUser));
                             window.location.href = "index";
                         });
-                    }else if (data.code === -1){
-                        layer.msg(data.message +',请重试！', {icon: 7, time: 3000});
-                    }else if (data.code === -2){
+                    } else if (data.code === -1) {
+                        layer.msg(data.message + ',请重试！', {icon: 7, time: 3000});
+                    } else if (data.code === -2) {
                         layer.msg(data.message + '密码错误,请重试！', {icon: 7, time: 3000});
                     }
                 },
-                error:function (err) {
+                error: function (err) {
                     layer.msg('服务器被吃啦！请稍后重试', {icon: 7, time: 3000});
                 }
             })
@@ -117,11 +115,11 @@
         }
         if (code === str) {
             return true;
-        }else if(code.toUpperCase() === str.toUpperCase()){
+        } else if (code.toUpperCase() === str.toUpperCase()) {
             return true;
-        }else if(code.toLowerCase() === str.toLowerCase()){
+        } else if (code.toLowerCase() === str.toLowerCase()) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }

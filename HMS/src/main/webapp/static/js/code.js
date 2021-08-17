@@ -5,6 +5,7 @@
  * @Date 2021/8/13 16:09
  * @Email liuxing997@foxmail.com
  **/
+//生成验证码
 function draw(show_num) {
     var code_width = $('#code').width();
     var code_height = $('#code').height();

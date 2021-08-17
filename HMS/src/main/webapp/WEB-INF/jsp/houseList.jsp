@@ -1,8 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
-<%
-    String basePath = request.getContextPath();
-%>
 <html class="x-admin-sm">
 <head>
     <meta charset="UTF-8">
@@ -11,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <%--  引入公共样式和脚本文件  --%>
     <jsp:include page="common.jsp"/>
 </head>
 <body>
@@ -109,7 +107,6 @@
     </form>
 </div>
 
-
 <!-- 编辑房间模态框 -->
 <div class="site-text" style="margin: 5%; display: none" id="editOneHouseModel">
     <form class="layui-form">
@@ -199,8 +196,7 @@
         //头工具栏事件
         table.on('toolbar(house_list)', function (obj) {
             switch (obj.event) {
-                case 'searchHouseByName':
-                    // console.log($("#username").val())
+                case 'searchHouseByName'://搜索房间
                     table.reload('house_list', {
                         url: 'house/searchHouse',
                         where: {names: $("#houseNames").val()},
@@ -222,13 +218,13 @@
                         }, page: true
                     })
                     break;
-                case 'addOneHouse':
+                case 'addOneHouse': //添加房间
                     layer.open({
                         type: 1 //Page层类型
                         , skin: 'layui-layer-molv'
                         , area: '600px'
                         , title: ['添加房间', 'font-size:18px']
-                        , btn: ['保存', '取消']
+                        , btn: ['添加', '取消']
                         , shadeClose: true
                         , shade: 0 //遮罩透明度
                         , maxmin: true //允许全屏最小化
@@ -241,19 +237,21 @@
                             let houseAddPrice = $('#houseAddPrice').val();
                             let houseAddFloorId = $('#houseAddFloorId').val();
                             let houseAddState = $('#houseAddState').val();
-                            if (houseAddId.length === 0){
+                            if (houseAddId.length !== 0 && houseAddName.length !== 0 && houseAddAmount.length !== 0 && houseAddPrice.length !== 0 && houseAddFloorId.length !== 0 && houseAddState.length !== 0) {
+                                layer.msg("请填写完整信息！", {icon: 2, time: 3000});
+                            } else if (houseAddId.length === 0) {
                                 layer.msg("房间ID不能为空！", {icon: 2, time: 3000});
-                            }else if (houseAddName.length === 0){
+                            } else if (houseAddName.length === 0) {
                                 layer.msg("房间名不能为空！", {icon: 2, time: 3000});
-                            }else if (houseAddAmount.length === 0){
+                            } else if (houseAddAmount.length === 0) {
                                 layer.msg("可住人数不能为空！", {icon: 2, time: 3000});
-                            }else if (houseAddPrice.length === 0){
+                            } else if (houseAddPrice.length === 0) {
                                 layer.msg("价格不能为空！", {icon: 2, time: 3000});
-                            }else if (houseAddFloorId .length === 0){
+                            } else if (houseAddFloorId.length === 0) {
                                 layer.msg("楼层不能为空！", {icon: 2, time: 3000});
-                            }else if (houseAddState .length === 0){
+                            } else if (houseAddState.length === 0) {
                                 layer.msg("状态不能为空！", {icon: 2, time: 3000});
-                            }else if (houseAddId.length !== 0 && houseAddName.length !== 0 && houseAddAmount.length !== 0  && houseAddPrice.length !== 0  && houseAddFloorId.length !== 0  && houseAddState.length !== 0 ){
+                            } else if (houseAddId.length !== 0 && houseAddName.length !== 0 && houseAddAmount.length !== 0 && houseAddPrice.length !== 0 && houseAddFloorId.length !== 0 && houseAddState.length !== 0) {
                                 $.ajax({
                                     url: "house/insertOneHouse",
                                     dataType: "json",
@@ -279,8 +277,6 @@
                                         layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
                                     }
                                 });
-                            }else{
-                                layer.msg("请填写完整信息！", {icon: 2, time: 3000});
                             }
                         }
                     });
@@ -291,8 +287,7 @@
         //监听行工具事件
         table.on('tool(house_list)', function (obj) {
             let data = obj.data;
-            //删除事件
-            if (obj.event === 'delOneHouse') {
+            if (obj.event === 'delOneHouse') { //删除房间
                 switch (data.state) {
                     case '已定':
                         layer.msg(data.houseName + "房间已被顾客预订, 暂时不能删除哦！", {icon: 2, time: 3000});
@@ -335,7 +330,7 @@
                         });
                         break;
                 }
-            } else if (obj.event === 'editOneHouse') { //编辑事件
+            } else if (obj.event === 'editOneHouse') { //编辑房间
                 switch (data.state) {
                     case '已定':
                         layer.msg(data.houseName + "房间已被顾客预订, 暂时不能编辑哦！", {icon: 2, time: 3000});
@@ -374,7 +369,9 @@
                                 let houseEditPrice = $('#houseEditPrice').val();
                                 let houseEditFloorId = $('#houseEditFloorId').val();
                                 let houseEditState = $('#houseEditState').val();
-                                if (houseEditId.length == 0) {
+                                if (houseEditId.length === 0 && houseEditName.length === 0 && houseEditAmount.length === 0 && houseEditPrice.length === 0 && houseEditFloorId.length === 0 && houseEditState.length === 0) {
+                                    layer.msg("请先填写完整信息！", {icon: 2, time: 3000});
+                                } else if (houseEditId.length == 0) {
                                     layer.msg("房间ID不能为空！", {icon: 2, time: 3000});
                                 } else if (houseEditName.length === 0) {
                                     layer.msg("房间名不能为空！", {icon: 2, time: 3000});
@@ -387,17 +384,16 @@
                                 } else if (houseEditState.length === 0) {
                                     layer.msg("客房状态不能为空！", {icon: 2, time: 3000});
                                 } else if (houseEditId.length !== 0 && houseEditName.length !== 0 && houseEditAmount.length !== 0 && houseEditPrice.length !== 0 && houseEditFloorId.length !== 0 && houseEditState.length !== 0) {
-
                                     $.ajax({
                                         url: "house/updateOneHouse",
                                         dataType: "json",
                                         data: {
-                                            houseId: $('#houseEditId').val(),
-                                            houseName: $('#houseEditName').val(),
-                                            amount: $('#houseEditAmount').val(),
-                                            price: $('#houseEditPrice').val(),
-                                            floorId: $('#houseEditFloorId').val(),
-                                            state: $('#houseEditState').val()
+                                            houseId: houseEditId,
+                                            houseName: houseEditName,
+                                            amount: houseEditAmount,
+                                            price: houseEditPrice,
+                                            floorId: houseEditFloorId,
+                                            state: houseEditState
                                         },
                                         success: function (data) {
                                             if (data.code === 200) {
@@ -413,8 +409,6 @@
                                             layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
                                         }
                                     });
-                                } else {
-                                    layer.msg("请先填写完整信息！", {icon: 2, time: 3000});
                                 }
                             }
                         });

@@ -1,10 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
-<%
-    String basePath = request.getContextPath();
-%>
 <html class="x-admin-sm">
-
 <head>
     <meta charset="UTF-8">
     <title>订房列表｜酒店后台管理系统</title>
@@ -12,9 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <%--  引入公共样式和脚本文件  --%>
     <jsp:include page="common.jsp"/>
 </head>
-
 <body>
 <div class="x-nav">
             <span class="layui-breadcrumb">
@@ -23,7 +19,7 @@
                 <a>
                     <cite>订房列表</cite></a>
             </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+    <a class="layui-btn layui-btn-small" id="reservationRefresh" style="line-height:1.6em;margin-top:3px;float:right"
        onclick="location.reload()" title="刷新">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
     </a>
@@ -70,7 +66,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">顾客ID</label>
             <div class="layui-input-block">
-                <input type="text" id="customerId" lay-verify="title" autocomplete="off"  placeholder="请输入顾客ID"
+                <input type="text" id="customerId" lay-verify="title" autocomplete="off" placeholder="请输入顾客ID"
                        class="layui-input">
             </div>
         </div>
@@ -90,21 +86,21 @@
         <div class="layui-form-item">
             <label for="checkinCustomerId" class="layui-form-label">顾客ID</label>
             <div class="layui-input-block">
-                <input type="text"  id="checkinCustomerId" autocomplete="off" placeholder="请输入顾客ID"
+                <input type="text" id="checkinCustomerId" autocomplete="off" placeholder="请输入顾客ID"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label for="checkinHouseName" class="layui-form-label">房间号</label>
             <div class="layui-input-block">
-                <input type="text"  id="checkinHouseName" readonly disabled autocomplete="off"
+                <input type="text" id="checkinHouseName" readonly disabled autocomplete="off"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label for="checkinDay" class="layui-form-label">入住天数</label>
             <div class="layui-input-block">
-                <input type="text"  id="checkinDay" placeholder="请输入入住天数" autocomplete="off"
+                <input type="text" id="checkinDay" placeholder="请输入入住天数" autocomplete="off"
                        class="layui-input">
             </div>
         </div>
@@ -118,7 +114,7 @@
         <div class="layui-form-item">
             <label for="userId" class="layui-form-label">操作员ID</label>
             <div class="layui-input-block">
-                <input type="text"  id="userId" readonly disabled autocomplete="off"
+                <input type="text" id="userId" readonly disabled autocomplete="off"
                        class="layui-input">
             </div>
         </div>
@@ -129,6 +125,7 @@
     //表格事件
     layui.use('table', function () {
         let table = layui.table;
+        var currPage = 1;
         table.render({
             elem: '#reservation_list'
             , url: 'house/getAllHouse'
@@ -141,6 +138,15 @@
                     "count": res.data.totalSize,
                     "data": res.data.list
                 }
+            }
+            , done: function (res, curr, count) {
+                //如果是异步请求数据方式，res即为你接口返回的信息。
+                console.log(res);
+                currPage = curr;//将当前页码赋值给全局变量currPage
+                //得到当前页码
+                console.log(curr);
+                //得到数据总量
+                console.log(count);
             }
             , title: '订房列表'
             , cols: [[
@@ -202,51 +208,50 @@
         //监听行工具事件
         table.on('tool(reservation_list)', function (obj) {
             let data = obj.data;
-            //订房
-            if (obj.event === 'reservation') {
+            if (obj.event === 'reservation') { //订房
                 layer.open({
                     type: 1 //Page层类型
                     , skin: 'layui-layer-molv'
                     , area: ['600px', '250px']
                     , title: ['预订房间', 'font-size:18px']
-                    , btn: ['预订', '取消']
+                    , btn: ['确认预订', '取消预订']
                     , shadeClose: true
                     , shade: 0
                     , maxmin: true
                     , content: $("#reservationModel")  //弹窗路径
                     , success: function (layero, index) {
                         $('#houseName').val(data.houseName);
-
                     }, yes: function (index, layero) {
-                        let customerId= $("#customerId").val();
-                        if (customerId.length===0){
-                            layer.msg("客户id不能为空！", {icon: 2, time: 3000});
+                        let customerId = $("#customerId").val();
+                        if (customerId.length === 0) {
+                            layer.msg("客户ID不能为空！", {icon: 2, time: 3000});
+                        } else {
+                            $.ajax({
+                                url: "house/reservation",
+                                dataType: "json",
+                                data: {
+                                    customerId: $("#customerId").val(),
+                                    name: $("#houseName").val()
+                                },
+                                success: function (data) {
+                                    if (data.code === 200) {
+                                        layer.msg("恭喜您！" + data.message, {icon: 1, time: 3000}, function () {
+                                            layer.close(index);
+                                            location.reload();
+                                        });
+                                    } else {
+                                        layer.msg(data.message + "请重试", {icon: 2, time: 3000});
+                                    }
+                                },
+                                error: function (err) {
+                                    let customerId = $("#customerId").val();
+                                    if (customerId.length === 0) {
+                                        layer.msg("客户id不能为空！", {icon: 2, time: 5000});
+                                    }
+                                    // layer.msg('服务器走丢啦', {icon: 7, time: 3000});
+                                }
+                            });
                         }
-                        $.ajax({
-                            url: "house/reservation",
-                            dataType: "json",
-                            data: {
-                                customerId:$("#customerId").val(),
-                                name:$("#houseName").val()
-                            },
-                            success: function (data) {
-                                if (data.code === 200) {
-                                    layer.msg("恭喜您！" + data.message, {icon: 1, time: 3000}, function () {
-                                        layer.close(index);
-                                        location.reload();
-                                    });
-                                } else {
-                                    layer.msg(data.message + "请重试", {icon: 2, time: 3000});
-                                }
-                            },
-                            error: function (err) {
-                                let customerId= $("#customerId").val();
-                                if (customerId.length===0){
-                                    layer.msg("客户id不能为空！", {icon: 2, time: 5000});
-                                }
-                                // layer.msg('服务器走丢啦', {icon: 7, time: 3000});
-                            }
-                        });
                     }
                 });
 
@@ -256,7 +261,7 @@
                     , skin: 'layui-layer-molv'
                     , area: '600px'
                     , title: ['顾客入住', 'font-size:18px']
-                    , btn: ['入住', '取消']
+                    , btn: ['确认入住', '取消入住']
                     , shadeClose: true
                     , shade: 0 //遮罩透明度
                     , maxmin: true //允许全屏最小化
@@ -266,56 +271,52 @@
                         $('#checkinHouseName').val(data.houseName);
                         $('#userId').val(JSON.parse(localStorage.getItem("user")).id);
                     }, yes: function (index, layero) {
-                        console.log($("#checkinCustomerId").val(),$("#checkinHouseName").val(),
-                            $("#checkinDay").val(),$("#checkinPeople").val(),$("#userId").val())
-                        $.ajax({
-                            url: "house/checkIn",
-                            dataType: "json",
-                            data: {
-                                customerId:$("#checkinCustomerId").val(),
-                                name:$("#checkinHouseName").val(),
-                                day:$("#checkinDay").val(),
-                                numberOfPeople:$("#checkinPeople").val(),
-                                userId:$("#userId").val()
-                            },
-                            success: function (data) {
-                                if (data.code === 200) {
-                                    layer.msg(data.message, {icon: 1, time: 3000}, function () {
-                                        layer.close(index);
-                                        location.reload();
-                                    });
-                                }else if (data.code === 201){  //会员卡余额不足，跳转未缴费页面
-                                    layer.msg(data.message, {icon: 2, time: 3000}, function () {
-                                        layer.close(index);
-                                        location.href='unpaidList';
-                                    });
-                                } else if (data.code === -9){
-                                    layer.msg(data.message, {icon: 2, time: 3000});
+                        let checkinCustomerId = $("#checkinCustomerId").val();
+                        let checkinDay = $("#checkinDay").val();
+                        let checkinPeople = $("#checkinPeople").val();
+                        if (checkinCustomerId.length === 0 && checkinDay.length === 0 && checkinPeople.length === 0) {
+                            layer.msg('请先填写完整内容！', {icon: 7, time: 3000});
+                        } else if (checkinCustomerId.length === 0) {
+                            layer.msg("顾客ID不能为空！", {icon: 2, time: 3000});
+                        } else if (checkinDay.length === 0) {
+                            layer.msg("入住天数不能为空！", {icon: 2, time: 3000});
+                        } else if (checkinPeople.length === 0) {
+                            layer.msg("入住人数不能为空！", {icon: 2, time: 3000});
+                        } else {
+                            $.ajax({
+                                url: "house/checkIn",
+                                dataType: "json",
+                                data: {
+                                    customerId: checkinCustomerId,
+                                    name: $("#checkinHouseName").val(),
+                                    day: checkinDay,
+                                    numberOfPeople: checkinPeople,
+                                    userId: $("#userId").val()
+                                },
+                                success: function (data) {
+                                    if (data.code === 200) {
+                                        layer.msg(data.message, {icon: 1, time: 3000}, function () {
+                                            layer.close(index);
+                                            location.reload();
+                                        });
+                                    } else if (data.code === 201) {  //会员卡余额不足
+                                        layer.msg(data.message, {icon: 2, time: 3000}, function () {
+                                            layer.close(index);
+                                        });
+                                    } else if (data.code === -9) {
+                                        layer.msg(data.message, {icon: 2, time: 3000});
+                                    } else {
+                                        layer.msg(data.message + "，请重试！", {icon: 2, time: 3000});
+                                    }
+                                },
+                                error: function (err) {
+                                    layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
                                 }
-                                else {
-                                    layer.msg(data.message + "，请重试！", {icon: 2, time: 3000});
-                                }
-                            },
-                            error: function (err) {
-                           let   id=  $("#checkinCustomerId").val();
-                             let  day=     $("#checkinDay").val();
-                             let peopel   =    $("#checkinPeople").val();
-                             if (id.length===0){
-                                 layer.msg("房间ID不能为空！", {icon: 2, time: 3000});
-                             }else
-                             if (day.length===0){
-                                 layer.msg("天数不能为空！", {icon: 2, time: 3000});
-                             }else
-                                if (peopel.length===0){
-                                    layer.msg("人数不能为空！", {icon: 2, time: 3000});
-                                }
-                                // console.log(err);
-                                // layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
-                            }
-                        });
+                            });
+                        }
                     }
                 });
-            }else if (obj.event === 'unsubscribe'){//退订
+            } else if (obj.event === 'unsubscribe') { //退订
                 layer.confirm('真的要退订' + data.houseName + "么？", {title: "提示"}, function (index) {
                     $.ajax({
                         url: "house/unsubscribe",
@@ -342,7 +343,7 @@
                     })
 
                 });
-            }else if (obj.event === 'checkout'){//退房
+            } else if (obj.event === 'checkout') { //退房
                 layer.confirm('确定退房吗？', {title: "提示"}, function (index) {
                     $.ajax({
                         url: "house/checkOut",
@@ -370,6 +371,17 @@
 
                 });
             }
+        });
+
+        //监听刷新，只刷新当前页
+        $("#reservationRefresh").on('click', function () {
+            table.reload('reservation_list', {
+                url: 'house/getAllHouse',
+                where: {page: currPage}
+                , page: {
+                    curr: currPage
+                }
+            })
         });
     });
 </script>

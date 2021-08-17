@@ -18,7 +18,9 @@
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
+    <%--  引入公共样式和脚本文件  --%>
     <jsp:include page="common.jsp"/>
+    <%--  引入登录超时脚本文件  --%>
     <script type="text/javascript" src="js/timeout.js" charset="UTF-8"></script>
     <script>
         // 是否开启刷新记忆tab功能
@@ -149,7 +151,6 @@
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>操作员列表</cite></a>
                     </li>
-
                 </ul>
             </li>
         </ul>
@@ -180,10 +181,12 @@
 <div class="page-content-bg"></div>
 <style id="theme_style"></style>
 <script>
+    //获取当前登录的操作员用户名
     $(function () {
         $("#userName").html(JSON.parse(localStorage.getItem("user")).name);
     })
 
+    //退出登录
     function logout() {
         $.ajax({
             url: "user/logout",
@@ -203,6 +206,4 @@
     }
 </script>
 </body>
-
-
 </html>

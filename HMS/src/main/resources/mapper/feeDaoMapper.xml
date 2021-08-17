@@ -4,40 +4,96 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hqyj.seven.dao.Feedao">
 
-
-
-
+    <!--  新增缴费信息  -->
     <insert id="inserintoFee" parameterType="com.hqyj.seven.pojo.Fee">
-        insert into fee (enter_id,direct,coustomer_id,money,house_id,description,user_id,fee_type)
+        insert into fee (enter_id, direct, coustomer_id, money, house_id, description, user_id, fee_type)
             value
             (#{enterId},#{direct},#{coustomerId},#{money},#{houseId},#{description},#{userId},
             #{fee_type})
     </insert>
-   <select id="queryByHouseIdAndCoustomerId" resultType="com.hqyj.seven.pojo.Fee">
-       select  fee_id feeId,enter_id enterId,direct,coustomer_id coustomerId,money,house_id houseId,description,user_id  userId,fee_type from  fee where  house_id=#{houseId} and coustomer_id=#{coustomerId} order by fee_id DESC limit 1
-   </select>
-  <update id="updateByFeeId" parameterType="com.hqyj.seven.pojo.Fee">
-      update  fee set direct='未缴费',fee_type='待缴费' where fee_id=#{feeId}
-  </update>
 
-    <select id="queryByDirect" resultType="com.hqyj.seven.pojo.Fee">
-        select  fee_id feeId,enter_id enterId,direct,coustomer_id coustomerId,
-               money,house_id houseId,description,user_id  userId,fee_type
-        from  fee where  direct=#{direct}
+    <!--  根据房间ID或顾客ID查询缴费信息  -->
+    <select id="queryByHouseIdAndCoustomerId" resultType="com.hqyj.seven.pojo.Fee">
+        select fee_id       feeId,
+               enter_id     enterId,
+               direct,
+               coustomer_id coustomerId,
+               money,
+               house_id     houseId,
+               description,
+               user_id      userId,
+               fee_type
+        from fee
+        where house_id = #{houseId}
+          and coustomer_id = #{coustomerId}
+        order by fee_id DESC limit 1
     </select>
-      <select id="queryOneByFeeId" resultType="com.hqyj.seven.pojo.Fee">
-          select fee_id feeId,enter_id enterId,direct,coustomer_id coustomerId,
-                 money,house_id houseId,description,user_id  userId,fee_type
-          from  fee where  fee_id=#{feeId}
-      </select>
-    <update id="updateFee" parameterType="com.hqyj.seven.pojo.Fee">
-        update fee set enter_id=#{enterId},direct=#{direct},
-                       coustomer_id=#{coustomerId},money=#{money},house_id=#{houseId},
-                       description=#{description},user_id=#{userId},fee_type=#{fee_type}
-        where fee_id=#{feeId}
+
+    <!--  根据缴费ID更新缴费状态和缴费方式  -->
+    <update id="updateByFeeId" parameterType="com.hqyj.seven.pojo.Fee">
+        update fee
+        set direct='未缴费',
+            fee_type='待缴费'
+        where fee_id = #{feeId}
     </update>
+
+    <!--  根据缴费状态查询缴费信息  -->
+    <select id="queryByDirect" resultType="com.hqyj.seven.pojo.Fee">
+        select fee_id       feeId,
+               enter_id     enterId,
+               direct,
+               coustomer_id coustomerId,
+               money,
+               house_id     houseId,
+               description,
+               user_id      userId,
+               fee_type
+        from fee
+        where direct = #{direct}
+    </select>
+
+    <!--  根据缴费ID查询缴费信息  -->
+    <select id="queryOneByFeeId" resultType="com.hqyj.seven.pojo.Fee">
+        select fee_id       feeId,
+               enter_id     enterId,
+               direct,
+               coustomer_id coustomerId,
+               money,
+               house_id     houseId,
+               description,
+               user_id      userId,
+               fee_type
+        from fee
+        where fee_id = #{feeId}
+    </select>
+
+    <!--  根据缴费ID更新缴费全部信息  -->
+    <update id="updateFee" parameterType="com.hqyj.seven.pojo.Fee">
+        update fee
+        set enter_id=#{enterId},
+            direct=#{direct},
+            coustomer_id=#{coustomerId},
+            money=#{money},
+            house_id=#{houseId},
+            description=#{description},
+            user_id=#{userId},
+            fee_type=#{fee_type}
+        where fee_id = #{feeId}
+    </update>
+
+    <!--  根据缴费ID查询所有缴费信息  -->
     <select id="queryAllId" resultType="com.hqyj.seven.pojo.Fee">
-        select fee_id feeId,enter_id enterId,direct,coustomer_id coustomerId,money,house_id houseId,description,user_id  userId,fee_type
-        from  fee where direct=#{direct} and  (fee_id=#{Id} or enter_id=#{Id} or coustomer_id=#{Id} or house_id=#{Id} or user_id=#{Id})
+        select fee_id       feeId,
+               enter_id     enterId,
+               direct,
+               coustomer_id coustomerId,
+               money,
+               house_id     houseId,
+               description,
+               user_id      userId,
+               fee_type
+        from fee
+        where direct = #{direct}
+          and (fee_id = #{Id} or enter_id = #{Id} or coustomer_id = #{Id} or house_id = #{Id} or user_id = #{Id})
     </select>
 </mapper>

@@ -30,11 +30,11 @@
     <mvc:resources mapping="/css/**" location="/static/css/"/>
     <mvc:resources mapping="/lib/**" location="/static/lib/"/>
     <mvc:resources mapping="/fonts/**" location="/static/fonts/"/>
-    
+
     <!--处理文件上传-->
-<!--    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
-<!--        &lt;!&ndash;文件上传的大小限制&ndash;&gt;-->
-<!--        <property name="maxInMemorySize" value="5000000"/>-->
-<!--    </bean>-->
+    <!--    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
+    <!--        &lt;!&ndash;文件上传的大小限制&ndash;&gt;-->
+    <!--        <property name="maxInMemorySize" value="5000000"/>-->
+    <!--    </bean>-->
 
 </beans>

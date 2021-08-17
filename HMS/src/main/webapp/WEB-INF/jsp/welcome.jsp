@@ -9,9 +9,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
-<%
-    String basePath = request.getContextPath();
-%>
 <html class="x-admin-sm">
 <head>
     <meta charset="UTF-8">
@@ -20,6 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <%--  引入公共样式和脚本文件  --%>
     <jsp:include page="common.jsp"/>
 </head>
 <body>
@@ -154,24 +152,22 @@
     </div>
 </div>
 </div>
-
 <script>
     $('document').ready(function () {
         getTime();
         $("#loginUser").html(JSON.parse(localStorage.getItem("user")).name);
-
         //获取房间统计信息
         $.ajax({
-            url:"house/totalOfHouse",
-            type:"get",
-            dataType:"json",
+            url: "house/totalOfHouse",
+            type: "get",
+            dataType: "json",
             beforeSend: function () {
                 this.index = layer.load(0, {shade: false, time: 10 * 1000})
             },
             complete: function () {
                 layer.close(this.index);
             },
-            success:function (data) {
+            success: function (data) {
                 if (data.code === 200) {
                     $("#houseSum").html(data.data.Sum);
                     $("#houseNull").html(data.data.Null);
@@ -181,12 +177,11 @@
                     $("#houseMaintain").html(data.data.Maintain);
                 }
             },
-            error:function (err) {
+            error: function (err) {
                 layer.msg('服务器被吃啦！请稍后重试', {icon: 7, time: 3000});
             }
         })
     })
-
 </script>
 </body>
 </html>

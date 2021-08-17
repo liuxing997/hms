@@ -17,6 +17,7 @@
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <%--  引入公共样式和脚本文件  --%>
     <jsp:include page="common.jsp"/>
 </head>
 <style>
@@ -24,7 +25,8 @@
         color: green;
         text-decoration: none;
     }
-    a:hover{
+
+    a:hover {
         color: blue;
     }
 </style>
@@ -43,9 +45,9 @@
         //移除浏览器本地存储的数据
         localStorage.removeItem("user");
         //退出当前用户登录
-        location.href="user/logout";
+        location.href = "user/logout";
         //回到登录页面
-        window.location.href="login";
+        window.location.href = "login";
     }
 </script>
 </body>

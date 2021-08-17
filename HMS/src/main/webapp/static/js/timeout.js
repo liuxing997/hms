@@ -5,6 +5,7 @@
  * @Date 2021/8/14 16:45
  * @Email liuxing997@foxmail.com
  **/
+//登录超时验证
 var lastTime = new Date().getTime();
 var currentTime = new Date().getTime();
 var timeOut = 15 * 60 * 1000; //设置超时时间： 15分钟

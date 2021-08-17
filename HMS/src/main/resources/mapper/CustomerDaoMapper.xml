@@ -5,40 +5,73 @@
 <!-- 对某个java接口文件进行描述，两者之间的关系一一对应-->
 <!-- namespace属性指明对应的java接口文件，全类名 -->
 <mapper namespace="com.hqyj.seven.dao.CustomerDao">
+
+    <!-- 根据顾客ID修改顾客余额 缴费  -->
     <update id="updataByCustomerIdToremainder" parameterType="com.hqyj.seven.pojo.Customer">
-        update customer set remainder=remainder-#{money} where customer_id=#{id}
+        update customer
+        set remainder=remainder - #{money}
+        where customer_id = #{id}
     </update>
+
+    <!--  根据顾客ID查询顾客信息  -->
     <select id="queryByCustomer" resultType="com.hqyj.seven.pojo.Customer">
-        select * from customer where customer_id=#{CustomerId}
+        select *
+        from customer
+        where customer_id = #{CustomerId}
     </select>
+
+    <!-- 根据顾客ID修改顾客余额 退费  -->
     <update id="updataByCustomerIdToremainderTwo" parameterType="com.hqyj.seven.pojo.Customer">
-        update customer set remainder=remainder+#{money} where customer_id=#{id}
+        update customer
+        set remainder=remainder + #{money}
+        where customer_id = #{id}
     </update>
+
+    <!--  查询所有顾客信息  -->
     <select id="queryAll" resultType="com.hqyj.seven.pojo.Customer">
-        select * from customer
+        select *
+        from customer
     </select>
 
+    <!--  根据顾客的名字、身份证号码、座机号码、手机号码查询顾客信息  -->
     <select id="queryByCusName" resultType="com.hqyj.seven.pojo.Customer">
-        select * from customer where name = #{name}
-        or card = #{name}
-        or phone = #{name}
-        or mobile = #{name}
+        select *
+        from customer
+        where name = #{name}
+           or card = #{name}
+           or phone = #{name}
+           or mobile = #{name}
     </select>
 
+    <!--  根据顾客ID更新顾客信息  -->
     <update id="updataOneCus" parameterType="com.hqyj.seven.pojo.Customer">
-        update customer set customer_id = #{customer_id},name  = #{name}
-        ,card = #{card},phone = #{phone},mobile = #{mobile},remainder = #{remainder}
+        update customer
+        set customer_id = #{customer_id}
+          , name        = #{name}
+          , card        = #{card}
+          , phone       = #{phone}
+          , mobile      = #{mobile}
+          , remainder   = #{remainder}
         where customer_id = #{customer_id}
     </update>
+
+    <!--  新增顾客信息  -->
     <insert id="insertOneCus" parameterType="com.hqyj.seven.pojo.Customer">
-        insert into  customer(customer_id,name,card,phone,mobile,remainder)
-        value (#{customer_id},#{name},#{card}, #{phone},#{mobile},#{remainder})
+        insert into customer(customer_id, name, card, phone, mobile, remainder)
+            value (#{customer_id},#{name},#{card}, #{phone},#{mobile},#{remainder})
     </insert>
+
+    <!--  根据顾客ID删除顾客  -->
     <delete id="deleteOneCus" parameterType="com.hqyj.seven.pojo.Customer">
-        delete from customer where customer_id = #{customer_id}
+        delete
+        from customer
+        where customer_id = #{customer_id}
     </delete>
 
+    <!--  根据顾客ID查询顾客状态  -->
     <select id="queryState" resultType="com.hqyj.seven.pojo.House">
-        select house_id houseId ,name houseName,amount,price,floor_id floorId,state,customer_id customerId from house where customer_id = #{customer_id}
+        select house_id houseId, name houseName, amount, price, floor_id floorId, state, customer_id customerId
+        from house
+        where customer_id = #{customer_id}
     </select>
 </mapper>

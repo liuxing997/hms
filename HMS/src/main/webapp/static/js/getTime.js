@@ -1,4 +1,11 @@
-// 获取时间
+/**
+ * Created by IntelliJ IDEA.
+ * @File code.js
+ * @Auth liuxing
+ * @Date 2021/8/13 16:20
+ * @Email liuxing997@foxmail.com
+ **/
+// 动态获取时间
 function getTime() {
     var myDate = new Date();
     var myHour = myDate.getHours(); //获取当前小时数(0-23)

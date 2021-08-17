@@ -5,19 +5,31 @@
 <!--对某个Java接口文件进行描述，两者之间的关系一一对应-->
 <!--namespace属性指定对应的java接口文件，全类名-->
 <mapper namespace="com.hqyj.seven.dao.HouseDao">
+
+    <!--  根据房间号查询房间信息  -->
     <select id="queryByHousename" resultType="com.hqyj.seven.pojo.House">
-        select * from house where name=#{name}
+        select *
+        from house
+        where name = #{name}
     </select>
 
-    <!--根据ID或房间名查询房间-->
+    <!--根据ID或房间号查询房间信息-->
     <select id="searchHouse" resultType="com.hqyj.seven.pojo.House">
-        select * from house where name=#{names} or house_id=#{names}
+        select *
+        from house
+        where name = #{names}
+           or house_id = #{names}
     </select>
+
+    <!--  根据房间号更新房间信息  -->
     <update id="updateByHouseName" parameterType="com.hqyj.seven.pojo.House">
-       update house set state='已定',customer_id=#{customerId} where name=#{name}
+        update house
+        set state='已定',
+            customer_id=#{customerId}
+        where name = #{name}
     </update>
 
-
+    <!-- 配置返回值  -->
     <resultMap id="customerResultMap" type="com.hqyj.seven.pojo.Enter">
         <id column="house_id" property="house_id"/>
         <result column="customer_info" property="customer_info"/>
@@ -33,79 +45,148 @@
         </collection>
     </resultMap>
 
-<!--    根据enter入住表查询客户基本信息-->
+    <!-- 根据enter入住表查询客户基本信息  -->
     <select id="queryInter" resultMap="customerResultMap">
-        select e.house_id,e.customer_info,e.start_time,e.end_time_actual,
-        e.end_time_estimate,e.user_id,e.state,
-        c.name,c.mobile,c.customer_id
+        select e.house_id,
+               e.customer_info,
+               e.start_time,
+               e.end_time_actual,
+               e.end_time_estimate,
+               e.user_id,
+               e.state,
+               c.name,
+               c.mobile,
+               c.customer_id
         from enter e
-        LEFT JOIN customer c on e.customer_id = c.customer_id
+                 LEFT JOIN customer c on e.customer_id = c.customer_id
         where e.house_id = #{house_id}
-   </select>
-
-    <select id="queryAllHouseI" resultType="com.hqyj.seven.pojo.House">
-        select * from house
     </select>
 
+    <!--  查询所有房间信息  -->
+    <select id="queryAllHouseI" resultType="com.hqyj.seven.pojo.House">
+        select *
+        from house
+    </select>
 
+    <!--  根据房间ID更新房间所有信息  -->
     <update id="updateHouse" parameterType="com.hqyj.seven.pojo.House">
-         update house set house_id = #{houseId},name=#{houseName},amount=#{amount},
-         price=#{price},floor_id=#{floorId},state=#{state} where house_id = #{houseId}
+        update house
+        set house_id = #{houseId},
+            name=#{houseName},
+            amount=#{amount},
+            price=#{price},
+            floor_id=#{floorId},
+            state=#{state}
+        where house_id = #{houseId}
     </update>
 
+    <!--  新增房间信息  -->
     <insert id="insertHouse" parameterType="com.hqyj.seven.pojo.House">
-           insert into house (house_id,name,amount,price,floor_id,state,customer_id) value
+        insert into house (house_id, name, amount, price, floor_id, state, customer_id) value
             (#{houseId},#{houseName},#{amount},#{price},#{floorId},#{state},#{customerId})
     </insert>
 
+    <!--  根据房间ID删除房间信息  -->
     <delete id="deleteHouse">
-        delete from house where house_id = #{house_id}
+        delete
+        from house
+        where house_id = #{house_id}
     </delete>
+
+    <!--  根据房间名更新状态和顾客ID 用于入住  -->
     <update id="updateByHouseNametocheckIn" parameterType="com.hqyj.seven.pojo.House">
-        update house set state='入住',customer_id=#{customerId} where name=#{name}
+        update house
+        set state='入住',
+            customer_id=#{customerId}
+        where name = #{name}
     </update>
-  <select id="queryCount" resultType="java.lang.Integer">
-      select count(*) from house
-  </select>
+
+    <!--  添加房间总数  -->
+    <select id="queryCount" resultType="java.lang.Integer">
+        select count(*)
+        from house
+    </select>
+
+    <!--  统计空闲房间  -->
     <select id="queryCountByStateNull" resultType="java.lang.Integer">
-        select count(*) from house where state='空闲'
+        select count(*)
+        from house
+        where state = '空闲'
     </select>
+
+    <!--  添加被预订房间  -->
     <select id="queryCountByStateReserve" resultType="java.lang.Integer">
-        select count(*) from house where state='已定'
+        select count(*)
+        from house
+        where state = '已定'
     </select>
+
+    <!--  统计已入住房间  -->
     <select id="queryCountByStateCheckIn" resultType="java.lang.Integer">
-        select count(*) from house where state='入住'
+        select count(*)
+        from house
+        where state = '入住'
     </select>
+
+    <!--  统计待打扫房间  -->
     <select id="queryCountByStateClean" resultType="java.lang.Integer">
-        select count(*) from house where state='打扫'
+        select count(*)
+        from house
+        where state = '打扫'
     </select>
+
+    <!--  统计待维修房间  -->
     <select id="queryCountByStateMaintain" resultType="java.lang.Integer">
-        select count(*) from house where state='维修'
+        select count(*)
+        from house
+        where state = '维修'
     </select>
+
+    <!--  根据状态查询房间信息  -->
     <select id="queryBySate" resultType="com.hqyj.seven.pojo.House">
-        select * from  house where state=#{state}
+        select *
+        from house
+        where state = #{state}
     </select>
+
+    <!--  按房间号实现退订  -->
     <update id="updateByHouseNameToUnsubscribe" parameterType="com.hqyj.seven.pojo.House">
-        update house set state='空闲',customer_id=null where name=#{houseName}
+        update house
+        set state='空闲',
+            customer_id=null
+        where name = #{houseName}
     </update>
+
+    <!--  根据房间号和状态更新打扫或维修的状态为空闲  -->
     <update id="cleanMaintainByHouseState" parameterType="com.hqyj.seven.pojo.House">
-        update house set state='空闲' where name=#{name} and state=#{state}
+        update house
+        set state='空闲'
+        where name = #{name}
+          and state = #{state}
     </update>
+
+    <!--  根据房间号修改退房房间的状态为打扫  -->
     <update id="updateByHouseNameToCheckOut" parameterType="com.hqyj.seven.pojo.House">
-        update house set state='打扫',customer_id=null where name=#{houseName}
+        update house
+        set state='打扫',
+            customer_id=null
+        where name = #{houseName}
     </update>
-
-
-
 
     <!--根据ID或房间名搜索待打扫房间-->
     <select id="searchHouseClean" resultType="com.hqyj.seven.pojo.House">
-        select * from house where (name=#{names} or house_id=#{names}) and state='打扫'
-    </select>
-    <!--根据ID或房间名搜索待维修房间-->
-    <select id="searchHouseMaintain" resultType="com.hqyj.seven.pojo.House">
-        select * from house where (name=#{names} or house_id=#{names}) and state='维修'
+        select *
+        from house
+        where (name = #{names} or house_id = #{names})
+          and state = '打扫'
     </select>
 
+    <!--根据ID或房间名搜索待维修房间-->
+    <select id="searchHouseMaintain" resultType="com.hqyj.seven.pojo.House">
+        select *
+        from house
+        where (name = #{names} or house_id = #{names})
+          and state = '维修'
+    </select>
 
 </mapper>

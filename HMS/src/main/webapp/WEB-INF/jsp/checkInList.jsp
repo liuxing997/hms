@@ -17,6 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <%--  引入公共样式和脚本文件  --%>
     <jsp:include page="common.jsp"/>
 </head>
 <body>
@@ -102,7 +103,7 @@
         //头工具栏事件
         table.on('toolbar(check_list)', function (obj) {
             switch (obj.event) {
-                case 'searchCheckIn':
+                case 'searchCheckIn': //搜索已入住的客户信息
                     table.reload('check_list', {
                         url: 'enter/queryOneById',
                         where: {id: $("#checkInNames").val()},

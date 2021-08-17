@@ -9,11 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
-<%
-    String basePath = request.getContextPath();
-%>
 <html class="x-admin-sm">
-
 <head>
     <meta charset="UTF-8">
     <title>操作员列表｜酒店后台管理系统</title>
@@ -21,9 +17,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <%--  引入公共样式和脚本文件  --%>
     <jsp:include page="common.jsp"/>
 </head>
-
 <body>
 <div class="x-nav">
             <span class="layui-breadcrumb">
@@ -203,10 +199,10 @@
             , limits: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
         });
 
-        //头工具栏事件
+        //头工具栏
         table.on('toolbar(user_list)', function (obj) {
             switch (obj.event) {
-                case 'searchUserByName':
+                case 'searchUserByName': //搜索操作员
                     table.reload('user_list', {
                         url: 'user/searchUser',
                         where: {names: $("#searchUserNames").val()},
@@ -228,7 +224,7 @@
                         }, page: true
                     })
                     break;
-                case 'addOneUser':
+                case 'addOneUser': //添加操作员
                     layer.open({
                         type: 1 //Page层类型
                         , skin: 'layui-layer-molv'
@@ -240,34 +236,34 @@
                         , maxmin: true //允许全屏最小化
                         , content: $("#addUserModel")  //弹窗路径
                         , yes: function (index, layero) {
+                            layer.iframeAuto(index)//高度自适应
                             let addUserId = $("#addUserId").val();
-                            let name = $("#name").val();
-                            let password = $("#password").val();
-                            let phone = $("#phone").val();
-                            let state = $("#state").val();
-                            if (addUserId.length == 0) {
+                            let addUserName = $("#addUserName").val();
+                            let addUserPassword = $("#addUserPassword").val();
+                            let addUserPhone = $("#addUserPhone").val();
+                            let addUserState = $("#addUserState").val();
+                            if (addUserId.length === 0 && addUserName.length === 0 && addUserPassword.length === 0 && addUserPhone.length === 0 && addUserState.length === 0) {
+                                layer.msg("请先填写完整信息！", {icon: 2, time: 3000});
+                            } else if (addUserId.length === 0) {
                                 layer.msg("操作员ID不能为空！", {icon: 2, time: 3000});
-                            } else if (name.length === 0) {
+                            } else if (addUserName.length === 0) {
                                 layer.msg("姓名不能为空！", {icon: 2, time: 3000});
-                            } else if (password.length === 0) {
+                            } else if (addUserPassword.length === 0) {
                                 layer.msg("密码不能为空！", {icon: 2, time: 3000});
-                            } else if (phone.length === 0) {
+                            } else if (addUserPhone.length === 0) {
                                 layer.msg("电话不能为空！", {icon: 2, time: 3000});
-                            } else if (state.length === 0) {
+                            } else if (addUserState.length === 0) {
                                 layer.msg("状态不能为空！", {icon: 2, time: 3000});
-                            } else if (addUserId.length !== 0 && name.length !== 0 && password.length !== 0 && phone.length !== 0 && state.length !== 0) {
-
-
-                                layer.iframeAuto(index)//高度自适应
+                            } else if (addUserId.length !== 0 && addUserName.length !== 0 && addUserPassword.length !== 0 && addUserPhone.length !== 0 && addUserState.length !== 0) {
                                 $.ajax({
                                     url: "user/insertUser",
                                     dataType: "json",
                                     data: {
-                                        id: $("#addUserId").val(),
-                                        name: $("#addUserName").val(),
-                                        password: $("#addUserPassword").val(),
-                                        phone: $("#addUserPhone").val(),
-                                        state: $("#addUserState").val()
+                                        id: addUserId,
+                                        name: addUserName,
+                                        password: addUserPassword,
+                                        phone: addUserPhone,
+                                        state: addUserState
                                     },
                                     success: function (data) {
                                         if (data.code === 200) {
@@ -283,8 +279,6 @@
                                         layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
                                     }
                                 });
-                            }else{
-                                layer.msg("请填写完整信息！", {icon: 2, time: 3000});
                             }
                         }
                     });
@@ -293,11 +287,10 @@
             ;
         });
 
-        //监听行工具事件
+        //监听行工具
         table.on('tool(user_list)', function (obj) {
             let data = obj.data;
-            //删除事件
-            if (obj.event === 'delOneUser') {
+            if (obj.event === 'delOneUser') { //删除操作员
                 layer.confirm('真的要删除' + data.name + "么？", {title: "提示"}, function (index) {
                     $.ajax({
                         url: "user/deleteById",
@@ -324,7 +317,7 @@
                     })
 
                 });
-            } else if (obj.event === 'editOneUser') { //编辑事件
+            } else if (obj.event === 'editOneUser') { //编辑操作员
                 layer.open({
                     type: 1 //Page层类型
                     , skin: 'layui-layer-molv'
@@ -348,6 +341,9 @@
                         let editUserPassword = $("#editUserPassword").val();
                         let editUserPhone = $("#editUserPhone").val();
                         let editUserState = $("#editUserState").val();
+                        if (editUserId.length === 0 && editUserName.length === 0 && editUserPassword.length === 0 && editUserPhone.length === 0 && editUserState.length === 0) {
+                            layer.msg("请先填写完整信息！", {icon: 2, time: 3000});
+                        }
                         if (editUserId.length === 0) {
                             layer.msg("操作员ID不能为空！", {icon: 2, time: 3000});
                         } else if (editUserName.length === 0) {
@@ -359,7 +355,6 @@
                         } else if (editUserState.length === 0) {
                             layer.msg("状态不能为空！", {icon: 2, time: 3000});
                         } else if (editUserId.length !== 0 && editUserName.length !== 0 && editUserPassword.length !== 0 && editUserPhone.length !== 0 && editUserState.length !== 0) {
-
                             $.ajax({
                                 url: "user/updateById",
                                 dataType: "json",
@@ -367,7 +362,7 @@
                                     id: editUserId,
                                     name: editUserName,
                                     password: editUserPassword,
-                                    phone:editUserPhone,
+                                    phone: editUserPhone,
                                     state: editUserState
                                 },
                                 success: function (data) {
@@ -383,10 +378,7 @@
                                 error: function (err) {
                                     layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
                                 }
-
                             });
-                        }else {
-                            layer.msg("请先填写完整信息！", {icon: 2, time: 3000});
                         }
                     }
                 });

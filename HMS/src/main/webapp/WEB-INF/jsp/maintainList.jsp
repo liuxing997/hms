@@ -17,6 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <%--  引入公共样式和脚本文件  --%>
     <jsp:include page="common.jsp"/>
 </head>
 <body>
@@ -42,7 +43,8 @@
                         <div class="layui-card-body ">
                             <form class="layui-form layui-col-space5" onsubmit="return false;">
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" id="maintainHouseNames" placeholder="请输入房间号、ID" autocomplete="off"
+                                    <input type="text" id="maintainHouseNames" placeholder="请输入房间号、ID"
+                                           autocomplete="off"
                                            class="layui-input"></div>
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn" lay-submit="" lay-filter="sreach"
@@ -86,7 +88,7 @@
             , cols: [[
                 {type: 'checkbox', fixed: 'left'}
                 , {field: 'houseId', title: '房间ID', fixed: 'left', unresize: true, align: "center"}
-                , {field: 'houseName', title: '房间号', align: "center",  sort: true}
+                , {field: 'houseName', title: '房间号', align: "center", sort: true}
                 , {field: 'amount', title: '可入住数量', align: "center", sort: true}
                 , {field: 'price', title: '价格', align: "center", sort: true}
                 , {field: 'floorId', title: '楼层', align: "center", sort: true}
@@ -101,7 +103,7 @@
         //头工具栏事件
         table.on('toolbar(maintainHouse_list)', function (obj) {
             switch (obj.event) {
-                case 'searchMaintainHouse':
+                case 'searchMaintainHouse': //搜索待维修房间
                     table.reload('maintainHouse_list', {
                         url: 'house/searchHouseMaintain',
                         where: {names: $("#maintainHouseNames").val()},
@@ -129,10 +131,8 @@
         //监听行工具事件
         table.on('tool(maintainHouse_list)', function (obj) {
             let data = obj.data;
-            console.log(data)
-            //打扫房间
-            if (obj.event === 'maintainHouse') {
-                layer.confirm('真的维修了' + data.houseName + "房间么？", {title: "提示",btn:["已维修","未维修"]}, function (index) {
+            if (obj.event === 'maintainHouse') { //打扫房间
+                layer.confirm('真的维修了' + data.houseName + "房间么？", {title: "提示", btn: ["已维修", "未维修"]}, function (index) {
                     $.ajax({
                         url: "house/updateMaintainState",
                         type: "get",

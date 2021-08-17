@@ -9,9 +9,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
-<%
-    String basePath = request.getContextPath();
-%>
 <html class="x-admin-sm">
 <head>
     <meta charset="UTF-8">
@@ -20,6 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <%--  引入公共样式和脚本文件  --%>
     <jsp:include page="common.jsp"/>
 </head>
 <body>
@@ -70,12 +68,11 @@
         </form>
     </div>
 </div>
-
-
 <script>
+    //提示操作员当前登录的是哪一个操作员，给页面赋值
     $(function () {
         let user = JSON.parse(localStorage.getItem("user"));
-        layer.msg("你好！"+ user.name, {icon: 1, time: 3000});
+        layer.msg("你好！" + user.name, {icon: 1, time: 3000});
         $("#userID").val(user.id);
         $("#userName").val(user.name);
         $("#password").val(user.password);
@@ -84,37 +81,37 @@
         $("#person").find('input,textarea').attr('readonly', true);
     });
 
+    //编辑当前操作员信息
     function edit() {
         $("#person").find('input,textarea').attr('readonly', false);
     }
 
+    //保存当前操作员信息
     function savePerson() {
         $.ajax({
-            url:"user/updateById",
-            dataType:"json",
-            data:{
-                id:$("#userID").val(),
-                name:$("#userName").val(),
-                password:$("#password").val(),
-                phone:$("#phone").val(),
-                state:$("#state").val()
+            url: "user/updateById",
+            dataType: "json",
+            data: {
+                id: $("#userID").val(),
+                name: $("#userName").val(),
+                password: $("#password").val(),
+                phone: $("#phone").val(),
+                state: $("#state").val()
             },
-            success:function (data) {
-                if (data.code === 200 ){
+            success: function (data) {
+                if (data.code === 200) {
                     layer.msg("个人信息" + data.message, {icon: 1, time: 3000}, function () {
                         location.reload();
                     });
-                }else {
+                } else {
                     layer.msg("个人信息" + data.message + "请重试", {icon: 2, time: 3000});
                 }
             },
-            error:function (err){
+            error: function (err) {
                 layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
             }
         });
     }
-
-
 </script>
 </body>
 </html>
