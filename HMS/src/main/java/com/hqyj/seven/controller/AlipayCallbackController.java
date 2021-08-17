@@ -2,7 +2,9 @@ package com.hqyj.seven.controller;
 
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
+import com.hqyj.seven.service.FeeService;
 import com.hqyj.seven.utils.AlipayConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,6 +26,9 @@ import java.util.Map;
  */
 @Controller
 public class AlipayCallbackController {
+
+    @Autowired
+    private FeeService feeService;
 
     //异步回调
     @RequestMapping("/notifyUrl")
@@ -144,7 +149,17 @@ public class AlipayCallbackController {
             //付款金额
             String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"), "UTF-8");
 
-            out.println("trade_no:" + trade_no + "<br/>out_trade_no:" + out_trade_no + "<br/>total_amount:" + total_amount);
+            String feeId = new String(request.getParameter("FeeId").getBytes("ISO-8859-1"), "UTF-8");
+            String trade_no1 = trade_no.substring(trade_no.length()-9);
+            int feeid=Integer.parseInt(feeId);
+            long trade_no2 = Long.parseLong(trade_no1);
+            Double total_amount1 = Double.parseDouble(total_amount);
+           if (feeService.payByAliPay(trade_no2,total_amount1,feeid)){
+               response.sendRedirect("index");
+           }else {
+               out.println("缴费失败！");
+               response.sendRedirect("unpaidList");
+           }
         } else {
             out.println("验签失败");
         }
