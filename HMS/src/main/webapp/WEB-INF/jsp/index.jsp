@@ -39,6 +39,9 @@
                 <dd>
                     <a onclick="xadmin.open('个人信息','person',800,380)">个人信息</a></dd>
                 <dd>
+                <dd>
+                    <a href="unauthorized">没有权限的页面</a></dd>
+                <dd>
                     <a href="javascript:void(0);" onclick="logout()">退出</a></dd>
             </dl>
         </li>
