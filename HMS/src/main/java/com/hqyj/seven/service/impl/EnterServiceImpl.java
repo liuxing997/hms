@@ -62,13 +62,13 @@ public class EnterServiceImpl implements EnterService {
         pageData.setList(pageInfo.getList());
         return pageData;
     }
-
+    //删除单个enter数据
     @Override
     public int deleteEnter(int enter_id) {
         int num = enterDao.deleteEnter(enter_id);
         return num;
     }
-
+//    根据enterid查询数据
     @Override
     public List<Enter> queryOneById(int id) {
         List<Enter> enterList = enterDao.queryOneById(id);
