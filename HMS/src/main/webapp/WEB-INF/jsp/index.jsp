@@ -189,7 +189,7 @@
                 if (data.code === 200) {
                     layer.msg("退出成功，欢迎再次使用！", {icon: 1, time: 3000}, function () {
                         localStorage.removeItem("user");
-                        window.location.href = "login.jsp";
+                        window.location.href = "login";
                     });
                 }
             },
