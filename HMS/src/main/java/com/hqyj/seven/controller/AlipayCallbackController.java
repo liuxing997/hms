@@ -96,9 +96,7 @@ public class AlipayCallbackController {
                 //注意：
                 //付款完成后，支付宝系统发送该交易状态通知
             }
-
             out.println("success");
-
         } else {//验证失败
             out.println("fail");
 

@@ -12,7 +12,7 @@ public class Enter {
     private Date end_time_estimate;
     private Date end_time_actual;
     private double fee_total;
-    private  int fee_info;
+    private  String fee_info;
     private int user_id;
     private String state;
     private double price;
@@ -20,6 +20,20 @@ public class Enter {
     private String start_time1;
     private String end_time_estimate1;
     private String end_time_actual1;
+
+    public Enter(int house_id, int customer_id, int customer_info, Date start_time, Date end_time_estimate, Date end_time_actual, double fee_total, String fee_info, int user_id, String state, double price) {
+        this.house_id = house_id;
+        this.customer_id = customer_id;
+        this.customer_info = customer_info;
+        this.start_time = start_time;
+        this.end_time_estimate = end_time_estimate;
+        this.end_time_actual = end_time_actual;
+        this.fee_total = fee_total;
+        this.fee_info = fee_info;
+        this.user_id = user_id;
+        this.state = state;
+        this.price = price;
+    }
 
     public String getStart_time1() {
         return start_time1;
@@ -135,13 +149,7 @@ public class Enter {
         this.fee_total = fee_total;
     }
 
-    public int getFee_info() {
-        return fee_info;
-    }
 
-    public void setFee_info(int fee_info) {
-        this.fee_info = fee_info;
-    }
 
     public int getUser_id() {
         return user_id;
@@ -159,14 +167,20 @@ public class Enter {
         this.state = state;
     }
 
+    public String getFee_info() {
+        return fee_info;
+    }
 
+    public void setFee_info(String fee_info) {
+        this.fee_info = fee_info;
+    }
 
     public void setPrice(float price) {
         this.price = price;
     }
 
-
-    public Enter(int house_id, int customer_id, int customer_info, Date start_time, Date end_time_estimate, Date end_time_actual, double fee_total, int fee_info, int user_id, String state, double price) {
+    public Enter(int house_id, int customer_id, int customer_info, Date start_time, Date end_time_estimate, Date end_time_actual, double fee_total, String fee_info, int user_id, String state, double price, String start_time1, String end_time_estimate1, String end_time_actual1, List<Customer> customers) {
+        this.enter_id = enter_id;
         this.house_id = house_id;
         this.customer_id = customer_id;
         this.customer_info = customer_info;
@@ -178,27 +192,12 @@ public class Enter {
         this.user_id = user_id;
         this.state = state;
         this.price = price;
+        this.start_time1 = start_time1;
+        this.end_time_estimate1 = end_time_estimate1;
+        this.end_time_actual1 = end_time_actual1;
+        this.customers = customers;
     }
 
     public Enter() {
-    }
-
-    @Override
-    public String toString() {
-        return "Enter{" +
-                "enter_id=" + enter_id +
-                ", house_id='" + house_id + '\'' +
-                ", customer_id=" + customer_id +
-                ", customer_info='" + customer_info + '\'' +
-                ", start_time1='" + start_time1 + '\'' +
-                ", end_time_estimate1='" + end_time_estimate1 + '\'' +
-                ", end_time_actual1='" + end_time_actual1 + '\'' +
-                ", fee_total=" + fee_total +
-                ", fee_info=" + fee_info +
-                ", user_id=" + user_id +
-                ", state='" + state + '\'' +
-                ", price=" + price +
-                ", customers=" + customers +
-                '}';
     }
 }
