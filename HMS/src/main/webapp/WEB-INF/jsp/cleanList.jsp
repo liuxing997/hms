@@ -75,12 +75,23 @@
             , defaultToolbar: ['filter', 'exports', 'print']
             , cellMinWidth: 80
             , parseData: function (res) {
+                if (res.code===-1)
+                {
+                    return {
+                        "code": res.code,
+                        "msg": res.msg,
+                        "count": res.data.totalSize,
+                        "data": res.data.list
+
+                    }
+                }else {
                 return {
                     "code": res.code,
                     "msg": res.msg,
                     "count": res.data.totalSize,
                     "data": res.data.list
-                }
+
+                }}
             }
             , title: '待打扫列表'
             , cols: [[
