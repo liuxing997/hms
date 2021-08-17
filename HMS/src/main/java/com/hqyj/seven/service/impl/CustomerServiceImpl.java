@@ -64,31 +64,31 @@ public class CustomerServiceImpl implements CustomerService {
         pageData.setList(pageInfo.getList());
         return pageData;
     }
-
+    //根据客户信息查询单个客户
     @Override
     public List<Customer> queryByCusName(String name) {
         List<Customer> customerList = customerDao.queryByCusName(name);
         return customerList;
     }
-
+    //更新客户信息
     @Override
     public int updataOneCus(Customer customer) {
         int num = customerDao.updataOneCus(customer);
         return num;
     }
-
+    //查询单个客户
     @Override
     public int insertOneCus(Customer customer) {
         int num = customerDao.insertOneCus(customer);
         return num;
     }
-
+    //删除单个客户
     @Override
     public int deleteOneCus(int customer_id) {
         int num = customerDao.deleteOneCus(customer_id);
         return num;
     }
-
+    //查询客户状态
     @Override
     public List<House> queryState(int customer_id) {
         List<House> houseList = customerDao.queryState(customer_id);
