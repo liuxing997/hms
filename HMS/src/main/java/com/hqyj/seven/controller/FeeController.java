@@ -43,7 +43,7 @@ public class FeeController {
         Map<String, Object> fee = new HashMap<>();
         if (feeList == null) {
             fee.put("code", -1);
-            fee.put("msg", "没有客房信息");
+            fee.put("msg", "没有已缴费信息!");
         } else {
             fee.put("code", 0);
             fee.put("data", feeList);
@@ -73,7 +73,8 @@ public class FeeController {
         Map<String, Object> fee = new HashMap<>();
         if (feeList.getList().size() == 0) {
             fee.put("code", -1);
-            fee.put("msg", "没有客房信息");
+            fee.put("msg", "没有未缴费信息！");
+            fee.put("data",feeList);
         } else {
             fee.put("code", 0);
             fee.put("data", feeList);
@@ -104,6 +105,7 @@ public class FeeController {
         if (feeList.getList().size() == 0) {
             fee.put("code", -1);
             fee.put("msg", "没有条件为" + id + "的缴费信息！");
+            fee.put("data",feeList);
         } else {
             fee.put("code", 0);
             fee.put("data", feeList);
@@ -131,9 +133,10 @@ public class FeeController {
         //添加分页功能
         PageData<Fee> feeList = feeService.queryAllId(number, size, id, "未缴费");
         Map<String, Object> fee = new HashMap<>();
-        if (feeList == null) {
+        if (feeList.getList() == null) {
             fee.put("code", -1);
             fee.put("msg", "没有条件为" + id + "的未缴费信息");
+            fee.put("data",feeList);
         } else {
             fee.put("code", 0);
             fee.put("data", feeList);
