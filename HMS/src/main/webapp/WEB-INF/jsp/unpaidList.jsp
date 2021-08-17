@@ -177,6 +177,11 @@
               target="_blank">
             <div id="body1" class="show" name="divcontent">
                 <dl class="content">
+                    <dt>缴费ID ：</dt>
+                    <dd>
+                        <input id="FeeID" name="FeeID"/>
+                    </dd>
+                    <hr class="one_line">
                     <dt>商户订单号 ：</dt>
                     <dd>
                         <input id="WIDout_trade_no" name="WIDout_trade_no"/>
@@ -347,6 +352,7 @@
                         layer.iframeAuto(index)//自适应高度
                         $("#WIDsubject").val("顾客" + data.coustomerId + "的房费");
                         $("#WIDtotal_amount").val(data.money);
+                        $("#FeeID").val(data.feeId);
                     }
                 });
             } else if (obj.event === 'cashPayment') { //现金支付
