@@ -166,6 +166,26 @@ public class FeeServiceImpl implements FeeService {
         }
         return result;
     }
+    //支付宝支付
+    public  Map<String,Object> payByAliPay(long  out_trade_no,double total_amount,int feeId){
+        Map<String, Object> result = new HashMap<>();
+        Fee fee = feedao.queryOneByFeeId(feeId);
+        System.out.println(fee);
+        if (fee != null&&fee.getFee_type().equals("待缴费")) {
+            double money = fee.getMoney();
+            int enterId = fee.getEnterId();
+            fee.setFee_type("支付宝");
+            fee.setDirect("缴费");
+            feedao.updateFee(fee);
+            enterDao.updateByEnterIdToMoneyTwo(money, enterId,out_trade_no);
+            result.put("code", 200);
+            result.put("message", "支付宝支付成功");
+        } else {
+            result.put("code", -1);
+            result.put("message", "此房间未找到或者不是待缴费状态请先退房试试");
+        }
+        return result;
+    }
 
 
 }

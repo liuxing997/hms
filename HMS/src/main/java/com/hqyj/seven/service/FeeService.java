@@ -24,4 +24,6 @@ public interface FeeService {
 
     //现金支付
     Map<String, Object> CashPayment(int feeId);
+    //支付宝支付
+    public  Map<String,Object> payByAliPay(long out_trade_no,double total_amount,int feeId);
 }
