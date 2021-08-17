@@ -23,5 +23,9 @@ public interface EnterDao {
     //更改金额 现金支付时
     int updateByEnterIdToMoney(@Param("money") double money,@Param("enterId") int enterId);
     //更改功能，支付宝支付时候
-    int updateByEnterIdToMoneyTwo(@Param("money") double money,@Param("enterId") int enterId,@Param("out_trade_no") long out_trade_no);
+    int updateByEnterIdToMoneyTwo(@Param("enterId") int enterId,@Param("money") double money,@Param("out_trade_no") String out_trade_no);
+
+    //根据交易流水号查询查询住宿情况
+    Enter queryByOutTradeNo(String out_trade_no);
+
 }
