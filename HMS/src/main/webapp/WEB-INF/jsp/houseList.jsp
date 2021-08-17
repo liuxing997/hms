@@ -153,6 +153,8 @@
             <div class="layui-input-block">
                 <select id="houseEditState" lay-filter="houseEditState">
                     <option value="空闲" selected>空闲</option>
+                    <option value="维修">维修</option>
+                    <option value="打扫">打扫</option>
                 </select>
             </div>
         </div>
