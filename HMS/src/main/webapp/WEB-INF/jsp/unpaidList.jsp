@@ -42,7 +42,8 @@
                         <div class="layui-card-body ">
                             <form class="layui-form layui-col-space5" onsubmit="return false;">
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" id="searchUnPaidFeeNames" placeholder="请输入缴费ID、入住ID、顾客ID、房间ID、操作员ID"
+                                    <input type="text" id="searchUnPaidFeeNames"
+                                           placeholder="请输入缴费ID、入住ID、顾客ID、房间ID、操作员ID"
                                            autocomplete="off"
                                            class="layui-input" style="width: 300px;"></div>
                                 <div class="layui-inline layui-show-xs-block">
@@ -57,36 +58,177 @@
                     <table class="layui-hide" id="unpaid_list" lay-filter="unpaid_list"></table>
                     <%--操作按钮模块--%>
                     <script type="text/html" id="unpaid_list_bar">
-                        <a class="layui-btn layui-btn-xs" lay-event="recharge">充值</a>
-                        <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="cashPayment">现金支付</a>
+                        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="alipay">支付宝</a>
+                        <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="cashPayment">现金</a>
                     </script>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<style>
+    .show {
+        clear: left;
+        display: block;
+    }
 
+    .new-btn-login-sp {
+        padding: 1px;
+        display: inline-block;
+        width: 75%;
+    }
+
+    .new-btn-login {
+        background-color: #02aaf1;
+        color: #FFFFFF;
+        font-weight: bold;
+        border: none;
+        width: 100%;
+        height: 30px;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .content {
+        margin-top: 5px;
+    }
+
+    .content dt {
+        width: 100px;
+        display: inline-block;
+        float: left;
+        margin-left: 20px;
+        color: #666;
+        font-size: 13px;
+        margin-top: 8px;
+    }
+
+    .content dd {
+        margin-left: 120px;
+        margin-bottom: 5px;
+    }
+
+    .content dd input {
+        width: 85%;
+        height: 28px;
+        border: 0;
+        -webkit-border-radius: 0;
+        -webkit-appearance: none;
+    }
+
+    #foot {
+        margin-top: 10px;
+        position: absolute;
+        bottom: 15px;
+        width: 100%;
+    }
+
+    .foot-ul {
+        width: 100%;
+    }
+    .foot-ul li {
+        width: 100%;
+        text-align: center;
+        color: #666;
+    }
+
+    .note-help {
+        color: #999999;
+        font-size: 12px;
+        line-height: 130%;
+        margin-top: 5px;
+        width: 100%;
+        display: block;
+    }
+
+    #btn-dd {
+        margin: 20px;
+        text-align: center;
+    }
+
+    .foot-ul {
+        width: 100%;
+    }
+
+    .one_line {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #eeeeee;
+        width: 100%;
+        margin-left: 20px;
+    }
+
+
+    .am-header h1 {
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        box-flex: 1;
+        line-height: 18px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 300;
+        color: #fff;
+    }
+</style>
+<!-- 支付宝支付模态框 -->
+<div class="site-text" style="margin: 5%; display: none" id="aliPaymentModel">
+        <form name=alipayment action="alipay" method="post"
+              target="_blank">
+            <div id="body1" class="show" name="divcontent">
+                <dl class="content">
+                    <dt>商户订单号 ：</dt>
+                    <dd>
+                        <input id="WIDout_trade_no" name="WIDout_trade_no"/>
+                    </dd>
+                    <hr class="one_line">
+                    <dt>订单名称 ：</dt>
+                    <dd>
+                        <input id="WIDsubject" name="WIDsubject"/>
+                    </dd>
+                    <hr class="one_line">
+                    <dt>付款金额 ：</dt>
+                    <dd>
+                        <input id="WIDtotal_amount" name="WIDtotal_amount"/>
+                    </dd>
+                    <hr class="one_line">
+                    <dt>商品描述：</dt>
+                    <dd>
+                        <input id="WIDbody" name="WIDbody" placeholder="请输入商品描述，默认：房费" />
+                    </dd>
+                    <hr class="one_line">
+                    <dt></dt>
+                    <dd id="btn-dd">
+						<span class="new-btn-login-sp">
+							<button class="new-btn-login" type="submit"
+                                    style="text-align: center;">付 款</button>
+						</span> <span class="note-help">如果您点击“付款”按钮，即表示您同意本次付款操作。</span>
+                    </dd>
+                </dl>
+            </div>
+        </form>
+</div>
 <!-- 现金支付模态框 -->
 <div class="site-text" style="margin: 5%; display: none" id="cashPaymentModel">
     <form class="layui-form">
         <div class="layui-form-item">
             <label for="cashFeeId" class="layui-form-label">缴费ID</label>
             <div class="layui-input-block">
-                <input type="text"  id="cashFeeId" readonly disabled autocomplete="off"
+                <input type="text" id="cashFeeId" readonly disabled autocomplete="off"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label for="cashEnterId" class="layui-form-label">入住ID</label>
             <div class="layui-input-block">
-                <input type="text"  id="cashEnterId" readonly disabled autocomplete="off"
+                <input type="text" id="cashEnterId" readonly disabled autocomplete="off"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label for="cashCoustomerId" class="layui-form-label">顾客ID</label>
             <div class="layui-input-block">
-                <input type="text"  id="cashCoustomerId" readonly disabled autocomplete="off"
+                <input type="text" id="cashCoustomerId" readonly disabled autocomplete="off"
                        class="layui-input">
             </div>
         </div>
@@ -107,7 +249,7 @@
         <div class="layui-form-item">
             <label for="cashUserId" class="layui-form-label">操作员ID</label>
             <div class="layui-input-block">
-                <input type="text"  id="cashUserId" readonly disabled autocomplete="off"
+                <input type="text" id="cashUserId" readonly disabled autocomplete="off"
                        class="layui-input">
             </div>
         </div>
@@ -150,7 +292,7 @@
                 , {field: 'description', title: '描述', align: "center", sort: true}
                 , {field: 'userId', title: '操作员ID', align: "center", sort: true}
                 , {field: 'fee_type', title: '支付方式', align: "center", sort: true}
-                , {fixed: 'right', title: '操作', width: 160, align: "center", toolbar: '#unpaid_list_bar'}
+                , {fixed: 'right', title: '确认支付', width: 160, align: "center", toolbar: '#unpaid_list_bar'}
             ]]
             , page: true
             , limit: 10
@@ -163,7 +305,7 @@
                 case 'searchUnPaidFee':
                     table.reload('unpaid_list', {
                         url: 'fee/queryOneByIdNoPay',
-                        where: {id: $("#searchUnPaidFeeNames").val() },
+                        where: {id: $("#searchUnPaidFeeNames").val()},
                         parseData: function (res) {
                             if (res.code === 0) {
                                 return {
@@ -190,8 +332,23 @@
         //监听行工具事件
         table.on('tool(unpaid_list)', function (obj) {
             let data = obj.data;
-            if (obj.event === 'recharge') {//顾客充值
-                layer.msg("顾客充值", {icon: 1, time: 3000});
+            if (obj.event === 'alipay') {//支付宝支付
+                layer.open({
+                    type: 1 //Page层类型
+                    , skin: 'layui-layer-molv'
+                    , area: '600px'
+                    , title: ['支付宝支付', 'font-size:18px']
+                    , btn: ['取消支付']
+                    , shadeClose: true
+                    , shade: 0
+                    , maxmin: true
+                    , content: $("#aliPaymentModel")  //弹窗路径
+                    , success: function (layero, index) {
+                        layer.iframeAuto(index)//自适应高度
+                        $("#WIDsubject").val("顾客" + data.coustomerId + "的房费");
+                        $("#WIDtotal_amount").val(data.money);
+                    }
+                });
             } else if (obj.event === 'cashPayment') { //现金支付
                 layer.open({
                     type: 1 //Page层类型
@@ -217,7 +374,7 @@
                             url: "fee/cashPayment",
                             dataType: "json",
                             data: {
-                                feeId:$("#cashFeeId").val(),
+                                feeId: $("#cashFeeId").val(),
                             },
                             success: function (data) {
                                 if (data.code === 200) {
@@ -238,6 +395,21 @@
             }
         });
     });
+</script>
+<script>
+    function GetDateNow() {
+        var vNow = new Date();
+        var sNow = "";
+        sNow += String(vNow.getFullYear());
+        sNow += String(vNow.getMonth() + 1);
+        sNow += String(vNow.getDate());
+        sNow += String(vNow.getHours());
+        sNow += String(vNow.getMinutes());
+        sNow += String(vNow.getSeconds());
+        sNow += String(vNow.getMilliseconds());
+        $("#WIDout_trade_no").val(sNow) ;
+    }
+    GetDateNow();
 </script>
 </body>
 </html>
