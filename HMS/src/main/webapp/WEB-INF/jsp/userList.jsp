@@ -240,31 +240,52 @@
                         , maxmin: true //允许全屏最小化
                         , content: $("#addUserModel")  //弹窗路径
                         , yes: function (index, layero) {
-                            layer.iframeAuto(index)//高度自适应
-                            $.ajax({
-                                url: "user/insertUser",
-                                dataType: "json",
-                                data: {
-                                    id: $("#addUserId").val(),
-                                    name: $("#addUserName").val(),
-                                    password: $("#addUserPassword").val(),
-                                    phone: $("#addUserPhone").val(),
-                                    state: $("#addUserState").val()
-                                },
-                                success: function (data) {
-                                    if (data.code === 200) {
-                                        layer.msg("操作员信息" + data.message, {icon: 1, time: 3000}, function () {
-                                            layer.close(index);
-                                            location.reload();
-                                        });
-                                    } else {
-                                        layer.msg("操作员信息" + data.message + "请重试", {icon: 2, time: 3000});
+                            let addUserId = $("#addUserId").val();
+                            let name = $("#name").val();
+                            let password = $("#password").val();
+                            let phone = $("#phone").val();
+                            let state = $("#state").val();
+                            if (addUserId.length == 0) {
+                                layer.msg("操作员ID不能为空！", {icon: 2, time: 3000});
+                            } else if (name.length === 0) {
+                                layer.msg("姓名不能为空！", {icon: 2, time: 3000});
+                            } else if (password.length === 0) {
+                                layer.msg("密码不能为空！", {icon: 2, time: 3000});
+                            } else if (phone.length === 0) {
+                                layer.msg("电话不能为空！", {icon: 2, time: 3000});
+                            } else if (state.length === 0) {
+                                layer.msg("状态不能为空！", {icon: 2, time: 3000});
+                            } else if (addUserId.length !== 0 && name.length !== 0 && password.length !== 0 && phone.length !== 0 && state.length !== 0) {
+
+
+                                layer.iframeAuto(index)//高度自适应
+                                $.ajax({
+                                    url: "user/insertUser",
+                                    dataType: "json",
+                                    data: {
+                                        id: $("#addUserId").val(),
+                                        name: $("#addUserName").val(),
+                                        password: $("#addUserPassword").val(),
+                                        phone: $("#addUserPhone").val(),
+                                        state: $("#addUserState").val()
+                                    },
+                                    success: function (data) {
+                                        if (data.code === 200) {
+                                            layer.msg("操作员信息" + data.message, {icon: 1, time: 3000}, function () {
+                                                layer.close(index);
+                                                location.reload();
+                                            });
+                                        } else {
+                                            layer.msg("操作员信息" + data.message + "请重试", {icon: 2, time: 3000});
+                                        }
+                                    },
+                                    error: function (err) {
+                                        layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
                                     }
-                                },
-                                error: function (err) {
-                                    layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
-                                }
-                            });
+                                });
+                            }else{
+                                layer.msg("请填写完整信息！", {icon: 2, time: 3000});
+                            }
                         }
                     });
                     break;
