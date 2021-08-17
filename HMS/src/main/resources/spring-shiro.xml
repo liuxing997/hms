@@ -24,9 +24,10 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <!--        没有认证过的用户,访问受限资源时，shiro直接跳转该配置的url-->
-        <property name="loginUrl" value="/login.jsp"/>
+        <property name="loginUrl" value="/login"/>
         <!--        已认证过但是没有访问权限的用户 访问受限资源时 shiro直接跳转到该处置的url-->
-        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+        <property name="unauthorizedUrl" value="/unauthorized"/>
+        <property name="successUrl" value="/index"/>
         <property name="filterChainDefinitions">
             <value>
                 <!-- 静态资源路径 -->
