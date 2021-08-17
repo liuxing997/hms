@@ -296,7 +296,7 @@ public class HouseController {
         return customerMap;
     }
 
-    //获取所有打扫房间间信息
+    //获取所有打扫房间信息
     @RequestMapping("/queryBySatClean")
     @ResponseBody
     public Map<String, Object> queryBySateClean(@RequestParam("page") Integer pageNumber, @RequestParam("limit") Integer pageSize) {
@@ -317,7 +317,7 @@ public class HouseController {
         Map<String, Object> house = new HashMap<>();
         if (houseList == null) {
             house.put("code", -1);
-            house.put("msg", "没有客房信息");
+            house.put("msg", "没有未打扫客房信息");
         } else {
             house.put("code", 0);
             house.put("data", houseList);
@@ -326,7 +326,7 @@ public class HouseController {
         return house;
     }
 
-    //获取所有查询查询间信息
+    //获取所有查询维修房间信息
     @RequestMapping("/queryBySateMaintain")
     @ResponseBody
     public Map<String, Object> queryBySateMaintain(@RequestParam("page") Integer pageNumber, @RequestParam("limit") Integer pageSize) {
@@ -347,7 +347,7 @@ public class HouseController {
         Map<String, Object> house = new HashMap<>();
         if (houseList == null) {
             house.put("code", -1);
-            house.put("msg", "没有客房信息");
+            house.put("msg", "没有待维修客房信息");
         } else {
             house.put("code", 0);
             house.put("data", houseList);
