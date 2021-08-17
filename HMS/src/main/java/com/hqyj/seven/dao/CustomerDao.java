@@ -10,6 +10,7 @@ public interface CustomerDao {
 
     //通过客户ID更新客户余额
     int updataByCustomerIdToremainder(@Param("money") double money, @Param("id") int id);
+    //通过金钱和id更新用户余额
     int updataByCustomerIdToremainderTwo(@Param("money") double money, @Param("id") int id);
     Customer queryByCustomer(int CustomerId);
     //获取全部客户信息
