@@ -156,7 +156,6 @@ public class FeeServiceImpl implements FeeService {
             int enterId = fee.getEnterId();
             fee.setFee_type("现金");
             fee.setDirect("缴费");
-            System.out.println(fee);
             feedao.updateFee(fee);
             enterDao.updateByEnterIdToMoney(money, enterId);
             result.put("code", 200);
