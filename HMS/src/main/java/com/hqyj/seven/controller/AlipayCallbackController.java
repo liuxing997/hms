@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -155,7 +156,7 @@ public class AlipayCallbackController {
             long trade_no2 = Long.parseLong(trade_no1);
             Double total_amount1 = Double.parseDouble(total_amount);
            if (feeService.payByAliPay(trade_no2,total_amount1,feeid)){
-               response.sendRedirect("index");
+                   response.sendRedirect("index");
            }else {
                out.println("缴费失败！");
                response.sendRedirect("unpaidList");
