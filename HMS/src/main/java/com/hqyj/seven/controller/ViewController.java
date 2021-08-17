@@ -1,5 +1,8 @@
 package com.hqyj.seven.controller;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,9 +16,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ViewController {
 
+    /*登录界面*/
+    @RequestMapping("/login")
+    public String toLogin(){
+        //指向WEB-INF/jsp/index.jsp
+        return "login";
+    }
+
+    /*没有权限页面*/
+    @RequestMapping("/unauthorized")
+    public String unauthorized(){
+        //指向WEB-INF/jsp/unauthorized.jsp
+        return "unauthorized";
+    }
+
     /*后台主页面*/
-    @RequestMapping("/index")
+    @RequestMapping({"/", "/index"})
     public String index(){
+        Subject subject = SecurityUtils.getSubject();
+        Session session = subject.getSession();
+        //如果当前用户没有登录，指向WEB-INF/jsp/login.jsp
+        if (session.getAttribute("loginUser") == null || session.getAttribute("loginUser") == "") {
+            return "login";
+        }
         //指向WEB-INF/jsp/index.jsp
         return "index";
     }
