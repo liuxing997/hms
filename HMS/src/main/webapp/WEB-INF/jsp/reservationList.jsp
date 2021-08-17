@@ -218,6 +218,10 @@
                         $('#houseName').val(data.houseName);
 
                     }, yes: function (index, layero) {
+                        let customerId= $("#customerId").val();
+                        if (customerId.length===0){
+                            layer.msg("客户id不能为空！", {icon: 2, time: 3000});
+                        }
                         $.ajax({
                             url: "house/reservation",
                             dataType: "json",
@@ -236,7 +240,11 @@
                                 }
                             },
                             error: function (err) {
-                                layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
+                                let customerId= $("#customerId").val();
+                                if (customerId.length===0){
+                                    layer.msg("客户id不能为空！", {icon: 2, time: 5000});
+                                }
+                                // layer.msg('服务器走丢啦', {icon: 7, time: 3000});
                             }
                         });
                     }
@@ -289,8 +297,20 @@
                                 }
                             },
                             error: function (err) {
-                                console.log(err);
-                                layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
+                           let   id=  $("#checkinCustomerId").val();
+                             let  day=     $("#checkinDay").val();
+                             let peopel   =    $("#checkinPeople").val();
+                             if (id.length===0){
+                                 layer.msg("房间ID不能为空！", {icon: 2, time: 3000});
+                             }else
+                             if (day.length===0){
+                                 layer.msg("天数不能为空！", {icon: 2, time: 3000});
+                             }else
+                                if (peopel.length===0){
+                                    layer.msg("人数不能为空！", {icon: 2, time: 3000});
+                                }
+                                // console.log(err);
+                                // layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
                             }
                         });
                     }
