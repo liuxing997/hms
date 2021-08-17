@@ -289,7 +289,7 @@ public class HouseServiceImpl implements HouseService {
         int houseId = house.getHouseId();
         if (house.getState().equals("入住")) {
             Date date1 = new Date();
-            enterDao.updateByHouseIdAndCustomerId(date1, houseId, customerId);
+            enterDao.updateByHouseIdAndCustomerId(date1, houseId, customerId,"已结账");
             Enter enter = enterDao.selectByHouseIdAndCustomerId(houseId, customerId);
             Date date2 = enter.getEnd_time_estimate();
             DecimalFormat df = new DecimalFormat("#.##");
@@ -299,8 +299,10 @@ public class HouseServiceImpl implements HouseService {
             Fee fee = feedao.queryByHouseIdAndCoustomerId(houseId, customerId);
             int feeId = fee.getFeeId();
             String feeddirect = fee.getDirect();
-            if (feeddirect.equals("未缴费"))
+            if (feeddirect.equals("未缴费")){
                 feedao.updateByFeeId(feeId);
+                enterDao.updateByHouseIdAndCustomerId(date1, houseId, customerId,"未结账");
+            }
             houseDao.updateByHouseNameToCheckOut(name);
             result.put("code", 200);
             result.put("message", "退房成功");
