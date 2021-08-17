@@ -35,4 +35,9 @@
 
         update  enter set fee_total=#{money},state='已结账' where enter_id=#{enterId}
     </update>
+    <update id="updateByEnterIdToMoneyTwo" parameterType="com.hqyj.seven.pojo.Enter">
+
+        update  enter set fee_total=#{money},state='已结账',fee_info=#{out_trade_no} where enter_id=#{enterId}
+    </update>
+
 </mapper>
