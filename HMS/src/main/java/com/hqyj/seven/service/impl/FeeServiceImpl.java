@@ -162,7 +162,7 @@ public class FeeServiceImpl implements FeeService {
             result.put("message", "现金支付成功");
         } else {
             result.put("code", -1);
-            result.put("message", "此房间未找到或者已经付费");
+            result.put("message", "此房间未找到或者不是待缴费状态请先退房试试");
         }
         return result;
     }
