@@ -28,7 +28,7 @@
 <body class="index">
 <div class="container">
     <div class="logo">
-        <a href="./index.jsp">酒店后台管理系统</a></div>
+        <a href="index">酒店后台管理系统</a></div>
     <div class="left_open">
         <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
     </div>
@@ -54,7 +54,7 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('房间列表','houseList')">
+                        <a onclick="xadmin.add_tab('房间列表','houseList',true)">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>房间列表</cite></a>
                     </li>
@@ -67,7 +67,7 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('订房列表','reservationList')">
+                        <a onclick="xadmin.add_tab('订房列表','reservationList',true)">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>订房列表</cite></a>
                     </li>
@@ -80,7 +80,7 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('入住列表','checkInList')">
+                        <a onclick="xadmin.add_tab('入住列表','checkInList',true)">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>入住列表</cite></a>
                     </li>
@@ -93,7 +93,7 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('未缴费列表','unpaidList')">
+                        <a onclick="xadmin.add_tab('未缴费列表','unpaidList',true)">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>未缴费</cite></a>
                     </li>
@@ -111,7 +111,7 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('客户列表','customerList')">
+                        <a onclick="xadmin.add_tab('客户列表','customerList',true)">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>客户列表</cite></a>
                     </li>
@@ -124,7 +124,7 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('待打扫列表','cleanList')">
+                        <a onclick="xadmin.add_tab('待打扫列表','cleanList',true)">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>待打扫</cite></a>
                     </li>
@@ -142,7 +142,7 @@
                     <i class="iconfont nav_right">&#xe697;</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a onclick="xadmin.add_tab('操作员列表','userList')">
+                        <a onclick="xadmin.add_tab('操作员列表','userList',true)">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>操作员列表</cite></a>
                     </li>
