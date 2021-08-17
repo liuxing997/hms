@@ -22,4 +22,6 @@ public interface EnterDao {
     List<Enter> queryOneById(int id);
     //更改金额 现金支付时
     int updateByEnterIdToMoney(@Param("money") double money,@Param("enterId") int enterId);
+    //更改功能，支付宝支付时候
+    int updateByEnterIdToMoneyTwo(@Param("money") double money,@Param("enterId") int enterId,@Param("out_trade_no") long out_trade_no);
 }
