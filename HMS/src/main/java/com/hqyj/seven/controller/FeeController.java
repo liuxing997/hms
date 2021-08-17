@@ -41,7 +41,7 @@ public class FeeController {
         //添加分页功能
         PageData<Fee> feeList = feeService.queryByDirectPay(number, size);
         Map<String, Object> fee = new HashMap<>();
-        if (feeList == null) {
+        if (feeList.getList().size() == 0) {
             fee.put("code", -1);
             fee.put("msg", "没有已缴费信息!");
         } else {
@@ -133,7 +133,7 @@ public class FeeController {
         //添加分页功能
         PageData<Fee> feeList = feeService.queryAllId(number, size, id, "未缴费");
         Map<String, Object> fee = new HashMap<>();
-        if (feeList.getList().size()== 0 ) {
+        if (feeList.getList().size()== 0) {
             fee.put("code", -1);
             fee.put("msg", "没有条件为" + id + "的未缴费信息");
             fee.put("data",feeList);
