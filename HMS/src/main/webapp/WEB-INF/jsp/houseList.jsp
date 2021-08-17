@@ -233,31 +233,53 @@
                         , content: $("#addOneHouseModel")  //弹窗路径
                         , yes: function (index, layero) {
                             layer.iframeAuto(index)//高度自适应
-                            $.ajax({
-                                url: "house/insertOneHouse",
-                                dataType: "json",
-                                data: {
-                                    houseId: $('#houseAddId').val(),
-                                    houseName: $('#houseAddName').val(),
-                                    amount: $('#houseAddAmount').val(),
-                                    price: $('#houseAddPrice').val(),
-                                    floorId: $('#houseAddFloorId').val(),
-                                    state: $('#houseAddState').val()
-                                },
-                                success: function (data) {
-                                    if (data.code === 200) {
-                                        layer.msg("房间信息" + data.message, {icon: 1, time: 3000}, function () {
-                                            layer.close(index);
-                                            location.reload();
-                                        });
-                                    } else {
-                                        layer.msg("房间信息" + data.message + "请重试", {icon: 2, time: 3000});
+                            let houseAddId = $('#houseAddId').val();
+                            let houseAddName = $('#houseAddName').val();
+                            let houseAddAmount = $('#houseAddAmount').val();
+                            let houseAddPrice = $('#houseAddPrice').val();
+                            let houseAddFloorId = $('#houseAddFloorId').val();
+                            let houseAddState = $('#houseAddState').val();
+                            if (houseAddId.length === 0){
+                                layer.msg("房间ID不能为空！", {icon: 2, time: 3000});
+                            }else if (houseAddName.length === 0){
+                                layer.msg("房间名不能为空！", {icon: 2, time: 3000});
+                            }else if (houseAddAmount.length === 0){
+                                layer.msg("可住人数不能为空！", {icon: 2, time: 3000});
+                            }else if (houseAddPrice.length === 0){
+                                layer.msg("价格不能为空！", {icon: 2, time: 3000});
+                            }else if (houseAddFloorId .length === 0){
+                                layer.msg("楼层不能为空！", {icon: 2, time: 3000});
+                            }else if (houseAddState .length === 0){
+                                layer.msg("状态不能为空！", {icon: 2, time: 3000});
+                            }else if (houseAddId.length !== 0 && houseAddName.length !== 0 && houseAddAmount.length !== 0  && houseAddPrice.length !== 0  && houseAddFloorId.length !== 0  && houseAddState.length !== 0 ){
+                                $.ajax({
+                                    url: "house/insertOneHouse",
+                                    dataType: "json",
+                                    data: {
+                                        houseId: houseAddId,
+                                        houseName: houseAddName,
+                                        amount: houseAddAmount,
+                                        price: houseAddPrice,
+                                        floorId: houseAddFloorId,
+                                        state: houseAddState
+                                    },
+                                    success: function (data) {
+                                        if (data.code === 200) {
+                                            layer.msg("房间信息" + data.message, {icon: 1, time: 3000}, function () {
+                                                layer.close(index);
+                                                location.reload();
+                                            });
+                                        } else {
+                                            layer.msg("房间信息" + data.message + "请重试", {icon: 2, time: 3000});
+                                        }
+                                    },
+                                    error: function (err) {
+                                        layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
                                     }
-                                },
-                                error: function (err) {
-                                    layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
-                                }
-                            });
+                                });
+                            }else{
+                                layer.msg("请填写完整信息！", {icon: 2, time: 3000});
+                            }
                         }
                     });
                     break;
