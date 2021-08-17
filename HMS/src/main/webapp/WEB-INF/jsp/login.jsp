@@ -21,7 +21,7 @@
     <meta name="viewport"
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <jsp:include page="WEB-INF/jsp/common.jsp"/>
+    <jsp:include page="common.jsp"/>
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body class="login-bg">
