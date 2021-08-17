@@ -16,7 +16,7 @@ public interface EnterDao {
     //删除记录
     int deleteEnter(int enter_id);
     //更新房间号和客户号
-    int  updateByHouseIdAndCustomerId(@Param("time") Date time, @Param("houseId") int houseId, @Param("customerId") int customerId);
+    int  updateByHouseIdAndCustomerId(@Param("time") Date time, @Param("houseId") int houseId, @Param("customerId") int customerId,@Param("state") String state);
     Enter selectByHouseIdAndCustomerId(@Param("houseId") int houseId,@Param("customerId") int customerId);
     //根据住房id或者房间id查询住宿情况
     List<Enter> queryOneById(int id);
