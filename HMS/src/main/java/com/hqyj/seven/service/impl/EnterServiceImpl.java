@@ -75,4 +75,10 @@ public class EnterServiceImpl implements EnterService {
         return enterList;
     }
 
+    //根据交易流水号查询查询住宿情况
+    @Override
+    public Enter queryByOutTradeNo(String out_trade_no) {
+        return enterDao.queryByOutTradeNo(out_trade_no);
+    }
+
 }
