@@ -343,30 +343,51 @@
                         $('#editUserPhone').val(data.phone);
                         $('#editUserState').val(data.state);
                     }, yes: function (index, layero) {
-                        $.ajax({
-                            url: "user/updateById",
-                            dataType: "json",
-                            data: {
-                                id: $("#editUserId").val(),
-                                name: $("#editUserName").val(),
-                                password: $("#editUserPassword").val(),
-                                phone: $("#editUserPhone").val(),
-                                state: $("#editUserState").val()
-                            },
-                            success: function (data) {
-                                if (data.code === 200) {
-                                    layer.msg("操作员信息" + data.message, {icon: 1, time: 3000}, function () {
-                                        layer.close(index);
-                                        location.reload();
-                                    });
-                                } else {
-                                    layer.msg("操作员信息" + data.message + "请重试", {icon: 2, time: 3000});
+                        let editUserId = $("#editUserId").val();
+                        let editUserName = $("#editUserName").val();
+                        let editUserPassword = $("#editUserPassword").val();
+                        let editUserPhone = $("#editUserPhone").val();
+                        let editUserState = $("#editUserState").val();
+                        if (editUserId.length === 0) {
+                            layer.msg("操作员ID不能为空！", {icon: 2, time: 3000});
+                        } else if (editUserName.length === 0) {
+                            layer.msg("操作员姓名不能为空！", {icon: 2, time: 3000});
+                        } else if (editUserPassword.length === 0) {
+                            layer.msg("密码不能为空！", {icon: 2, time: 3000});
+                        } else if (editUserPhone.length === 0) {
+                            layer.msg("手机号码不能为空！", {icon: 2, time: 3000});
+                        } else if (editUserState.length === 0) {
+                            layer.msg("状态不能为空！", {icon: 2, time: 3000});
+                        } else if (editUserId.length !== 0 && editUserName.length !== 0 && editUserPassword.length !== 0 && editUserPhone.length !== 0 && editUserState.length !== 0) {
+
+                            $.ajax({
+                                url: "user/updateById",
+                                dataType: "json",
+                                data: {
+                                    id: editUserId,
+                                    name: editUserName,
+                                    password: editUserPassword,
+                                    phone:editUserPhone,
+                                    state: editUserState
+                                },
+                                success: function (data) {
+                                    if (data.code === 200) {
+                                        layer.msg("操作员信息" + data.message, {icon: 1, time: 3000}, function () {
+                                            layer.close(index);
+                                            location.reload();
+                                        });
+                                    } else {
+                                        layer.msg("操作员信息" + data.message + "请重试", {icon: 2, time: 3000});
+                                    }
+                                },
+                                error: function (err) {
+                                    layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
                                 }
-                            },
-                            error: function (err) {
-                                layer.msg('服务器走丢啦！', {icon: 7, time: 3000});
-                            }
-                        });
+
+                            });
+                        }else {
+                            layer.msg("请先填写完整信息！", {icon: 2, time: 3000});
+                        }
                     }
                 });
             }
