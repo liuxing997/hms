@@ -287,12 +287,12 @@ public class HouseController {
     public Map<String, Object> updateCleanState(String name) {
         Map<String, Object> customerMap = new HashMap<>();
         int housestate = houseService.updateCleanHouse(name);
-        if (housestate == 0) {
-            customerMap.put("code", -1);
-            customerMap.put("message", "房间已打扫成功");
-        } else {
+        if (housestate == 1) {
             customerMap.put("code", 200);
-            customerMap.put("message", "打扫成功");
+            customerMap.put("message", "打扫成功！");
+        } else {
+            customerMap.put("code", -1);
+            customerMap.put("message", "房间已经打扫过啦！");
         }
         return customerMap;
     }
