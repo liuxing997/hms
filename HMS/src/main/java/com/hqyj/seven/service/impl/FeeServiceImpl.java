@@ -151,7 +151,7 @@ public class FeeServiceImpl implements FeeService {
         Map<String, Object> result = new HashMap<>();
         Fee fee = feedao.queryOneByFeeId(feeId);
         System.out.println(fee);
-        if (fee != null) {
+        if (fee != null&&fee.getFee_type().equals("待缴费")) {
             double money = fee.getMoney();
             int enterId = fee.getEnterId();
             fee.setFee_type("现金");
