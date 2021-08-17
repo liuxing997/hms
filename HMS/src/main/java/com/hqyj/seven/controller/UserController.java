@@ -87,7 +87,7 @@ public class UserController {
         }
         PageData<User> userList = userService.queryAllUser(number, size);
         Map<String, Object> result = new HashMap<>();
-        if (userList == null) {
+        if (userList.getList().size() == 0) {
             result.put("code", -1);
             result.put("msg", "用户数据为空！");
         } else {
