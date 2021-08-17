@@ -63,9 +63,10 @@ public class HouseController {
         //添加分页功能
         PageData<House> houseList = houseService.getAllHouse(number, size);
         Map<String, Object> house = new HashMap<>();
-        if (houseList.getList().size() ==0) {
+        if (houseList.getList() == null) {
             house.put("code", -1);
             house.put("msg", "没有客房信息");
+            house.put("data", houseList);
         } else {
             house.put("code", 0);
             house.put("data", houseList);
@@ -130,7 +131,7 @@ public class HouseController {
             List<House> houseList = houseService.searchHouse(names);
             if (houseList.size() == 0) {
                 houseMap.put("code", -1);
-                houseMap.put("msg", "房间不存在！");
+                houseMap.put("msg", "房间"+names+"不存在！");
             } else {
                 houseMap.put("code", 0);
                 houseMap.put("msg", "搜索房间成功！");
@@ -195,9 +196,7 @@ public class HouseController {
             houseMap.put("code", -2);
             houseMap.put("message", "房间号不能为空");
         } else {
-
             houseMap = houseService.checkOut(name);
-
         }
         return houseMap;
     }
@@ -233,6 +232,7 @@ public class HouseController {
             if (houseList.size() == 0) {
                 houseMap.put("code", -1);
                 houseMap.put("msg", "房间已打扫或空闲中！");
+                houseMap.put("data", houseList);
             } else {
                 houseMap.put("code", 0);
                 houseMap.put("msg", "搜索房间成功！");
@@ -255,6 +255,7 @@ public class HouseController {
             if (houseList.size() == 0) {
                 houseMap.put("code", -1);
                 houseMap.put("msg", "房间已维修或空闲中！");
+                houseMap.put("data", houseList);
             } else {
                 houseMap.put("code", 0);
                 houseMap.put("msg", "搜索房间成功！");
@@ -315,9 +316,10 @@ public class HouseController {
         //添加分页功能
         PageData<House> houseList = houseService.queryBySateClean(number, size);
         Map<String, Object> house = new HashMap<>();
-        if (houseList.getList().size() == 0) {
+        if (houseList.getList() == null) {
             house.put("code", -1);
             house.put("msg", "没有未打扫客房信息");
+            house.put("data", houseList);
         } else {
             house.put("code", 0);
             house.put("data", houseList);
@@ -345,9 +347,10 @@ public class HouseController {
         //添加分页功能
         PageData<House> houseList = houseService.queryBySateMaintain(number, size);
         Map<String, Object> house = new HashMap<>();
-        if (houseList.getList().size() == 0) {
+        if (houseList.getList() == null) {
             house.put("code", -1);
             house.put("msg", "没有待维修客房信息");
+            house.put("data", houseList);
         } else {
             house.put("code", 0);
             house.put("data", houseList);
