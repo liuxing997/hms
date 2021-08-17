@@ -7,7 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 public interface EnterDao {
+    //插入一天enter数据
     int inserintoEnter(Enter enter);
+    //根据房间id查询房间信息
     Enter queryByHouseIdAndLimitOne(@Param("HouseId") int HouseId);
     //查询全部 入住信息
     List<Enter> queryAll();
