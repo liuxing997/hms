@@ -1,0 +1,111 @@
+/**
+* Created by IntelliJ IDEA.
+* @File alipay.css
+* @Auth liuxing
+* @Date 2021/8/17 23:58
+* @Email liuxing997@foxmail.com
+**/
+.show {
+    clear: left;
+    display: block;
+}
+
+.new-btn-login-sp {
+    padding: 1px;
+    display: inline-block;
+    width: 75%;
+}
+
+.new-btn-login {
+    background-color: #02aaf1;
+    color: #FFFFFF;
+    font-weight: bold;
+    border: none;
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.content {
+    margin-top: 5px;
+}
+
+.content dt {
+    width: 100px;
+    display: inline-block;
+    float: left;
+    margin-left: 20px;
+    color: #666;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.content dd {
+    margin-left: 120px;
+    margin-bottom: 5px;
+}
+
+.content dd input {
+    width: 85%;
+    height: 28px;
+    border: 0;
+    -webkit-border-radius: 0;
+    -webkit-appearance: none;
+}
+
+#foot {
+    margin-top: 10px;
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+}
+
+.foot-ul {
+    width: 100%;
+}
+
+.foot-ul li {
+    width: 100%;
+    text-align: center;
+    color: #666;
+}
+
+.note-help {
+    color: #999999;
+    font-size: 12px;
+    line-height: 130%;
+    margin-top: 5px;
+    width: 100%;
+    display: block;
+}
+
+#btn-dd {
+    margin: 20px;
+    text-align: center;
+}
+
+.foot-ul {
+    width: 100%;
+}
+
+.one_line {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #eeeeee;
+    width: 100%;
+    margin-left: 20px;
+}
+
+
+.am-header h1 {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    box-flex: 1;
+    line-height: 18px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 300;
+    color: #fff;
+}
