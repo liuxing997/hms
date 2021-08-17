@@ -21,4 +21,7 @@ public interface EnterService {
 
     //根据住房id或者房间id查询住宿情况
     List<Enter> queryOneById(int id);
+
+    //根据交易流水号查询查询住宿情况
+    Enter queryByOutTradeNo(String out_trade_no);
 }

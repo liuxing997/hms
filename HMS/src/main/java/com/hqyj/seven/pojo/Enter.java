@@ -200,4 +200,22 @@ public class Enter {
 
     public Enter() {
     }
+
+    @Override
+    public String toString() {
+        return "Enter{" +
+                "enter_id=" + enter_id +
+                ", house_id=" + house_id +
+                ", customer_id=" + customer_id +
+                ", customer_info=" + customer_info +
+                ", start_time=" + start_time +
+                ", end_time_estimate=" + end_time_estimate +
+                ", end_time_actual=" + end_time_actual +
+                ", fee_total=" + fee_total +
+                ", fee_info='" + fee_info + '\'' +
+                ", user_id=" + user_id +
+                ", state='" + state + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }
