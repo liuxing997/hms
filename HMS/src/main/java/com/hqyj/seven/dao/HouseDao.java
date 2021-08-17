@@ -13,7 +13,7 @@ public interface HouseDao {
     int updateByHouseName(@Param("customerId")int customerId,@Param("name") String name );
     //更改维修状态
     int updateByHouseStatetocheckIn(@Param("houseId")int houseId,@Param("state") String state);
-
+    //根据房间名查询客房信息
     House queryByHousename(String name);
 
     //根据ID或房间名查询房间
@@ -23,7 +23,7 @@ public interface HouseDao {
     List<House> searchHouseState(String  state);
 
     int updateByHouse(House house);
-
+    //根据客房名更新客房信息
     int updateByHouseNametocheckIn(@Param("customerId")int customerId,@Param("name") String name,@Param("day") int day);
 
     //获取全部客房信息
