@@ -63,7 +63,7 @@ public class HouseController {
         //添加分页功能
         PageData<House> houseList = houseService.getAllHouse(number, size);
         Map<String, Object> house = new HashMap<>();
-        if (houseList == null) {
+        if (houseList.getList().size() ==0) {
             house.put("code", -1);
             house.put("msg", "没有客房信息");
         } else {
@@ -315,7 +315,7 @@ public class HouseController {
         //添加分页功能
         PageData<House> houseList = houseService.queryBySateClean(number, size);
         Map<String, Object> house = new HashMap<>();
-        if (houseList == null) {
+        if (houseList.getList().size() == 0) {
             house.put("code", -1);
             house.put("msg", "没有未打扫客房信息");
         } else {
@@ -345,7 +345,7 @@ public class HouseController {
         //添加分页功能
         PageData<House> houseList = houseService.queryBySateMaintain(number, size);
         Map<String, Object> house = new HashMap<>();
-        if (houseList == null) {
+        if (houseList.getList().size() == 0) {
             house.put("code", -1);
             house.put("msg", "没有待维修客房信息");
         } else {
