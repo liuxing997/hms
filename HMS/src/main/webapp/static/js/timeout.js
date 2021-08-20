@@ -28,7 +28,7 @@ function toLoginPage(){
                 if (data.code === 200) {
                     layer.msg("登录超时！请重新登录", {icon: 2, time: 5000}, function () {
                         localStorage.removeItem("user");
-                        window.location.href = "login.jsp";
+                        window.location.href = "login";
                     });
                 }
             },

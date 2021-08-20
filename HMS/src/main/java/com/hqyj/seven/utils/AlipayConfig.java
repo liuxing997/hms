@@ -16,9 +16,9 @@ public class AlipayConfig {
     // 支付宝公钥
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmoEIVKrihgB7pXL6oAWTRMVR0o75QdeCsamGBsXF18XcJIawkEdkThfEOYeF45tMXF8WKjtM50d76KEgVWgcYZVoSHyEQQeCw8+oLz7cU7AKXPFoyT8XmNADTAgZbFBzqZrifYpQN1HP9/+2gizC13FnC5JNr9+a7nCe80RQwI1kRkrAwgNoAlc2RqjJKQHvKaJM2PmdwtIANPMVv8qFFptMVHKKWZRS6+LdeE1mbDBtCmSLv0Tbk/u9lTLkK+vvHE2HzJzLl0i6JNbmGbomJU8ccTJTDrs+hr+iE5NsUR3JsB7T/hLEDe/R86Fn5fMOR1/wWszn11KK7W5L5WCyHQIDAQAB";
     // 服务器异步通知页面路径
-    public static String notify_url = "http://ettfv8.natappfree.cc/HMS_war_exploded/notifyUrl";
+    public static String notify_url = "http://47.111.244.142:8086/hms/notifyUrl";
     // 页面跳转同步通知页面路径
-    public static String return_url = "http://ettfv8.natappfree.cc/HMS_war_exploded/returnUrl";
+    public static String return_url = "http://47.111.244.142:8086/hms/returnUrl";
     // 签名方式
     public static String sign_type = "RSA2";
     // 字符编码格式

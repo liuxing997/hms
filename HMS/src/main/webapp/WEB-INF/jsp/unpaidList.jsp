@@ -20,7 +20,7 @@
     <%--  引入公共样式和脚本文件  --%>
     <jsp:include page="common.jsp"/>
     <%--  引入支付模态框样式  --%>
-    <link rel="stylesheet" href="alipay.css">
+    <link rel="stylesheet" href="css/alipay.css">
 </head>
 <body>
 <div class="x-nav">

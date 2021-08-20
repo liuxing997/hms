@@ -58,13 +58,12 @@ public class EnterController {
         if (enterList.getList().size() == 0) {
             enter.put("code", -1);
             enter.put("msg", "没有客户信息");
+            enter.put("data", enterList);
         } else {
             enter.put("code", 0);
-            enter.put("data", enterList);
             enter.put("msg", "获取数据成功！");
+            enter.put("data", enterList);
         }
-        Session session = SecurityUtils.getSubject().getSession();
-        session.setAttribute("enterList", enterList);
         return enter;
     }
 
@@ -85,10 +84,11 @@ public class EnterController {
         Map<String, Object> enterMap = new HashMap<>();
         if (enterList.size() == 0) {
             enterMap.put("code", -1);
-            enterMap.put("msg", "未查询到任何信息");
+            enterMap.put("msg", "未查询到任何信息！");
+            enterMap.put("data", enterList);
         } else {
             enterMap.put("code", 0);
-            enterMap.put("msg", "查询成功");
+            enterMap.put("msg", "查询成功！");
             enterMap.put("data", enterList);
         }
         return enterMap;

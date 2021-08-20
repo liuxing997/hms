@@ -45,11 +45,12 @@ public class CustomerController {
         Map<String, Object> customer = new HashMap<>();
         if (customerList == null) {
             customer.put("code", -1);
-            customer.put("msg", "没有客户信息");
+            customer.put("msg", "没有客户信息！");
+            customer.put("data", customerList);
         } else {
             customer.put("code", 0);
-            customer.put("data", customerList);
             customer.put("msg", "获取数据成功！");
+            customer.put("data", customerList);
         }
         return customer;
     }
@@ -62,15 +63,15 @@ public class CustomerController {
         Map<String, Object> customer = new HashMap<>();
         if (name == null) {
             customer.put("code", -9);
-            customer.put("msg", "查询参数不为空");
+            customer.put("msg", "查询参数不为空！");
         } else {
             List<Customer> customerList = customerService.queryByCusName(name);
             if (customerList.size() == 0) {
                 customer.put("code", -1);
-                customer.put("msg", "客户不存在");
+                customer.put("msg", "客户不存在！");
             } else {
                 customer.put("code", 0);
-                customer.put("msg", "查询成功");
+                customer.put("msg", "查询成功！");
                 customer.put("data", customerList);
             }
         }

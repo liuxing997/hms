@@ -69,8 +69,8 @@ public class HouseController {
             house.put("data", houseList);
         } else {
             house.put("code", 0);
-            house.put("data", houseList);
             house.put("msg", "获取数据成功！");
+            house.put("data", houseList);
         }
         Session session = SecurityUtils.getSubject().getSession();
         session.setAttribute("houselist", houseList);

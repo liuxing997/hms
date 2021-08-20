@@ -44,10 +44,11 @@ public class FeeController {
         if (feeList.getList().size() == 0) {
             fee.put("code", -1);
             fee.put("msg", "没有已缴费信息!");
+            fee.put("data", feeList);
         } else {
             fee.put("code", 0);
-            fee.put("data", feeList);
             fee.put("msg", "获取数据成功！");
+            fee.put("data", feeList);
         }
         return fee;
     }
@@ -77,8 +78,8 @@ public class FeeController {
             fee.put("data",feeList);
         } else {
             fee.put("code", 0);
-            fee.put("data", feeList);
             fee.put("msg", "获取数据成功！");
+            fee.put("data", feeList);
         }
         return fee;
     }
@@ -108,8 +109,8 @@ public class FeeController {
             fee.put("data",feeList);
         } else {
             fee.put("code", 0);
-            fee.put("data", feeList);
             fee.put("msg", "获取数据成功！");
+            fee.put("data", feeList);
         }
         return fee;
     }
@@ -139,8 +140,8 @@ public class FeeController {
             fee.put("data",feeList);
         } else {
             fee.put("code", 0);
-            fee.put("data", feeList);
             fee.put("msg", "获取数据成功！");
+            fee.put("data", feeList);
         }
         return fee;
     }
@@ -155,12 +156,12 @@ public class FeeController {
     @ResponseBody
     public Map<String, Object> cashPayment(int feeId){
         Map<String, Object> result = new HashMap<>();
-        if (feeId==0){
+        if (feeId == 0){
             result.put("code",-2);
             result.put("message","房间号异常");
         }
         else {
-            result=feeService.CashPayment(feeId);
+            result = feeService.CashPayment(feeId);
         }
         return  result;
     }

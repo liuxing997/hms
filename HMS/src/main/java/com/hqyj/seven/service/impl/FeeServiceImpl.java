@@ -17,15 +17,16 @@ import java.util.Map;
 @Service
 public class FeeServiceImpl implements FeeService {
 
-
     private Feedao feedao;
+
+    private EnterDao enterDao;
 
     @Autowired
     public void setEnterDao(EnterDao enterDao) {
         this.enterDao = enterDao;
     }
 
-    private EnterDao enterDao;
+
 
     @Autowired
     public void setFeedao(Feedao feedao) {
@@ -140,6 +141,11 @@ public class FeeServiceImpl implements FeeService {
     }
 
     @Override
+    public Fee queryOneByFeeId(int feeId) {
+        return feedao.queryOneByFeeId(feeId);
+    }
+
+    @Override
     public double paymentAmount(int feeId) {
         Fee fee = feedao.queryOneByFeeId(feeId);
         return fee.getMoney();
@@ -166,21 +172,39 @@ public class FeeServiceImpl implements FeeService {
         }
         return result;
     }
+
     //支付宝支付
-    public  boolean payByAliPay(long  out_trade_no,double total_amount,int feeId){
-        Map<String, Object> result = new HashMap<>();
+    public  boolean payByAliPay(int feeId,double total_amount,String  out_trade_no){
         Fee fee = feedao.queryOneByFeeId(feeId);
-        System.out.println(fee);
-        if (fee != null&&fee.getFee_type().equals("待缴费")) {
+        if (fee != null&&fee.getFee_type().equals("支付宝支付完成")) {
             double money = fee.getMoney();
             int enterId = fee.getEnterId();
             fee.setFee_type("支付宝");
             fee.setDirect("缴费");
             feedao.updateFee(fee);
-            enterDao.updateByEnterIdToMoneyTwo(money, enterId,out_trade_no);
+            enterDao.updateByEnterIdToMoneyTwo(enterId,money,out_trade_no);
             return true;
         }
         return false;
+    }
+
+    //传入缴费ID、流水号、金额、之前状态、最新状态
+    @Override
+    public int updateFeeInfoByFeeId(int feeId,String out_trade_no,String Fee_type1,String Fee_type2) {
+        Fee fee = feedao.queryOneByFeeId(feeId);
+        if (fee != null&&fee.getFee_type().equals(Fee_type1)) {
+            fee.setFee_type(Fee_type2);
+            double money = fee.getMoney();
+            int enterId = fee.getEnterId();
+            if (feedao.updateFee(fee) == 1){
+                if (enterDao.updateByEnterIdToMoneyTwo( enterId,money,out_trade_no) == 1){
+                    return 1;
+                }
+            }else {
+                return 0;
+            }
+        }
+        return 0;
     }
 
 
